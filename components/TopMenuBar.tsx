@@ -9,6 +9,7 @@ interface MenuItem {
   href?: string
   divider?: boolean
   shortcut?: string
+  external?: boolean
 }
 
 interface Menu {
@@ -22,14 +23,16 @@ export default function TopMenuBar() {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin Wallet', color: '#f7931a', url: '/apps/wallet' },
-    { name: 'Bitcoin Email', color: '#ef4444', url: '/apps/email' },
-    { name: 'Bitcoin Music', color: '#8b5cf6', url: '/apps/music' },
-    { name: 'Bitcoin Writer', color: '#3b82f6', url: '/apps/writer' },
-    { name: 'Bitcoin Drive', color: '#22c55e', url: '/apps/drive' },
-    { name: 'Bitcoin Calendar', color: '#eab308', url: '/apps/calendar' },
-    { name: 'Bitcoin Search', color: '#ec4899', url: '/apps/search' },
-    { name: 'Bitcoin Shares', color: '#f43f5e', url: '/apps/shares' },
+    { name: 'Bitcoin Wallet', color: '#f7931a', url: 'https://bitcoin-wallet.vercel.app' },
+    { name: 'Bitcoin Email', color: '#ef4444', url: 'https://bitcoin-email.vercel.app' },
+    { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
+    { name: 'Bitcoin Writer', color: '#3b82f6', url: 'https://bitcoin-writer.vercel.app' },
+    { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
+    { name: 'Bitcoin Spreadsheet', color: '#10b981', url: 'https://bitcoin-spreadsheet.vercel.app' },
+    { name: 'Bitcoin Calendar', color: '#eab308', url: 'https://bitcoin-calendar.vercel.app' },
+    { name: 'Bitcoin Search', color: '#ec4899', url: 'https://bitcoin-search.vercel.app' },
+    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app' },
+    { name: 'Bitcoin Jobs', color: '#f59e0b', url: 'https://bitcoin-jobs.vercel.app' },
   ]
 
   const menus: Menu[] = [
@@ -79,7 +82,8 @@ export default function TopMenuBar() {
       label: 'Apps',
       items: bitcoinApps.map(app => ({
         label: app.name,
-        href: app.url
+        href: app.url,
+        external: true
       }))
     },
     {
@@ -133,6 +137,8 @@ export default function TopMenuBar() {
             <a
               key={app.name}
               href={app.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
               onClick={() => setShowBitcoinApps(false)}
             >
@@ -162,7 +168,15 @@ export default function TopMenuBar() {
                     key={index}
                     className="w-full text-left px-4 py-1 hover:bg-gray-800 flex justify-between items-center"
                     onClick={() => {
-                      item.action?.()
+                      if (item.href) {
+                        if (item.external) {
+                          window.open(item.href, '_blank')
+                        } else {
+                          window.location.href = item.href
+                        }
+                      } else {
+                        item.action?.()
+                      }
                       setActiveMenu(null)
                     }}
                   >
