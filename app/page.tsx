@@ -41,7 +41,7 @@ export default function BitcoinOS() {
     // Simulate boot process
     setTimeout(() => {
       setIsBooting(false)
-    }, 3000)
+    }, 1000)
   }, [])
 
   useEffect(() => {

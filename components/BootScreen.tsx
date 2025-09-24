@@ -20,7 +20,7 @@ export default function BootScreen() {
     let messageIndex = 0
 
     const interval = setInterval(() => {
-      currentProgress += 5
+      currentProgress += 10
       setProgress(currentProgress)
 
       if (currentProgress % 20 === 0 && messageIndex < messages.length) {
@@ -31,7 +31,7 @@ export default function BootScreen() {
       if (currentProgress >= 100) {
         clearInterval(interval)
       }
-    }, 100)
+    }, 30)
 
     return () => clearInterval(interval)
   }, [])
@@ -51,7 +51,7 @@ export default function BootScreen() {
         <div className="w-64 space-y-2">
           <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
             <div 
-              className="h-full bg-yellow-500 transition-all duration-300"
+              className="h-full bg-yellow-500 transition-all duration-100"
               style={{ width: `${progress}%` }}
             />
           </div>
