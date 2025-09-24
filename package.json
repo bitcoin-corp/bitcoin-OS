@@ -1,0 +1,46 @@
+{
+  "name": "bitcoin-os",
+  "version": "0.1.0",
+  "description": "Bitcoin-powered operating system with built-in wallet and decentralized apps",
+  "author": "THE BITCOIN CORPORATION LTD <ceo@thebitcoincorporation.com>",
+  "license": "Open-BSV-4.0",
+  "copyright": "Copyright (c) 2025 THE BITCOIN CORPORATION LTD (UK Company No. 16735102)",
+  "homepage": "https://bitcoin-os.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitcoin-apps-suite/bitcoin-OS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bitcoin-apps-suite/bitcoin-OS/issues"
+  },
+  "keywords": [
+    "bitcoin",
+    "bsv",
+    "operating-system",
+    "blockchain",
+    "decentralized",
+    "the-bitcoin-corporation"
+  ],
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 2050",
+    "build": "next build",
+    "start": "next start -p 2050",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "15.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "lucide-react": "^0.544.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8",
+    "autoprefixer": "^10"
+  }
+}
