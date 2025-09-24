@@ -7,7 +7,7 @@ interface DesktopProps {
 }
 
 const desktopApps = [
-  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-bitcoin-orange', url: 'https://bitcoin-wallet.vercel.app', external: true },
+  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-bitcoin-orange', url: 'https://bitcoin-wallet-sable.vercel.app', external: true },
   { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', external: true },
   { name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', external: true },
   { name: 'Bitcoin Writer', icon: FileText, color: 'text-blue-500', url: 'https://bitcoin-writer.vercel.app', external: true },

@@ -23,7 +23,7 @@ export default function TopMenuBar() {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin Wallet', color: '#f7931a', url: 'https://bitcoin-wallet.vercel.app' },
+    { name: 'Bitcoin Wallet', color: '#f7931a', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', color: '#ef4444', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
     { name: 'Bitcoin Writer', color: '#3b82f6', url: 'https://bitcoin-writer.vercel.app' },
