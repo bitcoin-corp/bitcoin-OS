@@ -54,7 +54,26 @@ export default function Taskbar({ openWindows, activeWindow, onWindowClick }: Ta
                 }`}
                 onClick={() => {
                   if (!app.disabled && app.url) {
-                    window.open(app.url, '_blank')
+                    // Open in sized window
+                    const width = 1200
+                    const height = 800
+                    const left = (window.screen.width - width) / 2
+                    const top = (window.screen.height - height) / 2
+                    
+                    const windowFeatures = [
+                      `width=${width}`,
+                      `height=${height}`,
+                      `left=${left}`,
+                      `top=${top}`,
+                      'toolbar=no',
+                      'menubar=no',
+                      'location=no',
+                      'status=no',
+                      'scrollbars=yes',
+                      'resizable=yes'
+                    ].join(',')
+                    
+                    window.open(app.url, app.name.replace(/\s+/g, '_'), windowFeatures)
                   }
                 }}
                 title={app.name}
