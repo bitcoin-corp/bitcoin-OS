@@ -57,6 +57,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                   loading="lazy"
                   decoding="async"
                 />
+              </div>
             ) : (
               <div className="relative">
                 <Icon className={`w-12 h-12 ${app.color}`} />
