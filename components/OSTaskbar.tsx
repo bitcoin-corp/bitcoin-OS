@@ -1,6 +1,6 @@
 'use client'
 
-import { Bitcoin, Grid, Clock } from 'lucide-react'
+import { Bitcoin, Grid, Clock, Wifi, Battery, Volume2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 interface TaskbarProps {
@@ -46,6 +46,9 @@ export default function Taskbar({ openWindows, activeWindow, onWindowClick }: Ta
       </div>
       
       <div className="flex items-center space-x-4 text-sm">
+        <Wifi className="w-4 h-4 text-green-500" />
+        <Volume2 className="w-4 h-4" />
+        <Battery className="w-4 h-4 text-green-500" />
         <div className="flex items-center space-x-2">
           <Clock className="w-4 h-4" />
           <span>{currentTime.toLocaleTimeString()}</span>

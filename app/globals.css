@@ -32,4 +32,21 @@
   .taskbar {
     @apply bg-gray-900/95 backdrop-blur-md border-t border-gray-700;
   }
+  
+  /* Ensure proper layering */
+  .menu-bar {
+    z-index: 100;
+  }
+  
+  .dev-sidebar {
+    z-index: 40;
+  }
+  
+  .desktop {
+    z-index: 10;
+  }
+  
+  .taskbar {
+    z-index: 90;
+  }
 }

@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Desktop from '@/components/Desktop'
-import Taskbar from '@/components/Taskbar'
+import OSTaskbar from '@/components/OSTaskbar'
+import TopMenuBar from '@/components/TopMenuBar'
+import DevSidebar from '@/components/DevSidebar'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
 
@@ -10,6 +12,7 @@ export default function BitcoinOS() {
   const [isBooting, setIsBooting] = useState(true)
   const [openWindows, setOpenWindows] = useState<string[]>([])
   const [activeWindow, setActiveWindow] = useState<string | null>(null)
+  const [showDevSidebar, setShowDevSidebar] = useState(true)
 
   useEffect(() => {
     // Simulate boot process
@@ -17,6 +20,18 @@ export default function BitcoinOS() {
       setIsBooting(false)
     }, 3000)
   }, [])
+
+  useEffect(() => {
+    // Keyboard shortcut for dev sidebar
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === 'd') {
+        e.preventDefault()
+        setShowDevSidebar(!showDevSidebar)
+      }
+    }
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [showDevSidebar])
 
   const openApp = (appName: string) => {
     if (!openWindows.includes(appName)) {
@@ -37,24 +52,32 @@ export default function BitcoinOS() {
   }
 
   return (
-    <div className="h-screen flex flex-col relative">
-      <Desktop onOpenApp={openApp} />
+    <div className="h-screen flex flex-col relative bg-black">
+      <TopMenuBar />
       
-      {openWindows.map((appName) => (
-        <Window
-          key={appName}
-          title={appName}
-          isActive={activeWindow === appName}
-          onClose={() => closeWindow(appName)}
-          onFocus={() => setActiveWindow(appName)}
-        >
-          <div className="p-4">
-            <p>Welcome to {appName} on Bitcoin OS!</p>
-          </div>
-        </Window>
-      ))}
+      <div className="flex-1 flex relative">
+        {showDevSidebar && <DevSidebar />}
+        
+        <div className={`flex-1 transition-all duration-300 ${showDevSidebar ? 'ml-64' : ''}`}>
+          <Desktop onOpenApp={openApp} />
+          
+          {openWindows.map((appName) => (
+            <Window
+              key={appName}
+              title={appName}
+              isActive={activeWindow === appName}
+              onClose={() => closeWindow(appName)}
+              onFocus={() => setActiveWindow(appName)}
+            >
+              <div className="p-4">
+                <p>Welcome to {appName} on Bitcoin OS!</p>
+              </div>
+            </Window>
+          ))}
+        </div>
+      </div>
       
-      <Taskbar 
+      <OSTaskbar 
         openWindows={openWindows}
         activeWindow={activeWindow}
         onWindowClick={setActiveWindow}
