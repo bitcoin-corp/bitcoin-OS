@@ -77,7 +77,7 @@ export default function DevSidebar() {
   }
 
   return (
-    <div className={`fixed left-0 top-[64px] bottom-12 ${isCollapsed ? 'w-16' : 'w-[260px]'} bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 flex flex-col`}>
+    <div className={`fixed left-0 top-[64px] bottom-14 ${isCollapsed ? 'w-16' : 'w-[260px]'} bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 flex flex-col`}>
       <div className="p-4 border-b border-gray-800 flex items-center justify-between">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
