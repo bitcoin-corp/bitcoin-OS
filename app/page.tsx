@@ -7,12 +7,16 @@ import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
+import PlaceholderWindow from '@/components/PlaceholderWindow'
 
 export default function BitcoinOS() {
   const [isBooting, setIsBooting] = useState(true)
   const [openWindows, setOpenWindows] = useState<string[]>([])
   const [activeWindow, setActiveWindow] = useState<string | null>(null)
   const [showDevSidebar, setShowDevSidebar] = useState(true)
+  const [placeholderApp, setPlaceholderApp] = useState<string | null>(null)
+  
+  const placeholderApps = ['Bitcoin Shares', 'Bitcoin Jobs', 'Browser', 'Terminal', 'Settings']
 
   useEffect(() => {
     // Simulate boot process
@@ -34,10 +38,15 @@ export default function BitcoinOS() {
   }, [showDevSidebar])
 
   const openApp = (appName: string) => {
-    if (!openWindows.includes(appName)) {
+    // Check if it's a placeholder app
+    if (placeholderApps.includes(appName)) {
+      setPlaceholderApp(appName)
+    } else if (!openWindows.includes(appName)) {
       setOpenWindows([...openWindows, appName])
+      setActiveWindow(appName)
+    } else {
+      setActiveWindow(appName)
     }
-    setActiveWindow(appName)
   }
 
   const closeWindow = (appName: string) => {
@@ -74,6 +83,13 @@ export default function BitcoinOS() {
               </div>
             </Window>
           ))}
+          
+          {placeholderApp && (
+            <PlaceholderWindow
+              appName={placeholderApp}
+              onClose={() => setPlaceholderApp(null)}
+            />
+          )}
         </div>
       </div>
       
