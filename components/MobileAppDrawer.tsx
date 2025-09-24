@@ -85,7 +85,7 @@ export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
                   <div className="w-14 h-14 rounded-xl overflow-hidden shadow-lg border border-orange-500/40">
                     <img 
                       src="/bapps-icon.jpg" 
-                      alt="BAPPS Store" 
+                      alt="Bitcoin Apps Store" 
                       className="w-full h-full object-cover"
                     />
                   </div>

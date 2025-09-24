@@ -13,7 +13,7 @@ export interface BitcoinApp {
 export const bitcoinApps: BitcoinApp[] = [
   {
     id: 'bapps-store',
-    name: 'BAPPS Store',
+    name: 'Bitcoin Apps Store',
     url: 'https://www.bitcoinapps.store/',
     color: '#ff6b35',
     description: 'Bitcoin Apps Store',

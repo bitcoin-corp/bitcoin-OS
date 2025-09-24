@@ -8,7 +8,7 @@ interface DesktopProps {
 }
 
 const desktopApps = [
-  { id: 'bapps-store', name: 'BAPPS Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', chromeAppId: null, external: true, isImage: true },
+  { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', chromeAppId: null, external: true, isImage: true },
   { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', chromeAppId: 'bitcoin-wallet', external: true },
   { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', chromeAppId: 'bitcoin-email', external: true },
   { name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', chromeAppId: 'bitcoin-music', external: true },
@@ -52,7 +52,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
               <div className="w-12 h-12 rounded-lg overflow-hidden">
                 <img 
                   src="/bapps-icon.jpg" 
-                  alt="BAPPS Store" 
+                  alt="Bitcoin Apps Store" 
                   className="w-full h-full object-cover"
                 />
               </div>

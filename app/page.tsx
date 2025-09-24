@@ -178,7 +178,7 @@ export default function BitcoinOS() {
                           <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg border-2 border-orange-500/40">
                             <img 
                               src="/bapps-icon.jpg" 
-                              alt="BAPPS Store" 
+                              alt="Bitcoin Apps Store" 
                               className="w-full h-full object-cover"
                             />
                           </div>
