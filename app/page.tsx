@@ -237,18 +237,7 @@ export default function BitcoinOS() {
             </Window>
           ))}
           
-          {/* Render Bitcoin Apps in OptimizedAppLoader */}
-          {openApps.map((app) => (
-            <OptimizedAppLoader
-              key={app.id}
-              appName={app.name}
-              appUrl={app.url}
-              isActive={activeWindow === app.id}
-              onClose={() => closeApp(app.id)}
-              onFocus={() => setActiveWindow(app.id)}
-              onMinimize={() => minimizeApp(app.id)}
-            />
-          ))}
+          {/* Apps now open in new tabs/windows - no embedded windows needed */}
           
           {placeholderApp && (
             <PlaceholderWindow
