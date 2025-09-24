@@ -101,7 +101,7 @@ export default function DevSidebar() {
               return <div key={index} className="my-2 border-t border-gray-800" />
             }
 
-            const Icon = item.icon
+            const Icon = item.icon as React.ComponentType<{ className?: string }>
             const isActive = pathname === item.path
             const isExternal = item.external
 

@@ -31,7 +31,8 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
     if ((app as any).disabled) return
     
     if (app.external && app.url) {
-      window.open(app.url, '_blank')
+      // Open in new window - Chrome will use app mode if PWA is installed
+      window.open(app.url, '_blank', 'noreferrer')
     } else {
       onOpenApp(app.name)
     }

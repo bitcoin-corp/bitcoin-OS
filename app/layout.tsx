@@ -1,10 +1,16 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Bitcoin OS - Decentralized Operating System',
   description: 'Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration | By THE BITCOIN CORPORATION LTD',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: '#f7931a',
 }
 

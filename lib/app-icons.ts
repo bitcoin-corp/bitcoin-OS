@@ -33,5 +33,5 @@ export const appIcons = {
 }
 
 export const getAppIcon = (appId: string) => {
-  return appIcons[appId] || { icon: Globe, color: '#6b7280' }
+  return appIcons[appId as keyof typeof appIcons] || { icon: Globe, color: '#6b7280' }
 }
