@@ -128,49 +128,50 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   }, [])
 
   return (
-    <div className="h-8 md:h-8 bg-gray-900 border-b border-gray-800 flex items-center px-2 text-sm hidden md:flex" ref={menuRef}>
-      <button
-        onClick={() => {
-          setShowBitcoinApps(!showBitcoinApps)
-          setActiveMenu(null)
-        }}
-        className="p-1 hover:bg-gray-800 rounded mr-2"
-      >
-        <span className="text-yellow-400 font-bold text-base">₿</span>
-      </button>
+    <div className="h-8 md:h-8 bg-gray-900 border-b border-gray-800 flex items-center text-sm hidden md:flex" ref={menuRef}>
+      <div className="flex items-center" style={{ paddingLeft: '16px' }}>
+        <button
+          onClick={() => {
+            setShowBitcoinApps(!showBitcoinApps)
+            setActiveMenu(null)
+          }}
+          className="p-1 hover:bg-gray-800 rounded mr-2"
+        >
+          <span className="text-yellow-400 font-bold text-base">₿</span>
+        </button>
 
-      {showBitcoinApps && (
-        <div className="absolute top-8 left-2 bg-gray-900 border border-gray-700 rounded-lg shadow-xl z-50 p-2 min-w-[200px]">
-          <div className="text-xs text-gray-400 px-2 py-1">Bitcoin Apps</div>
-          {bitcoinApps.map((app) => (
+        {showBitcoinApps && (
+          <div className="absolute top-8 left-2 bg-gray-900 border border-gray-700 rounded-lg shadow-xl z-50 p-2 min-w-[200px]">
+            <div className="text-xs text-gray-400 px-2 py-1">Bitcoin Apps</div>
+            {bitcoinApps.map((app) => (
+              <button
+                key={app.name}
+                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-left"
+                onClick={() => {
+                  if (onOpenApp) {
+                    onOpenApp(app.name)
+                  } else {
+                    // Fallback to external link
+                    window.open(app.url, '_blank')
+                  }
+                  setShowBitcoinApps(false)
+                }}
+              >
+                <span className="font-bold text-sm" style={{ color: app.color }}>₿</span>
+                <span>{app.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {menus.map((menu) => (
+          <div key={menu.label} className="relative">
             <button
-              key={app.name}
-              className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-left"
-              onClick={() => {
-                if (onOpenApp) {
-                  onOpenApp(app.name)
-                } else {
-                  // Fallback to external link
-                  window.open(app.url, '_blank')
-                }
-                setShowBitcoinApps(false)
-              }}
+              className={`px-3 py-1 hover:bg-gray-800 rounded ${activeMenu === menu.label ? 'bg-gray-800' : ''}`}
+              onClick={() => setActiveMenu(activeMenu === menu.label ? null : menu.label)}
             >
-              <span className="font-bold text-sm" style={{ color: app.color }}>₿</span>
-              <span>{app.name}</span>
+              {menu.label}
             </button>
-          ))}
-        </div>
-      )}
-
-      {menus.map((menu) => (
-        <div key={menu.label} className="relative">
-          <button
-            className={`px-3 py-1 hover:bg-gray-800 rounded ${activeMenu === menu.label ? 'bg-gray-800' : ''}`}
-            onClick={() => setActiveMenu(activeMenu === menu.label ? null : menu.label)}
-          >
-            {menu.label}
-          </button>
           
           {activeMenu === menu.label && (
             <div className="absolute top-8 left-0 bg-gray-900 border border-gray-700 rounded-lg shadow-xl z-50 min-w-[200px]">
@@ -203,8 +204,9 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
               ))}
             </div>
           )}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
 
       <div className="ml-auto flex items-center gap-4 px-2">
         <span className="text-gray-400">Bitcoin OS v1.0</span>
