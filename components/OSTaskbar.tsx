@@ -11,8 +11,10 @@ interface TaskbarProps {
 
 export default function Taskbar({ openWindows, activeWindow, onWindowClick }: TaskbarProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
@@ -116,7 +118,7 @@ export default function Taskbar({ openWindows, activeWindow, onWindowClick }: Ta
         <Battery className="w-4 h-4 text-green-500" />
         <div className="flex items-center space-x-2">
           <Clock className="w-4 h-4" />
-          <span>{currentTime.toLocaleTimeString()}</span>
+          <span>{mounted ? currentTime.toLocaleTimeString() : '12:00:00 AM'}</span>
         </div>
       </div>
     </div>

@@ -22,14 +22,8 @@ import {
 
 export default function DevSidebar() {
   const pathname = usePathname()
-  const [isCollapsed, setIsCollapsed] = useState(() => {
-    // Default to collapsed if no preference is saved
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('devSidebarCollapsed')
-      return saved !== null ? saved === 'true' : true
-    }
-    return true
-  })
+  const [isCollapsed, setIsCollapsed] = useState(true) // Always start collapsed
+  const [mounted, setMounted] = useState(false)
   const [issueCount, setIssueCount] = useState<number | null>(null)
 
   // Fetch GitHub issues count
@@ -46,12 +40,12 @@ export default function DevSidebar() {
     fetchIssues()
   }, [])
 
-  // Load collapsed state from localStorage
+  // Load collapsed state from localStorage after mount
   useEffect(() => {
+    setMounted(true)
     const saved = localStorage.getItem('devSidebarCollapsed')
-    if (saved) {
-      setIsCollapsed(JSON.parse(saved))
-    }
+    // Default to collapsed (true) if no saved preference
+    setIsCollapsed(saved !== null ? saved === 'true' : true)
   }, [])
 
   const toggleSidebar = () => {
@@ -83,10 +77,13 @@ export default function DevSidebar() {
     openTasks: issueCount || 0
   }
 
+  // Use mounted state to ensure consistent rendering between server and client
+  const sidebarCollapsed = mounted ? isCollapsed : true
+
   return (
-    <div className={`fixed left-0 top-[64px] bottom-14 ${isCollapsed ? 'w-16' : 'w-[260px]'} bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 flex flex-col`}>
+    <div className={`fixed left-0 top-8 bottom-14 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 flex flex-col`}>
       <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-        {!isCollapsed && (
+        {!sidebarCollapsed && (
           <div className="flex items-center gap-2">
             <Monitor className="w-5 h-5 text-bitcoin-orange" />
             <span className="font-semibold text-white">Developer Hub</span>
@@ -95,111 +92,109 @@ export default function DevSidebar() {
         <button
           onClick={toggleSidebar}
           className="p-1.5 hover:bg-gray-800 rounded-lg transition-colors"
-          title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          {sidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3">
-        <nav className="space-y-1">
-          {menuItems.map((item, index) => {
-            if (item.divider) {
-              return <div key={index} className="my-2 border-t border-gray-800" />
-            }
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-2">
+        {menuItems.map((item, index) => {
+          if (item.divider) {
+            return <div key={index} className="my-2 border-t border-gray-800" />
+          }
 
-            const Icon = item.icon as React.ComponentType<{ className?: string }>
-            const isActive = pathname === item.path
-            const isExternal = item.external
+          const Icon = item.icon!
+          const isActive = pathname === item.path
+          const isExternal = item.external
 
-            const linkContent = (
-              <>
-                <Icon className={`w-4 h-4 ${isActive ? 'text-bitcoin-orange' : 'text-gray-400'}`} />
-                {!isCollapsed && (
+          if (isExternal) {
+            return (
+              <a
+                key={item.path}
+                href={item.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 px-4 py-2 hover:bg-gray-800 transition-colors ${
+                  sidebarCollapsed ? 'justify-center' : ''
+                }`}
+                title={sidebarCollapsed ? item.label : undefined}
+              >
+                <Icon className="w-5 h-5 text-gray-400" />
+                {!sidebarCollapsed && (
                   <>
-                    <span className={`flex-1 text-sm ${isActive ? 'text-white font-medium' : 'text-gray-300'}`}>
-                      {item.label}
-                    </span>
-                    {item.badge !== null && item.badge !== undefined && (
-                      <span className="bg-bitcoin-orange text-black text-xs px-1.5 py-0.5 rounded-full font-medium">
+                    <span>{item.label}</span>
+                    {item.badge !== undefined && (
+                      <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
                         {item.badge}
                       </span>
                     )}
-                    {isExternal && <ExternalLink className="w-3 h-3 text-gray-500" />}
                   </>
                 )}
-              </>
-            )
-
-            if (isExternal) {
-              return (
-                <a
-                  key={index}
-                  href={item.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-gray-800 ${
-                    isActive ? 'bg-gray-800' : ''
-                  }`}
-                  title={isCollapsed ? item.label : undefined}
-                >
-                  {linkContent}
-                </a>
-              )
-            }
-
-            return (
-              <a
-                key={index}
-                href={item.path}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-gray-800 ${
-                  isActive ? 'bg-gray-800' : ''
-                }`}
-                title={isCollapsed ? item.label : undefined}
-              >
-                {linkContent}
               </a>
             )
-          })}
-        </nav>
-      </div>
+          }
 
-      {!isCollapsed && (
-        <>
-          <div className="p-4 border-t border-gray-800">
-            <div className="text-xs text-gray-500 mb-3">PROJECT STATS</div>
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between">
-                <span className="text-gray-400">Supply</span>
-                <span className="text-bitcoin-orange font-mono">{stats.supply}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Distributed</span>
-                <span className="text-green-500">{stats.distributed}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Contributors</span>
-                <span className="text-blue-500">{stats.contributors}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Open Tasks</span>
-                <span className="text-yellow-500">{stats.openTasks}</span>
-              </div>
+          return (
+            <a
+              key={item.path}
+              href={item.path}
+              className={`flex items-center gap-3 px-4 py-2 hover:bg-gray-800 transition-colors ${
+                isActive ? 'bg-gray-800 border-l-2 border-bitcoin-orange' : ''
+              } ${sidebarCollapsed ? 'justify-center' : ''}`}
+              title={sidebarCollapsed ? item.label : undefined}
+            >
+              <Icon className={`w-5 h-5 ${isActive ? 'text-bitcoin-orange' : 'text-gray-400'}`} />
+              {!sidebarCollapsed && (
+                <>
+                  <span className={isActive ? 'text-white font-medium' : 'text-gray-300'}>
+                    {item.label}
+                  </span>
+                  {item.badge !== undefined && (
+                    <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
+                      {item.badge}
+                    </span>
+                  )}
+                </>
+              )}
+            </a>
+          )
+        })}
+      </nav>
+
+      {/* Quick Stats */}
+      {!sidebarCollapsed && (
+        <div className="p-4 border-t border-gray-800">
+          <h4 className="text-xs text-gray-500 uppercase tracking-wider mb-3">bOS Stats</h4>
+          <div className="space-y-2">
+            <div>
+              <div className="text-xs text-gray-400">Total Supply</div>
+              <div className="text-sm font-mono text-white">{stats.supply}</div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-400">Distributed</div>
+              <div className="text-sm font-mono text-white">{stats.distributed}</div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-400">Contributors</div>
+              <div className="text-sm font-mono text-white">{stats.contributors}</div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-400">Open Tasks</div>
+              <div className="text-sm font-mono text-white">{stats.openTasks}</div>
             </div>
           </div>
-          
-          <div className="p-4 border-t border-gray-800">
-            <div className="text-center">
-              <p className="text-xs text-gray-400 mb-2">Start Contributing</p>
-              <a
-                href="/tasks"
-                className="block w-full py-2 px-3 bg-gradient-to-r from-bitcoin-orange to-orange-500 text-black text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
-              >
-                View Tasks
-              </a>
-            </div>
-          </div>
-        </>
+        </div>
+      )}
+
+      {/* Footer */}
+      {!sidebarCollapsed && (
+        <div className="p-4 border-t border-gray-800">
+          <button className="w-full bg-bitcoin-orange text-black py-2 px-4 rounded-lg hover:bg-bitcoin-orange/90 transition-colors font-medium text-sm">
+            Start Contributing
+          </button>
+        </div>
       )}
     </div>
   )
