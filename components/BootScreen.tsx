@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { BitcoinBOnly } from './BitcoinLogo'
+import { Bitcoin } from 'lucide-react'
 
 export default function BootScreen() {
   const [progress, setProgress] = useState(0)
@@ -40,7 +40,7 @@ export default function BootScreen() {
     <div className="h-screen bg-black flex flex-col items-center justify-center">
       <div className="text-center space-y-8">
         <div className="flex justify-center">
-          <BitcoinBOnly className="text-yellow-500 animate-pulse" size={120} />
+          <span className="text-yellow-400 text-8xl font-bold animate-pulse">₿</span>
         </div>
         
         <h1 className="text-4xl font-bold">

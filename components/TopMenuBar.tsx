@@ -136,7 +136,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         }}
         className="p-1 hover:bg-gray-800 rounded mr-2"
       >
-        <Bitcoin className="w-4 h-4 text-bitcoin-orange" />
+        <span className="text-yellow-400 font-bold text-base">₿</span>
       </button>
 
       {showBitcoinApps && (
@@ -156,7 +156,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
                 setShowBitcoinApps(false)
               }}
             >
-              <Bitcoin className="w-3 h-3" style={{ color: app.color }} />
+              <span className="font-bold text-sm" style={{ color: app.color }}>₿</span>
               <span>{app.name}</span>
             </button>
           ))}

@@ -5,6 +5,7 @@ export interface BitcoinApp {
   icon?: string
   color: string
   description?: string
+  chromeAppId?: string // Chrome app ID for launching Chrome apps
   isLocal?: boolean // For apps running on same domain
   isExternal?: boolean // For apps that should open in new tab
 }
@@ -24,6 +25,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development' 
       ? 'http://localhost:3001' 
       : 'https://bitcoin-wallet-sable.vercel.app',
+    chromeAppId: 'bitcoin-wallet',
     color: '#ffd700',
     description: 'Manage your Bitcoin'
   },
@@ -33,6 +35,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3002'
       : 'https://bitcoin-email.vercel.app',
+    chromeAppId: 'bitcoin-email',
     color: '#ef4444',
     description: 'Email with Bitcoin integration'
   },
@@ -42,6 +45,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3003'
       : 'https://bitcoin-music.vercel.app',
+    chromeAppId: 'bitcoin-music',
     color: '#8b5cf6',
     description: 'Stream and support artists with Bitcoin'
   },
@@ -51,6 +55,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3004'
       : 'https://bitcoin-writer.vercel.app',
+    chromeAppId: 'bitcoin-writer',
     color: '#ff9500',
     description: 'Write and publish with Bitcoin'
   },
@@ -60,6 +65,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3005'
       : 'https://bitcoin-drive.vercel.app',
+    chromeAppId: 'bitcoin-drive',
     color: '#22c55e',
     description: 'Decentralized file storage'
   },
@@ -69,6 +75,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3006'
       : 'https://bitcoin-jobs.vercel.app',
+    chromeAppId: 'bitcoin-jobs',
     color: '#40e0d0',
     description: 'Find jobs in the Bitcoin ecosystem'
   },
@@ -78,6 +85,7 @@ export const bitcoinApps: BitcoinApp[] = [
     url: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3007'
       : 'https://bitcoin-exchange.vercel.app',
+    chromeAppId: 'bitcoin-exchange',
     color: '#10b981',
     description: 'Trade Bitcoin and other assets'
   }

@@ -12,6 +12,16 @@ interface MobileAppDrawerProps {
 export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
+  // Function to launch app
+  const launchApp = (app: typeof bitcoinApps[0]) => {
+    if (app.isExternal) {
+      window.open(app.url, '_blank')
+    } else {
+      onOpenApp(app.name)
+    }
+    setIsOpen(false)
+  }
+
   return (
     <>
       {/* App Drawer Toggle Button */}
@@ -68,14 +78,7 @@ export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
             return (
               <button
                 key={app.id}
-                onClick={() => {
-                  if (app.isExternal) {
-                    window.open(app.url, '_blank')
-                  } else {
-                    onOpenApp(app.name)
-                  }
-                  setIsOpen(false)
-                }}
+                onClick={() => launchApp(app)}
                 className="flex flex-col items-center gap-2 p-3 hover:bg-white/5 active:bg-white/10 rounded-xl transition-all"
               >
                 {app.id === 'bapps-store' ? (
