@@ -10,7 +10,7 @@ import DevSidebar from '@/components/DevSidebar'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
 import PlaceholderWindow from '@/components/PlaceholderWindow'
-import AppLoader from '@/components/AppLoader'
+import OptimizedAppLoader from '@/components/OptimizedAppLoader'
 import MobileAppLoader from '@/components/MobileAppLoader'
 import MobileAppDrawer from '@/components/MobileAppDrawer'
 import MobileTaskbar from '@/components/MobileTaskbar'
@@ -237,9 +237,9 @@ export default function BitcoinOS() {
             </Window>
           ))}
           
-          {/* Render Bitcoin Apps in AppLoader */}
+          {/* Render Bitcoin Apps in OptimizedAppLoader */}
           {openApps.map((app) => (
-            <AppLoader
+            <OptimizedAppLoader
               key={app.id}
               appName={app.name}
               appUrl={app.url}

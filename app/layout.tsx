@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
 export const metadata: Metadata = {
   title: 'Bitcoin OS - Decentralized Operating System',
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white overflow-hidden">
+        <ServiceWorkerRegistration />
         {children}
       </body>
     </html>

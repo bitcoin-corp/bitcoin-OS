@@ -54,8 +54,9 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                   src="/bapps-icon.jpg" 
                   alt="Bitcoin Apps Store" 
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
-              </div>
             ) : (
               <div className="relative">
                 <Icon className={`w-12 h-12 ${app.color}`} />
