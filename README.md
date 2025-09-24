@@ -4,7 +4,7 @@
 
 ## Overview
 
-Bitcoin OS is a revolutionary web-based operating system that brings the power of Bitcoin and blockchain technology to your desktop. Built by THE BITCOIN CORPORATION LTD, it provides a familiar desktop environment while integrating cryptocurrency and decentralized applications seamlessly.
+Bitcoin OS is a revolutionary web-based operating system that brings the power of Bitcoin and blockchain technology to your desktop. Built by The Bitcoin Corporation LTD, it provides a familiar desktop environment while integrating cryptocurrency and decentralized applications seamlessly.
 
 ## Features
 
@@ -70,7 +70,7 @@ Open BSV License v4
 
 ## Company
 
-Built with ❤️ by **THE BITCOIN CORPORATION LTD**  
+Built with ❤️ by **The Bitcoin Corporation LTD**  
 UK Company No. 16735102
 
 ## Contributing

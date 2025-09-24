@@ -4,7 +4,7 @@ import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
 export const metadata: Metadata = {
   title: 'Bitcoin OS - Decentralized Operating System',
-  description: 'Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration | By THE BITCOIN CORPORATION LTD',
+  description: 'Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration | By The Bitcoin Corporation LTD',
 }
 
 export const viewport: Viewport = {

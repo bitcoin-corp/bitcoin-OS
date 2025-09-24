@@ -147,7 +147,7 @@ export default function PlaceholderWindow({ appName, onClose }: PlaceholderWindo
         </div>
 
         <div className="text-center text-xs text-gray-500">
-          Join the Bitcoin revolution • Build the future of money • THE BITCOIN CORPORATION LTD
+          Join the Bitcoin revolution • Build the future of money • The Bitcoin Corporation LTD
         </div>
       </div>
     </div>
