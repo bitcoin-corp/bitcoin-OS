@@ -217,7 +217,7 @@ export default function BitcoinOS() {
       <ProofOfConceptBar />
       <TopMenuBar onOpenApp={openApp} />
       
-      <div className="flex-1 flex relative overflow-hidden">
+      <div className="flex-1 flex relative overflow-hidden pb-14">
         {showDevSidebar && !isMobile && <DevSidebar />}
         
         <div className={`flex-1 transition-all duration-300 ${showDevSidebar && !isMobile ? 'md:ml-64' : ''}`}>
