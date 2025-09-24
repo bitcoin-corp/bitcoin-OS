@@ -12,32 +12,39 @@ interface OptimizedAppLoaderProps {
   onMinimize: () => void
 }
 
-// App content loader with prefetching
+// App content loader with iframe for cross-origin apps
 const AppContent = ({ url, appName }: { url: string; appName: string }) => {
-  const [content, setContent] = useState<React.ReactNode>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
   
   useEffect(() => {
-    // For now, we'll show an embedded view
-    // In production, this would dynamically import the app's module
-    setContent(
-      <div className="w-full h-full bg-white flex items-center justify-center">
-        <div className="text-center p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">{appName}</h2>
-          <p className="text-gray-600 mb-4">App modules loading system coming soon</p>
-          <a 
-            href={url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-bitcoin-orange text-white rounded-lg hover:bg-orange-600 transition-colors"
-          >
-            Open in New Tab
-          </a>
-        </div>
-      </div>
-    )
+    // Send messages to iframe for app integration
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== new URL(url).origin) return
+      
+      // Handle app ready message
+      if (event.data.type === 'app-ready') {
+        iframeRef.current?.contentWindow?.postMessage({
+          type: 'os-config',
+          theme: 'dark',
+          appName: appName
+        }, url)
+      }
+    }
+    
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
   }, [url, appName])
   
-  return <>{content}</>
+  return (
+    <iframe
+      ref={iframeRef}
+      src={url}
+      className="w-full h-full border-0 bg-white"
+      allow="clipboard-write; clipboard-read"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+      title={appName}
+    />
+  )
 }
 
 export default function OptimizedAppLoader({ 
