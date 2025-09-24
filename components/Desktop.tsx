@@ -14,7 +14,7 @@ const desktopApps = [
   { name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', chromeAppId: 'bitcoin-drive' },
   { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', chromeAppId: 'bitcoin-email' },
   { name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', chromeAppId: 'bitcoin-music' },
-  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', chromeAppId: 'bitcoin-wallet' },
+  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'http://localhost:1050', chromeAppId: 'bitcoin-wallet' },
   { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', chromeAppId: 'bitcoin-jobs', disabled: true },
   { name: 'Bitcoin Calendar', icon: Calendar, color: 'text-gray-500', url: 'https://bitcoin-calendar.vercel.app', chromeAppId: 'bitcoin-calendar', external: true, disabled: true },
   { name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', chromeAppId: 'bitcoin-search', external: true, disabled: true },
@@ -77,14 +77,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                 />
               </div>
             ) : (
-              <div className="relative">
-                <Icon className={`w-12 h-12 ${app.color}`} />
-                {app.name === 'Bitcoin Wallet' && (
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full flex items-center justify-center">
-                    <TriangleAlert className="w-3 h-3 text-black" />
-                  </div>
-                )}
-              </div>
+              <Icon className={`w-12 h-12 ${app.color}`} />
             )}
             <span className="text-xs mt-2 text-center">{app.name}</span>
           </div>
