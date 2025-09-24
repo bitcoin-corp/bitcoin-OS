@@ -59,7 +59,7 @@ export default function BootScreen() {
         </div>
         
         <p className="text-xs text-gray-600">
-          © 2025 THE BITCOIN CORPORATION LTD
+          © 2025 The Bitcoin Corporation LTD (16735102)
         </p>
       </div>
     </div>
