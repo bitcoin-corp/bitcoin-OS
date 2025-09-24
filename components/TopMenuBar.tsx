@@ -12,12 +12,16 @@ interface MenuItem {
   external?: boolean
 }
 
+interface TopMenuBarProps {
+  onOpenApp?: (appName: string) => void
+}
+
 interface Menu {
   label: string
   items: MenuItem[]
 }
 
-export default function TopMenuBar() {
+export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const [showBitcoinApps, setShowBitcoinApps] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -82,8 +86,13 @@ export default function TopMenuBar() {
       label: 'Apps',
       items: bitcoinApps.map(app => ({
         label: app.name,
-        href: app.url,
-        external: true
+        action: () => {
+          if (onOpenApp) {
+            onOpenApp(app.name)
+          } else {
+            window.open(app.url, '_blank')
+          }
+        }
       }))
     },
     {
@@ -119,7 +128,7 @@ export default function TopMenuBar() {
   }, [])
 
   return (
-    <div className="h-8 bg-gray-900 border-b border-gray-800 flex items-center px-2 text-sm" ref={menuRef}>
+    <div className="h-8 md:h-8 bg-gray-900 border-b border-gray-800 flex items-center px-2 text-sm hidden md:flex" ref={menuRef}>
       <button
         onClick={() => {
           setShowBitcoinApps(!showBitcoinApps)
@@ -134,17 +143,22 @@ export default function TopMenuBar() {
         <div className="absolute top-8 left-2 bg-gray-900 border border-gray-700 rounded-lg shadow-xl z-50 p-2 min-w-[200px]">
           <div className="text-xs text-gray-400 px-2 py-1">Bitcoin Apps</div>
           {bitcoinApps.map((app) => (
-            <a
+            <button
               key={app.name}
-              href={app.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
-              onClick={() => setShowBitcoinApps(false)}
+              className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-left"
+              onClick={() => {
+                if (onOpenApp) {
+                  onOpenApp(app.name)
+                } else {
+                  // Fallback to external link
+                  window.open(app.url, '_blank')
+                }
+                setShowBitcoinApps(false)
+              }}
             >
               <Bitcoin className="w-3 h-3" style={{ color: app.color }} />
               <span>{app.name}</span>
-            </a>
+            </button>
           ))}
         </div>
       )}

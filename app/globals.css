@@ -8,6 +8,15 @@
   }
 }
 
+@layer utilities {
+  .bitcoin-mesh {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(247, 147, 26, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(247, 147, 26, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(247, 147, 26, 0.08) 0%, transparent 50%);
+  }
+}
+
 @layer components {
   .window {
     @apply bg-gray-900 border border-gray-700 rounded-lg shadow-2xl;

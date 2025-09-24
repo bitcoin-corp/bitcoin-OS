@@ -1,0 +1,111 @@
+<!-- 
+  PROOF OF CONCEPT BAR FOR BITCOINAPPS.STORE
+  
+  Copy this HTML to the top of your <body> tag in your bitcoinapps.store website.
+  If using React/Next.js, use the React component version below instead.
+-->
+
+<!-- HTML VERSION -->
+<div id="poc-bar" style="
+  background: linear-gradient(to right, #ca8a04, #ea580c);
+  color: #000;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: system-ui, -apple-system, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+  </svg>
+  <span>PROOF OF CONCEPT - This is a demonstration of Bitcoin Apps Store</span>
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+  </svg>
+</div>
+
+<!-- 
+  REACT/NEXT.JS COMPONENT VERSION
+  
+  Save this as ProofOfConceptBar.jsx or ProofOfConceptBar.tsx
+  Then import and use it at the top of your layout
+-->
+
+<!--
+// ProofOfConceptBar.jsx (React Component)
+
+import React from 'react'
+
+export default function ProofOfConceptBar() {
+  return (
+    <div style={{
+      background: 'linear-gradient(to right, #ca8a04, #ea580c)',
+      color: '#000',
+      padding: '8px 16px',
+      textAlign: 'center',
+      fontSize: '14px',
+      fontWeight: '500',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '8px',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+      position: 'sticky',
+      top: 0,
+      zIndex: 9999
+    }}>
+      <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span>PROOF OF CONCEPT - This is a demonstration of Bitcoin Apps Store</span>
+      <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    </div>
+  )
+}
+
+// Then in your layout/app component:
+// import ProofOfConceptBar from './ProofOfConceptBar'
+// 
+// And add at the top of your render:
+// <ProofOfConceptBar />
+-->
+
+<!-- 
+  CSS-ONLY VERSION (if you prefer to use CSS classes)
+  
+  Add this to your CSS file:
+-->
+<!--
+.poc-bar {
+  background: linear-gradient(to right, #ca8a04, #ea580c);
+  color: #000;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: system-ui, -apple-system, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.poc-bar svg {
+  width: 16px;
+  height: 16px;
+}
+-->
+
+<!-- Then use: <div class="poc-bar">...</div> -->

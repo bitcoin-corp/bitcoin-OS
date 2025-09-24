@@ -20,7 +20,7 @@ export default function Taskbar({ openWindows, activeWindow, onWindowClick }: Ta
   }, [])
 
   return (
-    <div className="taskbar h-12 flex items-center justify-between px-4">
+    <div className="taskbar h-12 flex items-center justify-between px-4 hidden md:flex">
       <div className="flex items-center space-x-2">
         <button className="p-2 hover:bg-white/10 rounded transition-colors">
           <Bitcoin className="w-5 h-5 text-bitcoin-orange" />
