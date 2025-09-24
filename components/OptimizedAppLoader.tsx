@@ -40,8 +40,7 @@ const AppContent = ({ url, appName }: { url: string; appName: string }) => {
       ref={iframeRef}
       src={url}
       className="w-full h-full border-0 bg-white"
-      allow="clipboard-write; clipboard-read"
-      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       title={appName}
     />
   )
