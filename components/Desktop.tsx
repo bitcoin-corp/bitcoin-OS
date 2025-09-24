@@ -1,6 +1,6 @@
 'use client'
 
-import { Wallet, Mail, Music, FileText, HardDrive, Globe, Terminal, Settings, Calendar, Search, LineChart, Briefcase, Table, Share2, Store, ShoppingBag } from 'lucide-react'
+import { Wallet, Mail, Music, FileText, HardDrive, Globe, Terminal, Settings, Calendar, Search, LineChart, Briefcase, Table, Share2, Store, ShoppingBag, TriangleAlert } from 'lucide-react'
 import Image from 'next/image'
 
 interface DesktopProps {
@@ -9,16 +9,16 @@ interface DesktopProps {
 
 const desktopApps = [
   { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', chromeAppId: null, external: true, isImage: true },
-  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', chromeAppId: 'bitcoin-wallet', external: true },
+  { name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', chromeAppId: 'bitcoin-writer', external: true },
+  { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', chromeAppId: 'bitcoin-spreadsheet', external: true },
+  { name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', chromeAppId: 'bitcoin-drive', external: true },
   { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', chromeAppId: 'bitcoin-email', external: true },
   { name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', chromeAppId: 'bitcoin-music', external: true },
-  { name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', chromeAppId: 'bitcoin-writer', external: true },
-  { name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', chromeAppId: 'bitcoin-drive', external: true },
-  { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', chromeAppId: 'bitcoin-spreadsheet', external: true },
+  { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', chromeAppId: 'bitcoin-wallet', external: true },
+  { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', chromeAppId: 'bitcoin-jobs', external: true, disabled: true },
   { name: 'Bitcoin Calendar', icon: Calendar, color: 'text-gray-500', url: 'https://bitcoin-calendar.vercel.app', chromeAppId: 'bitcoin-calendar', external: true, disabled: true },
   { name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', chromeAppId: 'bitcoin-search', external: true, disabled: true },
   { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', chromeAppId: 'bitcoin-shares', external: true, disabled: true },
-  { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', chromeAppId: 'bitcoin-jobs', external: true, disabled: true },
   { name: 'Browser', icon: Globe, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
   { name: 'Terminal', icon: Terminal, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
   { name: 'Settings', icon: Settings, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
@@ -57,7 +57,14 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                 />
               </div>
             ) : (
-              <Icon className={`w-12 h-12 ${app.color}`} />
+              <div className="relative">
+                <Icon className={`w-12 h-12 ${app.color}`} />
+                {app.name === 'Bitcoin Wallet' && (
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full flex items-center justify-center">
+                    <TriangleAlert className="w-3 h-3 text-black" />
+                  </div>
+                )}
+              </div>
             )}
             <span className="text-xs mt-2 text-center">{app.name}</span>
           </div>
