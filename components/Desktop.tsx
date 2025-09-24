@@ -16,17 +16,20 @@ const desktopApps = [
   { name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', chromeAppId: 'bitcoin-drive', external: true },
   { name: 'Bitcoin Calendar', icon: Calendar, color: 'text-yellow-500', url: 'https://bitcoin-calendar.vercel.app', chromeAppId: 'bitcoin-calendar', external: true },
   { name: 'Bitcoin Search', icon: Search, color: 'text-pink-500', url: 'https://bitcoin-search.vercel.app', chromeAppId: 'bitcoin-search', external: true },
-  { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-emerald-500', url: 'https://bitcoin-spreadsheet.vercel.app', chromeAppId: 'bitcoin-spreadsheet', external: true },
-  { name: 'Bitcoin Shares', icon: Share2, color: 'text-rose-500', url: 'https://bitcoin-shares.vercel.app', chromeAppId: 'bitcoin-shares', external: true },
-  { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-500', url: 'https://bitcoin-jobs.vercel.app', chromeAppId: 'bitcoin-jobs', external: true },
-  { name: 'Browser', icon: Globe, color: 'text-cyan-500', url: null, chromeAppId: null },
-  { name: 'Terminal', icon: Terminal, color: 'text-gray-400', url: null, chromeAppId: null },
-  { name: 'Settings', icon: Settings, color: 'text-gray-500', url: null, chromeAppId: null },
+  { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', chromeAppId: 'bitcoin-spreadsheet', external: true },
+  { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', chromeAppId: 'bitcoin-shares', external: true, disabled: true },
+  { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', chromeAppId: 'bitcoin-jobs', external: true, disabled: true },
+  { name: 'Browser', icon: Globe, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
+  { name: 'Terminal', icon: Terminal, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
+  { name: 'Settings', icon: Settings, color: 'text-gray-500', url: null, chromeAppId: null, disabled: true },
 ]
 
 export default function Desktop({ onOpenApp }: DesktopProps) {
   // Function to launch app
   const launchApp = (app: typeof desktopApps[0]) => {
+    // Don't launch if app is disabled
+    if ((app as any).disabled) return
+    
     if (app.external && app.url) {
       window.open(app.url, '_blank')
     } else {
@@ -41,7 +44,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
         return (
           <div
             key={app.name}
-            className="desktop-icon"
+            className={`desktop-icon ${(app as any).disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onDoubleClick={() => launchApp(app)}
           >
             {app.id === 'bapps-store' ? (
