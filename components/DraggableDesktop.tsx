@@ -140,7 +140,18 @@ export default function DraggableDesktop() {
   const openApp = useCallback((app: DesktopIcon) => {
     if (app.disabled) return
     
-    // Check if window is already open
+    // Check app mode preference (default to fullscreen)
+    const appMode = typeof window !== 'undefined' 
+      ? localStorage.getItem('appMode') || 'fullscreen'
+      : 'fullscreen'
+    
+    if (appMode === 'fullscreen' && app.url) {
+      // Open in fullscreen mode (navigate to URL)
+      window.location.href = app.url
+      return
+    }
+    
+    // Windowed mode - check if window is already open
     const existingWindow = openWindows.find(w => w.id === app.id)
     if (existingWindow) {
       // Bring to front (handled by WindowManager)

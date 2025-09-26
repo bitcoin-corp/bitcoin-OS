@@ -201,6 +201,21 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
       label: 'Window',
       items: [
         { 
+          label: 'App Mode: Fullscreen URLs', 
+          action: () => {
+            localStorage.setItem('appMode', 'fullscreen')
+            alert('Apps will now open in fullscreen mode (current page)')
+          }
+        },
+        { 
+          label: 'App Mode: Windowed Apps', 
+          action: () => {
+            localStorage.setItem('appMode', 'windowed')
+            alert('Apps will now open in draggable windows')
+          }
+        },
+        { divider: true },
+        { 
           label: 'Minimize', 
           shortcut: '⌘M',
           action: () => console.log('Minimize')
