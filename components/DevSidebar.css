@@ -1,4 +1,16 @@
 /* Developer Sidebar Styles - Bitcoin OS */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .dev-sidebar {
   position: fixed;
   left: 0;
@@ -32,9 +44,24 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #d946ef; /* Bitcoin OS purple theme */
   font-weight: 600;
   font-size: 16px;
+}
+
+.dev-sidebar-title span {
+  animation: colorCycle 15s ease infinite;
+}
+
+@keyframes colorCycle {
+  0% { color: #ff6b6b; }
+  12.5% { color: #f97316; }
+  25% { color: #feca57; }
+  37.5% { color: #48dbfb; }
+  50% { color: #0abde3; }
+  62.5% { color: #a55eea; }
+  75% { color: #fd79a8; }
+  87.5% { color: #ff6b6b; }
+  100% { color: #ff6b6b; }
 }
 
 .dev-sidebar-logo {
