@@ -36,29 +36,9 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
     // Don't launch if app is disabled
     if ((app as any).disabled) return
     
-    // Open apps in sized windows
+    // Open apps in the same window (full screen)
     if (app.url) {
-      // Calculate window size and position
-      const width = 1200
-      const height = 800
-      const left = (window.screen.width - width) / 2
-      const top = (window.screen.height - height) / 2
-      
-      // Window features for a more app-like experience
-      const windowFeatures = [
-        `width=${width}`,
-        `height=${height}`,
-        `left=${left}`,
-        `top=${top}`,
-        'toolbar=no',
-        'menubar=no',
-        'location=no',
-        'status=no',
-        'scrollbars=yes',
-        'resizable=yes'
-      ].join(',')
-      
-      window.open(app.url, app.name.replace(/\s+/g, '_'), windowFeatures)
+      window.location.href = app.url
     }
   }
 

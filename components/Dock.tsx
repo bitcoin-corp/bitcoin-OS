@@ -58,25 +58,7 @@ const Dock: React.FC = () => {
 
   const handleAppClick = (app: DockApp) => {
     if (!app.disabled && app.url && !app.current) {
-      const width = 1200;
-      const height = 800;
-      const left = (window.screen.width - width) / 2;
-      const top = (window.screen.height - height) / 2;
-      
-      const windowFeatures = [
-        `width=${width}`,
-        `height=${height}`,
-        `left=${left}`,
-        `top=${top}`,
-        'toolbar=no',
-        'menubar=no',
-        'location=no',
-        'status=no',
-        'scrollbars=yes',
-        'resizable=yes'
-      ].join(',');
-      
-      window.open(app.url, app.name.replace(/\s+/g, '_'), windowFeatures);
+      window.location.href = app.url;
     }
   };
 

@@ -341,8 +341,6 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
               <a
                 key={app.name}
                 href={app.url}
-                target={app.url.startsWith('http') ? '_blank' : undefined}
-                rel={app.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -357,6 +355,9 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
                 onClick={(e) => {
                   if (app.url === '#') {
                     e.preventDefault()
+                  } else {
+                    e.preventDefault()
+                    window.location.href = app.url
                   }
                   setShowBAppsMenu(false)
                 }}
