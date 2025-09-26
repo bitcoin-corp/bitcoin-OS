@@ -218,36 +218,33 @@ export default function BitcoinOS() {
       <ProofOfConceptBar />
       <TopMenuBar onOpenApp={openApp} />
       
-      <div className="flex-1 flex relative overflow-hidden">
+      <div className="flex-1 relative overflow-hidden">
+        <DraggableDesktop />
+        <Dock />
         {showDevSidebar && !isMobile && <DevSidebar />}
         
-        <div className={`flex-1 relative ${showDevSidebar && !isMobile ? 'ml-[260px]' : ''}`}>
-          <DraggableDesktop />
-          <Dock />
-          
-          {openWindows.map((appName) => (
-            <Window
-              key={appName}
-              title={appName}
-              isActive={activeWindow === appName}
-              onClose={() => closeWindow(appName)}
-              onFocus={() => setActiveWindow(appName)}
-            >
-              <div className="p-4">
-                <p>Welcome to {appName} on Bitcoin OS!</p>
-              </div>
-            </Window>
-          ))}
-          
-          {/* Apps now open in new tabs/windows - no embedded windows needed */}
-          
-          {placeholderApp && (
-            <PlaceholderWindow
-              appName={placeholderApp}
-              onClose={() => setPlaceholderApp(null)}
-            />
-          )}
-        </div>
+        {openWindows.map((appName) => (
+          <Window
+            key={appName}
+            title={appName}
+            isActive={activeWindow === appName}
+            onClose={() => closeWindow(appName)}
+            onFocus={() => setActiveWindow(appName)}
+          >
+            <div className="p-4">
+              <p>Welcome to {appName} on Bitcoin OS!</p>
+            </div>
+          </Window>
+        ))}
+        
+        {/* Apps now open in new tabs/windows - no embedded windows needed */}
+        
+        {placeholderApp && (
+          <PlaceholderWindow
+            appName={placeholderApp}
+            onClose={() => setPlaceholderApp(null)}
+          />
+        )}
       </div>
     </div>
   )
