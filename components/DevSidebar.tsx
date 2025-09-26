@@ -17,14 +17,34 @@ import {
   History,
   CheckCircle,
   ListTodo,
-  Briefcase
+  Briefcase,
+  Terminal,
+  Package,
+  Download,
+  Upload,
+  Lock,
+  Unlock,
+  Activity,
+  Clock
 } from 'lucide-react'
+import './DevSidebar.css'
 
 export default function DevSidebar() {
   const pathname = usePathname()
-  const [isCollapsed, setIsCollapsed] = useState(true) // Always start collapsed
-  const [mounted, setMounted] = useState(false)
-  const [issueCount, setIssueCount] = useState<number | null>(null)
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('devSidebarCollapsed')
+      return saved !== null ? saved === 'true' : true
+    }
+    return true
+  })
+  const [issueCount, setIssueCount] = useState<number>(0)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('devSidebarCollapsed', isCollapsed.toString())
+    }
+  }, [isCollapsed])
 
   // Fetch GitHub issues count
   useEffect(() => {
@@ -32,101 +52,109 @@ export default function DevSidebar() {
       try {
         const response = await fetch('https://api.github.com/repos/bitcoin-apps-suite/bitcoin-OS/issues?state=open')
         const data = await response.json()
-        setIssueCount(Array.isArray(data) ? data.length : null)
+        setIssueCount(Array.isArray(data) ? data.length : 0)
       } catch (error) {
         console.error('Error fetching issues:', error)
+        setIssueCount(0)
       }
     }
     fetchIssues()
   }, [])
 
-  // Load collapsed state from localStorage after mount
-  useEffect(() => {
-    setMounted(true)
-    const saved = localStorage.getItem('devSidebarCollapsed')
-    // Default to collapsed (true) if no saved preference
-    setIsCollapsed(saved !== null ? saved === 'true' : true)
-  }, [])
-
-  const toggleSidebar = () => {
-    const newState = !isCollapsed
-    setIsCollapsed(newState)
-    localStorage.setItem('devSidebarCollapsed', newState.toString())
-  }
-
-  const menuItems = [
-    { path: '/contracts', icon: Briefcase, label: 'Contracts' },
-    { path: '/tasks', icon: ListTodo, label: 'Tasks' },
-    { path: '/contributors', icon: Users, label: 'Contributors' },
+  const menuItems: Array<{
+    path?: string
+    icon?: any
+    label?: string
+    badge?: string
+    divider?: boolean
+    section?: string
+    external?: boolean
+  }> = [
+    // Token & Core at top
+    { path: '/token', icon: Coins, label: '$bOS Token', badge: 'NEW' },
+    { path: '/contracts', icon: Terminal, label: 'Smart Contracts', badge: 'BETA' },
+    { path: '/exchange', icon: Download, label: 'Token Exchange' },
+    
+    // System Operations
+    { divider: true },
+    { section: 'SYSTEM' },
+    { path: '/tasks', icon: ListTodo, label: 'Task Manager' },
+    { path: '/contributors', icon: Users, label: 'Contributors', badge: '42' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },
-    { path: '/token', icon: Coins, label: '$bOS Token' },
+    
+    // Development
     { divider: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS', icon: Github, label: 'Repository', external: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: FileCode, label: 'Issues', badge: issueCount, external: true },
+    { section: 'DEVELOPMENT' },
+    { path: '/api', icon: Package, label: 'API Reference' },
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS', icon: Github, label: 'GitHub Repository', external: true },
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: FileCode, label: 'Issues', badge: issueCount > 0 ? String(issueCount) : '0', external: true },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/pulls', icon: GitPullRequest, label: 'Pull Requests', external: true },
+    
+    // System Status
     { divider: true },
-    { path: '/api', icon: FileText, label: 'API Reference' },
     { path: '/changelog', icon: History, label: 'Changelog' },
-    { path: '/status', icon: CheckCircle, label: 'Status' },
+    { path: '/status', icon: CheckCircle, label: 'System Status', badge: 'OK' }
   ]
 
   const stats = {
-    supply: '1,000,000,000,000',
+    totalSupply: '1,000,000,000,000',
     distributed: '12,456,789',
     contributors: '42',
-    openTasks: issueCount || 0
+    openTasks: issueCount || 0,
+    networkNodes: '150+'
   }
 
-  // Use mounted state to ensure consistent rendering between server and client
-  const sidebarCollapsed = mounted ? isCollapsed : true
-
   return (
-    <div className={`fixed left-0 bottom-0 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} border-r transition-all duration-300 ease-in-out z-50 flex flex-col`} style={{ top: '68px', background: 'rgba(22, 22, 22, 0.98)', backdropFilter: 'blur(20px) saturate(180%)', borderColor: 'rgba(0, 0, 0, 0.9)' }}>
-      <div className="p-4 border-b border-gray-800 flex items-center justify-between min-h-[60px]">
-        <div className={`flex items-center gap-2 transition-opacity duration-300 ${sidebarCollapsed ? 'opacity-0 w-0' : 'opacity-100'}`}>
-          <Monitor className="w-5 h-5 text-bitcoin-orange flex-shrink-0" />
-          <span className="font-semibold text-white whitespace-nowrap overflow-hidden">Developer Hub</span>
-        </div>
-        <button
-          onClick={toggleSidebar}
-          className={`p-1.5 hover:bg-gray-800 rounded-lg transition-colors flex-shrink-0 ${sidebarCollapsed ? 'mx-auto' : ''}`}
-          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+    <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+      <div className="dev-sidebar-header">
+        {!isCollapsed && (
+          <div className="dev-sidebar-title">
+            <Monitor className="dev-sidebar-logo" />
+            <span>Developer Hub</span>
+          </div>
+        )}
+        <button 
+          className="dev-sidebar-toggle"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          {sidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-2">
+      <nav className="dev-sidebar-nav">
         {menuItems.map((item, index) => {
           if (item.divider) {
-            return <div key={index} className="my-2 border-t border-gray-800" />
+            return <div key={index} className="dev-sidebar-divider" />
           }
 
-          const Icon = item.icon!
-          const isActive = pathname === item.path
-          const isExternal = item.external
+          if (item.section) {
+            return !isCollapsed ? (
+              <div key={index} className="dev-sidebar-section">
+                {item.section}
+              </div>
+            ) : null
+          }
 
-          if (isExternal) {
+          const Icon = item.icon
+          const isActive = pathname === item.path
+
+          if (item.external) {
             return (
               <a
-                key={item.path}
+                key={`${item.path}-${index}`}
                 href={item.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-3 px-4 py-2 hover:bg-gray-800 transition-colors ${
-                  sidebarCollapsed ? 'justify-center' : ''
-                }`}
-                title={sidebarCollapsed ? item.label : undefined}
+                className={`dev-sidebar-item ${isActive ? 'active' : ''}`}
+                title={isCollapsed ? item.label : undefined}
               >
-                <Icon className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${sidebarCollapsed ? 'w-0 opacity-0' : 'opacity-100'}`}>
-                  {item.label}
-                </span>
-                {item.badge !== undefined && !sidebarCollapsed && (
-                  <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
-                    {item.badge}
-                  </span>
+                <Icon size={20} />
+                {!isCollapsed && (
+                  <>
+                    <span className="dev-sidebar-label">{item.label}</span>
+                    {item.badge && <span className="dev-sidebar-badge">{item.badge}</span>}
+                  </>
                 )}
               </a>
             )
@@ -134,60 +162,66 @@ export default function DevSidebar() {
 
           return (
             <a
-              key={item.path}
-              href={item.path}
-              className={`flex items-center gap-3 px-4 py-2 hover:bg-gray-800 transition-colors ${
-                isActive ? 'bg-gray-800 border-l-2 border-bitcoin-orange' : ''
-              } ${sidebarCollapsed ? 'justify-center' : ''}`}
-              title={sidebarCollapsed ? item.label : undefined}
+              key={`${item.path}-${index}`}
+              href={item.path || '/'}
+              className={`dev-sidebar-item ${isActive ? 'active' : ''}`}
+              title={isCollapsed ? item.label : undefined}
             >
-              <Icon className={`w-5 h-5 ${isActive ? 'text-bitcoin-orange' : 'text-gray-400'} flex-shrink-0`} />
-              <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${sidebarCollapsed ? 'w-0 opacity-0' : 'opacity-100'} ${isActive ? 'text-white font-medium' : 'text-gray-300'}`}>
-                {item.label}
-              </span>
-              {item.badge !== undefined && !sidebarCollapsed && (
-                <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
-                  {item.badge}
-                </span>
+              <Icon size={20} />
+              {!isCollapsed && (
+                <>
+                  <span className="dev-sidebar-label">{item.label}</span>
+                  {item.badge && <span className="dev-sidebar-badge">{item.badge}</span>}
+                </>
               )}
             </a>
           )
         })}
       </nav>
 
-      {/* Quick Stats */}
-      <div className={`border-t border-gray-800 transition-all duration-300 overflow-hidden ${sidebarCollapsed ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>
-        <div className="p-4">
-          <h4 className="text-xs text-gray-500 uppercase tracking-wider mb-3">bOS Stats</h4>
-          <div className="space-y-2">
-            <div>
-              <div className="text-xs text-gray-400">Total Supply</div>
-              <div className="text-sm font-mono text-white">{stats.supply}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-400">Distributed</div>
-              <div className="text-sm font-mono text-white">{stats.distributed}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-400">Contributors</div>
-              <div className="text-sm font-mono text-white">{stats.contributors}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-400">Open Tasks</div>
-              <div className="text-sm font-mono text-white">{stats.openTasks}</div>
-            </div>
+      {/* Stats section */}
+      {!isCollapsed && (
+        <div className="dev-sidebar-stats">
+          <h4>bOS Stats</h4>
+          <div className="dev-stat">
+            <span className="dev-stat-label">Total Supply</span>
+            <span className="dev-stat-value">{stats.totalSupply}</span>
+          </div>
+          <div className="dev-stat">
+            <span className="dev-stat-label">Distributed</span>
+            <span className="dev-stat-value">{stats.distributed}</span>
+          </div>
+          <div className="dev-stat">
+            <span className="dev-stat-label">Contributors</span>
+            <span className="dev-stat-value">{stats.contributors}</span>
+          </div>
+          <div className="dev-stat">
+            <span className="dev-stat-label">Open Tasks</span>
+            <span className="dev-stat-value">{stats.openTasks}</span>
+          </div>
+          <div className="dev-stat">
+            <span className="dev-stat-label">Network Nodes</span>
+            <span className="dev-stat-value">{stats.networkNodes}</span>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Footer */}
-      <div className={`border-t border-gray-800 transition-all duration-300 overflow-hidden ${sidebarCollapsed ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>
-        <div className="p-4">
-          <button className="w-full bg-bitcoin-orange text-black py-2 px-4 rounded-lg hover:bg-bitcoin-orange/90 transition-colors font-medium text-sm">
-            Start Contributing
-          </button>
+      {/* Footer CTA */}
+      {!isCollapsed && (
+        <div className="dev-sidebar-footer">
+          <div className="dev-sidebar-cta">
+            <p>Join Development</p>
+            <a 
+              href="https://github.com/bitcoin-apps-suite/bitcoin-OS" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="dev-sidebar-cta-button"
+            >
+              Start Contributing
+            </a>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
