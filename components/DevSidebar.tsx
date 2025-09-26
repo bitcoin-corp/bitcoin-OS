@@ -81,17 +81,15 @@ export default function DevSidebar() {
   const sidebarCollapsed = mounted ? isCollapsed : true
 
   return (
-    <div className={`fixed left-0 bottom-0 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} border-r transition-all duration-300 z-40 flex flex-col`} style={{ top: '68px', background: 'rgba(22, 22, 22, 0.98)', backdropFilter: 'blur(20px) saturate(180%)', borderColor: 'rgba(0, 0, 0, 0.9)' }}>
-      <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-        {!sidebarCollapsed && (
-          <div className="flex items-center gap-2">
-            <Monitor className="w-5 h-5 text-bitcoin-orange" />
-            <span className="font-semibold text-white">Developer Hub</span>
-          </div>
-        )}
+    <div className={`fixed left-0 bottom-0 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} border-r transition-all duration-300 ease-in-out z-50 flex flex-col`} style={{ top: '68px', background: 'rgba(22, 22, 22, 0.98)', backdropFilter: 'blur(20px) saturate(180%)', borderColor: 'rgba(0, 0, 0, 0.9)' }}>
+      <div className="p-4 border-b border-gray-800 flex items-center justify-between min-h-[60px]">
+        <div className={`flex items-center gap-2 transition-opacity duration-300 ${sidebarCollapsed ? 'opacity-0 w-0' : 'opacity-100'}`}>
+          <Monitor className="w-5 h-5 text-bitcoin-orange flex-shrink-0" />
+          <span className="font-semibold text-white whitespace-nowrap overflow-hidden">Developer Hub</span>
+        </div>
         <button
           onClick={toggleSidebar}
-          className="p-1.5 hover:bg-gray-800 rounded-lg transition-colors"
+          className={`p-1.5 hover:bg-gray-800 rounded-lg transition-colors flex-shrink-0 ${sidebarCollapsed ? 'mx-auto' : ''}`}
           title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {sidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -121,16 +119,14 @@ export default function DevSidebar() {
                 }`}
                 title={sidebarCollapsed ? item.label : undefined}
               >
-                <Icon className="w-5 h-5 text-gray-400" />
-                {!sidebarCollapsed && (
-                  <>
-                    <span>{item.label}</span>
-                    {item.badge !== undefined && (
-                      <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
-                        {item.badge}
-                      </span>
-                    )}
-                  </>
+                <Icon className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${sidebarCollapsed ? 'w-0 opacity-0' : 'opacity-100'}`}>
+                  {item.label}
+                </span>
+                {item.badge !== undefined && !sidebarCollapsed && (
+                  <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
+                    {item.badge}
+                  </span>
                 )}
               </a>
             )
@@ -145,18 +141,14 @@ export default function DevSidebar() {
               } ${sidebarCollapsed ? 'justify-center' : ''}`}
               title={sidebarCollapsed ? item.label : undefined}
             >
-              <Icon className={`w-5 h-5 ${isActive ? 'text-bitcoin-orange' : 'text-gray-400'}`} />
-              {!sidebarCollapsed && (
-                <>
-                  <span className={isActive ? 'text-white font-medium' : 'text-gray-300'}>
-                    {item.label}
-                  </span>
-                  {item.badge !== undefined && (
-                    <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
-                      {item.badge}
-                    </span>
-                  )}
-                </>
+              <Icon className={`w-5 h-5 ${isActive ? 'text-bitcoin-orange' : 'text-gray-400'} flex-shrink-0`} />
+              <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${sidebarCollapsed ? 'w-0 opacity-0' : 'opacity-100'} ${isActive ? 'text-white font-medium' : 'text-gray-300'}`}>
+                {item.label}
+              </span>
+              {item.badge !== undefined && !sidebarCollapsed && (
+                <span className="ml-auto bg-bitcoin-orange text-black px-2 py-0.5 rounded text-xs font-bold">
+                  {item.badge}
+                </span>
               )}
             </a>
           )
@@ -164,8 +156,8 @@ export default function DevSidebar() {
       </nav>
 
       {/* Quick Stats */}
-      {!sidebarCollapsed && (
-        <div className="p-4 border-t border-gray-800">
+      <div className={`border-t border-gray-800 transition-all duration-300 overflow-hidden ${sidebarCollapsed ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>
+        <div className="p-4">
           <h4 className="text-xs text-gray-500 uppercase tracking-wider mb-3">bOS Stats</h4>
           <div className="space-y-2">
             <div>
@@ -186,11 +178,11 @@ export default function DevSidebar() {
             </div>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Footer */}
-      {!sidebarCollapsed && (
-        <div className="p-4 border-t border-gray-800">
+      <div className={`border-t border-gray-800 transition-all duration-300 overflow-hidden ${sidebarCollapsed ? 'h-0 opacity-0' : 'h-auto opacity-100'}`}>
+        <div className="p-4">
           <button className="w-full bg-bitcoin-orange text-black py-2 px-4 rounded-lg hover:bg-bitcoin-orange/90 transition-colors font-medium text-sm">
             Start Contributing
           </button>
