@@ -25,6 +25,7 @@ interface TopMenuBarProps {
 
 export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
+  const [showBAppsMenu, setShowBAppsMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
@@ -70,16 +71,6 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           action: () => console.log('Shut Down')
         },
       ]
-    },
-    {
-      label: 'BApps',
-      items: bitcoinApps.map(app => ({
-        label: app.name,
-        action: () => {
-          window.open(app.url, app.name.replace(/\s+/g, '_'), 'width=1200,height=800,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes')
-        },
-        external: true
-      }))
     },
     {
       label: 'File',
@@ -266,12 +257,14 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setActiveMenu(null)
+        setShowBAppsMenu(false)
       }
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setActiveMenu(null)
+        setShowBAppsMenu(false)
       }
     }
 
@@ -286,13 +279,79 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
 
   return (
     <div ref={menuRef} className="bitcoin-os-taskbar">
-      {/* Bitcoin Logo */}
-      <div 
-        className="taskbar-logo"
-        onDoubleClick={() => window.location.href = '/'}
-        title="Double-click to go home"
-      >
-        <span className="bitcoin-symbol">₿</span>
+      {/* Bitcoin Logo with BApps Menu */}
+      <div style={{ position: 'relative' }}>
+        <button 
+          className="taskbar-logo"
+          onClick={() => {
+            setShowBAppsMenu(!showBAppsMenu)
+            setActiveMenu(null)
+          }}
+          onDoubleClick={() => window.location.href = '/'}
+          title="Click for apps • Double-click to go home"
+          style={{ 
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '0 12px',
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
+          }}
+        >
+          <span className="bitcoin-symbol">₿</span>
+        </button>
+        
+        {/* BApps Dropdown */}
+        {showBAppsMenu && (
+          <div className="dropdown-menu" style={{ left: 0 }}>
+            {bitcoinApps.map((app, index) => {
+              const appColors = [
+                '#ff6b6b', // red
+                '#f97316', // orange
+                '#eab308', // yellow
+                '#22c55e', // green
+                '#06b6d4', // cyan
+                '#3b82f6', // blue
+                '#8b5cf6', // violet
+                '#d946ef', // magenta
+                '#ec4899', // pink
+                '#f43f5e', // rose
+                '#84cc16', // lime
+              ]
+              const color = appColors[index % appColors.length]
+              
+              return (
+                <button
+                  key={app.name}
+                  className="menu-item"
+                  onClick={() => {
+                    window.open(app.url, app.name.replace(/\s+/g, '_'), 'width=1200,height=800,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes')
+                    setShowBAppsMenu(false)
+                  }}
+                  style={{
+                    background: 'transparent',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = `linear-gradient(135deg, ${color} 0%, ${color}99 100%)`
+                    e.currentTarget.style.color = '#ffffff'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)'
+                  }}
+                >
+                  <div className="menu-item-content">
+                    <span className="menu-label" style={{ color: color, fontWeight: 500 }}>
+                      {app.name}
+                    </span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        )}
       </div>
 
       {/* Menu Items */}

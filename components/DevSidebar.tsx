@@ -81,7 +81,7 @@ export default function DevSidebar() {
   const sidebarCollapsed = mounted ? isCollapsed : true
 
   return (
-    <div className={`fixed left-0 top-16 bottom-0 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 flex flex-col`}>
+    <div className={`fixed left-0 bottom-0 ${sidebarCollapsed ? 'w-16' : 'w-[260px]'} border-r transition-all duration-300 z-40 flex flex-col`} style={{ top: '68px', background: 'rgba(22, 22, 22, 0.98)', backdropFilter: 'blur(20px) saturate(180%)', borderColor: 'rgba(0, 0, 0, 0.9)' }}>
       <div className="p-4 border-b border-gray-800 flex items-center justify-between">
         {!sidebarCollapsed && (
           <div className="flex items-center gap-2">

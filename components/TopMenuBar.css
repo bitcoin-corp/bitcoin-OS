@@ -2,12 +2,12 @@
 .bitcoin-os-taskbar {
   display: flex;
   align-items: center;
-  height: 22px;
-  background: rgba(22, 22, 22, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  height: 28px;
+  background: rgba(22, 22, 22, 0.98);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
   user-select: none;
@@ -17,7 +17,7 @@
 }
 
 .taskbar-logo {
-  padding: 0 8px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   height: 100%;
@@ -25,10 +25,17 @@
 }
 
 .bitcoin-symbol {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
+  color: #d946ef;
+  opacity: 0.95;
+  text-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
+  transition: all 0.2s ease;
+}
+
+.taskbar-logo:hover .bitcoin-symbol {
   color: #ff9500;
-  opacity: 0.9;
+  text-shadow: 0 0 15px rgba(255, 149, 0, 0.5);
 }
 
 .taskbar-menus {
@@ -44,12 +51,12 @@
 }
 
 .menu-button {
-  padding: 0 10px;
-  height: 20px;
+  padding: 0 12px;
+  height: 24px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
   font-weight: 400;
   cursor: pointer;
   font-family: inherit;
@@ -61,27 +68,27 @@
 }
 
 .menu-button:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .menu-button.active {
-  background: #0058d1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
-  top: 22px;
+  top: 28px;
   left: 0;
-  min-width: 200px;
-  background: rgba(36, 36, 36, 0.98);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-  padding: 3px 0;
+  min-width: 220px;
+  background: rgba(30, 30, 30, 0.98);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  padding: 4px 0;
 }
 
 /* Menu Items */
@@ -89,22 +96,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.85);
+  padding: 5px 14px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
   background: transparent;
   border: none;
   width: 100%;
   text-align: left;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.1s ease;
+  transition: background 0.15s ease;
   font-family: inherit;
-  min-height: 20px;
+  min-height: 24px;
 }
 
 .menu-item:hover {
-  background: #0058d1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
 }
 

@@ -26,6 +26,7 @@
   animation: gradientShift 15s ease infinite;
   position: relative;
   overflow: hidden;
+  height: 40px;
 }
 
 .poc-bar::before {
@@ -45,12 +46,12 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 0.5rem 1rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
 }
 
 .poc-text {
