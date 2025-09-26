@@ -46,8 +46,8 @@ function AppWindow({ window, onClose, onFocus, zIndex, isActive }: {
   return (
     <Rnd
       default={{
-        x: Math.random() * (window.innerWidth - 800),
-        y: Math.random() * (window.innerHeight - 600),
+        x: Math.random() * 400 + 100,
+        y: Math.random() * 200 + 100,
         width: 800,
         height: 600
       }}

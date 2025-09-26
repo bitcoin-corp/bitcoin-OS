@@ -187,7 +187,7 @@ export default function DevSidebar() {
             Start Contributing
           </button>
         </div>
-      )}
+      </div>
     </div>
   )
 }
