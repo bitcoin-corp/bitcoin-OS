@@ -29,17 +29,25 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin Wallet', url: 'https://bitcoin-wallet-sable.vercel.app' },
-    { name: 'Bitcoin Email', url: 'https://bitcoin-email.vercel.app' },
-    { name: 'Bitcoin Music', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Writer', url: 'https://bitcoin-writer.vercel.app' },
-    { name: 'Bitcoin Drive', url: 'https://bitcoin-drive.vercel.app' },
-    { name: 'Bitcoin Spreadsheet', url: 'https://bitcoin-spreadsheet.vercel.app' },
-    { name: 'Bitcoin Calendar', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Exchange', url: 'https://bitcoin-exchange.vercel.app' },
-    { name: 'Bitcoin Search', url: 'https://bitcoin-search.vercel.app' },
-    { name: 'Bitcoin Shares', url: 'https://bitcoin-shares.vercel.app' },
-    { name: 'Bitcoin Jobs', url: 'https://bitcoin-jobs.vercel.app' },
+    { name: 'Bitcoin Auth', color: '#ef4444', url: '#', disabled: true },
+    { name: 'Bitcoin Calendar', color: '#d946ef', url: 'https://bitcoin-calendar.vercel.app' },
+    { name: 'Bitcoin Chat', color: '#ff6500', url: '#', disabled: true },
+    { name: 'Bitcoin Domains', color: '#eab308', url: '#', disabled: true },
+    { name: 'Bitcoin Draw', color: '#10b981', url: '#', disabled: true },
+    { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
+    { name: 'Bitcoin Email', color: '#06b6d4', url: 'https://bitcoin-email.vercel.app' },
+    { name: 'Bitcoin Exchange', color: '#6b7280', url: 'https://bitcoin-exchange.vercel.app' },
+    { name: 'Bitcoin Jobs', color: '#06b6d4', url: 'https://bitcoin-jobs.vercel.app' },
+    { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
+    { name: 'Bitcoin Paint', color: '#a855f7', url: '#', disabled: true },
+    { name: 'Bitcoin Pics', color: '#ec4899', url: '#', disabled: true },
+    { name: 'Bitcoin Registry', color: '#f43f5e', url: '#', disabled: true },
+    { name: 'Bitcoin Search', color: '#6b7280', url: 'https://bitcoin-search.vercel.app', disabled: true },
+    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app', disabled: true },
+    { name: 'Bitcoin Spreadsheets', color: '#3b82f6', url: 'https://bitcoin-spreadsheet.vercel.app' },
+    { name: 'Bitcoin Video', color: '#65a30d', url: '#', disabled: true },
+    { name: 'Bitcoin Wallet', color: '#f59e0b', url: 'https://bitcoin-wallet-sable.vercel.app' },
+    { name: 'Bitcoin Writer', color: '#ff9500', url: 'https://bitcoin-writer.vercel.app' }
   ]
 
   const menus: Menu[] = [
@@ -304,52 +312,89 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         
         {/* BApps Dropdown */}
         {showBAppsMenu && (
-          <div className="dropdown-menu" style={{ left: 0 }}>
-            {bitcoinApps.map((app, index) => {
-              const appColors = [
-                '#ff6b6b', // red
-                '#f97316', // orange
-                '#eab308', // yellow
-                '#22c55e', // green
-                '#06b6d4', // cyan
-                '#3b82f6', // blue
-                '#8b5cf6', // violet
-                '#d946ef', // magenta
-                '#ec4899', // pink
-                '#f43f5e', // rose
-                '#84cc16', // lime
-              ]
-              const color = appColors[index % appColors.length]
-              
-              return (
+          <div className="dropdown-menu" style={{ left: 0, minWidth: '240px' }}>
+            <div style={{
+              padding: '8px 16px',
+              fontSize: '12px',
+              color: '#d946ef',
+              fontWeight: '600',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              marginBottom: '4px'
+            }}>
+              Bitcoin Apps
+            </div>
+            
+            {bitcoinApps.map((app) => (
+              app.disabled ? (
+                <div
+                  key={app.name}
+                  className="menu-item"
+                  style={{
+                    opacity: 0.5,
+                    cursor: 'not-allowed',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '6px 16px'
+                  }}
+                >
+                  <span 
+                    style={{ 
+                      color: app.color,
+                      marginRight: '12px',
+                      fontSize: '16px',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    ₿
+                  </span>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                    {app.name}
+                    <span style={{ marginLeft: '8px', fontSize: '11px', opacity: 0.6 }}>(Coming Soon)</span>
+                  </span>
+                </div>
+              ) : (
                 <button
                   key={app.name}
                   className="menu-item"
                   onClick={() => {
-                    window.open(app.url, app.name.replace(/\s+/g, '_'), 'width=1200,height=800,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes')
-                    setShowBAppsMenu(false)
+                    if (app.url !== '#') {
+                      window.open(app.url, app.name.replace(/\s+/g, '_'), 'width=1200,height=800,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes')
+                      setShowBAppsMenu(false)
+                    }
                   }}
                   style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '6px 16px',
                     background: 'transparent',
-                    transition: 'all 0.15s ease'
+                    transition: 'all 0.15s ease',
+                    width: '100%',
+                    border: 'none',
+                    cursor: 'pointer'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = `linear-gradient(135deg, ${color} 0%, ${color}99 100%)`
-                    e.currentTarget.style.color = '#ffffff'
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)'
                   }}
                 >
-                  <div className="menu-item-content">
-                    <span className="menu-label" style={{ color: color, fontWeight: 500 }}>
-                      {app.name}
-                    </span>
-                  </div>
+                  <span 
+                    style={{ 
+                      color: app.color,
+                      marginRight: '12px',
+                      fontSize: '16px',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    ₿
+                  </span>
+                  <span style={{ color: '#ffffff', textAlign: 'left' }}>
+                    {app.name}
+                  </span>
                 </button>
               )
-            })}
+            ))}
           </div>
         )}
       </div>
