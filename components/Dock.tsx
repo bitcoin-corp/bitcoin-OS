@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -31,6 +31,7 @@ const Dock: React.FC = () => {
       'text-yellow-500': '#eab308',
       'text-red-500': '#ef4444',
       'text-purple-500': '#a855f7',
+      'text-fuchsia-500': '#d946ef',
       'text-green-500': '#22c55e',
       'text-blue-500': '#3b82f6',
       'text-gray-500': '#6b7280',
@@ -47,7 +48,8 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app' },
     { name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app' },
     { name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app' },
-    { name: 'Bitcoin Calendar', icon: Calendar, color: 'text-red-500', url: 'https://bitcoin-calendar.vercel.app' },
+    { name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app' },
+    { name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-gray-500', url: 'https://bitcoin-exchange.vercel.app' },
     { name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', disabled: true },
     { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true },
