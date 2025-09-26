@@ -33,9 +33,21 @@
   transition: all 0.2s ease;
 }
 
-.taskbar-logo:hover .bitcoin-symbol {
-  color: #ff9500;
-  text-shadow: 0 0 15px rgba(255, 149, 0, 0.5);
+@keyframes rainbowColors {
+  0% { color: #ff6b6b; }
+  14% { color: #f97316; }
+  28% { color: #eab308; }
+  42% { color: #22c55e; }
+  57% { color: #06b6d4; }
+  71% { color: #8b5cf6; }
+  85% { color: #d946ef; }
+  100% { color: #ff6b6b; }
+}
+
+.taskbar-logo:hover .bitcoin-symbol,
+.taskbar-logo.menu-open .bitcoin-symbol {
+  animation: rainbowColors 2s linear infinite;
+  text-shadow: 0 0 15px currentColor;
 }
 
 .taskbar-menus {

@@ -29,23 +29,23 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin Auth', color: '#ef4444', url: '#', disabled: true },
+    { name: 'Bitcoin Auth', color: '#ef4444', url: '#' },
     { name: 'Bitcoin Calendar', color: '#d946ef', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Chat', color: '#ff6500', url: '#', disabled: true },
-    { name: 'Bitcoin Domains', color: '#eab308', url: '#', disabled: true },
-    { name: 'Bitcoin Draw', color: '#10b981', url: '#', disabled: true },
+    { name: 'Bitcoin Chat', color: '#ff6500', url: '#' },
+    { name: 'Bitcoin Domains', color: '#eab308', url: '#' },
+    { name: 'Bitcoin Draw', color: '#10b981', url: '#' },
     { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
     { name: 'Bitcoin Email', color: '#06b6d4', url: 'https://bitcoin-email.vercel.app' },
-    { name: 'Bitcoin Exchange', color: '#6b7280', url: 'https://bitcoin-exchange.vercel.app' },
+    { name: 'Bitcoin Exchange', color: '#3b82f6', url: 'https://bitcoin-exchange.vercel.app' },
     { name: 'Bitcoin Jobs', color: '#06b6d4', url: 'https://bitcoin-jobs.vercel.app' },
     { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Paint', color: '#a855f7', url: '#', disabled: true },
-    { name: 'Bitcoin Pics', color: '#ec4899', url: '#', disabled: true },
-    { name: 'Bitcoin Registry', color: '#f43f5e', url: '#', disabled: true },
-    { name: 'Bitcoin Search', color: '#6b7280', url: 'https://bitcoin-search.vercel.app', disabled: true },
-    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app', disabled: true },
+    { name: 'Bitcoin Paint', color: '#a855f7', url: '#' },
+    { name: 'Bitcoin Pics', color: '#ec4899', url: '#' },
+    { name: 'Bitcoin Registry', color: '#f43f5e', url: '#' },
+    { name: 'Bitcoin Search', color: '#6b7280', url: 'https://bitcoin-search.vercel.app' },
+    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app' },
     { name: 'Bitcoin Spreadsheets', color: '#3b82f6', url: 'https://bitcoin-spreadsheet.vercel.app' },
-    { name: 'Bitcoin Video', color: '#65a30d', url: '#', disabled: true },
+    { name: 'Bitcoin Video', color: '#65a30d', url: '#' },
     { name: 'Bitcoin Wallet', color: '#f59e0b', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Writer', color: '#ff9500', url: 'https://bitcoin-writer.vercel.app' }
   ]
@@ -290,7 +290,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
       {/* Bitcoin Logo with BApps Menu */}
       <div style={{ position: 'relative' }}>
         <button 
-          className="taskbar-logo"
+          className={`taskbar-logo ${showBAppsMenu ? 'menu-open' : ''}`}
           onClick={() => {
             setShowBAppsMenu(!showBAppsMenu)
             setActiveMenu(null)
@@ -298,13 +298,14 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           onDoubleClick={() => window.location.href = '/'}
           title="Click for apps • Double-click to go home"
           style={{ 
-            background: 'transparent',
+            background: showBAppsMenu ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
             border: 'none',
             cursor: 'pointer',
             padding: '0 12px',
             display: 'flex',
             alignItems: 'center',
-            height: '100%'
+            height: '100%',
+            transition: 'background 0.15s ease'
           }}
         >
           <span className="bitcoin-symbol">₿</span>
@@ -312,7 +313,19 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         
         {/* BApps Dropdown */}
         {showBAppsMenu && (
-          <div className="dropdown-menu" style={{ left: 0, minWidth: '240px' }}>
+          <div style={{
+            position: 'absolute',
+            top: '28px',
+            left: 0,
+            minWidth: '220px',
+            background: '#1a1a1a',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            borderRadius: '8px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8)',
+            padding: '8px 0',
+            zIndex: 1000
+          }}>
             <div style={{
               padding: '8px 16px',
               fontSize: '12px',
@@ -325,75 +338,45 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
             </div>
             
             {bitcoinApps.map((app) => (
-              app.disabled ? (
-                <div
-                  key={app.name}
-                  className="menu-item"
-                  style={{
-                    opacity: 0.5,
-                    cursor: 'not-allowed',
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '6px 16px'
+              <a
+                key={app.name}
+                href={app.url}
+                target={app.url.startsWith('http') ? '_blank' : undefined}
+                rel={app.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '6px 16px',
+                  color: '#ffffff',
+                  background: 'transparent',
+                  textDecoration: 'none',
+                  fontSize: '13px',
+                  transition: 'background 0.15s ease',
+                  cursor: 'pointer'
+                }}
+                onClick={(e) => {
+                  if (app.url === '#') {
+                    e.preventDefault()
+                  }
+                  setShowBAppsMenu(false)
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              >
+                <span 
+                  style={{ 
+                    color: app.color,
+                    marginRight: '12px',
+                    fontSize: '16px',
+                    fontWeight: 'bold'
                   }}
                 >
-                  <span 
-                    style={{ 
-                      color: app.color,
-                      marginRight: '12px',
-                      fontSize: '16px',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    ₿
-                  </span>
-                  <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-                    {app.name}
-                    <span style={{ marginLeft: '8px', fontSize: '11px', opacity: 0.6 }}>(Coming Soon)</span>
-                  </span>
-                </div>
-              ) : (
-                <button
-                  key={app.name}
-                  className="menu-item"
-                  onClick={() => {
-                    if (app.url !== '#') {
-                      window.open(app.url, app.name.replace(/\s+/g, '_'), 'width=1200,height=800,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes')
-                      setShowBAppsMenu(false)
-                    }
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '6px 16px',
-                    background: 'transparent',
-                    transition: 'all 0.15s ease',
-                    width: '100%',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'transparent'
-                  }}
-                >
-                  <span 
-                    style={{ 
-                      color: app.color,
-                      marginRight: '12px',
-                      fontSize: '16px',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    ₿
-                  </span>
-                  <span style={{ color: '#ffffff', textAlign: 'left' }}>
-                    {app.name}
-                  </span>
-                </button>
-              )
+                  ₿
+                </span>
+                <span>
+                  {app.name}
+                </span>
+              </a>
             ))}
           </div>
         )}
