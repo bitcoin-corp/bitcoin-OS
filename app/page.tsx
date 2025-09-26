@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Bitcoin } from 'lucide-react'
 import { getAppIcon } from '@/lib/app-icons'
-import Desktop from '@/components/Desktop'
+import DraggableDesktop from '@/components/DraggableDesktop'
 import OSTaskbar from '@/components/OSTaskbar'
 import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
@@ -221,7 +221,7 @@ export default function BitcoinOS() {
         {showDevSidebar && !isMobile && <DevSidebar />}
         
         <div className={`flex-1 transition-all duration-300 ${showDevSidebar && !isMobile ? 'md:ml-64' : ''}`}>
-          <Desktop onOpenApp={openApp} />
+          <DraggableDesktop />
           
           {openWindows.map((appName) => (
             <Window
