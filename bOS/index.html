@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin OS BIOS v1.0.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .bios-container {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .bios-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .bios-version {
+            color: #00aa00;
+            font-size: 12px;
+        }
+
+        .system-info {
+            margin-bottom: 30px;
+        }
+
+        .info-line {
+            margin: 5px 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .info-line:nth-child(1) { animation-delay: 0.2s; }
+        .info-line:nth-child(2) { animation-delay: 0.4s; }
+        .info-line:nth-child(3) { animation-delay: 0.6s; }
+        .info-line:nth-child(4) { animation-delay: 0.8s; }
+        .info-line:nth-child(5) { animation-delay: 1.0s; }
+
+        .boot-sequence {
+            margin-top: 20px;
+        }
+
+        .boot-line {
+            margin: 8px 0;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .boot-line.active {
+            animation: bootFadeIn 0.3s forwards;
+        }
+
+        .status {
+            margin-left: auto;
+            padding-left: 20px;
+        }
+
+        .status.ok {
+            color: #00ff00;
+        }
+
+        .status.loading {
+            color: #ffaa00;
+        }
+
+        .status.error {
+            color: #ff0000;
+        }
+
+        .progress-bar {
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 3s;
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            height: 20px;
+            border: 1px solid #00ff00;
+            background: #001100;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00aa00 0%, #00ff00 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .bitcoin-ascii {
+            color: #f7931a;
+            margin: 20px 0;
+            font-size: 10px;
+            line-height: 1.2;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 2s;
+            text-shadow: 0 0 5px #f7931a;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes bootFadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .bottom-info {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #00ff00;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 4s;
+        }
+
+        .key-prompt {
+            color: #00aa00;
+            margin-top: 10px;
+            animation: blink 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bios-container">
+        <div class="header">
+            <div class="bios-title">Bitcoin OS BIOS</div>
+            <div class="bios-version">Version 1.0.0 - Build 2025.01.26</div>
+        </div>
+
+        <div class="system-info">
+            <div class="info-line">CPU: Bitcoin Core Processor @ 3.7 GHz</div>
+            <div class="info-line">RAM: 256 GB DDR5 Memory</div>
+            <div class="info-line">Storage: 1 TB NVMe SSD (Blockchain Ready)</div>
+            <div class="info-line">Network: P2P Protocol v2.0 Enabled</div>
+            <div class="info-line">Security: SHA-256 Hardware Acceleration</div>
+        </div>
+
+        <div class="bitcoin-ascii">
+<pre>
+    ₿₿₿₿₿₿₿₿₿₿₿₿₿₿₿
+   ₿₿₿          ₿₿₿
+  ₿₿₿  ₿₿₿₿₿₿    ₿₿₿
+  ₿₿₿  ₿₿    ₿₿  ₿₿₿
+  ₿₿₿  ₿₿₿₿₿₿    ₿₿₿
+  ₿₿₿  ₿₿    ₿₿  ₿₿₿
+  ₿₿₿  ₿₿₿₿₿₿    ₿₿₿
+   ₿₿₿          ₿₿₿
+    ₿₿₿₿₿₿₿₿₿₿₿₿₿₿₿
+</pre>
+        </div>
+
+        <div class="boot-sequence" id="bootSequence">
+            <div class="boot-line">Initializing Bitcoin Core...<span class="status ok">[OK]</span></div>
+            <div class="boot-line">Loading Blockchain Headers...<span class="status ok">[OK]</span></div>
+            <div class="boot-line">Verifying Wallet Security...<span class="status ok">[OK]</span></div>
+            <div class="boot-line">Establishing P2P Connections...<span class="status loading">[LOADING]</span></div>
+            <div class="boot-line">Synchronizing Mempool...<span class="status loading">[WAITING]</span></div>
+            <div class="boot-line">Starting Mining Service...<span class="status loading">[WAITING]</span></div>
+            <div class="boot-line">Loading Lightning Network...<span class="status loading">[WAITING]</span></div>
+        </div>
+
+        <div class="progress-bar">
+            <div>System Boot Progress:</div>
+            <div class="progress-container">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div id="progressText">0% Complete</div>
+        </div>
+
+        <div class="bottom-info">
+            <div>Press DEL to enter BIOS Setup | F8 for Boot Menu | F12 for Network Boot</div>
+            <div class="key-prompt">Press any key to continue<span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <script>
+        // Boot sequence animation
+        const bootLines = document.querySelectorAll('.boot-line');
+        let currentLine = 0;
+
+        function animateBootSequence() {
+            if (currentLine < bootLines.length) {
+                bootLines[currentLine].classList.add('active');
+                currentLine++;
+                setTimeout(animateBootSequence, 500);
+            }
+        }
+
+        // Start boot sequence after 1 second
+        setTimeout(animateBootSequence, 1000);
+
+        // Progress bar animation
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        let progress = 0;
+
+        function updateProgress() {
+            if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '% Complete';
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                setTimeout(updateProgress, 300);
+            } else {
+                progressText.innerHTML = 'Boot Complete - Starting Bitcoin OS...<span class="loading-spinner">⟳</span>';
+                setTimeout(() => {
+                    // Redirect to main OS or show complete message
+                    document.body.style.animation = 'fadeOut 1s forwards';
+                }, 2000);
+            }
+        }
+
+        // Start progress after 3.5 seconds
+        setTimeout(updateProgress, 3500);
+
+        // Update status indicators
+        setTimeout(() => {
+            bootLines[3].querySelector('.status').textContent = '[OK]';
+            bootLines[3].querySelector('.status').className = 'status ok';
+        }, 4000);
+
+        setTimeout(() => {
+            bootLines[4].querySelector('.status').textContent = '[OK]';
+            bootLines[4].querySelector('.status').className = 'status ok';
+        }, 5000);
+
+        setTimeout(() => {
+            bootLines[5].querySelector('.status').textContent = '[OK]';
+            bootLines[5].querySelector('.status').className = 'status ok';
+        }, 6000);
+
+        setTimeout(() => {
+            bootLines[6].querySelector('.status').textContent = '[OK]';
+            bootLines[6].querySelector('.status').className = 'status ok';
+        }, 7000);
+
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Keyboard interaction
+        document.addEventListener('keydown', (e) => {
+            if (progress >= 100) {
+                // Could trigger navigation to main OS
+                console.log('Key pressed, booting into Bitcoin OS...');
+            }
+        });
+    </script>
+</body>
+</html>
