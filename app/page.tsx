@@ -7,6 +7,7 @@ import DraggableDesktop from '@/components/DraggableDesktop'
 import OSTaskbar from '@/components/OSTaskbar'
 import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
+import Dock from '@/components/Dock'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
 import PlaceholderWindow from '@/components/PlaceholderWindow'
@@ -220,8 +221,9 @@ export default function BitcoinOS() {
       <div className="flex-1 flex relative overflow-hidden">
         {showDevSidebar && !isMobile && <DevSidebar />}
         
-        <div className={`flex-1 transition-all duration-300 ${showDevSidebar && !isMobile ? 'md:ml-64' : ''}`}>
+        <div className={`flex-1 relative ${showDevSidebar && !isMobile ? 'ml-[260px]' : ''}`}>
           <DraggableDesktop />
+          <Dock />
           
           {openWindows.map((appName) => (
             <Window

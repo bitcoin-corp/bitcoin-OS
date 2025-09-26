@@ -61,9 +61,9 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
       className={`desktop-icon-draggable ${app.disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       onDoubleClick={!app.disabled ? onDoubleClick : undefined}
     >
-      <div className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-white/10 transition-colors select-none">
+      <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all select-none">
         {app.id === 'bapps-store' ? (
-          <div className="w-12 h-12 rounded-lg overflow-hidden shadow-lg">
+          <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl">
             <img 
               src="/bapps-icon.jpg" 
               alt="Bitcoin Apps Store" 
@@ -72,11 +72,11 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
           </div>
         ) : (
           <Icon 
-            className={`w-12 h-12 ${app.color} drop-shadow-lg`} 
+            className={`w-16 h-16 ${app.color} drop-shadow-2xl`} 
             strokeWidth={1.5}
           />
         )}
-        <span className="text-xs text-white text-center font-medium drop-shadow-md max-w-[80px] break-words">
+        <span className="text-sm text-white text-center font-medium drop-shadow-lg max-w-[100px] break-words leading-tight">
           {app.name}
         </span>
       </div>
@@ -168,7 +168,7 @@ export default function DraggableDesktop() {
           onDragEnd={handleDragEnd}
         >
           <SortableContext items={desktopApps} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-8 gap-4 auto-rows-min">
+            <div className="grid grid-cols-12 gap-6 auto-rows-min">
               {desktopApps.map((app) => (
                 <DraggableIcon
                   key={app.id}
@@ -182,15 +182,15 @@ export default function DraggableDesktop() {
           <DragOverlay>
             {activeApp ? (
               <div className="opacity-80">
-                <div className="flex flex-col items-center gap-2 p-2 rounded-lg bg-white/10">
+                <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
                   {activeApp.id === 'bapps-store' ? (
-                    <div className="w-12 h-12 rounded-lg overflow-hidden">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden">
                       <img src="/bapps-icon.jpg" alt="Bitcoin Apps Store" className="w-full h-full object-cover" />
                     </div>
                   ) : (
-                    <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                    <activeApp.icon className={`w-16 h-16 ${activeApp.color}`} />
                   )}
-                  <span className="text-xs text-white text-center font-medium">
+                  <span className="text-sm text-white text-center font-medium">
                     {activeApp.name}
                   </span>
                 </div>
