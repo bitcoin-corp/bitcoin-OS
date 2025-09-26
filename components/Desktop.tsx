@@ -28,7 +28,7 @@ const desktopApps = [
 ]
 
 export default function Desktop({ onOpenApp }: DesktopProps) {
-  const [is3DMode, setIs3DMode] = useState(true)
+  const [is3DMode, setIs3DMode] = useState(false)
 
   // Function to launch app
   const launchApp = (app: typeof desktopApps[0]) => {
@@ -63,14 +63,14 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
 
   return (
     <div className="relative w-full h-full">
-      {/* 3D Mode Toggle Button */}
-      <button
+      {/* 3D Mode Toggle Button - Commented out for now */}
+      {/* <button
         onClick={() => setIs3DMode(!is3DMode)}
         className="absolute top-4 right-4 z-50 bg-orange-500/20 hover:bg-orange-500/30 backdrop-blur-sm border border-orange-500/50 text-orange-400 px-4 py-2 rounded-lg flex items-center gap-2 transition-all"
       >
         <Box className="w-4 h-4" />
         {is3DMode ? '2D View' : '3D View'}
-      </button>
+      </button> */}
 
       {is3DMode ? (
         <Desktop3D onAppClick={(appName) => {

@@ -217,7 +217,7 @@ export default function BitcoinOS() {
       <ProofOfConceptBar />
       <TopMenuBar onOpenApp={openApp} />
       
-      <div className="flex-1 flex relative overflow-hidden pb-14">
+      <div className="flex-1 flex relative overflow-hidden">
         {showDevSidebar && !isMobile && <DevSidebar />}
         
         <div className={`flex-1 transition-all duration-300 ${showDevSidebar && !isMobile ? 'md:ml-64' : ''}`}>
@@ -247,23 +247,6 @@ export default function BitcoinOS() {
           )}
         </div>
       </div>
-      
-      <OSTaskbar 
-        openWindows={[...openWindows, ...openApps.filter(a => !a.isMinimized).map(a => a.name)]}
-        activeWindow={activeWindow ? (openApps.find(a => a.id === activeWindow)?.name || activeWindow) : null}
-        onWindowClick={(name) => {
-          // Check if it's an app
-          const app = openApps.find(a => a.name === name)
-          if (app) {
-            setActiveWindow(app.id)
-            setOpenApps(openApps.map(a => 
-              a.id === app.id ? { ...a, isMinimized: false } : a
-            ))
-          } else {
-            setActiveWindow(name)
-          }
-        }}
-      />
     </div>
   )
 }

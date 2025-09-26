@@ -36,9 +36,11 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
     camera.position.set(0, 8, 15)
     camera.lookAt(0, 0, 0)
 
-    // Renderer setup
+    // Renderer setup - Account for taskbar height
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    const container = mountRef.current
+    const rect = container.getBoundingClientRect()
+    renderer.setSize(rect.width, rect.height)
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.shadowMap.enabled = true
     renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -412,8 +414,12 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
 
     // Mouse interaction handlers
     const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1
-      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1
+      const container = mountRef.current
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+        mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+      }
 
       // Raycast for hover effects - check children of groups
       raycasterRef.current.setFromCamera(mouseRef.current, camera)
@@ -463,8 +469,12 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
     }
 
     const handleMouseClick = (event: MouseEvent) => {
-      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1
-      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1
+      const container = mountRef.current
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+        mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+      }
 
       raycasterRef.current.setFromCamera(mouseRef.current, camera)
       const allObjects: THREE.Object3D[] = []
@@ -533,9 +543,13 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
 
     // Handle resize
     const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      const container = mountRef.current
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        camera.aspect = rect.width / rect.height
+        camera.updateProjectionMatrix()
+        renderer.setSize(rect.width, rect.height)
+      }
     }
     window.addEventListener('resize', handleResize)
 
@@ -556,7 +570,7 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
 
   return (
     <>
-      <div ref={mountRef} className="fixed inset-0 z-0" style={{ pointerEvents: 'auto' }} />
+      <div ref={mountRef} className="absolute inset-0 z-0" style={{ pointerEvents: 'auto' }} />
       {children && (
         <div className="relative z-10 w-full h-full pointer-events-none">
           {children}

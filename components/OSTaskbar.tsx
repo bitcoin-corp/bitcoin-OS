@@ -1,7 +1,6 @@
 'use client'
 
-import { Bitcoin, Clock, Wifi, Battery, Volume2 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Bitcoin } from 'lucide-react'
 
 interface TaskbarProps {
   openWindows: string[]
@@ -10,26 +9,14 @@ interface TaskbarProps {
 }
 
 export default function Taskbar({ openWindows, activeWindow, onWindowClick }: TaskbarProps) {
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-
   return (
-    <div className="taskbar fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-4 hidden md:flex z-40">
+    <div className="taskbar relative h-10 flex items-center justify-between px-4 hidden md:flex z-50 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700">
       <div className="flex items-center space-x-2">
-        <button className="p-2 hover:bg-white/10 rounded transition-colors">
-          <Bitcoin className="w-5 h-5 text-bitcoin-orange" />
+        <button className="p-1 hover:bg-white/10 rounded transition-colors">
+          <Bitcoin className="w-4 h-4 text-bitcoin-orange" />
         </button>
         
-        <div className="border-l border-gray-700 h-8 mx-2" />
+        <div className="border-l border-gray-600 h-6 mx-2" />
         
         {/* Open Windows */}
         <div className="flex space-x-1">
@@ -46,16 +33,6 @@ export default function Taskbar({ openWindows, activeWindow, onWindowClick }: Ta
               {window}
             </button>
           ))}
-        </div>
-      </div>
-      
-      <div className="flex items-center space-x-4 text-sm">
-        <Wifi className="w-4 h-4 text-green-500" />
-        <Volume2 className="w-4 h-4" />
-        <Battery className="w-4 h-4 text-green-500" />
-        <div className="flex items-center space-x-2">
-          <Clock className="w-4 h-4" />
-          <span>{mounted ? currentTime.toLocaleTimeString() : '12:00:00 AM'}</span>
         </div>
       </div>
     </div>
