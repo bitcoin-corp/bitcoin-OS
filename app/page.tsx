@@ -32,7 +32,14 @@ export default function BitcoinOS() {
   const [openApps, setOpenApps] = useState<OpenApp[]>([])
   const [activeWindow, setActiveWindow] = useState<string | null>(null)
   const [activeApp, setActiveApp] = useState<string | null>(null)
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
+  const [showDevSidebar, setShowDevSidebar] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('devSidebarVisible')
+      // Default to closed for first-time visitors
+      return saved !== null ? saved === 'true' : false
+    }
+    return false
+  })
   const [placeholderApp, setPlaceholderApp] = useState<string | null>(null)
   const isMobile = useIsMobile()
   
@@ -50,7 +57,11 @@ export default function BitcoinOS() {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === 'd') {
         e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
+        const newState = !showDevSidebar
+        setShowDevSidebar(newState)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('devSidebarVisible', newState.toString())
+        }
       }
     }
     window.addEventListener('keydown', handleKeyPress)

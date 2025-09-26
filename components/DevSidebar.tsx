@@ -34,6 +34,7 @@ export default function DevSidebar() {
   const [isCollapsed, setIsCollapsed] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('devSidebarCollapsed')
+      // Default to collapsed (closed) for first-time visitors
       return saved !== null ? saved === 'true' : true
     }
     return true
