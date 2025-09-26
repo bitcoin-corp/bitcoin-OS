@@ -160,7 +160,7 @@ export default function DraggableDesktop() {
   return (
     <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-8">
+      <div className="absolute inset-0 p-8 pl-80">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -168,7 +168,7 @@ export default function DraggableDesktop() {
           onDragEnd={handleDragEnd}
         >
           <SortableContext items={desktopApps} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-12 gap-6 auto-rows-min">
+            <div className="grid grid-cols-6 gap-6 auto-rows-min max-w-3xl">
               {desktopApps.map((app) => (
                 <DraggableIcon
                   key={app.id}
