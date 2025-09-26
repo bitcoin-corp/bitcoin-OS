@@ -53,7 +53,7 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', disabled: true },
     { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true },
-    { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-500', url: 'https://bitcoin-jobs.vercel.app' },
+    { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', disabled: true },
   ];
 
   const handleAppClick = (app: DockApp) => {

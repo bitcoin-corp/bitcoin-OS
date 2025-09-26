@@ -37,7 +37,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
     { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
     { name: 'Bitcoin Email', color: '#06b6d4', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Exchange', color: '#3b82f6', url: 'https://bitcoin-exchange.vercel.app' },
-    { name: 'Bitcoin Jobs', color: '#06b6d4', url: 'https://bitcoin-jobs.vercel.app' },
+    { name: 'Bitcoin Jobs', color: '#6b7280', url: '#' },
     { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
     { name: 'Bitcoin Paint', color: '#a855f7', url: '#' },
     { name: 'Bitcoin Pics', color: '#ec4899', url: '#' },
