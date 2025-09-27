@@ -28,7 +28,7 @@ Bitcoin OS is a revolutionary web-based operating system that brings the power o
 
 ```bash
 # Clone the repository
-git clone https://github.com/bitcoin-apps-suite/bitcoin-OS.git
+git clone https://github.com/bitcoin-corp/bitcoin-OS.git
 
 # Navigate to the project
 cd bitcoin-OS

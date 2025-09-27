@@ -62,3 +62,15 @@
     z-index: 90;
   }
 }
+
+/* Settings Page Controls */
+.no-color-cycling .bitcoin-symbol,
+.no-color-cycling .dev-sidebar-title span {
+  animation: none !important;
+  color: #d946ef !important;
+}
+
+body.no-animations * {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}

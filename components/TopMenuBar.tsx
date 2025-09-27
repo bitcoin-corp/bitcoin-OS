@@ -62,7 +62,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'System Preferences', 
           shortcut: '⌘,',
-          action: () => window.location.href = '/settings'
+          action: () => onOpenApp?.('Settings')
         },
         { divider: true },
         { 

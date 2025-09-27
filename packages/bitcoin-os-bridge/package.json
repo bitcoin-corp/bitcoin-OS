@@ -1,32 +1,38 @@
 {
   "name": "@bitcoin-os/bridge",
   "version": "1.0.0",
-  "description": "Bridge library for Bitcoin OS app integration",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "description": "Reusable Bitcoin OS components for seamless app integration",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "index.js",
-    "index.d.ts",
-    "react.js",
-    "react.d.ts"
+    "dist/**/*",
+    "components/**/*"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "bitcoin",
     "bitcoin-os",
-    "iframe",
-    "postmessage",
-    "integration"
+    "react",
+    "components",
+    "ui",
+    "taskbar",
+    "dock",
+    "sidebar"
   ],
   "author": "Bitcoin OS",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "lucide-react": ">=0.263.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "typescript": "^5.0.0"
   }
 }

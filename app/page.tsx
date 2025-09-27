@@ -71,7 +71,18 @@ export default function BitcoinOS() {
         // On mobile, only one app at a time
         setActiveApp(app.id)
       } else {
-        // Desktop behavior
+        // Check app mode preference (default to fullscreen)
+        const appMode = typeof window !== 'undefined' 
+          ? localStorage.getItem('appMode') || 'fullscreen'
+          : 'fullscreen'
+        
+        if (appMode === 'fullscreen' && app.url) {
+          // Open in fullscreen mode (navigate to URL)
+          window.location.href = app.url
+          return
+        }
+        
+        // Windowed mode - Desktop behavior
         const existingApp = openApps.find(a => a.id === app.id)
         if (existingApp) {
           // Just focus it

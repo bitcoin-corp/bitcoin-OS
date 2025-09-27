@@ -1,0 +1,12 @@
+# Development files
+src/
+examples/
+*.md
+tsconfig.json
+.git
+.gitignore
+
+# Keep only built files and package metadata
+!dist/
+!package.json
+!README.md

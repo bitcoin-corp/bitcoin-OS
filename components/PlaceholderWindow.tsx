@@ -1,6 +1,7 @@
 'use client'
 
-import { X, GitBranch, Hammer, Sparkles } from 'lucide-react'
+import { X, GitBranch, Hammer, Sparkles, Settings } from 'lucide-react'
+import SettingsWindow from './SettingsWindow'
 
 interface PlaceholderWindowProps {
   appName: string
@@ -84,6 +85,27 @@ export default function PlaceholderWindow({ appName, onClose }: PlaceholderWindo
   ]
 
   const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)]
+
+  // Special case for Settings - render actual settings window
+  if (appName === 'Settings') {
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[600px] bg-gray-900 rounded-lg shadow-2xl border border-gray-700 overflow-hidden z-50">
+        <div className="bg-gradient-to-r from-bitcoin-orange to-amber-500 text-white px-4 py-2 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Settings className="w-4 h-4" />
+            <span className="font-semibold">System Preferences</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="hover:bg-white/20 rounded p-1 transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <SettingsWindow />
+      </div>
+    )
+  }
 
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] bg-gray-900 rounded-lg shadow-2xl border border-gray-700 overflow-hidden z-50">

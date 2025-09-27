@@ -8,10 +8,10 @@
   "homepage": "https://bitcoin-os.vercel.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitcoin-apps-suite/bitcoin-OS.git"
+    "url": "git+https://github.com/bitcoin-corp/bitcoin-OS.git"
   },
   "bugs": {
-    "url": "https://github.com/bitcoin-apps-suite/bitcoin-OS/issues"
+    "url": "https://github.com/bitcoin-corp/bitcoin-OS/issues"
   },
   "keywords": [
     "bitcoin",
