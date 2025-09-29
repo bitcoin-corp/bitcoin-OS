@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2 } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -28,6 +28,7 @@ const Dock: React.FC = () => {
   const getIconColor = (colorClass: string): string => {
     const colorMap: { [key: string]: string } = {
       'text-orange-500': '#f97316',
+      'text-bitcoin-orange': '#f7931a',
       'text-yellow-500': '#eab308',
       'text-red-500': '#ef4444',
       'text-purple-500': '#a855f7',
@@ -42,6 +43,7 @@ const Dock: React.FC = () => {
   };
 
   const dockApps: DockApp[] = [
+    { name: 'Bitcoin Corporation', icon: Building2, color: 'text-bitcoin-orange', url: 'https://bitcoin-corp.vercel.app/' },
     { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', isImage: true },
     { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app' },
