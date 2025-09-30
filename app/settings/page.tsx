@@ -200,7 +200,7 @@ export default function SettingsPage() {
                     { value: 'windowed', label: 'Windowed Apps', description: 'Apps open in draggable windows on desktop' }
                   ]}
                   value={appMode}
-                  onChange={handleAppModeChange}
+                  onChange={(value) => handleAppModeChange(value as 'fullscreen' | 'windowed')}
                 />
               </SettingRow>
             </SettingSection>
