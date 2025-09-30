@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "Bitcoin Drive",
+  "version": "1.0.0",
+  "description": "Decentralized cloud storage powered by BSV blockchain with multi-provider support",
+  "icons": [
+    {
+      "src": "/bitcoin-drive-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/bitcoin-drive-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/bitcoin-drive-icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/bitcoin-drive-icon-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "chrome_settings_overrides": {
+    "homepage": "http://localhost:2030"
+  },
+  "chrome_url_overrides": {
+    "newtab": "http://localhost:2030"
+  },
+  "theme": {
+    "colors": {
+      "frame": [0, 26, 0],
+      "frame_inactive": [0, 17, 0],
+      "frame_incognito": [0, 17, 0],
+      "frame_incognito_inactive": [0, 17, 0],
+      "bookmark_text": [0, 255, 136],
+      "tab_background_text": [255, 255, 255],
+      "tab_text": [0, 255, 136],
+      "toolbar": [0, 0, 0],
+      "toolbar_text": [0, 255, 136],
+      "ntp_background": [0, 0, 0],
+      "ntp_text": [0, 255, 136],
+      "ntp_link": [0, 255, 136],
+      "ntp_header": [0, 26, 0],
+      "button_background": [0, 26, 0]
+    },
+    "tints": {
+      "buttons": [0.33, 1, 0.5],
+      "frame": [0.33, 0.9, 0.2],
+      "frame_inactive": [0.33, 0.5, 0.2],
+      "frame_incognito": [0.33, 0.3, 0.2],
+      "frame_incognito_inactive": [0.33, 0.2, 0.15]
+    },
+    "properties": {
+      "ntp_background_alignment": "center",
+      "ntp_background_repeat": "no-repeat"
+    }
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "/bitcoin-drive-icon-16.png",
+      "48": "/bitcoin-drive-icon-48.png",
+      "128": "/bitcoin-drive-icon-128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost:2030/*"
+  ]
+} 

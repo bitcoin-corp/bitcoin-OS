@@ -1,0 +1,70 @@
+{
+  "name": "bitcoin-jobs-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "license": "Open-BSV",
+  "author": "The Bitcoin Corporation LTD (UK Company No. 16735102)",
+  "copyright": "Copyright (c) 2025 The Bitcoin Corporation LTD",
+  "homepage": "https://bitcoinapps.store",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-apps-suite/bitcoin-jobs.git"
+  },
+  "dependencies": {
+    "@handcash/handcash-connect": "^0.2.6",
+    "@handcash/handcash-sdk": "^0.0.4",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^16.18.0",
+    "@types/plotly.js": "^3.0.6",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "bitcoin-ibe": "^1.2.2",
+    "date-fns": "^2.30.0",
+    "file-saver": "^2.0.5",
+    "lucide-react": "^0.544.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
+    "react-router-dom": "^7.9.1",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "scrypt-ts": "^1.4.5",
+    "typescript": "^4.9.0",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "start": "PORT=2060 react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/jest": "^29.5.0",
+    "@types/react-plotly.js": "^2.6.3",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0"
+  }
+}

@@ -1,0 +1,128 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "Bitcoin Drive"
+		},
+		{
+			"path": "../bitcoin-exchange"
+		},
+		{
+			"path": "../bitcoin-music"
+		},
+		{
+			"path": "../bitcoin-wallet"
+		},
+		{
+			"path": "../bitcoin-writer"
+		},
+		{
+			"path": "../../bitcoin-spreadsheets"
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit"
+		},
+		"typescript.tsdk": "node_modules/typescript/lib",
+		"typescript.enablePromptUseWorkspaceTsdk": true,
+		"files.exclude": {
+			"**/.git": true,
+			"**/.DS_Store": true,
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/out": true,
+			"**/dist": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/out": true,
+			"**/dist": true,
+			"**/.git": true,
+			"**/package-lock.json": true
+		},
+		"eslint.validate": [
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact"
+		],
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[javascriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[json]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[css]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"emmet.includeLanguages": {
+			"javascript": "javascriptreact",
+			"typescript": "typescriptreact"
+		},
+		"tailwindCSS.experimental.classRegex": [
+			["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+		],
+		"workbench.colorCustomizations": {
+			"statusBar.noFolderBackground": "#4a7c59",
+			"activityBar.inactiveBackground": "#1e3025",
+			"sideBar.background": "#1e2e24",
+			"sideBarTitle.foreground": "#8fbf9f",
+			"editor.background": "#0e1610",
+			"editorGroupHeader.tabsBackground": "#1a2a20",
+			"tab.activeBackground": "#2d4a37",
+			"tab.inactiveBackground": "#1a2a20",
+			"panel.background": "#1a2a20",
+			"terminal.background": "#0e1610"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"dbaeumer.vscode-eslint",
+			"esbenp.prettier-vscode",
+			"bradlc.vscode-tailwindcss",
+			"prisma.prisma",
+			"ms-vscode.vscode-typescript-next"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Next.js: debug server-side",
+				"type": "node-terminal",
+				"request": "launch",
+				"command": "npm run dev"
+			},
+			{
+				"name": "Next.js: debug client-side",
+				"type": "chrome",
+				"request": "launch",
+				"url": "http://localhost:1030",
+				"webRoot": "${workspaceFolder}"
+			},
+			{
+				"name": "Next.js: debug full stack",
+				"type": "node-terminal",
+				"request": "launch",
+				"command": "npm run dev",
+				"serverReadyAction": {
+					"pattern": "- Local:.+(https?://\\S+|[0-9]+)",
+					"uriFormat": "http://localhost:1030",
+					"action": "debugWithChrome"
+				}
+			}
+		]
+	}
+}

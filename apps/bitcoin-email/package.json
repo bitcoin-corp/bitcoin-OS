@@ -1,0 +1,72 @@
+{
+  "name": "bitcoin-email",
+  "version": "0.1.0",
+  "description": "The world's first blockchain-powered email client by The Bitcoin Corporation LTD",
+  "author": "The Bitcoin Corporation LTD <ceo@thebitcoincorporation.com>",
+  "license": "Open-BSV-4.0",
+  "copyright": "Copyright (c) 2025 The Bitcoin Corporation LTD (UK Company No. 16735102)",
+  "homepage": "https://bitcoin-email.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitcoin-apps-suite/bitcoin-email.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bitcoin-apps-suite/bitcoin-email/issues"
+  },
+  "keywords": [
+    "bitcoin",
+    "bsv",
+    "email",
+    "blockchain",
+    "micropayments",
+    "decentralized",
+    "the-bitcoin-corporation"
+  ],
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 2040",
+    "build": "next build",
+    "start": "next start -p 2040",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@bitcoin-os/bridge": "^1.0.1",
+    "@bsv/sdk": "^1.7.6",
+    "@handcash/handcash-connect": "^0.8.11",
+    "@react-email/components": "^0.5.3",
+    "@react-email/render": "^1.2.3",
+    "@tanstack/react-query": "^5.62.10",
+    "@types/mailparser": "^3.4.6",
+    "@types/node-imap": "^0.9.3",
+    "@types/nodemailer": "^7.0.1",
+    "axios": "^1.7.9",
+    "crypto-js": "^4.2.0",
+    "google-auth-library": "^10.3.0",
+    "googleapis": "^160.0.0",
+    "lucide-react": "^0.544.0",
+    "mailparser": "^3.7.4",
+    "next": "15.5.3",
+    "next-auth": "^4.24.11",
+    "next-pwa": "^5.6.0",
+    "node-imap": "^0.9.6",
+    "nodemailer": "^6.10.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-resizable-panels": "^3.0.6",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "20.19.17",
+    "@types/react": "19.1.14",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "5.9.2"
+  }
+}

@@ -1,0 +1,517 @@
+/* Mobile-First Responsive Design for Bitcoin Spreadsheet */
+
+/* Base mobile styles */
+@media screen and (max-width: 768px) {
+  /* Reset and base */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  html {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* App container */
+  .App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Header adjustments */
+  .App-header {
+    padding: 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Mobile header top row - Title only */
+  .mobile-header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    background: #000000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .App-header h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 300;
+  }
+
+  .App-header h1 .bitcoin-icon-beveled {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 8px !important;
+  }
+
+  .app-subtitle {
+    display: none; /* Hide on mobile to save space */
+  }
+
+  /* Mobile header bottom row - Connection status */
+  .mobile-header-connections {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: rgba(10, 14, 39, 0.5);
+    min-height: 44px;
+  }
+
+  /* Connection badge for mobile - inline in header */
+  .connection-badge {
+    position: static;
+    transform: none;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .connect-badge-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    min-width: auto;
+    background: #4285F4;
+    border-radius: 16px;
+  }
+
+  .connected-avatars {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .service-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .connection-count {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Hide desktop user info on mobile */
+  .desktop-user-info {
+    display: none !important;
+  }
+
+  /* Mobile user info - compact in header */
+  .mobile-user-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .handcash-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+  }
+
+  .handcash-user-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .user-handle {
+    font-size: 12px;
+    color: #87CEEB;
+  }
+
+  .connection-dot {
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+  }
+
+  /* Mobile action buttons */
+  .mobile-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .mobile-connections-btn,
+  .mobile-logout-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    border-radius: 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+  }
+
+  .mobile-connections-btn {
+    background: rgba(66, 133, 244, 0.2);
+    color: #4285F4;
+  }
+
+  .mobile-logout-btn {
+    background: rgba(255, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Main content area */
+  .spreadsheet-main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    height: calc(100vh - 60px);
+  }
+
+  /* Hide desktop sidebar on mobile */
+  .spreadsheet-sidebar {
+    display: none !important;
+  }
+
+  /* Mobile toolbar */
+  .spreadsheet-toolbar {
+    padding: 8px;
+    flex-shrink: 0;
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    background: #0A0E27;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .spreadsheet-toolbar button {
+    min-width: fit-content;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Spreadsheet container */
+  .spreadsheet-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile spreadsheet grid */
+  .spreadsheet-grid {
+    flex: 1;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  .spreadsheet-grid table {
+    min-width: 100%;
+    table-layout: auto;
+  }
+
+  .spreadsheet-grid th,
+  .spreadsheet-grid td {
+    min-width: 60px;
+    max-width: 120px;
+    padding: 8px 4px;
+    font-size: 12px;
+    height: 36px;
+  }
+
+  .spreadsheet-grid th:first-child,
+  .spreadsheet-grid td:first-child {
+    position: sticky;
+    left: 0;
+    background: #0A0E27;
+    z-index: 10;
+    min-width: 40px;
+    max-width: 40px;
+  }
+
+  .spreadsheet-grid thead th {
+    position: sticky;
+    top: 0;
+    background: #0A0E27;
+    z-index: 11;
+  }
+
+  .spreadsheet-grid thead th:first-child {
+    z-index: 12;
+  }
+
+  /* Mobile cell input */
+  .cell-input {
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  /* Mobile formula bar */
+  .formula-bar {
+    padding: 8px;
+    flex-shrink: 0;
+    background: #0A0E27;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .formula-bar input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* Mobile taskbar */
+  .spreadsheet-taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    flex-direction: row;
+    height: auto;
+    padding: 0;
+    background: #0A0E27;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    z-index: 99;
+  }
+
+  .taskbar-menu {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 8px 4px;
+    gap: 4px;
+  }
+
+  .menu-item {
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    min-width: fit-content;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+
+  .menu-item:hover {
+    background: rgba(247, 147, 26, 0.1);
+  }
+
+  .menu-dropdown {
+    position: fixed;
+    bottom: 56px;
+    left: auto;
+    right: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+    min-width: 200px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Hide bitcoin suite menu on mobile */
+  .bitcoin-suite-menu {
+    display: none;
+  }
+
+  /* Mobile clock */
+  .taskbar-clock {
+    display: none;
+  }
+
+  /* Mobile exchange view */
+  .exchange-container {
+    padding: 16px;
+  }
+
+  .exchange-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Mobile modals */
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    max-height: calc(100vh - 32px);
+    border-radius: 12px;
+  }
+
+  /* Mobile Claude Chat */
+  .claude-chat-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .claude-chat-header {
+    padding: 12px 16px;
+  }
+
+  .claude-chat-input-container {
+    padding: 12px;
+  }
+
+  /* Mobile 3D view */
+  .three-d-container {
+    height: calc(100vh - 60px);
+  }
+
+  /* Touch-friendly buttons */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Hide desktop-only elements */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Show mobile-only elements */
+  .mobile-only {
+    display: block !important;
+  }
+
+  /* Floating action button for mobile */
+  .mobile-fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #87CEEB, #4682B4);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(247, 147, 26, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 999;
+    cursor: pointer;
+  }
+
+  /* Install prompt on mobile */
+  .install-prompt {
+    bottom: 100px;
+    width: calc(100% - 32px);
+    max-width: none;
+  }
+
+  /* Mobile navigation improvements */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0A0E27;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    z-index: 100;
+  }
+
+  .mobile-nav button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mobile-nav button.active {
+    color: #87CEEB;
+  }
+
+  .mobile-nav button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .App-header {
+    padding: 16px 24px;
+  }
+
+  .spreadsheet-sidebar {
+    width: 200px;
+  }
+
+  .spreadsheet-grid th,
+  .spreadsheet-grid td {
+    min-width: 80px;
+    padding: 10px 8px;
+  }
+}
+
+/* Landscape mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .App-header {
+    padding: 8px 16px;
+  }
+
+  .App-header h1 {
+    font-size: 1rem;
+  }
+
+  .spreadsheet-grid th,
+  .spreadsheet-grid td {
+    height: 32px;
+    padding: 6px 4px;
+  }
+
+  .mobile-nav {
+    padding: 4px 0;
+  }
+}

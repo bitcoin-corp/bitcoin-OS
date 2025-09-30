@@ -1,0 +1,144 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.login-header {
+  padding: 40px 30px 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.login-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 2rem;
+  font-weight: 200;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.login-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.login-content {
+  padding: 40px 30px;
+}
+
+.features {
+  margin-bottom: 30px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+}
+
+.handcash-login-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.handcash-login-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.handcash-login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.handcash-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.login-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: #000000;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 85, 85, 0.1);
+  border: 1px solid rgba(255, 85, 85, 0.2);
+  border-radius: 6px;
+  color: #ff5555;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.demo-note {
+  margin-top: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .login-card {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .login-header {
+    padding: 30px 20px 25px;
+  }
+  
+  .login-content {
+    padding: 30px 20px;
+  }
+}

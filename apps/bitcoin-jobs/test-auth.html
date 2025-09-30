@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test HandCash Auth</title>
+</head>
+<body>
+    <h1>Test HandCash Authentication</h1>
+    <button onclick="clearAll()">Clear All Storage</button>
+    <button onclick="testAuth()">Test Auth with HandCash</button>
+    <button onclick="testAPI()">Test API Endpoint</button>
+    <pre id="output"></pre>
+
+    <script>
+        function clearAll() {
+            localStorage.clear();
+            sessionStorage.clear();
+            document.getElementById('output').innerText = 'Cleared all storage';
+        }
+
+        function testAuth() {
+            const appId = '68c532b2a0b054ff147f4579';
+            const redirectUrl = 'http://localhost:3001/auth/handcash/callback';
+            const authUrl = `https://app.handcash.io/#/authorizeApp?appId=${appId}`;
+            window.open(authUrl, '_blank');
+        }
+
+        async function testAPI() {
+            const authToken = prompt('Enter your HandCash auth token:');
+            if (!authToken) return;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/handcash-profile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ authToken })
+                });
+
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

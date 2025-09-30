@@ -1,0 +1,22 @@
+{
+  "short_name": "Bitcoin Spreadsheet",
+  "name": "Bitcoin Blockchain Spreadsheet",
+  "description": "A decentralized spreadsheet application on Bitcoin",
+  "icons": [
+    {
+      "src": "bitcoin-watercolor-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "bitcoin-spreadsheets-icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1976d2",
+  "background_color": "#000000"
+}

@@ -1,0 +1,158 @@
+.cell {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #000000;
+  color: #ffffff;
+  cursor: cell;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  min-height: 36px;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-weight: 300;
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell.selected {
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.cell.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+}
+
+.cell-content {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.cell-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  font-weight: 300;
+}
+
+.cell-input:focus {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Different cell types */
+.cell[data-type="number"] .cell-content {
+  text-align: right;
+  color: #5dff8c;
+  font-variant-numeric: tabular-nums;
+}
+
+.cell[data-type="formula"] .cell-content {
+  color: #4a9eff;
+  font-style: normal;
+}
+
+.cell[data-type="string"] .cell-content {
+  color: #ffffff;
+}
+
+.cell[data-type="error"] .cell-content {
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.05);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* Cell states */
+.cell.empty .cell-content::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+}
+
+/* Focus styles for accessibility */
+.cell:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  outline-offset: -1px;
+}
+
+/* Animation for cell updates */
+.cell.updated {
+  animation: cellUpdate 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cellUpdate {
+  0% {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    background: #000000;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .cell {
+    padding: 8px 6px;
+    min-height: 32px;
+    font-size: 12px;
+  }
+
+  .cell-content {
+    line-height: 1.3;
+  }
+
+  .cell-input {
+    font-size: 12px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cell {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .cell.selected {
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .cell {
+    transition: none;
+  }
+
+  .cell.updated {
+    animation: none;
+  }
+}

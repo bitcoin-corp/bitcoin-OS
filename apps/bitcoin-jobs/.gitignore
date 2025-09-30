@@ -1,0 +1,14 @@
+node_modules/
+.next/
+*.log
+.env.local
+.env.production
+.DS_Store
+dist/
+build/
+
+# Screenshots
+*Screenshot*
+Screenshot*
+*.png
+.vercel

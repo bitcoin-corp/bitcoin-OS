@@ -1,0 +1,266 @@
+/* Dark mode styles for x-data-spreadsheet */
+
+/* Main spreadsheet container */
+.dark-mode .x-spreadsheet {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+/* Toolbar */
+.dark-mode .x-spreadsheet-toolbar {
+  background-color: #2a2a2a !important;
+  border-bottom: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-toolbar .x-toolbar-btn {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .x-spreadsheet-toolbar .x-toolbar-btn:hover {
+  background-color: #3a3a3a !important;
+}
+
+.dark-mode .x-spreadsheet-toolbar .x-toolbar-btn.active {
+  background-color: #4a4a4a !important;
+  color: #FFA500 !important;
+}
+
+/* Formula bar */
+.dark-mode .x-spreadsheet-editor {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-editor textarea,
+.dark-mode .x-spreadsheet-editor input {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-editor-area {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+/* Cells */
+.dark-mode .x-spreadsheet-sheet {
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .x-spreadsheet-table {
+  background-color: #0a0a0a !important;
+}
+
+.dark-mode .x-spreadsheet-cell {
+  background-color: #0a0a0a !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+/* Header cells (row/column labels) */
+.dark-mode .x-spreadsheet-header {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border-color: #444 !important;
+}
+
+.dark-mode .x-spreadsheet-header-cell {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border-color: #444 !important;
+}
+
+/* Selected cells */
+.dark-mode .x-spreadsheet-cell.selected {
+  background-color: rgba(255, 165, 0, 0.2) !important;
+  border-color: #FFA500 !important;
+}
+
+.dark-mode .x-spreadsheet-cell.active {
+  background-color: rgba(255, 165, 0, 0.3) !important;
+  border: 2px solid #FFA500 !important;
+}
+
+/* Cell editor */
+.dark-mode .x-spreadsheet-cell-editor {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 2px solid #FFA500 !important;
+}
+
+/* Scrollbars */
+.dark-mode .x-spreadsheet-scrollbar {
+  background-color: #2a2a2a !important;
+}
+
+.dark-mode .x-spreadsheet-scrollbar-thumb {
+  background-color: #4a4a4a !important;
+}
+
+.dark-mode .x-spreadsheet-scrollbar-thumb:hover {
+  background-color: #5a5a5a !important;
+}
+
+/* Context menus and dropdowns */
+.dark-mode .x-spreadsheet-contextmenu,
+.dark-mode .x-spreadsheet-dropdown {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .x-spreadsheet-contextmenu-item,
+.dark-mode .x-spreadsheet-dropdown-item {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .x-spreadsheet-contextmenu-item:hover,
+.dark-mode .x-spreadsheet-dropdown-item:hover {
+  background-color: #3a3a3a !important;
+}
+
+/* Modals/Dialogs */
+.dark-mode .x-spreadsheet-modal {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .x-spreadsheet-modal-content {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+/* Input fields in modals */
+.dark-mode .x-spreadsheet-modal input,
+.dark-mode .x-spreadsheet-modal textarea,
+.dark-mode .x-spreadsheet-modal select {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+/* Buttons in modals */
+.dark-mode .x-spreadsheet-modal button {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-modal button:hover {
+  background-color: #4a4a4a !important;
+}
+
+.dark-mode .x-spreadsheet-modal button.primary {
+  background-color: #FFA500 !important;
+  color: #000 !important;
+  border: none !important;
+}
+
+/* Bottom bar / status bar */
+.dark-mode .x-spreadsheet-bottombar {
+  background-color: #2a2a2a !important;
+  border-top: 1px solid #444 !important;
+  color: #b0b0b0 !important;
+}
+
+/* Sheet tabs */
+.dark-mode .x-spreadsheet-sheet-tab {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-sheet-tab.active {
+  background-color: #1a1a1a !important;
+  color: #FFA500 !important;
+  border-bottom-color: #1a1a1a !important;
+}
+
+/* Resizer handles */
+.dark-mode .x-spreadsheet-resizer {
+  background-color: #FFA500 !important;
+}
+
+/* Selection area */
+.dark-mode .x-spreadsheet-selector {
+  border-color: #FFA500 !important;
+  background-color: rgba(255, 165, 0, 0.1) !important;
+}
+
+.dark-mode .x-spreadsheet-selector-corner {
+  background-color: #FFA500 !important;
+  border-color: #FFA500 !important;
+}
+
+/* Autofill handle */
+.dark-mode .x-spreadsheet-selector-autofill {
+  background-color: #FFA500 !important;
+  border-color: #FFA500 !important;
+}
+
+/* Color picker */
+.dark-mode .x-spreadsheet-color-picker {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .x-spreadsheet-color-picker-cell {
+  border-color: #444 !important;
+}
+
+/* Icons and SVGs */
+.dark-mode .x-spreadsheet svg {
+  fill: #e0e0e0 !important;
+}
+
+/* Grid lines */
+.dark-mode .x-spreadsheet-grid-line {
+  stroke: #333 !important;
+}
+
+/* Text selection */
+.dark-mode .x-spreadsheet ::selection {
+  background-color: rgba(255, 165, 0, 0.3) !important;
+  color: #fff !important;
+}
+
+/* Cell content with formulas */
+.dark-mode .x-spreadsheet-cell[data-type="formula"] {
+  color: #4CAF50 !important;
+}
+
+/* Cell content with errors */
+.dark-mode .x-spreadsheet-cell.error {
+  color: #f44336 !important;
+  background-color: rgba(244, 67, 54, 0.1) !important;
+}
+
+/* Freeze line indicators */
+.dark-mode .x-spreadsheet-freeze-line {
+  background-color: #FFA500 !important;
+}
+
+/* Additional overrides for better visibility */
+.dark-mode .x-spreadsheet * {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #2a2a2a;
+}
+
+.dark-mode .x-spreadsheet *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.dark-mode .x-spreadsheet *::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.dark-mode .x-spreadsheet *::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 5px;
+}
+
+.dark-mode .x-spreadsheet *::-webkit-scrollbar-thumb:hover {
+  background-color: #5a5a5a;
+}

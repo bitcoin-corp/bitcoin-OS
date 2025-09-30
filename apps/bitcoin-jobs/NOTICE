@@ -1,0 +1,120 @@
+NOTICE AND ATTRIBUTION
+
+Bitcoin Spreadsheet
+Copyright (c) 2025 THE BITCOIN CORPORATION LTD (UK Company No. 16735102)
+
+This product includes software developed by THE BITCOIN CORPORATION LTD
+and is licensed under the Open BSV License.
+
+================================================================================
+THIRD-PARTY SOFTWARE ATTRIBUTIONS
+================================================================================
+
+This software incorporates components from the following projects:
+
+React
+Copyright (c) Meta Platforms, Inc. and affiliates.
+Licensed under the MIT License
+https://github.com/facebook/react
+
+React Router
+Copyright (c) React Training LLC 2015-2019
+Copyright (c) Remix Software Inc. 2020-2021
+Licensed under the MIT License
+https://github.com/remix-run/react-router
+
+TypeScript
+Copyright (c) Microsoft Corporation
+Licensed under the Apache License 2.0
+https://github.com/microsoft/TypeScript
+
+@bsv/sdk
+Copyright (c) Bitcoin Association
+Licensed under the Open BSV License
+https://github.com/bitcoin-sv/ts-sdk
+
+HandCash SDK
+Copyright (c) HandCash Inc.
+Licensed under the MIT License
+https://handcash.io
+
+RevoGrid
+Copyright (c) Revolist OU
+Licensed under the MIT License
+https://github.com/revolist/revogrid
+
+Plotly.js
+Copyright (c) Plotly, Inc.
+Licensed under the MIT License
+https://github.com/plotly/plotly.js
+
+Lucide React
+Copyright (c) 2020 Lucide Contributors
+Licensed under the ISC License
+https://github.com/lucide-icons/lucide
+
+Crypto-JS
+Copyright (c) 2009-2013 Jeff Mott
+Copyright (c) 2013-2016 Evan Vosberg
+Licensed under the MIT License
+https://github.com/brix/crypto-js
+
+FileSaver.js
+Copyright (c) 2016 Eli Grey
+Licensed under the MIT License
+https://github.com/eligrey/FileSaver.js
+
+OpenAI API
+This software uses the OpenAI API for AI features.
+Copyright (c) OpenAI
+https://openai.com
+
+Axios
+Copyright (c) 2014-present Matt Zabriskie
+Licensed under the MIT License
+https://github.com/axios/axios
+
+Web Vitals
+Copyright (c) Google LLC
+Licensed under the Apache License 2.0
+https://github.com/GoogleChrome/web-vitals
+
+React Scripts / Create React App
+Copyright (c) 2013-present, Facebook, Inc.
+Licensed under the MIT License
+https://github.com/facebook/create-react-app
+
+================================================================================
+FONTS AND ICONS
+================================================================================
+
+SF Pro Display Font
+Copyright (c) Apple Inc.
+Used under Apple's Font License
+
+Bitcoin Symbol (₿)
+Public Domain
+
+================================================================================
+DEVELOPMENT DEPENDENCIES
+================================================================================
+
+Various development dependencies are used during the build process.
+These can be found in the package.json file and are not distributed
+with the production build.
+
+================================================================================
+TRADEMARK NOTICE
+================================================================================
+
+"Bitcoin Spreadsheet" is a trademark of THE BITCOIN CORPORATION LTD.
+"Bitcoin SV" and "BSV" are trademarks of Bitcoin Association.
+"HandCash" is a trademark of HandCash Inc.
+Other trademarks are property of their respective owners.
+
+================================================================================
+
+For questions about licensing or attribution, please contact:
+THE BITCOIN CORPORATION LTD
+UK Company No. 16735102
+https://bitcoinapps.store

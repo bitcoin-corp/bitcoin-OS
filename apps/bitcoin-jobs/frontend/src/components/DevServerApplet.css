@@ -1,0 +1,264 @@
+/* Dev Server Applet Styles */
+.dev-server-applet {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.applet-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(15, 19, 41, 0.8);
+  border: 1px solid rgba(66, 133, 244, 0.3);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.applet-button:hover {
+  background: rgba(66, 133, 244, 0.1);
+  border-color: #4285F4;
+  transform: translateY(-1px);
+}
+
+.applet-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bitcoin-spreadsheet-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  font-size: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  padding: 1px;
+}
+
+.applet-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Menu Backdrop */
+.applet-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+}
+
+/* Menu */
+.applet-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: linear-gradient(135deg, #0F1329 0%, #0A0E27 100%);
+  border: 1px solid rgba(247, 147, 26, 0.2);
+  border-radius: 12px;
+  min-width: 280px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu Header */
+.menu-header {
+  padding: 16px;
+  background: rgba(247, 147, 26, 0.05);
+  border-bottom: 1px solid rgba(247, 147, 26, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #F7931A;
+}
+
+.status-badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-badge.running {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-badge.stopped {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.status-badge.restarting {
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Menu Actions */
+.menu-actions {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+}
+
+.menu-action-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(2px);
+}
+
+.menu-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.menu-action-btn.restart:hover:not(:disabled) {
+  background: rgba(66, 133, 244, 0.2);
+  border-color: #4285F4;
+}
+
+.menu-action-btn.open:hover:not(:disabled) {
+  background: rgba(247, 147, 26, 0.2);
+  border-color: #F7931A;
+}
+
+.menu-action-btn.stop:hover:not(:disabled) {
+  background: rgba(244, 67, 54, 0.2);
+  border-color: #f44336;
+}
+
+.menu-action-btn.start:hover:not(:disabled) {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: #4CAF50;
+}
+
+.action-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Menu Info */
+.menu-info {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.info-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.info-value {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Courier New', monospace;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .applet-button {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .applet-text {
+    display: none;
+  }
+
+  .applet-menu {
+    position: fixed;
+    top: auto;
+    bottom: 60px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    min-width: unset;
+  }
+
+  .bitcoin-spreadsheet-logo {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Integration with Taskbar */
+.taskbar-item .dev-server-applet .applet-button {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+}
+
+.taskbar-item .dev-server-applet .applet-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

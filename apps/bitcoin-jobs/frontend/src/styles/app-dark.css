@@ -1,0 +1,247 @@
+/* Dark mode styles for App components */
+
+/* Main app container */
+.dark-mode {
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+.dark-mode .App {
+  background-color: #0a0a0a;
+}
+
+/* Taskbar */
+.dark-mode .bitcoin-taskbar {
+  background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode .bitcoin-logo-button {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.dark-mode .bitcoin-logo-button:hover {
+  background: rgba(255, 165, 0, 0.2);
+}
+
+/* Menus */
+.dark-mode .bitcoin-menu,
+.dark-mode .developer-menu {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .menu-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .menu-item:hover {
+  background: #3a3a3a;
+}
+
+.dark-mode .menu-separator {
+  background: #444;
+}
+
+/* Header */
+.dark-mode .App-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: #e0e0e0;
+}
+
+.dark-mode .app-subtitle {
+  color: #b0b0b0;
+}
+
+/* Sidebar */
+.dark-mode .spreadsheet-manager {
+  background: #1a1a1a;
+  border-right: 1px solid #444;
+}
+
+.dark-mode .manager-header {
+  background: #2a2a2a;
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode .spreadsheet-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  color: #e0e0e0;
+}
+
+.dark-mode .spreadsheet-item:hover {
+  background: rgba(255, 165, 0, 0.1);
+  border-color: rgba(255, 165, 0, 0.3);
+}
+
+.dark-mode .spreadsheet-item.active {
+  background: rgba(255, 165, 0, 0.15);
+  border-color: #1976d2;
+}
+
+.dark-mode .sheet-meta {
+  color: #999;
+}
+
+.dark-mode .new-sheet-button {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: #000;
+  border: none;
+}
+
+.dark-mode .new-sheet-button:hover {
+  background: linear-gradient(135deg, #1e88e5, #FF9C10);
+}
+
+/* Toolbar */
+.dark-mode .toolbar {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode .toolbar input {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .toolbar input:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+.dark-mode .function-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .function-btn:hover {
+  background: rgba(255, 165, 0, 0.1);
+  border-color: rgba(255, 165, 0, 0.5);
+}
+
+/* Modals */
+.dark-mode .dialog-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .dialog {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .dialog input {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .dialog button {
+  background: #3a3a3a;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+
+.dark-mode .dialog button:hover {
+  background: #4a4a4a;
+}
+
+.dark-mode .dialog .create-button {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: #000;
+  border: none;
+}
+
+/* Status bar */
+.dark-mode .status-bar {
+  background: #1a1a1a;
+  border-top: 1px solid #444;
+  color: #b0b0b0;
+}
+
+/* HandCash badge */
+.dark-mode .handcash-user-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #444;
+}
+
+/* Buttons */
+.dark-mode button {
+  color: #e0e0e0;
+}
+
+.dark-mode .logout-btn {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff6b6b;
+}
+
+.dark-mode .logout-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+/* Dark mode toggle button specific styles */
+.dark-mode .dark-mode-toggle {
+  color: #1976d2;
+}
+
+.dark-mode .dark-mode-toggle:hover {
+  background: rgba(255, 165, 0, 0.1) !important;
+  border-color: #1976d2 !important;
+}
+
+/* Advanced Spreadsheet Container */
+.dark-mode .advanced-spreadsheet-container {
+  background: #0a0a0a;
+}
+
+/* Cost info */
+.dark-mode .cost-info {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+/* Empty state */
+.dark-mode .empty-state {
+  color: #999;
+}
+
+.dark-mode .create-first-button {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: #000;
+  border: none;
+}
+
+/* Scrollbars */
+.dark-mode ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 5px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+/* Links */
+.dark-mode a {
+  color: #1976d2;
+}
+
+.dark-mode a:hover {
+  color: #1e88e5;
+}
