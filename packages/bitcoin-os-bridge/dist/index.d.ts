@@ -1,5 +1,10 @@
 export { default as BitcoinOSProvider } from './components/BitcoinOSProvider';
+export { default as LayoutClient } from './components/LayoutClient';
+export { default as AppWrapper } from './components/AppWrapper';
+export { default as Footer } from './components/Footer';
+export { default as PocBar } from './components/PocBar';
 export { default as ProofOfConceptBar } from './components/ProofOfConceptBar';
+export { default as Taskbar } from './components/Taskbar';
 export { default as TopMenuBar } from './components/TopMenuBar';
 export { default as DevSidebar } from './components/DevSidebar';
 export { default as Dock } from './components/Dock';

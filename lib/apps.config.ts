@@ -23,7 +23,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-wallet',
     name: 'Bitcoin Wallet',
     url: process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3001' 
+      ? 'http://localhost:1050' 
       : 'https://bitcoin-wallet-sable.vercel.app',
     chromeAppId: 'bitcoin-wallet',
     color: '#ffd700',
@@ -33,7 +33,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-email',
     name: 'Bitcoin Email',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3002'
+      ? 'http://localhost:2040'
       : 'https://bitcoin-email.vercel.app',
     chromeAppId: 'bitcoin-email',
     color: '#ef4444',
@@ -43,7 +43,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-music',
     name: 'Bitcoin Music',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3003'
+      ? 'http://localhost:3007'
       : 'https://bitcoin-music.vercel.app',
     chromeAppId: 'bitcoin-music',
     color: '#8b5cf6',
@@ -53,7 +53,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-writer',
     name: 'Bitcoin Writer',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3004'
+      ? 'http://localhost:2010'
       : 'https://bitcoin-writer.vercel.app',
     chromeAppId: 'bitcoin-writer',
     color: '#ff9500',
@@ -63,7 +63,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-drive',
     name: 'Bitcoin Drive',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3005'
+      ? 'http://localhost:2030'
       : 'https://bitcoin-drive.vercel.app',
     chromeAppId: 'bitcoin-drive',
     color: '#22c55e',
@@ -73,7 +73,7 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-jobs',
     name: 'Bitcoin Jobs',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3006'
+      ? 'http://localhost:3010'
       : 'https://bitcoin-jobs.vercel.app',
     chromeAppId: 'bitcoin-jobs',
     color: '#40e0d0',
@@ -83,11 +83,21 @@ export const bitcoinApps: BitcoinApp[] = [
     id: 'bitcoin-exchange',
     name: 'Bitcoin Exchange',
     url: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3007'
+      ? 'http://localhost:3000'
       : 'https://bitcoin-exchange.vercel.app',
     chromeAppId: 'bitcoin-exchange',
     color: '#10b981',
     description: 'Trade Bitcoin and other assets'
+  },
+  {
+    id: 'bitcoin-spreadsheets',
+    name: 'Bitcoin Spreadsheets',
+    url: process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3020'
+      : 'https://bitcoin-spreadsheets.vercel.app',
+    chromeAppId: 'bitcoin-spreadsheets',
+    color: '#06b6d4',
+    description: 'Spreadsheets powered by Bitcoin'
   }
 ]
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2 } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -37,13 +37,15 @@ const Dock: React.FC = () => {
       'text-blue-500': '#3b82f6',
       'text-gray-500': '#6b7280',
       'text-sky-400': '#38bdf8',
-      'text-cyan-500': '#06b6d4'
+      'text-cyan-500': '#06b6d4',
+      'text-cyan-400': '#22d3ee'
     };
     return colorMap[colorClass] || '#ffffff';
   };
 
   const dockApps: DockApp[] = [
     { name: 'Bitcoin Corporation', icon: Building2, color: 'text-bitcoin-orange', url: 'https://bitcoin-corp.vercel.app/' },
+    { name: 'Trust', icon: Shield, color: 'text-blue-500', url: 'https://bitcoin-corp.vercel.app/trust' },
     { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', isImage: true },
     { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app' },
@@ -55,7 +57,7 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', disabled: true },
     { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true },
-    { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-gray-500', url: 'https://bitcoin-jobs.vercel.app', disabled: true },
+    { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/' },
   ];
 
   const handleAppClick = (app: DockApp) => {
@@ -82,6 +84,10 @@ const Dock: React.FC = () => {
               {app.id === 'bapps-store' ? (
                 <div className="dock-app-icon">
                   <img src="/bapps-icon.jpg" alt="BAPPS" className="dock-app-image" />
+                </div>
+              ) : app.name === 'Bitcoin Jobs' ? (
+                <div className="dock-app-icon">
+                  <img src="/bitcoin-jobs-icon.png" alt="Bitcoin Jobs" className="dock-app-image" />
                 </div>
               ) : (
                 <Icon className="dock-app-icon" style={{ color: getIconColor(app.color) }} />

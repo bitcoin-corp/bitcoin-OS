@@ -1,13 +1,17 @@
 {
   "name": "@bitcoin-os/bridge",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Reusable Bitcoin OS components for seamless app integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
-    "components/**/*"
+    "components/**/*",
+    "cli/**/*"
   ],
+  "bin": {
+    "create-bitcoin-app": "./cli/create-app.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",

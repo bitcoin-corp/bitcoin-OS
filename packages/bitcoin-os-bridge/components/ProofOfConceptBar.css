@@ -12,21 +12,21 @@
 
 .poc-bar {
   background: linear-gradient(
-    90deg,
-    #ff6b6b,
-    #f97316,
-    #feca57,
+    135deg,
+    #40e0d0,
+    #20b2aa,
     #48dbfb,
-    #0abde3,
-    #a55eea,
-    #fd79a8,
-    #ff6b6b
+    #40e0d0
   );
   background-size: 400% 100%;
-  animation: gradientShift 15s ease infinite;
-  position: relative;
+  animation: gradientShift 8s ease infinite;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
-  height: 40px;
+  height: 32px;
+  z-index: 10001;
 }
 
 .poc-bar::before {
@@ -43,15 +43,14 @@
 .poc-content {
   position: relative;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  padding: 0 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .poc-text {
