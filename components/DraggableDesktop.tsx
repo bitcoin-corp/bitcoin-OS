@@ -35,6 +35,7 @@ interface DesktopIcon {
 
 // Desktop icon component with drag functionality
 function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick: () => void }) {
+  const [imageError, setImageError] = useState(false)
   const {
     attributes,
     listeners,
@@ -62,20 +63,22 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
       onDoubleClick={!app.disabled ? onDoubleClick : undefined}
     >
       <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all select-none">
-        {app.id === 'bapps-store' ? (
+        {app.id === 'bapps-store' && !imageError ? (
           <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl">
             <img 
               src="/bapps-icon.jpg" 
               alt="Bitcoin Apps Store" 
               className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
             />
           </div>
-        ) : app.id === 'jobs' ? (
+        ) : app.id === 'jobs' && !imageError ? (
           <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl">
             <img 
               src="/bitcoin-jobs-icon.png" 
               alt="Bitcoin Jobs" 
               className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
             />
           </div>
         ) : (

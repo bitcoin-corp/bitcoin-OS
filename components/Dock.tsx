@@ -16,6 +16,7 @@ interface DockApp {
 const Dock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     setMounted(true);
@@ -24,6 +25,10 @@ const Dock: React.FC = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleImageError = (appId: string) => {
+    setFailedImages(prev => new Set(prev).add(appId));
+  };
 
   const getIconColor = (colorClass: string): string => {
     const colorMap: { [key: string]: string } = {
@@ -81,13 +86,23 @@ const Dock: React.FC = () => {
               title={app.name}
               disabled={app.disabled}
             >
-              {app.id === 'bapps-store' ? (
+              {app.id === 'bapps-store' && !failedImages.has('bapps-store') ? (
                 <div className="dock-app-icon">
-                  <img src="/bapps-icon.jpg" alt="BAPPS" className="dock-app-image" />
+                  <img 
+                    src="/bapps-icon.jpg" 
+                    alt="BAPPS" 
+                    className="dock-app-image"
+                    onError={() => handleImageError('bapps-store')}
+                  />
                 </div>
-              ) : app.name === 'Bitcoin Jobs' ? (
+              ) : app.name === 'Bitcoin Jobs' && !failedImages.has('bitcoin-jobs') ? (
                 <div className="dock-app-icon">
-                  <img src="/bitcoin-jobs-icon.png" alt="Bitcoin Jobs" className="dock-app-image" />
+                  <img 
+                    src="/bitcoin-jobs-icon.png" 
+                    alt="Bitcoin Jobs" 
+                    className="dock-app-image"
+                    onError={() => handleImageError('bitcoin-jobs')}
+                  />
                 </div>
               ) : (
                 <Icon className="dock-app-icon" style={{ color: getIconColor(app.color) }} />

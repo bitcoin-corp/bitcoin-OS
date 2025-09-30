@@ -30,6 +30,7 @@ const desktopApps = [
 
 export default function Desktop({ onOpenApp }: DesktopProps) {
   const [is3DMode, setIs3DMode] = useState(false)
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set())
 
   // Function to launch app
   const launchApp = (app: typeof desktopApps[0]) => {
@@ -68,7 +69,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                 className={`desktop-icon ${(app as any).disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onDoubleClick={() => launchApp(app)}
               >
-                {app.id === 'bapps-store' ? (
+                {app.id === 'bapps-store' && !failedImages.has('bapps-store') ? (
                   <div className="w-12 h-12 rounded-lg overflow-hidden">
                     <img 
                       src="/bapps-icon.jpg" 
@@ -76,6 +77,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
+                      onError={() => setFailedImages(prev => new Set(prev).add('bapps-store'))}
                     />
                   </div>
                 ) : (
