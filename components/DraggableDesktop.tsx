@@ -62,20 +62,12 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
       onDoubleClick={!app.disabled ? onDoubleClick : undefined}
     >
       <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all select-none">
-        {app.id === 'bapps-store' ? (
+        {app.id === 'ninja-punk-girls' ? (
           <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl">
             <img 
-              src="/bapps-store.svg" 
-              alt="Bitcoin Apps Store" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : app.id === 'ninja-punk-girls' ? (
-          <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-pink-500 to-purple-600">
-            <img 
-              src="/ninja-punk-girls-logo.svg" 
+              src="/ninja-punk-girls-logo.png" 
               alt="Ninja Punk Girls" 
-              className="w-full h-full object-contain p-1"
+              className="w-full h-full object-cover"
             />
           </div>
         ) : (
@@ -107,7 +99,7 @@ export default function DraggableDesktop() {
     { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 2, y: 1 } },
     { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-gray-500', url: 'https://bitcoin-exchange.vercel.app', position: { x: 3, y: 1 } },
     { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 0, y: 2 } },
-    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', position: { x: 1, y: 2 } },
+    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-blue-600', url: 'https://bitcoin-search.vercel.app', position: { x: 1, y: 2 } },
     { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 2, y: 2 } },
     { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 3, y: 2 } },
     { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 0, y: 3 } },
@@ -208,13 +200,9 @@ export default function DraggableDesktop() {
             {activeApp ? (
               <div className="opacity-80">
                 <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
-                  {activeApp.id === 'bapps-store' ? (
+                  {activeApp.id === 'ninja-punk-girls' ? (
                     <div className="w-16 h-16 rounded-xl overflow-hidden">
-                      <img src="/bapps-icon.jpg" alt="Bitcoin Apps Store" className="w-full h-full object-cover" />
-                    </div>
-                  ) : activeApp.id === 'ninja-punk-girls' ? (
-                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-black">
-                      <img src="/ninja-punk-girls-logo.svg" alt="Ninja Punk Girls" className="w-full h-full object-contain" />
+                      <img src="/ninja-punk-girls-logo.png" alt="Ninja Punk Girls" className="w-full h-full object-cover" />
                     </div>
                   ) : (
                     <activeApp.icon className={`w-16 h-16 ${activeApp.color}`} />
