@@ -70,6 +70,14 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
               className="w-full h-full object-cover"
             />
           </div>
+        ) : app.id === 'ninja-punk-girls' ? (
+          <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl bg-black">
+            <img 
+              src="/ninja-punk-girls-logo.svg" 
+              alt="Ninja Punk Girls" 
+              className="w-full h-full object-contain"
+            />
+          </div>
         ) : (
           <Icon 
             className={`w-16 h-16 ${app.color} drop-shadow-2xl`} 
@@ -102,6 +110,7 @@ export default function DraggableDesktop() {
     { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 0, y: 3 } },
     { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 1, y: 3 } },
     { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 2, y: 3 } },
+    { id: 'ninja-punk-girls', name: 'Ninja Punk Girls', icon: Store, color: 'text-pink-500', url: 'https://www.ninjapunkgirls.website', position: { x: 3, y: 3 } },
   ])
 
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -200,6 +209,10 @@ export default function DraggableDesktop() {
                   {activeApp.id === 'bapps-store' ? (
                     <div className="w-16 h-16 rounded-xl overflow-hidden">
                       <img src="/bapps-icon.jpg" alt="Bitcoin Apps Store" className="w-full h-full object-cover" />
+                    </div>
+                  ) : activeApp.id === 'ninja-punk-girls' ? (
+                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-black">
+                      <img src="/ninja-punk-girls-logo.svg" alt="Ninja Punk Girls" className="w-full h-full object-contain" />
                     </div>
                   ) : (
                     <activeApp.icon className={`w-16 h-16 ${activeApp.color}`} />
