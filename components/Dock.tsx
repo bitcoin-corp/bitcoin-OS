@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Video } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -96,20 +96,6 @@ const Dock: React.FC = () => {
         {/* Status icons on the right */}
         <div className="dock-status">
           <div className="dock-divider" />
-          <button 
-            className="status-button" 
-            title="Bitcoin Corporation"
-            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
-          >
-            <Building2 className="status-icon" style={{ color: '#f7931a' }} />
-          </button>
-          <button 
-            className="status-button" 
-            title="Trust"
-            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
-          >
-            <Shield className="status-icon" style={{ color: '#3b82f6' }} />
-          </button>
           <button className="status-button" title="Connected">
             <Wifi className="status-icon connected" />
           </button>

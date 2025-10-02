@@ -20,7 +20,7 @@ import {
 } from '@dnd-kit/sortable'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video } from 'lucide-react'
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap } from 'lucide-react'
 import WindowManager from './WindowManager'
 
 interface DesktopIcon {
@@ -65,17 +65,17 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
         {app.id === 'bapps-store' ? (
           <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl">
             <img 
-              src="/bapps-icon.jpg" 
+              src="/bapps-store.svg" 
               alt="Bitcoin Apps Store" 
               className="w-full h-full object-cover"
             />
           </div>
         ) : app.id === 'ninja-punk-girls' ? (
-          <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl bg-black">
+          <div className="w-16 h-16 rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-pink-500 to-purple-600">
             <img 
               src="/ninja-punk-girls-logo.svg" 
               alt="Ninja Punk Girls" 
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain p-1"
             />
           </div>
         ) : (
@@ -93,24 +93,26 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
 }
 
 export default function DraggableDesktop() {
+  const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
+  const [showTrashWindow, setShowTrashWindow] = useState(false)
+  
   // Desktop apps with positions
   const [desktopApps, setDesktopApps] = useState<DesktopIcon[]>([
-    { id: 'bitcoin-corp', name: 'Bitcoin Corporation', icon: Building2, color: 'text-bitcoin-orange', url: 'https://bitcoin-corp.vercel.app/', position: { x: 0, y: 0 } },
-    { id: 'trust', name: 'Trust', icon: Shield, color: 'text-blue-500', url: 'https://bitcoin-corp.vercel.app/trust', position: { x: 1, y: 0 } },
-    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 2, y: 0 } },
-    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 3, y: 0 } },
-    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 0, y: 1 } },
-    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 1, y: 1 } },
-    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 2, y: 1 } },
-    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 3, y: 1 } },
-    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 0, y: 2 } },
-    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-gray-500', url: 'https://bitcoin-exchange.vercel.app', position: { x: 1, y: 2 } },
-    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 2, y: 2 } },
-    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', disabled: true, position: { x: 3, y: 2 } },
-    { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 0, y: 3 } },
-    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 1, y: 3 } },
-    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 2, y: 3 } },
-    { id: 'ninja-punk-girls', name: 'Ninja Punk Girls', icon: Store, color: 'text-pink-500', url: 'https://www.ninjapunkgirls.website', position: { x: 3, y: 3 } },
+    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 0, y: 0 } },
+    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 1, y: 0 } },
+    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 2, y: 0 } },
+    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 3, y: 0 } },
+    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 0, y: 1 } },
+    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 1, y: 1 } },
+    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 2, y: 1 } },
+    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-gray-500', url: 'https://bitcoin-exchange.vercel.app', position: { x: 3, y: 1 } },
+    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 0, y: 2 } },
+    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-gray-500', url: 'https://bitcoin-search.vercel.app', position: { x: 1, y: 2 } },
+    { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 2, y: 2 } },
+    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 3, y: 2 } },
+    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 0, y: 3 } },
+    { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 1, y: 3 } },
+    { id: 'ninja-punk-girls', name: 'Ninja Punk Girls', icon: Store, color: 'text-pink-500', url: 'https://www.ninjapunkgirls.website', position: { x: 2, y: 3 } },
   ])
 
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -230,14 +232,47 @@ export default function DraggableDesktop() {
       {/* Window Manager for opened apps */}
       <WindowManager windows={openWindows} onClose={closeWindow} />
       
-      {/* Trash Basket - Bottom Right */}
+      {/* Bitcoin Corp and Trust - Right Side (small, vertical) */}
+      <div className="absolute right-8 top-1/3 flex flex-col gap-4">
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
+          title="Bitcoin Corporation"
+        >
+          <Building2 className="w-10 h-10 text-bitcoin-orange drop-shadow-lg" strokeWidth={1.5} />
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">Corp</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
+          title="Trust"
+        >
+          <Shield className="w-10 h-10 text-blue-500 drop-shadow-lg" strokeWidth={1.5} />
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">Trust</span>
+        </button>
+      </div>
+      
+      {/* Trash Basket - Bottom Right (interactive) */}
       <div className="absolute bottom-8 right-8">
         <div 
           className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
-          title="Trash (Empty)"
+          title={`Trash (${trashedItems.length} items)`}
+          onDoubleClick={() => setShowTrashWindow(true)}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault()
+            // Handle drop to trash
+            if (activeId) {
+              const itemToTrash = desktopApps.find(app => app.id === activeId)
+              if (itemToTrash) {
+                setTrashedItems([...trashedItems, itemToTrash])
+                setDesktopApps(desktopApps.filter(app => app.id !== activeId))
+              }
+            }
+          }}
         >
           <Trash2 
-            className="w-16 h-16 text-gray-400 drop-shadow-2xl" 
+            className={`w-16 h-16 ${trashedItems.length > 0 ? 'text-gray-300' : 'text-gray-400'} drop-shadow-2xl`} 
             strokeWidth={1.5}
           />
           <span className="text-sm text-white text-center font-medium drop-shadow-lg">
@@ -245,6 +280,49 @@ export default function DraggableDesktop() {
           </span>
         </div>
       </div>
+      
+      {/* Trash Window */}
+      {showTrashWindow && (
+        <div className="absolute inset-0 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg shadow-2xl p-6 w-96 max-h-96 overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-white text-xl font-bold">Trash ({trashedItems.length} items)</h2>
+              <button 
+                onClick={() => setShowTrashWindow(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+            {trashedItems.length === 0 ? (
+              <p className="text-gray-400">Trash is empty</p>
+            ) : (
+              <div className="space-y-2">
+                {trashedItems.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between bg-gray-700 p-2 rounded">
+                    <span className="text-white">{item.name}</span>
+                    <button 
+                      onClick={() => {
+                        setDesktopApps([...desktopApps, item])
+                        setTrashedItems(trashedItems.filter(t => t.id !== item.id))
+                      }}
+                      className="text-blue-400 hover:text-blue-300 text-sm"
+                    >
+                      Restore
+                    </button>
+                  </div>
+                ))}
+                <button 
+                  onClick={() => setTrashedItems([])}
+                  className="w-full mt-4 bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+                >
+                  Empty Trash
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
