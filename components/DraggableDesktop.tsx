@@ -20,7 +20,7 @@ import {
 } from '@dnd-kit/sortable'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield } from 'lucide-react'
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2 } from 'lucide-react'
 import WindowManager from './WindowManager'
 
 interface DesktopIcon {
@@ -215,6 +215,22 @@ export default function DraggableDesktop() {
 
       {/* Window Manager for opened apps */}
       <WindowManager windows={openWindows} onClose={closeWindow} />
+      
+      {/* Trash Basket - Bottom Right */}
+      <div className="absolute bottom-8 right-8">
+        <div 
+          className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
+          title="Trash (Empty)"
+        >
+          <Trash2 
+            className="w-16 h-16 text-gray-400 drop-shadow-2xl" 
+            strokeWidth={1.5}
+          />
+          <span className="text-sm text-white text-center font-medium drop-shadow-lg">
+            Trash
+          </span>
+        </div>
+      </div>
     </div>
   )
 }

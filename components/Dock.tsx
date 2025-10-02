@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Trash2 } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -93,15 +93,6 @@ const Dock: React.FC = () => {
           );
         })}
         </div>
-        
-        {/* Trash icon before status icons */}
-        <div className="dock-divider" />
-        <button 
-          className="dock-app trash-icon" 
-          title="Trash"
-        >
-          <Trash2 className="dock-app-icon" style={{ color: '#6b7280' }} />
-        </button>
         
         {/* Status icons on the right */}
         <div className="dock-status">
