@@ -25,7 +25,10 @@ import {
   Lock,
   Unlock,
   Activity,
-  Clock
+  Clock,
+  Cpu,
+  Server,
+  Zap
 } from 'lucide-react'
 import './DevSidebar.css'
 
@@ -72,9 +75,16 @@ export default function DevSidebar() {
     external?: boolean
   }> = [
     // Token & Core at top
-    { path: '/token', icon: Coins, label: '$bOS Token', badge: 'NEW' },
+    { path: '/token', icon: Coins, label: '$bOS Token', badge: 'HOT' },
+    { path: '/exchange', icon: Zap, label: 'Compute Exchange', badge: 'NEW' },
     { path: '/contracts', icon: Terminal, label: 'Smart Contracts', badge: 'BETA' },
-    { path: '/exchange', icon: Download, label: 'Token Exchange' },
+    
+    // HPC & Computational Resources
+    { divider: true },
+    { section: 'COMPUTE MARKETPLACE' },
+    { path: '/exchange?tab=buy', icon: Cpu, label: 'Buy Resources' },
+    { path: '/exchange?tab=sell', icon: Server, label: 'Sell Resources' },
+    { path: '/exchange?tab=my-resources', icon: Activity, label: 'My Resources' },
     
     // System Operations
     { divider: true },

@@ -60,6 +60,15 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         },
         { divider: true },
         { 
+          label: '$bOS Token', 
+          action: () => window.location.href = '/token'
+        },
+        { 
+          label: 'Compute Exchange', 
+          action: () => window.location.href = '/exchange'
+        },
+        { divider: true },
+        { 
           label: 'System Preferences', 
           shortcut: '⌘,',
           action: () => onOpenApp?.('Settings')
