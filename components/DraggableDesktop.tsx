@@ -63,11 +63,11 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
     >
       <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all select-none">
         {app.id === 'ninja-punk-girls' ? (
-          <div className="w-16 h-16 rounded-xl shadow-2xl flex items-center justify-center bg-black p-2">
+          <div className="w-16 h-16 rounded-xl shadow-2xl overflow-hidden">
             <img 
-              src="/ninja-punk-girls-logo.png" 
+              src="/npg-logo.svg" 
               alt="Ninja Punk Girls" 
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
             />
           </div>
         ) : (
@@ -201,8 +201,8 @@ export default function DraggableDesktop() {
               <div className="opacity-80">
                 <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
                   {activeApp.id === 'ninja-punk-girls' ? (
-                    <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-black p-2">
-                      <img src="/ninja-punk-girls-logo.png" alt="Ninja Punk Girls" className="w-full h-full object-contain" />
+                    <div className="w-16 h-16 rounded-xl overflow-hidden">
+                      <img src="/npg-logo.svg" alt="Ninja Punk Girls" className="w-full h-full object-cover" />
                     </div>
                   ) : (
                     <activeApp.icon className={`w-16 h-16 ${activeApp.color}`} />
