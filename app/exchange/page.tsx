@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Cpu, HardDrive, Zap, DollarSign, TrendingUp, Server, Wifi, Database } from 'lucide-react'
 
@@ -14,7 +14,7 @@ interface ComputeResource {
   location: string
 }
 
-export default function ExchangePage() {
+function ExchangeContent() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<'buy' | 'sell' | 'my-resources'>('buy')
   
@@ -329,5 +329,13 @@ export default function ExchangePage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ExchangePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ExchangeContent />
+    </Suspense>
   )
 }
