@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -44,8 +44,6 @@ const Dock: React.FC = () => {
   };
 
   const dockApps: DockApp[] = [
-    { name: 'Bitcoin Corporation', icon: Building2, color: 'text-bitcoin-orange', url: 'https://bitcoin-corp.vercel.app/' },
-    { name: 'Trust', icon: Shield, color: 'text-blue-500', url: 'https://bitcoin-corp.vercel.app/trust' },
     { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', isImage: true },
     { name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app' },
@@ -58,6 +56,7 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true },
     { name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/' },
+    { name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app' },
   ];
 
   const handleAppClick = (app: DockApp) => {
@@ -97,6 +96,20 @@ const Dock: React.FC = () => {
         {/* Status icons on the right */}
         <div className="dock-status">
           <div className="dock-divider" />
+          <button 
+            className="status-button" 
+            title="Bitcoin Corporation"
+            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
+          >
+            <Building2 className="status-icon" style={{ color: '#f7931a' }} />
+          </button>
+          <button 
+            className="status-button" 
+            title="Trust"
+            onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
+          >
+            <Shield className="status-icon" style={{ color: '#3b82f6' }} />
+          </button>
           <button className="status-button" title="Connected">
             <Wifi className="status-icon connected" />
           </button>
