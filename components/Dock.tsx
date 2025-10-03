@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, ShoppingCart, Zap, Globe, Settings, Code, Paintbrush } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Code, Paintbrush } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -89,10 +89,6 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Social', icon: Users, color: 'rainbow', url: 'https://bitcoin-social.vercel.app' },
     { name: 'Bitcoin Games', icon: Gamepad2, color: 'rainbow', url: 'https://bitcoin-games.vercel.app' },
     { name: 'Bitcoin Books', icon: BookOpen, color: 'rainbow', url: 'https://bitcoin-books.vercel.app' },
-    { name: 'Bitcoin Store', icon: ShoppingCart, color: 'rainbow', url: 'https://bitcoin-store.vercel.app' },
-    { name: 'Bitcoin Energy', icon: Zap, color: 'rainbow', url: 'https://bitcoin-energy.vercel.app' },
-    { name: 'Bitcoin Web', icon: Globe, color: 'rainbow', url: 'https://bitcoin-web.vercel.app' },
-    { name: 'Bitcoin Settings', icon: Settings, color: 'rainbow', url: 'https://bitcoin-settings.vercel.app' },
   ];
 
   const handleAppClick = (app: DockApp) => {
