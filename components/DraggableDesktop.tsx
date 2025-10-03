@@ -227,7 +227,7 @@ export default function DraggableDesktop() {
       </div>
       
       {/* Trash Basket - Bottom Right (interactive) */}
-      <div className="absolute bottom-8 right-8">
+      <div className="absolute bottom-24 right-8">
         <div 
           className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
           title={`Trash (${trashedItems.length} items)`}

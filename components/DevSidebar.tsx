@@ -217,22 +217,6 @@ export default function DevSidebar() {
         </div>
       )}
 
-      {/* Footer CTA */}
-      {!isCollapsed && (
-        <div className="dev-sidebar-footer">
-          <div className="dev-sidebar-cta">
-            <p>Join Development</p>
-            <a 
-              href="https://github.com/bitcoin-apps-suite/bitcoin-OS" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="dev-sidebar-cta-button"
-            >
-              Start Contributing
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
