@@ -80,6 +80,23 @@ To enable wallet features:
 2. Ensure it's running on localhost:3321
 3. Bitcoin OS will automatically detect and connect
 
+### BRC Standards Integration
+
+Bitcoin OS implements BSV BRC (Bitcoin Request for Comments) specifications:
+
+- **BRC-1 Transaction Creation** - Standardized wallet-to-application interface
+- **BRC-103 Identity Certificates** - Verifiable identity with selective disclosure
+- **Interactive Learning** - Integration with [fast.brc.dev](https://fast.brc.dev) resources
+- **Transaction Broadcasting** - Direct BSV network interaction
+- **Data Transactions** - OP_RETURN data storage on blockchain
+
+BRC Demo Features:
+- Create standardized BSV payment transactions
+- Store data on-chain using OP_RETURN
+- Lookup identity certificates (BRC-103)
+- Check transaction status and confirmations
+- Validate transactions against BRC standards
+
 ## License
 
 Open BSV License v4
