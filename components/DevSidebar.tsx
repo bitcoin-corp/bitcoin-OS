@@ -31,6 +31,7 @@ import {
   Zap
 } from 'lucide-react'
 import './DevSidebar.css'
+import MetanetStatus from './MetanetStatus'
 
 export default function DevSidebar() {
   const pathname = usePathname()
@@ -189,6 +190,18 @@ export default function DevSidebar() {
           )
         })}
       </nav>
+
+      {/* Metanet Desktop Integration */}
+      {!isCollapsed && (
+        <div className="dev-sidebar-section">
+          <MetanetStatus 
+            className="mb-4" 
+            showBalance={true}
+            showAddress={false}
+            compact={false}
+          />
+        </div>
+      )}
 
       {/* Stats section */}
       {!isCollapsed && (

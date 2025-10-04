@@ -63,10 +63,38 @@ Bitcoin OS is built with:
 - **Tailwind CSS** - Styling
 - **Bitcoin SDK** - Blockchain integration
 - **Lucide Icons** - UI icons
+- **Metanet Desktop Integration** - BSV wallet connectivity via JSON-API
+
+### Metanet Desktop Integration
+
+Bitcoin OS integrates with [Metanet Desktop](https://github.com/bsv-blockchain/metanet-desktop) to provide native BSV wallet functionality:
+
+- **JSON-API Communication** - Connects via TCP port 3321
+- **WAB Authentication** - Secure app-wallet authentication
+- **Transaction Signing** - Sign and broadcast BSV transactions
+- **Balance & Address Display** - Real-time wallet information
+- **Permission Management** - Granular app permissions
+
+To enable wallet features:
+1. Install [Metanet Desktop](https://github.com/bsv-blockchain/metanet-desktop)
+2. Ensure it's running on localhost:3321
+3. Bitcoin OS will automatically detect and connect
 
 ## License
 
 Open BSV License v4
+
+## Third-Party Integrations
+
+### Metanet Desktop
+Bitcoin OS integrates with [Metanet Desktop](https://github.com/bsv-blockchain/metanet-desktop), a desktop wallet application for BSV blockchain:
+
+- **Repository**: https://github.com/bsv-blockchain/metanet-desktop
+- **License**: Open BSV License
+- **Organization**: BSV Blockchain Association
+- **Integration**: JSON-API over TCP/3321 for wallet functionality
+
+We extend our gratitude to the BSV Blockchain Association and the Metanet Desktop contributors for providing the wallet infrastructure that enables Bitcoin OS's blockchain features.
 
 ## Company
 
