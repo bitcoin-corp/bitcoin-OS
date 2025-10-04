@@ -205,8 +205,8 @@ export default function DraggableDesktop() {
       {/* Window Manager for opened apps */}
       <WindowManager windows={openWindows} onClose={closeWindow} />
       
-      {/* Bitcoin Corp and Trust - Right Side (small, vertical) */}
-      <div className="absolute right-8 top-1/3 flex flex-col gap-4">
+      {/* Bitcoin Corp, Trust and NPG - Top Right (small, vertical) */}
+      <div className="absolute right-8 top-8 flex flex-col gap-4">
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
