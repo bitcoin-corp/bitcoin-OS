@@ -55,6 +55,7 @@ const Dock: React.FC = () => {
       'text-red-500': '#ef4444',
       'text-purple-500': '#a855f7',
       'text-fuchsia-500': '#d946ef',
+      'text-pink-500': '#ec4899',
       'text-green-500': '#22c55e',
       'text-blue-500': '#3b82f6',
       'text-gray-500': '#6b7280',
@@ -87,7 +88,7 @@ const Dock: React.FC = () => {
     { name: 'Bitcoin Games', icon: Gamepad2, color: 'rainbow', url: 'https://bitcoin-gaming.vercel.app' },
     { name: 'Bitcoin Books', icon: BookOpen, color: 'rainbow', url: 'https://bitcoin-books-bay.vercel.app' },
     { name: 'Bitcoin Domains', icon: Globe, color: 'rainbow', url: 'https://bitcoin-dns.vercel.app' },
-    { name: 'Bitcoin 3D', icon: Box, color: 'rainbow', url: 'https://bitcoin-3d.vercel.app' },
+    { name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app' },
     { name: 'Bitcoin Jobs', icon: Briefcase, color: 'rainbow', url: 'https://bitcoin-jobs.vercel.app/' },
     { name: 'Bitcoin Shares', icon: Share2, color: 'rainbow', url: 'https://bitcoin-shares.vercel.app', disabled: true },
   ];
