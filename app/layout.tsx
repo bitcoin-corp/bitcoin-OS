@@ -3,7 +3,7 @@ import './globals.css'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
 export const metadata: Metadata = {
-  title: 'Bitcoin OS - Decentralized Operating System',
+  title: 'Bitcoin OS - Bitcoin Operating System',
   description: 'Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration | By The Bitcoin Corporation LTD',
   keywords: 'Bitcoin, OS, Operating System, Blockchain, Cryptocurrency, Wallet, Decentralized Apps, Bitcoin Corporation',
   authors: [{ name: 'The Bitcoin Corporation LTD' }],
@@ -15,21 +15,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://bitcoin-os.vercel.app',
     siteName: 'Bitcoin OS',
-    title: 'Bitcoin OS - Decentralized Operating System',
+    title: 'Bitcoin OS - Bitcoin Operating System',
     description: 'Experience the future with Bitcoin OS - a revolutionary operating system featuring integrated Bitcoin wallet, decentralized apps, and seamless blockchain interaction.',
     images: [
       {
         url: 'https://bitcoin-os.vercel.app/bitcoin-os.jpg',
         width: 1200,
         height: 630,
-        alt: 'Bitcoin OS - Decentralized Operating System',
+        alt: 'Bitcoin OS - Bitcoin Operating System',
         type: 'image/jpeg',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bitcoin OS - Decentralized Operating System',
+    title: 'Bitcoin OS - Bitcoin Operating System',
     description: 'Experience the future with Bitcoin OS - a revolutionary operating system featuring integrated Bitcoin wallet, decentralized apps, and seamless blockchain interaction.',
     images: ['https://bitcoin-os.vercel.app/bitcoin-os.jpg'],
     creator: '@BitcoinCorp',
