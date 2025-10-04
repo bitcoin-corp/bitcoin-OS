@@ -33,12 +33,11 @@ export interface MetanetTransaction {
 
 export class MetanetDesktopClient {
   private static instance: MetanetDesktopClient
-  private socket: WebSocket | null = null
   private isConnected = false
   private listeners: Map<string, ((data: any) => void)[]> = new Map()
   
-  // Metanet Desktop runs on localhost:3321 by default
-  private readonly METANET_WS_URL = 'ws://localhost:3321'
+  // Metanet Desktop runs on localhost:3321 by default (JSON-API over HTTP)
+  private readonly METANET_API_URL = 'http://localhost:3321'
   
   private constructor() {}
   
@@ -53,64 +52,37 @@ export class MetanetDesktopClient {
    * Connect to metanet-desktop wallet
    */
   async connect(): Promise<boolean> {
-    return new Promise((resolve) => {
-      try {
-        this.socket = new WebSocket(this.METANET_WS_URL)
-        
-        this.socket.onopen = () => {
-          this.isConnected = true
-          this.emit('connected', { connected: true })
-          resolve(true)
-        }
-        
-        this.socket.onmessage = (event) => {
-          try {
-            const data = JSON.parse(event.data)
-            this.emit('message', data)
-            
-            // Handle specific message types
-            if (data.type) {
-              this.emit(data.type, data)
-            }
-          } catch (error) {
-            console.error('Failed to parse metanet message:', error)
-          }
-        }
-        
-        this.socket.onclose = () => {
-          this.isConnected = false
-          this.emit('disconnected', { connected: false })
-        }
-        
-        this.socket.onerror = (error) => {
-          console.error('Metanet connection error:', error)
-          this.isConnected = false
-          resolve(false)
-        }
-        
-        // Timeout after 5 seconds
-        setTimeout(() => {
-          if (!this.isConnected) {
-            resolve(false)
-          }
-        }, 5000)
-        
-      } catch (error) {
-        console.error('Failed to connect to metanet-desktop:', error)
-        resolve(false)
+    try {
+      // Test connection by making a health check request
+      const response = await fetch(`${this.METANET_API_URL}/health`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      })
+      
+      if (response.ok) {
+        this.isConnected = true
+        this.emit('connected', { connected: true })
+        return true
+      } else {
+        this.isConnected = false
+        return false
       }
-    })
+    } catch (error) {
+      console.error('Failed to connect to metanet-desktop:', error)
+      this.isConnected = false
+      return false
+    }
   }
   
   /**
    * Disconnect from metanet-desktop
    */
   disconnect(): void {
-    if (this.socket) {
-      this.socket.close()
-      this.socket = null
-    }
     this.isConnected = false
+    this.emit('disconnected', { connected: false })
   }
   
   /**
@@ -121,11 +93,31 @@ export class MetanetDesktopClient {
   }
   
   /**
-   * Send message to metanet-desktop
+   * Send HTTP request to metanet-desktop
    */
-  private send(message: any): void {
-    if (this.socket && this.isConnected) {
-      this.socket.send(JSON.stringify(message))
+  private async apiRequest(endpoint: string, data?: any): Promise<any> {
+    if (!this.isConnected) {
+      throw new Error('Not connected to metanet-desktop')
+    }
+    
+    try {
+      const response = await fetch(`${this.METANET_API_URL}${endpoint}`, {
+        method: data ? 'POST' : 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data ? JSON.stringify(data) : undefined,
+        signal: AbortSignal.timeout(30000) // 30 second timeout
+      })
+      
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status} ${response.statusText}`)
+      }
+      
+      return await response.json()
+    } catch (error) {
+      console.error('Metanet API request failed:', error)
+      throw error
     }
   }
   
@@ -133,69 +125,35 @@ export class MetanetDesktopClient {
    * Get wallet information
    */
   async getWallet(): Promise<MetanetWallet | null> {
-    return new Promise((resolve) => {
-      if (!this.isConnected) {
-        resolve(null)
-        return
+    try {
+      const response = await this.apiRequest('/wallet')
+      return {
+        isConnected: true,
+        address: response.address,
+        balance: response.balance,
+        network: response.network || 'mainnet'
       }
-      
-      const requestId = Date.now().toString()
-      
-      const timeout = setTimeout(() => {
-        this.off('wallet-response', handler)
-        resolve(null)
-      }, 5000)
-      
-      const handler = (data: any) => {
-        if (data.requestId === requestId) {
-          clearTimeout(timeout)
-          this.off('wallet-response', handler)
-          resolve(data.wallet)
-        }
-      }
-      
-      this.on('wallet-response', handler)
-      this.send({
-        type: 'get-wallet',
-        requestId
-      })
-    })
+    } catch (error) {
+      console.error('Failed to get wallet info:', error)
+      return null
+    }
   }
   
   /**
    * Authenticate app with metanet-desktop
    */
   async authenticate(appId: string, appName: string, permissions: string[]): Promise<boolean> {
-    return new Promise((resolve) => {
-      if (!this.isConnected) {
-        resolve(false)
-        return
-      }
-      
-      const requestId = Date.now().toString()
-      
-      const timeout = setTimeout(() => {
-        this.off('auth-response', handler)
-        resolve(false)
-      }, 30000) // 30 second timeout for user interaction
-      
-      const handler = (data: any) => {
-        if (data.requestId === requestId) {
-          clearTimeout(timeout)
-          this.off('auth-response', handler)
-          resolve(data.success === true)
-        }
-      }
-      
-      this.on('auth-response', handler)
-      this.send({
-        type: 'authenticate',
-        requestId,
+    try {
+      const response = await this.apiRequest('/auth', {
         appId,
         appName,
         permissions
       })
-    })
+      return response.success === true
+    } catch (error) {
+      console.error('Authentication failed:', error)
+      return false
+    }
   }
   
   /**
@@ -205,69 +163,40 @@ export class MetanetDesktopClient {
     recipients: Array<{ address: string; amount: number }>,
     fee?: number
   ): Promise<MetanetTransaction | null> {
-    return new Promise((resolve) => {
-      if (!this.isConnected) {
-        resolve(null)
-        return
-      }
-      
-      const requestId = Date.now().toString()
-      
-      const timeout = setTimeout(() => {
-        this.off('transaction-response', handler)
-        resolve(null)
-      }, 60000) // 60 second timeout
-      
-      const handler = (data: any) => {
-        if (data.requestId === requestId) {
-          clearTimeout(timeout)
-          this.off('transaction-response', handler)
-          resolve(data.success ? data.transaction : null)
-        }
-      }
-      
-      this.on('transaction-response', handler)
-      this.send({
-        type: 'send-transaction',
-        requestId,
+    try {
+      const response = await this.apiRequest('/transaction', {
         recipients,
         fee
       })
-    })
+      
+      if (response.success) {
+        return {
+          txid: response.txid,
+          amount: response.amount,
+          fee: response.fee,
+          recipients: recipients
+        }
+      }
+      return null
+    } catch (error) {
+      console.error('Transaction failed:', error)
+      return null
+    }
   }
   
   /**
    * Sign message with wallet
    */
   async signMessage(message: string): Promise<string | null> {
-    return new Promise((resolve) => {
-      if (!this.isConnected) {
-        resolve(null)
-        return
-      }
-      
-      const requestId = Date.now().toString()
-      
-      const timeout = setTimeout(() => {
-        this.off('sign-response', handler)
-        resolve(null)
-      }, 30000)
-      
-      const handler = (data: any) => {
-        if (data.requestId === requestId) {
-          clearTimeout(timeout)
-          this.off('sign-response', handler)
-          resolve(data.success ? data.signature : null)
-        }
-      }
-      
-      this.on('sign-response', handler)
-      this.send({
-        type: 'sign-message',
-        requestId,
+    try {
+      const response = await this.apiRequest('/sign', {
         message
       })
-    })
+      return response.success ? response.signature : null
+    } catch (error) {
+      console.error('Message signing failed:', error)
+      return null
+    }
   }
   
   /**
@@ -298,13 +227,95 @@ export class MetanetDesktopClient {
   }
 }
 
+import { MetanetFallbackClient } from './metanet-fallback'
+
+// Adaptive client that uses fallback when metanet-desktop is unavailable
+class AdaptiveMetanetClient {
+  private realClient = MetanetDesktopClient.getInstance()
+  private fallbackClient = new MetanetFallbackClient()
+  private usingFallback = false
+
+  async connect(): Promise<boolean> {
+    // Try real client first
+    try {
+      const connected = await this.realClient.connect()
+      if (connected) {
+        this.usingFallback = false
+        return true
+      }
+    } catch (error) {
+      console.log('Metanet Desktop not available, using demo mode')
+    }
+
+    // Fall back to mock client
+    this.usingFallback = true
+    return await this.fallbackClient.connect()
+  }
+
+  disconnect(): void {
+    if (this.usingFallback) {
+      this.fallbackClient.disconnect()
+    } else {
+      this.realClient.disconnect()
+    }
+  }
+
+  getConnectionStatus(): boolean {
+    return this.usingFallback 
+      ? this.fallbackClient.getConnectionStatus()
+      : this.realClient.getConnectionStatus()
+  }
+
+  async getWallet(): Promise<MetanetWallet | null> {
+    return this.usingFallback
+      ? await this.fallbackClient.getWallet()
+      : await this.realClient.getWallet()
+  }
+
+  async authenticate(appId: string, appName: string, permissions: string[]): Promise<boolean> {
+    return this.usingFallback
+      ? await this.fallbackClient.authenticate(appId, appName, permissions)
+      : await this.realClient.authenticate(appId, appName, permissions)
+  }
+
+  async sendTransaction(
+    recipients: Array<{ address: string; amount: number }>,
+    fee?: number
+  ): Promise<MetanetTransaction | null> {
+    return this.usingFallback
+      ? await this.fallbackClient.sendTransaction(recipients, fee)
+      : await this.realClient.sendTransaction(recipients, fee)
+  }
+
+  async signMessage(message: string): Promise<string | null> {
+    return this.usingFallback
+      ? await this.fallbackClient.signMessage(message)
+      : await this.realClient.signMessage(message)
+  }
+
+  on(event: string, callback: (data: any) => void): void {
+    this.realClient.on(event, callback)
+    this.fallbackClient.on(event, callback)
+  }
+
+  off(event: string, callback: (data: any) => void): void {
+    this.realClient.off(event, callback)
+    this.fallbackClient.off(event, callback)
+  }
+
+  isUsingFallback(): boolean {
+    return this.usingFallback
+  }
+}
+
 // Export singleton instance
-export const metanetClient = MetanetDesktopClient.getInstance()
+export const metanetClient = new AdaptiveMetanetClient()
 
 // Helper function to check if metanet-desktop is available
 export async function isMetanetDesktopAvailable(): Promise<boolean> {
   try {
-    return await metanetClient.connect()
+    const connected = await metanetClient.connect()
+    return connected && !metanetClient.isUsingFallback()
   } catch {
     return false
   }
