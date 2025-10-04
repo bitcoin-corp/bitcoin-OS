@@ -65,7 +65,9 @@ export class MetanetFallbackClient {
     }
     
     // Update mock balance
-    this.mockWallet.balance -= (totalAmount + transactionFee)
+    if (this.mockWallet.balance !== undefined) {
+      this.mockWallet.balance -= (totalAmount + transactionFee)
+    }
     
     return transaction
   }
