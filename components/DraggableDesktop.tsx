@@ -95,7 +95,6 @@ export default function DraggableDesktop() {
     { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 0, y: 3 } },
     { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 1, y: 3 } },
     { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 2, y: 3 } },
-    { id: 'ninja-punk-girls', name: 'Ninja Punk Girls', icon: Sparkles, color: 'text-pink-500', url: 'https://www.ninjapunkgirls.website', position: { x: 3, y: 3 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 0, y: 4 } },
   ])
 
@@ -223,6 +222,24 @@ export default function DraggableDesktop() {
         >
           <Shield className="w-10 h-10 text-blue-500 drop-shadow-lg" strokeWidth={1.5} />
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Trust</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.open('https://bsvassociation.org/', '_blank')}
+          title="BSV Association"
+        >
+          <div className="w-10 h-10 flex items-center justify-center text-blue-400 drop-shadow-lg">
+            <span className="text-xl">⛩</span>
+          </div>
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">BSV</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.open('https://www.ninjapunkgirls.website', '_blank')}
+          title="Ninja Punk Girls"
+        >
+          <Sparkles className="w-8 h-8 text-pink-500 drop-shadow-lg" strokeWidth={1.5} />
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">NPG</span>
         </button>
       </div>
       
