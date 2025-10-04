@@ -11,6 +11,7 @@
 import { useState } from 'react'
 import { Wallet, Wifi, WifiOff, Loader2, Shield, AlertCircle } from 'lucide-react'
 import { useMetanet } from '@/hooks/useMetanet'
+import { metanetClient } from '@/lib/metanet-client'
 
 interface MetanetStatusProps {
   className?: string
@@ -141,18 +142,27 @@ export default function MetanetStatus({
             onClick={connect}
             className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
           >
-            Connect to Metanet Desktop
+            Try Demo Mode
           </button>
           <div className="text-xs text-gray-500 space-y-1">
-            <p>To use Bitcoin features, install Metanet Desktop:</p>
+            <p>For full Bitcoin features, install Metanet Desktop:</p>
             <p>• Download from github.com/bsv-blockchain/metanet-desktop</p>
             <p>• Ensure it's running on port 3321</p>
+            <p>• Or try demo mode to see the integration</p>
           </div>
         </div>
       )}
 
       {isConnected && wallet && (
         <div className="space-y-3">
+          {/* Demo mode indicator */}
+          {(metanetClient as any).isUsingFallback?.() && (
+            <div className="p-2 bg-yellow-900/50 border border-yellow-700 rounded-lg">
+              <div className="text-xs text-yellow-400 font-medium">Demo Mode</div>
+              <div className="text-xs text-gray-400">Install Metanet Desktop for real functionality</div>
+            </div>
+          )}
+          
           {showBalance && (
             <div>
               <div className="text-xs text-gray-400 mb-1">Balance</div>
