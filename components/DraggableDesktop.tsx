@@ -20,7 +20,7 @@ import {
 } from '@dnd-kit/sortable'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe } from 'lucide-react'
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box } from 'lucide-react'
 import WindowManager from './WindowManager'
 
 interface DesktopIcon {
@@ -97,6 +97,7 @@ export default function DraggableDesktop() {
     { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 2, y: 3 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 0, y: 4 } },
     { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 1, y: 4 } },
+    { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 2, y: 4 } },
   ])
 
   const [activeId, setActiveId] = useState<string | null>(null)
