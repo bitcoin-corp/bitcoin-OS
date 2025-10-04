@@ -96,8 +96,7 @@ export default function DraggableDesktop() {
     { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 1, y: 3 } },
     { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 2, y: 3 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 0, y: 4 } },
-    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-domains.vercel.app', position: { x: 1, y: 4 } },
-    { id: 'brc-demo', name: 'BRC Standards', icon: BookOpen, color: 'text-blue-400', url: '/brc-demo', position: { x: 2, y: 4 } },
+    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 1, y: 4 } },
   ])
 
   const [activeId, setActiveId] = useState<string | null>(null)
