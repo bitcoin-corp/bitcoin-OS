@@ -37,8 +37,8 @@ We believe in open source innovation while protecting the significant investment
 ## Get a Commercial License
 
 For commercial licensing inquiries:
-- Email: legal@bitcoin-corp.com
-- Website: https://bitcoin-corp.vercel.app
+- Email: bitcoinappssuite@gmail.com
+- Website: https://thebitcoincorporation.website
 - Revenue sharing options available
 
 ---
