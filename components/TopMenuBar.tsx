@@ -100,7 +100,11 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           label: 'Shut Down', 
           action: () => {
             if (confirm('Are you sure you want to shut down Bitcoin OS?')) {
-              window.close() || (window.location.href = 'about:blank')
+              try {
+                window.close()
+              } catch {
+                window.location.href = 'about:blank'
+              }
             }
           }
         },
@@ -146,7 +150,13 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Close Window', 
           shortcut: '⌘W',
-          action: () => window.close() || alert('Cannot close this window')
+          action: () => {
+            try {
+              window.close()
+            } catch {
+              alert('Cannot close this window')
+            }
+          }
         }
       ]
     },
