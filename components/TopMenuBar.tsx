@@ -29,21 +29,24 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin Auth', color: '#ef4444', url: '#' },
+    { name: 'Bitcoin 3D', color: '#ec4899', url: 'https://bitcoin-3d.vercel.app' },
+    { name: 'Bitcoin Apps Store', color: '#f7931a', url: 'https://www.bitcoinapps.store/' },
+    { name: 'Bitcoin Books', color: '#10b981', url: 'https://bitcoin-books-bay.vercel.app' },
     { name: 'Bitcoin Calendar', color: '#d946ef', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Chat', color: '#ff6500', url: '#' },
-    { name: 'Bitcoin Domains', color: '#eab308', url: '#' },
-    { name: 'Bitcoin Draw', color: '#10b981', url: '#' },
+    { name: 'Bitcoin Chat', color: '#ff6500', url: 'https://bitcoin-chat.vercel.app' },
+    { name: 'Bitcoin Code', color: '#0ea5e9', url: 'https://bitcoin-code.vercel.app' },
+    { name: 'Bitcoin Domains', color: '#eab308', url: 'https://bitcoin-dns.vercel.app' },
     { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
     { name: 'Bitcoin Email', color: '#06b6d4', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Exchange', color: '#3b82f6', url: 'https://bitcoin-exchange.vercel.app' },
-    { name: 'Bitcoin Jobs', color: '#6b7280', url: '#' },
+    { name: 'Bitcoin Games', color: '#8b5cf6', url: 'https://bitcoin-gaming.vercel.app' },
+    { name: 'Bitcoin Jobs', color: '#6b7280', url: 'https://bitcoin-jobs.vercel.app' },
+    { name: 'Bitcoin Maps', color: '#f59e0b', url: 'https://bitcoin-maps.vercel.app' },
     { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Paint', color: '#a855f7', url: '#' },
-    { name: 'Bitcoin Pics', color: '#ec4899', url: '#' },
-    { name: 'Bitcoin Registry', color: '#f43f5e', url: '#' },
+    { name: 'Bitcoin Paint', color: '#a855f7', url: 'https://bitcoin-paint.vercel.app' },
+    { name: 'Bitcoin Photos', color: '#ec4899', url: 'https://bitcoin-photos.vercel.app' },
     { name: 'Bitcoin Search', color: '#6b7280', url: 'https://bitcoin-search.vercel.app' },
-    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app' },
+    { name: 'Bitcoin Social', color: '#f43f5e', url: 'https://bitcoin-social.vercel.app' },
     { name: 'Bitcoin Spreadsheets', color: '#3b82f6', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Video', color: '#65a30d', url: 'https://bitcoin-video-nine.vercel.app' },
     { name: 'Bitcoin Wallet', color: '#f59e0b', url: 'https://bitcoin-wallet-sable.vercel.app' },
@@ -77,15 +80,29 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Lock Screen', 
           shortcut: '⌘L',
-          action: () => console.log('Lock Screen')
+          action: () => {
+            if (document.body.requestFullscreen) {
+              document.body.requestFullscreen()
+            }
+            alert('Screen locked - press F11 or Escape to unlock')
+          }
         },
         { 
           label: 'Log Out', 
-          action: () => console.log('Log Out')
+          action: () => {
+            if (confirm('Are you sure you want to log out?')) {
+              localStorage.clear()
+              window.location.href = '/'
+            }
+          }
         },
         { 
           label: 'Shut Down', 
-          action: () => console.log('Shut Down')
+          action: () => {
+            if (confirm('Are you sure you want to shut down Bitcoin OS?')) {
+              window.close() || (window.location.href = 'about:blank')
+            }
+          }
         },
       ]
     },
@@ -95,29 +112,41 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'New Window', 
           shortcut: '⌘N',
-          action: () => console.log('New Window')
+          action: () => window.open('/', '_blank')
         },
         { 
           label: 'New Folder', 
           shortcut: '⇧⌘N',
-          action: () => console.log('New Folder')
+          action: () => alert('File management coming soon!')
         },
         { divider: true },
         { 
           label: 'Open', 
           shortcut: '⌘O',
-          action: () => console.log('Open')
+          action: () => {
+            const input = document.createElement('input')
+            input.type = 'file'
+            input.click()
+          }
         },
         { 
           label: 'Save', 
           shortcut: '⌘S',
-          action: () => console.log('Save')
+          action: () => {
+            const data = 'Bitcoin OS Session Data'
+            const blob = new Blob([data], { type: 'text/plain' })
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = 'bitcoin-os-session.txt'
+            a.click()
+          }
         },
         { divider: true },
         { 
           label: 'Close Window', 
           shortcut: '⌘W',
-          action: () => console.log('Close')
+          action: () => window.close() || alert('Cannot close this window')
         }
       ]
     },
@@ -159,7 +188,12 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Find...', 
           shortcut: '⌘F',
-          action: () => console.log('Find')
+          action: () => {
+            const search = prompt('Find on page:')
+            if (search) {
+              window.find(search)
+            }
+          }
         }
       ]
     },
@@ -172,7 +206,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         },
         { 
           label: 'Show All Windows', 
-          action: () => console.log('Show All Windows')
+          action: () => alert('All windows are already visible')
         },
         { divider: true },
         { 
@@ -227,16 +261,20 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Minimize', 
           shortcut: '⌘M',
-          action: () => console.log('Minimize')
+          action: () => alert('Window minimization not supported in browser')
         },
         { 
           label: 'Zoom', 
-          action: () => console.log('Zoom')
+          action: () => {
+            const currentZoom = parseFloat(document.body.style.zoom) || 1
+            const newZoom = currentZoom >= 1.5 ? 1 : currentZoom + 0.1
+            document.body.style.zoom = newZoom.toString()
+          }
         },
         { divider: true },
         { 
           label: 'Bring All to Front', 
-          action: () => console.log('Bring All to Front')
+          action: () => window.focus()
         },
         { divider: true },
         { 
