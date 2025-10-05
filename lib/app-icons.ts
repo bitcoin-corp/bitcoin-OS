@@ -14,7 +14,18 @@ import {
   Table, 
   Share2,
   DollarSign,
-  Store
+  Store,
+  Code2,
+  TrendingUp,
+  Video,
+  Camera,
+  MapPin,
+  MessageCircle,
+  Users,
+  Gamepad2,
+  BookOpen,
+  Box,
+  Palette
 } from 'lucide-react'
 
 export const appIcons = {
@@ -22,13 +33,23 @@ export const appIcons = {
   'bitcoin-email': { icon: Mail, color: '#ef4444' },
   'bitcoin-music': { icon: Music, color: '#8b5cf6' },
   'bitcoin-writer': { icon: FileText, color: '#ff9500' }, // Warm orange from writer app
+  'bitcoin-code': { icon: Code2, color: '#0ea5e9' },
   'bitcoin-drive': { icon: HardDrive, color: '#22c55e' },
+  'bitcoin-calendar': { icon: Calendar, color: '#d946ef' },
+  'bitcoin-exchange': { icon: TrendingUp, color: '#10b981' },
+  'bitcoin-search': { icon: Search, color: '#6b7280' },
+  'bitcoin-spreadsheet': { icon: Table, color: '#3b82f6' },
+  'bitcoin-video': { icon: Video, color: '#65a30d' },
+  'bitcoin-photos': { icon: Camera, color: '#ec4899' },
+  'bitcoin-maps': { icon: MapPin, color: '#f59e0b' },
+  'bitcoin-chat': { icon: MessageCircle, color: '#ff6500' },
+  'bitcoin-social': { icon: Users, color: '#f43f5e' },
+  'bitcoin-games': { icon: Gamepad2, color: '#8b5cf6' },
+  'bitcoin-books': { icon: BookOpen, color: '#10b981' },
+  'bitcoin-domains': { icon: Globe, color: '#eab308' },
+  'bitcoin-3d': { icon: Box, color: '#ec4899' },
   'bitcoin-jobs': { icon: Briefcase, color: '#40e0d0' }, // Turquoise
-  'bitcoin-exchange': { icon: DollarSign, color: '#10b981' },
-  'bitcoin-calendar': { icon: Calendar, color: '#eab308' },
-  'bitcoin-search': { icon: Search, color: '#ec4899' },
-  'bitcoin-spreadsheet': { icon: Table, color: '#10b981' },
-  'bitcoin-shares': { icon: Share2, color: '#f43f5e' },
+  'bitcoin-paint': { icon: Palette, color: '#a855f7' },
   'bapps-store': { icon: Store, color: '#ff6b35' }, // For BAPPS store
 }
 
