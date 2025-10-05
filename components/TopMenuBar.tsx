@@ -201,7 +201,27 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           action: () => {
             const search = prompt('Find on page:')
             if (search) {
-              window.find(search)
+              // Use modern Find API or fallback
+              if ('find' in window) {
+                (window as any).find(search)
+              } else {
+                // Fallback: just highlight search term
+                const selection = window.getSelection()
+                const range = document.createRange()
+                const walker = document.createTreeWalker(
+                  document.body,
+                  NodeFilter.SHOW_TEXT
+                )
+                let node
+                while (node = walker.nextNode()) {
+                  if (node.textContent?.toLowerCase().includes(search.toLowerCase())) {
+                    range.selectNodeContents(node)
+                    selection?.removeAllRanges()
+                    selection?.addRange(range)
+                    break
+                  }
+                }
+              }
             }
           }
         }
