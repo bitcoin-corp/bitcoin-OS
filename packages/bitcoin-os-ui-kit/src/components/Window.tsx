@@ -12,7 +12,6 @@ export const Window: React.FC<WindowProps> = ({ window, children }) => {
   const windowRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [tempPosition, setTempPosition] = useState({ x: 0, y: 0 });
   
   const {
     closeWindow,
@@ -70,17 +69,12 @@ export const Window: React.FC<WindowProps> = ({ window, children }) => {
         y: Math.max(0, Math.min(newY, maxY)),
       };
       
-      // Use temp position for smooth dragging without constant state updates
-      setTempPosition(clampedPosition);
+      // Update position immediately for smooth dragging
+      moveWindow(window.id, clampedPosition);
     };
 
     const handleMouseUp = () => {
-      if (isDragging && tempPosition.x !== 0 && tempPosition.y !== 0) {
-        // Only update store when drag ends
-        moveWindow(window.id, tempPosition);
-      }
       setIsDragging(false);
-      setTempPosition({ x: 0, y: 0 });
     };
 
     if (isDragging) {
@@ -92,7 +86,7 @@ export const Window: React.FC<WindowProps> = ({ window, children }) => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, dragOffset, window.id, window.isMaximized, window.size, moveWindow, tempPosition]);
+  }, [isDragging, dragOffset, window.id, window.isMaximized, window.size, moveWindow]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -135,8 +129,8 @@ export const Window: React.FC<WindowProps> = ({ window, children }) => {
       style={{
         width: window.isMaximized ? '100vw' : window.size.width,
         height: window.isMaximized ? '100vh' : window.size.height,
-        left: window.isMaximized ? 0 : (isDragging && tempPosition.x !== 0 ? tempPosition.x : window.position.x),
-        top: window.isMaximized ? 0 : (isDragging && tempPosition.y !== 0 ? tempPosition.y : window.position.y),
+        left: window.isMaximized ? 0 : window.position.x,
+        top: window.isMaximized ? 0 : window.position.y,
         zIndex: window.zIndex,
       }}
       onMouseDown={handleMouseDown}

@@ -27,6 +27,8 @@ export const Desktop: React.FC<DesktopProps> = ({
     closeContextMenu,
     openSettings,
     addNotification,
+    openWindow,
+    dock,
   } = useOSStore();
 
   const handleDesktopClick = useCallback((e: React.MouseEvent) => {
@@ -105,6 +107,38 @@ export const Desktop: React.FC<DesktopProps> = ({
     }
   }, [openContextMenu, openSettings, addNotification]);
 
+  const handleDesktopIconDoubleClick = useCallback((icon: any) => {
+    // Find the app in the dock
+    const app = dock.apps.find(app => app.id === icon.appId);
+    if (app && app.url && app.url !== '#') {
+      // Open app in window with iframe
+      openWindow(app.id, app.name, (
+        <div className="flex-1 w-full h-full">
+          <iframe 
+            src={app.url}
+            className="w-full h-full border-0"
+            title={app.name}
+          />
+        </div>
+      ));
+      addNotification({
+        title: 'App Opened',
+        message: `${app.name} is now running in a window`,
+        type: 'success',
+        duration: 2000,
+      });
+    } else {
+      // Fallback for apps without URLs
+      openWindow(icon.appId, icon.name);
+      addNotification({
+        title: 'App Launched',
+        message: `${icon.name} is opening...`,
+        type: 'info',
+        duration: 2000,
+      });
+    }
+  }, [dock.apps, openWindow, addNotification]);
+
   return (
     <div
       ref={desktopRef}
@@ -127,6 +161,7 @@ export const Desktop: React.FC<DesktopProps> = ({
         <DesktopIcon
           key={icon.id}
           icon={icon}
+          onDoubleClick={handleDesktopIconDoubleClick}
         />
       ))}
 

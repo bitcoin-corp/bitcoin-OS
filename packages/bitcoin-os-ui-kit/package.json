@@ -1,6 +1,6 @@
 {
   "name": "@bitcoin-os/ui-kit",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "Complete Bitcoin OS UI Kit with authentication, desktop environment, and OS-style interface components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

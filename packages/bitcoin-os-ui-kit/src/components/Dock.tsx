@@ -10,6 +10,7 @@ interface DockProps {
   position?: 'bottom' | 'left' | 'right';
   size?: 'small' | 'medium' | 'large';
   autoHide?: boolean;
+  openAppsInWindows?: boolean; // Whether to open apps in windows instead of external tabs
 }
 
 export const Dock: React.FC<DockProps> = ({
@@ -17,6 +18,7 @@ export const Dock: React.FC<DockProps> = ({
   position = 'bottom',
   size = 'medium',
   autoHide = false,
+  openAppsInWindows = false,
 }) => {
   const { 
     dock, 
@@ -138,14 +140,33 @@ export const Dock: React.FC<DockProps> = ({
     } else {
       // Determine how to open the app
       if (app.url && app.url !== '#') {
-        // For real bApps with URLs, open externally
-        openWindow(app.id, app.name, undefined, { openExternal: true });
-        addNotification({
-          title: 'App Launched',
-          message: `${app.name} is opening in a new tab...`,
-          type: 'info',
-          duration: 2000,
-        });
+        if (openAppsInWindows) {
+          // Open app in window with embedded iframe
+          openWindow(app.id, app.name, (
+            <div className="flex-1 w-full h-full">
+              <iframe 
+                src={app.url}
+                className="w-full h-full border-0"
+                title={app.name}
+              />
+            </div>
+          ));
+          addNotification({
+            title: 'App Opened',
+            message: `${app.name} is now running in a window`,
+            type: 'success',
+            duration: 2000,
+          });
+        } else {
+          // Open externally in new tab
+          openWindow(app.id, app.name, undefined, { openExternal: true });
+          addNotification({
+            title: 'App Launched',
+            message: `${app.name} is opening in a new tab...`,
+            type: 'info',
+            duration: 2000,
+          });
+        }
       } else {
         // For demo/placeholder apps, open in window
         openWindow(app.id, app.name, (
@@ -206,7 +227,12 @@ export const Dock: React.FC<DockProps> = ({
     return positionClasses[position];
   };
 
-  if (!shouldShowDock) return null;
+  if (!shouldShowDock) {
+    console.log('Dock hidden:', { shouldShowDock, hasMaximizedWindow, autoHide, isVisible: dock.isVisible });
+    return null;
+  }
+  
+  console.log('Dock rendering:', { position, customPosition, apps: dock.apps.length });
 
   return (
     <motion.div

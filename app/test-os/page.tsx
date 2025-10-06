@@ -212,10 +212,15 @@ export default function TestOSPage() {
     // Only run on client side to avoid hydration mismatches
     if (typeof window === 'undefined') return;
     
+    console.log('🚀 useEffect running! About to add', bitcoinApps.length, 'apps to dock');
+    
     // Add all Bitcoin apps to dock
     bitcoinApps.forEach(app => {
+      console.log('📱 Adding app to dock:', app.name);
       addToDock(app);
     });
+    
+    console.log('✅ Finished adding apps to dock');
 
     // Add main apps as desktop icons
     const desktopIcons: DesktopIcon[] = [
@@ -354,6 +359,7 @@ export default function TestOSPage() {
         position="bottom"
         size="medium"
         autoHide={false}
+        openAppsInWindows={true}
       />
 
       {/* Settings Modal */}
