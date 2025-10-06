@@ -74,3 +74,53 @@ body.no-animations * {
   animation-duration: 0s !important;
   transition-duration: 0s !important;
 }
+
+/* Bitcoin OS UI Kit Styles */
+@layer components {
+  .bos-desktop {
+    @apply relative w-full h-full overflow-hidden select-none;
+  }
+  
+  .bos-window {
+    @apply bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col overflow-hidden;
+  }
+  
+  .bos-window-header {
+    @apply flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200;
+  }
+  
+  .bos-dock {
+    @apply fixed z-40 flex items-center bg-white/20 backdrop-blur-xl rounded-2xl border border-white/30 shadow-2xl p-2;
+  }
+  
+  .bos-settings {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm;
+  }
+  
+  .bos-context-menu {
+    @apply fixed z-50 min-w-48 py-2 bg-white/95 backdrop-blur-xl rounded-lg shadow-xl border border-gray-200/50;
+  }
+  
+  .bos-notification {
+    @apply fixed top-4 right-4 z-50 bg-white rounded-lg shadow-lg border border-gray-200 p-4;
+  }
+}
+
+/* Scrollbar styles for settings panels */
+.bos-settings-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bos-settings-panel::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.bos-settings-panel::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.bos-settings-panel::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

@@ -37,13 +37,16 @@
   "license": "Open-BSV-4.0",
   "copyright": "Copyright (c) 2025 The Bitcoin Corporation Ltd (UK Company No. 16735102)",
   "peerDependencies": {
+    "lucide-react": ">=0.263.0",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "lucide-react": ">=0.263.0"
+    "react-dom": ">=18.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@bitcoin-os/ui-kit": "^1.0.0"
   }
 }
