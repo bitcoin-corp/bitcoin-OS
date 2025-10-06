@@ -53,7 +53,7 @@
 
 ### Key Wallets/Platforms
 1. **Relysia** - Developer super-tool and wallet
-2. **DotWallet** - Multi-asset wallet (BSV, BTC, ETH)
+2. **DotWallet** - Multi-asset wallet (BSV, ETH)
 3. **Tique** - Token and Jig management
 4. **RelayX** - Buy/sell/use BSV platform
 5. **HandCash** - User-friendly wallet with SDK

@@ -11,7 +11,7 @@ export default function BiosPage() {
 
   useEffect(() => {
     // Animate boot sequence lines
-    const bootSequence = [0, 1, 2, 3, 4, 5, 6];
+    const bootSequence = [0, 1, 2, 3, 4, 5];
     bootSequence.forEach((index, i) => {
       setTimeout(() => {
         setBootLines(prev => [...prev, index]);
@@ -22,7 +22,6 @@ export default function BiosPage() {
     setTimeout(() => setStatusUpdates(prev => ({ ...prev, 3: 'ok' })), 4000);
     setTimeout(() => setStatusUpdates(prev => ({ ...prev, 4: 'ok' })), 5000);
     setTimeout(() => setStatusUpdates(prev => ({ ...prev, 5: 'ok' })), 6000);
-    setTimeout(() => setStatusUpdates(prev => ({ ...prev, 6: 'ok' })), 7000);
 
     // Progress bar animation
     const progressInterval = setInterval(() => {
@@ -58,7 +57,6 @@ export default function BiosPage() {
     { text: 'Establishing P2P Connections...', status: statusUpdates[3] || 'loading' },
     { text: 'Synchronizing Mempool...', status: statusUpdates[4] || 'waiting' },
     { text: 'Starting Mining Service...', status: statusUpdates[5] || 'waiting' },
-    { text: 'Loading Lightning Network...', status: statusUpdates[6] || 'waiting' },
   ];
 
   const getStatusColor = (status: string) => {

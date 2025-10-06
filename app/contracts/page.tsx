@@ -108,8 +108,7 @@ export default function ContractsPage() {
       deliverables: [
         'Multi-key wallet architecture',
         'Smart contract integration',
-        'Hardware wallet support',
-        'Lightning Network compatibility'
+        'Hardware wallet support'
       ]
     },
     {
