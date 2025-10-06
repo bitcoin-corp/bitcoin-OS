@@ -3,6 +3,7 @@ import { useOSStore } from '../stores/osStore';
 import { cn } from '../utils/cn';
 import { DesktopIcon } from './DesktopIcon';
 import { ContextMenu } from './ContextMenu';
+import { SmartIframe } from './SmartIframe';
 import { ContextMenuItem } from '../types';
 
 interface DesktopProps {
@@ -111,15 +112,20 @@ export const Desktop: React.FC<DesktopProps> = ({
     // Find the app in the dock
     const app = dock.apps.find(app => app.id === icon.appId);
     if (app && app.url && app.url !== '#') {
-      // Open app in window with iframe
+      // Open app in window with smart iframe that handles CORS
       openWindow(app.id, app.name, (
-        <div className="flex-1 w-full h-full">
-          <iframe 
-            src={app.url}
-            className="w-full h-full border-0"
-            title={app.name}
-          />
-        </div>
+        <SmartIframe
+          src={app.url}
+          title={app.name}
+          onError={() => {
+            addNotification({
+              title: 'Cannot Embed App',
+              message: `${app.name} cannot be embedded due to security restrictions. Click the button in the window to open it in a new tab.`,
+              type: 'info',
+              duration: 5000,
+            });
+          }}
+        />
       ));
       addNotification({
         title: 'App Opened',

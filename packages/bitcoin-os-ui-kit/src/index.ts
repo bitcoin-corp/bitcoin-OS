@@ -23,6 +23,7 @@ export { DockItem } from './components/DockItem';
 export { Window } from './components/Window';
 export { WindowManager } from './components/WindowManager';
 export { ContextMenu } from './components/ContextMenu';
+export { SmartIframe } from './components/SmartIframe';
 export { Settings } from './components/Settings';
 export { SettingsSidebar } from './components/SettingsSidebar';
 export { SettingsPanel } from './components/SettingsPanel';

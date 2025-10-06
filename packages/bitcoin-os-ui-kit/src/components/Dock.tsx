@@ -4,6 +4,7 @@ import { cn } from '../utils/cn';
 import { BitcoinApp } from '../types';
 import { useOSStore } from '../stores/osStore';
 import { DockItem } from './DockItem';
+import { SmartIframe } from './SmartIframe';
 
 interface DockProps {
   className?: string;
@@ -141,15 +142,20 @@ export const Dock: React.FC<DockProps> = ({
       // Determine how to open the app
       if (app.url && app.url !== '#') {
         if (openAppsInWindows) {
-          // Open app in window with embedded iframe
+          // Open app in window with smart iframe that handles CORS
           openWindow(app.id, app.name, (
-            <div className="flex-1 w-full h-full">
-              <iframe 
-                src={app.url}
-                className="w-full h-full border-0"
-                title={app.name}
-              />
-            </div>
+            <SmartIframe
+              src={app.url}
+              title={app.name}
+              onError={() => {
+                addNotification({
+                  title: 'Cannot Embed App',
+                  message: `${app.name} cannot be embedded due to security restrictions. Click the button in the window to open it in a new tab.`,
+                  type: 'info',
+                  duration: 5000,
+                });
+              }}
+            />
           ));
           addNotification({
             title: 'App Opened',

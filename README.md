@@ -1,21 +1,20 @@
-# Bitcoin OS 🖥️
+# Bitcoin OS (bOS) 🖥️
 
-> Open source Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration
+> Complete browser-based operating system for the Bitcoin ecosystem with native app integration and desktop experience
 
 ## Overview
 
-Bitcoin OS is a revolutionary web-based operating system that brings the power of Bitcoin and blockchain technology to your desktop. Built by The Bitcoin Corporation LTD, it provides a familiar desktop environment while integrating cryptocurrency and decentralized applications seamlessly.
+Bitcoin OS (bOS) is a revolutionary web-based operating system that provides a complete desktop environment for Bitcoin applications. Built by The Bitcoin Corporation LTD, it features window management, a draggable dock, desktop icons, and seamless integration with 14+ Bitcoin applications through intelligent iframe embedding and CORS handling.
 
-## Features
+## 🚀 Features
 
-- 🎨 **Desktop Environment** - Familiar OS-like interface with windows, taskbar, and desktop icons
-- 💰 **Built-in Bitcoin Wallet** - Secure wallet integrated at the OS level
-- 📧 **Bitcoin Email** - Encrypted email with blockchain storage
-- 🎵 **Bitcoin Music** - Stream and trade music NFTs
-- 📝 **Bitcoin Writer** - On-chain publishing platform
-- 💾 **Bitcoin Drive** - Decentralized cloud storage
-- 🌐 **DApp Browser** - Access decentralized applications
-- ⚡ **Terminal** - Command-line interface for advanced users
+- **Complete Desktop Environment**: Window management, draggable dock, desktop icons, and settings
+- **Bitcoin App Ecosystem**: 14+ integrated Bitcoin applications including Writer, Email, Music, Wallet, and more
+- **Smart App Embedding**: Intelligent iframe handling with CORS fallback for seamless app integration
+- **Responsive Design**: Works across desktop and mobile devices
+- **Subscription Management**: Built-in support for Bitcoin-based app subscriptions
+- **Theme System**: Customizable appearance and UI themes
+- **Drag & Drop**: Full drag-and-drop support for windows and dock
 
 ## Getting Started
 
@@ -28,10 +27,10 @@ Bitcoin OS is a revolutionary web-based operating system that brings the power o
 
 ```bash
 # Clone the repository
-git clone https://github.com/bitcoin-corp/bitcoin-OS.git
+git clone https://github.com/bitcoin-corp/bOS.git
 
 # Navigate to the project
-cd bitcoin-OS
+cd bOS
 
 # Install dependencies
 npm install
@@ -40,7 +39,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:2050](http://localhost:2050) in your browser.
+Visit [http://localhost:3000/test-os](http://localhost:3000/test-os) for the complete Bitcoin OS experience.
 
 ## Development
 
@@ -55,15 +54,68 @@ npm run build
 npm start
 ```
 
-## Architecture
+## 🏗️ Architecture
 
-Bitcoin OS is built with:
-- **Next.js 15** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Bitcoin SDK** - Blockchain integration
-- **Lucide Icons** - UI icons
-- **Metanet Desktop Integration** - BSV wallet connectivity via JSON-API
+### Monorepo Structure
+- `app/` - Next.js application and pages
+- `packages/bitcoin-os-ui-kit/` - Complete UI component library
+- `packages/bitcoin-os-bridge/` - Integration utilities
+- `packages/bitcoin-os-bapps/` - Bitcoin app definitions
+
+### Technology Stack
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type safety and development experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Animation and gesture library
+- **Zustand** - State management
+- **React 19** - Latest React features
+
+### Key Components
+- **Desktop**: Main desktop environment with wallpaper and icon management
+- **Dock**: Draggable dock with app launcher functionality
+- **WindowManager**: Complete window system with drag, resize, minimize, maximize
+- **Settings**: Comprehensive settings panel for customization
+- **SmartIframe**: Intelligent app embedding with CORS handling
+
+## 🧪 Development Environment
+
+### Test Environment
+Access the test environment at `/test-os` to preview all functionality:
+- Real Bitcoin apps in dock and desktop
+- Window-based app launching with iframe embedding
+- Draggable and detachable dock
+- Desktop icon management
+- Settings customization
+
+### UI Kit Development
+```bash
+cd packages/bitcoin-os-ui-kit
+npm run build
+npm run dev  # Watch mode
+```
+
+## 📱 Bitcoin Apps Integration
+
+bOS integrates with the complete Bitcoin app ecosystem:
+
+- **Bitcoin Apps Store** - App discovery and installation
+- **Bitcoin Writer** - Document creation and publishing
+- **Bitcoin Email** - Bitcoin-integrated email system
+- **Bitcoin Music** - Music streaming with Bitcoin payments
+- **Bitcoin Wallet** - Cryptocurrency wallet management
+- **Bitcoin Code** - Development environment
+- **Bitcoin Drive** - Decentralized file storage
+- **Bitcoin Calendar** - Event and scheduling management
+- **Bitcoin Photos** - Photo management and sharing
+- **Bitcoin Jobs** - Job marketplace
+- **And more...**
+
+## 🔒 CORS Handling
+
+bOS includes intelligent CORS handling:
+- Apps that allow embedding load seamlessly in iframe windows
+- Apps with CORS restrictions show elegant fallback UI with "Open in New Tab" option
+- Automatic detection and graceful handling of embedding restrictions
 
 ### Metanet Desktop Integration
 
@@ -99,7 +151,7 @@ BRC Demo Features:
 
 ## License
 
-Open BSV License v4
+Open BSV License v5
 
 ## Third-Party Integrations
 
@@ -124,7 +176,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/bitcoin-apps-suite/bitcoin-OS/issues)
+- **Issues**: [GitHub Issues](https://github.com/bitcoin-corp/bOS/issues)
 - **Email**: ceo@thebitcoincorporation.com
 - **Website**: [thebitcoincorporation.com](https://thebitcoincorporation.com)
 
