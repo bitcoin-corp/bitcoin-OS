@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Book, Code, Terminal, Zap, Shield, Layers, Search, ExternalLink, ChevronRight, FileText, GitBranch, Package, Cpu, Database, Cloud } from 'lucide-react'
+import { Book, Code, Terminal, Shield, Layers, Search, ExternalLink, ChevronRight, FileText, GitBranch, Package, Cpu, Database, Cloud } from 'lucide-react'
 import TopMenuBar from '@/components/TopMenuBar'
 import OSTaskbar from '@/components/OSTaskbar'
 import DevSidebar from '@/components/DevSidebar'
@@ -103,26 +103,6 @@ const bitcoinApps = [
       ]
     },
     {
-      id: 'lightning-network',
-      title: 'Lightning Network',
-      icon: Zap,
-      content: 'Bitcoin OS integrates Lightning Network capabilities for instant, low-cost Bitcoin transactions across all applications.',
-      code: `// Lightning Integration Example
-import { LightningProvider } from '@/lib/lightning'
-
-function App() {
-  return (
-    <LightningProvider>
-      <PaymentButton 
-        amount={1000}        // satoshis
-        memo="Coffee"
-        onSuccess={handlePayment}
-      />
-    </LightningProvider>
-  )
-}`,
-    },
-    {
       id: 'api-reference',
       title: 'API Reference',
       icon: Code,
@@ -205,8 +185,7 @@ docker run -p 3000:3000 bitcoin-os
 
 # Environment Variables
 NEXT_PUBLIC_BITCOIN_NETWORK=mainnet
-NEXT_PUBLIC_ELECTRUM_SERVER=electrum.blockstream.info
-NEXT_PUBLIC_LIGHTNING_NODE=node.lightning.com`,
+NEXT_PUBLIC_ELECTRUM_SERVER=electrum.blockstream.info`,
     }
   ]
 

@@ -212,7 +212,6 @@
             <div class="boot-line">Establishing P2P Connections...<span class="status loading">[LOADING]</span></div>
             <div class="boot-line">Synchronizing Mempool...<span class="status loading">[WAITING]</span></div>
             <div class="boot-line">Starting Mining Service...<span class="status loading">[WAITING]</span></div>
-            <div class="boot-line">Loading Lightning Network...<span class="status loading">[WAITING]</span></div>
         </div>
 
         <div class="progress-bar">
@@ -285,10 +284,6 @@
             bootLines[5].querySelector('.status').className = 'status ok';
         }, 6000);
 
-        setTimeout(() => {
-            bootLines[6].querySelector('.status').textContent = '[OK]';
-            bootLines[6].querySelector('.status').className = 'status ok';
-        }, 7000);
 
         // Add fadeOut animation
         const style = document.createElement('style');
