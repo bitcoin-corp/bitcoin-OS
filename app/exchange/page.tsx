@@ -55,7 +55,7 @@ function ExchangeContent() {
   const [orders, setOrders] = useState<ComputeOrder[]>([])
   
   useEffect(() => {
-    const tab = searchParams.get('tab')
+    const tab = searchParams?.get('tab')
     if (tab === 'trade' || tab === 'orders' || tab === 'analytics') {
       setActiveTab(tab)
     }
