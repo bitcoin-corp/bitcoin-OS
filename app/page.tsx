@@ -10,12 +10,14 @@ import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
+import BiosScreen from '@/components/BiosScreen'
 import PlaceholderWindow from '@/components/PlaceholderWindow'
 import OptimizedAppLoader from '@/components/OptimizedAppLoader'
 import MobileAppLoader from '@/components/MobileAppLoader'
 import MobileAppDrawer from '@/components/MobileAppDrawer'
 import MobileTaskbar from '@/components/MobileTaskbar'
 import ProofOfConceptBar from '@/components/ProofOfConceptBar'
+import HandCashLoginModal from '@/components/HandCashLoginModal'
 import { bitcoinApps, getAppByName } from '@/lib/apps.config'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
@@ -27,6 +29,7 @@ interface OpenApp {
 }
 
 export default function BitcoinOS() {
+  const [showBios, setShowBios] = useState(true)
   const [isBooting, setIsBooting] = useState(true)
   const [openWindows, setOpenWindows] = useState<string[]>([])
   const [openApps, setOpenApps] = useState<OpenApp[]>([])
@@ -34,22 +37,77 @@ export default function BitcoinOS() {
   const [activeApp, setActiveApp] = useState<string | null>(null)
   const [showDevSidebar, setShowDevSidebar] = useState(true)
   const [placeholderApp, setPlaceholderApp] = useState<string | null>(null)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [userHandle, setUserHandle] = useState<string | null>(null)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
+  const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
 
-  useEffect(() => {
-    // Simulate boot process - match the progress bar timing
-    setTimeout(() => {
-      setIsBooting(false)
-      // Play startup sound when boot screen finishes and video starts
+  const handleUserInteraction = () => {
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true)
+      // Play startup sound immediately on user interaction
       const audio = new Audio('/startup4.wav')
       audio.play().catch(err => {
-        // Handle autoplay restrictions - some browsers require user interaction first
-        console.log('Audio autoplay prevented:', err)
+        console.log('Audio playback failed:', err)
       })
-    }, 3000)
-  }, [])
+    }
+  }
+
+  const handleBiosComplete = () => {
+    setShowBios(false)
+    // Try to play sound when BIOS completes
+    const audio = new Audio('/startup4.wav')
+    audio.volume = 0.7
+    audio.play().catch(err => {
+      console.log('Audio autoplay blocked:', err)
+      // Fallback: try playing with a very brief delay
+      setTimeout(() => {
+        audio.play().catch(() => {
+          console.log('Audio still blocked - user interaction required')
+        })
+      }, 100)
+    })
+  }
+
+  useEffect(() => {
+    // Boot screen completes after 3 seconds
+    if (!showBios) {
+      setTimeout(() => {
+        setIsBooting(false)
+      }, 3000)
+    }
+  }, [showBios])
+
+  // Handle user interaction to play pending audio
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (!hasUserInteracted) {
+        setHasUserInteracted(true)
+        // Play pending audio if available
+        if (pendingAudio) {
+          pendingAudio.play().catch(err => {
+            console.log('Audio playback failed:', err)
+          })
+          setPendingAudio(null)
+        }
+      }
+    }
+
+    // Listen for any user interaction
+    const events = ['click', 'keydown', 'touchstart']
+    events.forEach(event => {
+      document.addEventListener(event, handleUserInteraction, { once: true })
+    })
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, handleUserInteraction)
+      })
+    }
+  }, [hasUserInteracted, pendingAudio])
 
   useEffect(() => {
     // Keyboard shortcut for dev sidebar
@@ -138,6 +196,10 @@ export default function BitcoinOS() {
     if (activeWindow === appName) {
       setActiveWindow(null)
     }
+  }
+
+  if (showBios) {
+    return <BiosScreen onComplete={handleBiosComplete} onUserInteraction={handleUserInteraction} />
   }
 
   if (isBooting) {
@@ -236,7 +298,7 @@ export default function BitcoinOS() {
       <TopMenuBar onOpenApp={openApp} />
       
       <div className="flex-1 relative overflow-hidden">
-        <DraggableDesktop />
+        <DraggableDesktop onVideoEnded={() => setShowLoginModal(true)} />
         <Dock />
         {showDevSidebar && !isMobile && <DevSidebar />}
         
@@ -263,6 +325,25 @@ export default function BitcoinOS() {
           />
         )}
       </div>
+      
+      {/* HandCash Login Modal */}
+      <HandCashLoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onLogin={(handle, method) => {
+          setUserHandle(handle)
+          setShowLoginModal(false)
+          console.log(`Connected with ${method}: ${handle}`)
+        }}
+      />
+      
+      {/* Clickable area to dismiss modal */}
+      {showLoginModal && (
+        <div 
+          className="fixed inset-0 z-40"
+          onClick={() => setShowLoginModal(false)}
+        />
+      )}
     </div>
   )
 }
