@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { X, Wallet, Key, Mail, Globe } from 'lucide-react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { X, Wallet, Key, Mail, Globe, Move } from 'lucide-react'
 
 interface HandCashLoginModalProps {
   isOpen: boolean
@@ -14,6 +14,38 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
   const [email, setEmail] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
   const [activeTab, setActiveTab] = useState<'handcash' | 'centbee' | 'yours' | 'bitcoin-wallet' | 'metanet' | 'keypair' | 'email' | 'rock-wallet'>('handcash')
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const dragRef = useRef<HTMLDivElement>(null)
+  const startPos = useRef({ x: 0, y: 0 })
+  const startMousePos = useRef({ x: 0, y: 0 })
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (isDragging) {
+      const deltaX = e.clientX - startMousePos.current.x
+      const deltaY = e.clientY - startMousePos.current.y
+      setPosition({
+        x: startPos.current.x + deltaX,
+        y: startPos.current.y + deltaY
+      })
+    }
+  }, [isDragging])
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false)
+  }, [])
+
+  // Add global mouse event listeners
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
+      }
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp])
 
   if (!isOpen) return null
 
@@ -39,11 +71,27 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
     window.open('https://handcash.io', '_blank')
   }
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (dragRef.current) {
+      setIsDragging(true)
+      startPos.current = { x: position.x, y: position.y }
+      startMousePos.current = { x: e.clientX, y: e.clientY }
+      e.preventDefault()
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none" style={{ paddingLeft: '60%', paddingRight: '15%', paddingTop: '18%', paddingBottom: '12%' }}>
-      {/* Modal - positioned without backdrop */}
+    <div className="fixed inset-0 z-50 pointer-events-none">
+      {/* Modal - positioned and draggable */}
       <div 
-        className="relative bg-gray-900/95 border border-gray-600 rounded-2xl p-6 w-full max-w-lg shadow-2xl backdrop-blur-md pointer-events-auto"
+        ref={dragRef}
+        className="absolute bg-gray-900/95 border border-gray-600 rounded-2xl p-6 w-full max-w-lg shadow-2xl backdrop-blur-md pointer-events-auto"
+        style={{
+          left: `calc(60% + ${position.x}px)`,
+          top: `calc(15% + ${position.y}px)`,
+          width: '320px',
+          cursor: isDragging ? 'grabbing' : 'default'
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -53,6 +101,20 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
         >
           <X className="w-5 h-5" />
         </button>
+
+        {/* Drag Handle */}
+        <div 
+          className="flex items-center justify-center py-2 cursor-grab active:cursor-grabbing"
+          onMouseDown={handleMouseDown}
+        >
+          <div className="flex space-x-1">
+            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+            <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+          </div>
+        </div>
 
         {/* Header */}
         <div className="text-center mb-6">
