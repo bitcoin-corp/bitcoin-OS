@@ -47,13 +47,13 @@ const Dock: React.FC = () => {
   // Core/Most Popular Apps (12 apps - fits nicely in dock)
   const coreApps: DockApp[] = [
     { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, primaryColor: '#f7931a', secondaryColor: '#ff6b35', url: 'https://www.bitcoinapps.store/', isImage: true },
-    { name: 'Bitcoin Wallet', icon: Wallet, primaryColor: '#fbbf24', secondaryColor: '#f59e0b', url: 'https://bitcoin-wallet-sable.vercel.app' },
-    { name: 'Bitcoin Email', icon: Mail, primaryColor: '#166534', secondaryColor: '#65ff00', url: 'https://bitcoin-email.vercel.app' },
-    { name: 'Bitcoin Music', icon: Music, primaryColor: '#6b21a8', secondaryColor: '#ff1493', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Writer', icon: FileText, primaryColor: '#1e40af', secondaryColor: '#06d6ff', url: 'https://bitcoin-writer.vercel.app' },
-    { name: 'Bitcoin Drive', icon: HardDrive, primaryColor: '#2563eb', secondaryColor: '#4682b4', url: 'https://bitcoin-drive.vercel.app' },
+    { name: 'Bitcoin Wallet', icon: Wallet, primaryColor: '#f7931a', secondaryColor: '#fbbf24', url: 'https://bitcoin-wallet-sable.vercel.app' },
+    { name: 'Bitcoin Email', icon: Mail, primaryColor: '#ff4444', secondaryColor: '#cc0000', url: 'https://bitcoin-email.vercel.app' },
+    { name: 'Bitcoin Music', icon: Music, primaryColor: '#a855f7', secondaryColor: '#ec4899', url: 'https://bitcoin-music.vercel.app' },
+    { name: 'Bitcoin Writer', icon: FileText, primaryColor: '#f7931a', secondaryColor: '#1a1a1a', url: 'https://bitcoin-writer.vercel.app' },
+    { name: 'Bitcoin Drive', icon: HardDrive, primaryColor: '#22c55e', secondaryColor: '#65a30d', url: 'https://bitcoin-drive.vercel.app' },
     { name: 'Bitcoin Calendar', icon: Calendar, primaryColor: '#1e3a8a', secondaryColor: '#87ceeb', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Exchange', icon: TrendingUp, primaryColor: '#d97706', secondaryColor: '#ffbf00', url: 'https://bitcoin-exchange-iota.vercel.app' },
+    { name: 'Bitcoin Exchange', icon: TrendingUp, primaryColor: '#f7931a', secondaryColor: '#fbbf24', url: 'https://bitcoin-exchange-iota.vercel.app' },
     { name: 'Bitcoin Search', icon: Search, primaryColor: '#0d9488', secondaryColor: '#00ffff', url: 'https://bitcoin-search.vercel.app' },
     { name: 'Bitcoin Video', icon: Video, primaryColor: '#b91c1c', secondaryColor: '#ff6600', url: 'https://bitcoin-video-nine.vercel.app' },
     { name: 'Bitcoin Chat', icon: MessageCircle, primaryColor: '#7c3aed', secondaryColor: '#dda0dd', url: 'https://bitcoin-chat.vercel.app' },
@@ -63,7 +63,7 @@ const Dock: React.FC = () => {
   // All Apps (for future use - could be shown in Apps Store or right-click menu)
   const allApps: DockApp[] = [
     ...coreApps,
-    { name: 'Bitcoin Code', icon: Code2, primaryColor: '#374151', secondaryColor: '#39ff14', url: 'https://bitcoin-code.vercel.app' },
+    { name: 'Bitcoin Code', icon: Code2, primaryColor: '#1e293b', secondaryColor: '#39ff14', url: 'https://bitcoin-code.vercel.app' },
     { name: 'Bitcoin Spreadsheet', icon: Table, primaryColor: '#16a34a', secondaryColor: '#50c878', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Photos', icon: Camera, primaryColor: '#4338ca', secondaryColor: '#87ceeb', url: 'https://bitcoin-photos.vercel.app' },
     { name: 'Bitcoin Maps', icon: MapPin, primaryColor: '#059669', secondaryColor: '#0077be', url: 'https://bitcoin-maps.vercel.app' },
