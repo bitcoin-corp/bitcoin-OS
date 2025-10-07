@@ -16,7 +16,6 @@ import OptimizedAppLoader from '@/components/OptimizedAppLoader'
 import MobileAppLoader from '@/components/MobileAppLoader'
 import MobileAppDrawer from '@/components/MobileAppDrawer'
 import MobileTaskbar from '@/components/MobileTaskbar'
-import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
 import { bitcoinApps, getAppByName } from '@/lib/apps.config'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -41,9 +40,30 @@ export default function BitcoinOS() {
   const [userHandle, setUserHandle] = useState<string | null>(null)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
+  const [isVideoReady, setIsVideoReady] = useState(false)
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
+
+  // Preload video during boot sequence
+  useEffect(() => {
+    const video = document.createElement('video')
+    video.src = '/b-OS-pro2.mp4'
+    video.muted = true
+    video.playsInline = true
+    video.preload = 'auto'
+    
+    const handleCanPlay = () => {
+      setIsVideoReady(true)
+    }
+    
+    video.addEventListener('canplaythrough', handleCanPlay)
+    video.load()
+    
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlay)
+    }
+  }, [])
 
   const handleUserInteraction = () => {
     if (!hasUserInteracted) {
@@ -58,26 +78,20 @@ export default function BitcoinOS() {
 
   const handleBiosComplete = () => {
     setShowBios(false)
-    // Try to play sound when BIOS completes
-    const audio = new Audio('/startup4.wav')
-    audio.volume = 0.7
-    audio.play().catch(err => {
-      console.log('Audio autoplay blocked:', err)
-      // Fallback: try playing with a very brief delay
-      setTimeout(() => {
-        audio.play().catch(() => {
-          console.log('Audio still blocked - user interaction required')
-        })
-      }, 100)
-    })
   }
 
   useEffect(() => {
-    // Boot screen completes after 3 seconds
+    // Boot screen completes after 3 seconds, don't wait for video
     if (!showBios) {
-      setTimeout(() => {
+      const bootTimer = setTimeout(() => {
         setIsBooting(false)
+        // Show login modal immediately when desktop loads
+        setTimeout(() => {
+          setShowLoginModal(true)
+        }, 500)
       }, 3000)
+      
+      return () => clearTimeout(bootTimer)
     }
   }, [showBios])
 
@@ -212,7 +226,6 @@ export default function BitcoinOS() {
     
     return (
       <div className="h-screen flex flex-col bg-gradient-to-b from-gray-900 to-black bitcoin-mesh">
-        <ProofOfConceptBar />
         {/* Mobile app in fullscreen */}
         {currentApp ? (
           <MobileAppLoader
@@ -294,11 +307,10 @@ export default function BitcoinOS() {
   // Desktop Layout
   return (
     <div className="h-screen flex flex-col relative bg-black">
-      <ProofOfConceptBar />
       <TopMenuBar onOpenApp={openApp} />
       
       <div className="flex-1 relative overflow-hidden">
-        <DraggableDesktop onVideoEnded={() => setShowLoginModal(true)} />
+        <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
         <Dock />
         {showDevSidebar && !isMobile && <DevSidebar />}
         

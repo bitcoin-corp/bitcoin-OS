@@ -24,7 +24,8 @@ import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Shar
 import WindowManager from './WindowManager'
 
 interface DraggableDesktopProps {
-  onVideoEnded?: () => void
+  isVideoReady?: boolean
+  showDevSidebar?: boolean
 }
 
 interface DesktopIcon {
@@ -78,7 +79,7 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
   )
 }
 
-export default function DraggableDesktop({ onVideoEnded }: DraggableDesktopProps = {}) {
+export default function DraggableDesktop({ isVideoReady, showDevSidebar = false }: DraggableDesktopProps = {}) {
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   
@@ -178,21 +179,33 @@ export default function DraggableDesktop({ onVideoEnded }: DraggableDesktopProps
   const activeApp = activeId ? desktopApps.find(app => app.id === activeId) : null
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+    <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 background-cycle">
       {/* Video Background */}
       <video
         autoPlay
         muted
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
         style={{ filter: 'brightness(0.3)' }}
+        onLoadedData={() => {
+          // Video is ready to play
+          console.log('Video loaded and ready')
+        }}
+        onTimeUpdate={(e) => {
+          const video = e.target as HTMLVideoElement;
+          const duration = video.duration;
+          const currentTime = video.currentTime;
+          
+          // Start fading when 90% through the video
+          if (duration && currentTime / duration > 0.9) {
+            const fadeProgress = (currentTime / duration - 0.9) / 0.1; // 0 to 1 over last 10%
+            video.style.opacity = (1 - fadeProgress).toString();
+          }
+        }}
         onEnded={(e) => {
           const video = e.target as HTMLVideoElement;
           video.style.opacity = '0';
-          // Trigger login modal after video fades out (1 second transition)
-          setTimeout(() => {
-            onVideoEnded?.();
-          }, 1000);
         }}
       >
         <source src="/b-OS-pro2.mp4" type="video/mp4" />
@@ -202,7 +215,7 @@ export default function DraggableDesktop({ onVideoEnded }: DraggableDesktopProps
       <div className="absolute inset-0 bg-black/30 z-10"></div>
       
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-8 pl-80 z-20">
+      <div className={`absolute inset-0 py-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}

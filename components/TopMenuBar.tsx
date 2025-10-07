@@ -368,22 +368,25 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('click', handleClickOutside)
     document.addEventListener('keydown', handleKeyDown)
     
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
 
   return (
     <div ref={menuRef} className="bitcoin-os-taskbar">
+      {/* Content overlay */}
+      <div className="taskbar-content">
       {/* Bitcoin Logo with BApps Menu */}
       <div style={{ position: 'relative' }}>
         <button 
           className={`taskbar-logo ${showBAppsMenu ? 'menu-open' : ''}`}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             setShowBAppsMenu(!showBAppsMenu)
             setActiveMenu(null)
           }}
@@ -407,7 +410,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         {showBAppsMenu && (
           <div style={{
             position: 'absolute',
-            top: '28px',
+            top: '40px',
             left: 0,
             minWidth: '220px',
             background: '#1a1a1a',
@@ -416,7 +419,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
             borderRadius: '8px',
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8)',
             padding: '8px 0',
-            zIndex: 1000
+            zIndex: 10001
           }}>
             <div style={{
               padding: '8px 16px',
@@ -481,7 +484,10 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           <div key={menu.label} className="menu-container">
             <button
               className={`menu-button ${activeMenu === menu.label ? 'active' : ''}`}
-              onClick={() => setActiveMenu(activeMenu === menu.label ? null : menu.label)}
+              onClick={(e) => {
+                e.stopPropagation()
+                setActiveMenu(activeMenu === menu.label ? null : menu.label)
+              }}
               onMouseEnter={() => activeMenu && setActiveMenu(menu.label)}
             >
               {menu.label}
@@ -553,6 +559,18 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         >
           <BookOpen className="taskbar-link-icon" />
         </a>
+        <a 
+          href="https://x.com/Bitcoin_OS_X" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="taskbar-link"
+          title="Follow @Bitcoin_OS_X"
+        >
+          <svg className="taskbar-link-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
       </div>
     </div>
   )
