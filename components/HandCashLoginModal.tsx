@@ -89,7 +89,8 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
         style={{
           left: `calc(60% + ${position.x}px)`,
           top: `calc(15% + ${position.y}px)`,
-          width: '320px',
+          width: '450px',
+          minHeight: '580px',
           cursor: isDragging ? 'grabbing' : 'default'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -202,10 +203,6 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
         <div className="space-y-4">
           {activeTab === 'handcash' && (
             <>
-              <div className="text-center py-4">
-                <Wallet className="w-12 h-12 text-green-400 mx-auto mb-3" />
-                <p className="text-gray-400 mb-4">Connect with HandCash Wallet</p>
-              </div>
               <button
                 onClick={() => handleConnect('handcash', 'handcash-wallet')}
                 disabled={isConnecting}

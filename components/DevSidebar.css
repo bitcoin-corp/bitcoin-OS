@@ -28,7 +28,6 @@
 
 .dev-sidebar.collapsed {
   width: 60px;
-  overflow: hidden;
 }
 
 .dev-sidebar-header {
@@ -79,7 +78,6 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: all 0.2s ease;
 }
 
 .dev-sidebar-toggle:hover {
@@ -102,7 +100,6 @@
   border-radius: 8px;
   color: #b0b0b0;
   text-decoration: none;
-  transition: all 0.2s ease;
   position: relative;
   font-size: 14px;
 }
@@ -222,7 +219,6 @@
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
-  transition: all 0.2s ease;
 }
 
 .dev-sidebar-cta-button:hover {
