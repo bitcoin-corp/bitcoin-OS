@@ -86,20 +86,6 @@ export default function DevSidebar() {
     { path: '/exchange?tab=sell', icon: Server, label: 'Sell Resources' },
     { path: '/exchange?tab=my-resources', icon: Activity, label: 'My Resources' },
     
-    // System Operations
-    { divider: true },
-    { section: 'SYSTEM' },
-    { path: '/tasks', icon: ListTodo, label: 'Task Manager' },
-    { path: '/contributors', icon: Users, label: 'Contributors' },
-    { path: '/docs', icon: BookOpen, label: 'Documentation' },
-    
-    // Development
-    { divider: true },
-    { section: 'DEVELOPMENT' },
-    { path: '/api', icon: Package, label: 'API Reference' },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS', icon: Github, label: 'GitHub Repository', external: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: FileCode, label: 'Issues', external: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/pulls', icon: GitPullRequest, label: 'Pull Requests', external: true }
   ]
 
 
