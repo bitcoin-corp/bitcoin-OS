@@ -215,7 +215,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       <div className="absolute inset-0 bg-black/30 z-10"></div>
       
       {/* Desktop Icons */}
-      <div className={`absolute inset-0 py-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}>
+      <div className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}

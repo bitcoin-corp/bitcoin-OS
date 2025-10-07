@@ -34,14 +34,7 @@ import './DevSidebar.css'
 
 export default function DevSidebar() {
   const pathname = usePathname()
-  const [isCollapsed, setIsCollapsed] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('devSidebarCollapsed')
-      // Default to collapsed (closed) for first-time visitors
-      return saved !== null ? saved === 'true' : true
-    }
-    return true
-  })
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [issueCount, setIssueCount] = useState<number>(0)
 
   useEffect(() => {
@@ -82,8 +75,8 @@ export default function DevSidebar() {
     // HPC & Computational Resources
     { divider: true },
     { section: 'COMPUTE MARKETPLACE' },
-    { path: '/exchange?tab=buy', icon: Cpu, label: 'Buy Resources' },
-    { path: '/exchange?tab=sell', icon: Server, label: 'Sell Resources' },
+    { path: '/exchange?tab=buy', icon: Cpu, label: 'Ask for Resources' },
+    { path: '/exchange?tab=sell', icon: Server, label: 'Offer Resources' },
     { path: '/exchange?tab=my-resources', icon: Activity, label: 'My Resources' },
     
   ]
