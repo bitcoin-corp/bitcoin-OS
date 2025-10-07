@@ -28,6 +28,7 @@
 
 .dev-sidebar.collapsed {
   width: 60px;
+  overflow: hidden;
 }
 
 .dev-sidebar-header {
@@ -82,7 +83,6 @@
 
 .dev-sidebar-toggle:hover {
   background: rgba(217, 70, 239, 0.1);
-  transform: scale(1.1);
 }
 
 .dev-sidebar-nav {
@@ -107,7 +107,6 @@
 .dev-sidebar-item:hover {
   background: rgba(217, 70, 239, 0.1);
   color: #d946ef;
-  transform: translateX(2px);
 }
 
 .dev-sidebar-item.active {
@@ -222,7 +221,6 @@
 }
 
 .dev-sidebar-cta-button:hover {
-  transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(217, 70, 239, 0.3);
 }
 

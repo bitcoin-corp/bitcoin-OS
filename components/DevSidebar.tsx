@@ -109,10 +109,10 @@ export default function DevSidebar() {
 
   const stats = {
     totalSupply: '1,000,000,000,000',
-    distributed: '12,456,789',
-    contributors: '42',
+    distributed: '0',
+    contributors: '1',
     openTasks: issueCount || 0,
-    networkNodes: '150+'
+    networkNodes: '0'
   }
 
   return (
