@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Github, BookOpen, FileText, ExternalLink } from 'lucide-react'
+import { Github, BookOpen, FileText, ExternalLink, X, Wifi, WifiOff } from 'lucide-react'
 import './TopMenuBar.css'
 
 interface MenuItem {
@@ -21,9 +21,11 @@ interface Menu {
 
 interface TopMenuBarProps {
   onOpenApp?: (appName: string) => void
+  onOpenWalletModal?: () => void
+  isConnected?: boolean
 }
 
-export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
+export default function TopMenuBar({ onOpenApp, onOpenWalletModal, isConnected }: TopMenuBarProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const [showBAppsMenu, setShowBAppsMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -325,7 +327,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
             background: showBAppsMenu ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
             border: 'none',
             cursor: 'pointer',
-            padding: '0 12px',
+            padding: '0 12px 0 20px',
             display: 'flex',
             alignItems: 'center',
             height: '100%',
@@ -339,7 +341,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         {showBAppsMenu && (
           <div style={{
             position: 'absolute',
-            top: '28px',
+            top: '32px',
             left: 0,
             minWidth: '220px',
             background: '#1a1a1a',
@@ -469,6 +471,23 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
 
       {/* Right side - Status */}
       <div className="taskbar-status">
+        <button
+          onClick={onOpenWalletModal}
+          className="taskbar-link"
+          title={isConnected ? "Connected" : "Connect Wallet"}
+        >
+          {isConnected ? (
+            <>
+              <Wifi className="taskbar-link-icon" />
+              <span style={{ fontSize: '11px', marginLeft: '4px' }}>Connected</span>
+            </>
+          ) : (
+            <>
+              <WifiOff className="taskbar-link-icon" />
+              <span style={{ fontSize: '11px', marginLeft: '4px' }}>Connect</span>
+            </>
+          )}
+        </button>
         <a 
           href="https://github.com/bitcoin-apps-suite/bitcoin-OS" 
           target="_blank" 
@@ -484,6 +503,17 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           title="Documentation"
         >
           <BookOpen className="taskbar-link-icon" />
+        </a>
+        <a 
+          href="https://x.com/Bitcoin_OS_X" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="taskbar-link"
+          title="Follow on X"
+        >
+          <svg className="taskbar-link-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
         </a>
       </div>
     </div>

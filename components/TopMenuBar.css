@@ -2,11 +2,11 @@
 .bitcoin-os-taskbar {
   display: flex;
   align-items: center;
-  height: 28px;
+  height: 32px;
   background: rgba(22, 22, 22, 0.98);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  border-bottom: none;
   font-size: 13px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
@@ -17,7 +17,7 @@
 }
 
 .taskbar-logo {
-  padding: 0 12px;
+  padding: 0 12px 0 20px;
   display: flex;
   align-items: center;
   height: 100%;
@@ -75,7 +75,7 @@
 
 .menu-button {
   padding: 0 12px;
-  height: 24px;
+  height: 32px;
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.9);
@@ -95,14 +95,14 @@
 }
 
 .menu-button.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
-  top: 28px;
+  top: 32px;
   left: 0;
   min-width: 220px;
   background: rgba(30, 30, 30, 0.98);
@@ -134,7 +134,7 @@
 }
 
 .menu-item:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
 }
 

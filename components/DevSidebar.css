@@ -14,7 +14,7 @@
 .dev-sidebar {
   position: fixed;
   left: 0;
-  top: 40px; /* Below taskbar (40px) */
+  top: 72px; /* Below ProofOfConceptBar (40px) + TopMenuBar (32px) - No gap */
   bottom: 0;
   width: 260px;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);

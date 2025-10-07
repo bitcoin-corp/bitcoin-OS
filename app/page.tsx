@@ -309,7 +309,11 @@ export default function BitcoinOS() {
   return (
     <div className="h-screen flex flex-col relative bg-black">
       <ProofOfConceptBar />
-      <TopMenuBar onOpenApp={openApp} />
+      <TopMenuBar 
+        onOpenApp={openApp} 
+        onOpenWalletModal={() => setShowLoginModal(true)}
+        isConnected={!!userHandle}
+      />
       
       <div className="flex-1 relative overflow-hidden">
         <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
