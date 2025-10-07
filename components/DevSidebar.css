@@ -49,30 +49,18 @@
 }
 
 .dev-sidebar-title span {
-  animation: colorCycle 15s ease infinite;
-}
-
-@keyframes colorCycle {
-  0% { color: #ff6b6b; }
-  12.5% { color: #f97316; }
-  25% { color: #feca57; }
-  37.5% { color: #48dbfb; }
-  50% { color: #0abde3; }
-  62.5% { color: #a55eea; }
-  75% { color: #fd79a8; }
-  87.5% { color: #ff6b6b; }
-  100% { color: #ff6b6b; }
+  color: #e5e7eb;
 }
 
 .dev-sidebar-logo {
-  color: #d946ef;
+  color: #9ca3af;
   flex-shrink: 0;
 }
 
 .dev-sidebar-toggle {
   background: transparent;
   border: none;
-  color: #d946ef;
+  color: #9ca3af;
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -82,7 +70,7 @@
 }
 
 .dev-sidebar-toggle:hover {
-  background: rgba(217, 70, 239, 0.1);
+  background: rgba(156, 163, 175, 0.1);
 }
 
 .dev-sidebar-nav {
@@ -105,13 +93,13 @@
 }
 
 .dev-sidebar-item:hover {
-  background: rgba(217, 70, 239, 0.1);
-  color: #d946ef;
+  background: rgba(156, 163, 175, 0.1);
+  color: #e5e7eb;
 }
 
 .dev-sidebar-item.active {
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.2));
-  color: #d946ef;
+  background: rgba(156, 163, 175, 0.2);
+  color: #f3f4f6;
   font-weight: 600;
 }
 
@@ -123,7 +111,7 @@
   transform: translateY(-50%);
   width: 3px;
   height: 70%;
-  background: #d946ef;
+  background: #9ca3af;
   border-radius: 0 2px 2px 0;
 }
 
@@ -132,8 +120,8 @@
 }
 
 .dev-sidebar-badge {
-  background: linear-gradient(135deg, #d946ef, #a855f7);
-  color: #1a1a1a;
+  background: rgba(128, 128, 128, 0.3);
+  color: #e5e5e5;
   font-size: 10px;
   font-weight: 700;
   padding: 2px 6px;
@@ -153,7 +141,7 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #a855f7;
+  color: #9ca3af;
   text-transform: uppercase;
 }
 
@@ -164,7 +152,7 @@
 }
 
 .dev-sidebar-stats h4 {
-  color: #d946ef;
+  color: #9ca3af;
   font-size: 12px;
   text-transform: uppercase;
   margin: 0 0 12px 0;
@@ -184,7 +172,7 @@
 }
 
 .dev-stat-value {
-  color: #d946ef;
+  color: #e5e7eb;
   font-weight: 600;
 }
 

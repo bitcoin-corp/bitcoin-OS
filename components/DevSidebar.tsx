@@ -75,9 +75,9 @@ export default function DevSidebar() {
     external?: boolean
   }> = [
     // Token & Core at top
-    { path: '/token', icon: Coins, label: '$bOS Token', badge: 'HOT' },
-    { path: '/exchange', icon: Zap, label: 'Compute Exchange', badge: 'NEW' },
-    { path: '/contracts', icon: Terminal, label: 'Smart Contracts', badge: 'BETA' },
+    { path: '/token', icon: Coins, label: '$bOS' },
+    { path: '/exchange', icon: Zap, label: 'Compute Exchange' },
+    { path: '/contracts', icon: Terminal, label: 'Contracts' },
     
     // HPC & Computational Resources
     { divider: true },
@@ -90,7 +90,7 @@ export default function DevSidebar() {
     { divider: true },
     { section: 'SYSTEM' },
     { path: '/tasks', icon: ListTodo, label: 'Task Manager' },
-    { path: '/contributors', icon: Users, label: 'Contributors', badge: '42' },
+    { path: '/contributors', icon: Users, label: 'Contributors' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },
     
     // Development
@@ -98,22 +98,10 @@ export default function DevSidebar() {
     { section: 'DEVELOPMENT' },
     { path: '/api', icon: Package, label: 'API Reference' },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS', icon: Github, label: 'GitHub Repository', external: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: FileCode, label: 'Issues', badge: issueCount > 0 ? String(issueCount) : '0', external: true },
-    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/pulls', icon: GitPullRequest, label: 'Pull Requests', external: true },
-    
-    // System Status
-    { divider: true },
-    { path: '/changelog', icon: History, label: 'Changelog' },
-    { path: '/status', icon: CheckCircle, label: 'System Status', badge: 'OK' }
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: FileCode, label: 'Issues', external: true },
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/pulls', icon: GitPullRequest, label: 'Pull Requests', external: true }
   ]
 
-  const stats = {
-    totalSupply: '1,000,000,000,000',
-    distributed: '0',
-    contributors: '1',
-    openTasks: issueCount || 0,
-    networkNodes: '0'
-  }
 
   return (
     <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
@@ -121,7 +109,7 @@ export default function DevSidebar() {
         {!isCollapsed && (
           <div className="dev-sidebar-title">
             <Monitor className="dev-sidebar-logo" />
-            <span>Developer Hub</span>
+            <span>Contracts Bar</span>
           </div>
         )}
         <button 
@@ -190,32 +178,6 @@ export default function DevSidebar() {
         })}
       </nav>
 
-      {/* Stats section */}
-      {!isCollapsed && (
-        <div className="dev-sidebar-stats">
-          <h4>bOS Stats</h4>
-          <div className="dev-stat">
-            <span className="dev-stat-label">Total Supply</span>
-            <span className="dev-stat-value">{stats.totalSupply}</span>
-          </div>
-          <div className="dev-stat">
-            <span className="dev-stat-label">Distributed</span>
-            <span className="dev-stat-value">{stats.distributed}</span>
-          </div>
-          <div className="dev-stat">
-            <span className="dev-stat-label">Contributors</span>
-            <span className="dev-stat-value">{stats.contributors}</span>
-          </div>
-          <div className="dev-stat">
-            <span className="dev-stat-label">Open Tasks</span>
-            <span className="dev-stat-value">{stats.openTasks}</span>
-          </div>
-          <div className="dev-stat">
-            <span className="dev-stat-label">Network Nodes</span>
-            <span className="dev-stat-value">{stats.networkNodes}</span>
-          </div>
-        </div>
-      )}
 
     </div>
   )
