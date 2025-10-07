@@ -304,7 +304,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       </div>
       
       {/* Trash Basket - Bottom Right (interactive) */}
-      <div className="absolute bottom-24 right-8 z-20">
+      <div className="absolute bottom-28 right-8 z-20">
         <div 
           className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
           title={`Trash (${trashedItems.length} items)`}
@@ -323,7 +323,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           }}
         >
           <Trash2 
-            className={`w-16 h-16 ${trashedItems.length > 0 ? 'text-gray-300' : 'text-gray-400'} drop-shadow-2xl`} 
+            className={`w-12 h-12 ${trashedItems.length > 0 ? 'text-gray-300' : 'text-gray-400'} drop-shadow-2xl`} 
             strokeWidth={1.5}
           />
           <span className="text-sm text-white text-center font-medium drop-shadow-lg">
