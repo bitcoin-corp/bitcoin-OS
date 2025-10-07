@@ -109,8 +109,19 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
             ))}
           </div>
           
-          {/* Third Row - Email Full Width */}
-          <div className="w-full">
+          {/* Third Row - Full Width Options */}
+          <div className="w-full space-y-2">
+            <button
+              onClick={() => setActiveTab('bitcoin-wallet')}
+              className={`flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-sm font-medium transition-all w-full ${
+                activeTab === 'bitcoin-wallet'
+                  ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              <Wallet className="w-5 h-5" />
+              <span className="text-sm">Bitcoin OS Wallet</span>
+            </button>
             <button
               onClick={() => setActiveTab('email')}
               className={`flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-sm font-medium transition-all w-full ${
@@ -129,39 +140,17 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
         <div className="space-y-4">
           {activeTab === 'handcash' && (
             <>
-              <div>
-                <label htmlFor="handle" className="block text-sm font-medium text-gray-300 mb-2">
-                  HandCash Handle
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">$</span>
-                  <input
-                    id="handle"
-                    type="text"
-                    value={handle}
-                    onChange={(e) => setHandle(e.target.value)}
-                    placeholder="your-handle"
-                    className="w-full pl-8 pr-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    onKeyPress={(e) => e.key === 'Enter' && handleConnect('handcash', handle)}
-                    disabled={isConnecting}
-                  />
-                </div>
+              <div className="text-center py-4">
+                <Wallet className="w-12 h-12 text-green-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Connect with HandCash Wallet</p>
               </div>
-              <div className="space-y-2">
-                <button
-                  onClick={() => handleConnect('handcash', handle)}
-                  disabled={!handle.trim() || isConnecting}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                >
-                  {isConnecting ? 'Connecting...' : 'Connect with HandCash'}
-                </button>
-                <button
-                  onClick={connectWithHandCash}
-                  className="w-full bg-gray-800 text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-700 border border-gray-600 transition-colors text-sm"
-                >
-                  Open HandCash App
-                </button>
-              </div>
+              <button
+                onClick={() => handleConnect('handcash', 'handcash-wallet')}
+                disabled={isConnecting}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                {isConnecting ? 'Connecting...' : 'Connect with HandCash'}
+              </button>
             </>
           )}
 
@@ -259,18 +248,16 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
           {activeTab === 'bitcoin-wallet' && (
             <>
               <div className="text-center py-4">
-                <Wallet className="w-12 h-12 text-yellow-400 mx-auto mb-3" />
-                <p className="text-gray-400 mb-4">Connect with Bitcoin Wallet</p>
+                <Wallet className="w-12 h-12 text-orange-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Use Bitcoin OS Native Wallet</p>
+                <p className="text-xs text-gray-500 mb-4">The built-in wallet for Bitcoin OS - secure, fast, and integrated</p>
               </div>
               <button
-                onClick={() => handleConnect('bitcoin-wallet', 'bitcoin-wallet')}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                onClick={() => handleConnect('bitcoin-wallet', 'bitcoin-os-wallet')}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
               >
-                Connect Bitcoin Wallet
+                Create Bitcoin OS Wallet
               </button>
-              <p className="text-xs text-gray-500 text-center">
-                Generic Bitcoin wallet connection
-              </p>
             </>
           )}
 
