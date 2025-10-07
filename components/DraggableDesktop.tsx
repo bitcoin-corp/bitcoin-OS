@@ -175,8 +175,26 @@ export default function DraggableDesktop() {
 
   return (
     <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
+        style={{ filter: 'brightness(0.3)' }}
+        onEnded={(e) => {
+          const video = e.target as HTMLVideoElement;
+          video.style.opacity = '0';
+        }}
+      >
+        <source src="/b-OS-pro2.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Overlay to ensure content visibility */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
+      
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-8 pl-80">
+      <div className="absolute inset-0 p-8 pl-80 z-20">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -214,7 +232,7 @@ export default function DraggableDesktop() {
       <WindowManager windows={openWindows} onClose={closeWindow} />
       
       {/* Bitcoin Corp, Trust and NPG - Top Right (small, vertical) */}
-      <div className="absolute right-8 top-8 flex flex-col gap-4">
+      <div className="absolute right-8 top-8 flex flex-col gap-4 z-20">
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
@@ -242,7 +260,7 @@ export default function DraggableDesktop() {
       </div>
       
       {/* Trash Basket - Bottom Right (interactive) */}
-      <div className="absolute bottom-24 right-8">
+      <div className="absolute bottom-24 right-8 z-20">
         <div 
           className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
           title={`Trash (${trashedItems.length} items)`}
