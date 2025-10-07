@@ -14,37 +14,38 @@ This document defines the comprehensive color scheme and design system for all B
 
 ### Primary Color Assignments
 
-| App | Primary Color | Secondary Color | Hex Codes | Usage |
-|-----|---------------|-----------------|-----------|-------|
-| bitcoin-writer | Deep Blue | Electric Cyan | `#1e40af` / `#06d6ff` | Text editing, professional |
-| bitcoin-email | Forest Green | Lime Green | `#166534` / `#65ff00` | Communication, natural |
-| bitcoin-music | Deep Purple | Hot Pink | `#6b21a8` / `#ff1493` | Creative, audio |
-| bitcoin-video | Dark Red | Orange | `#b91c1c` / `#ff6600` | Media, entertainment |
-| bitcoin-photos | Indigo | Light Blue | `#4338ca` / `#87ceeb` | Visual, sky-like |
-| bitcoin-art | Magenta | Gold | `#be185d` / `#ffd700` | Creative, luxury |
-| bitcoin-3d | Teal | Mint | `#0f766e` / `#00ff9f` | 3D modeling, spatial |
-| bitcoin-gaming | Dark Orange | Yellow | `#ea580c` / `#ffff00` | Gaming, energy |
-| bitcoin-calendar | Navy | Sky Blue | `#1e3a8a` / `#87ceeb` | Scheduling, time |
-| bitcoin-chat | Purple | Lavender | `#7c3aed` / `#dda0dd` | Communication, social |
-| bitcoin-social | Pink | Rose | `#ec4899` / `#ff69b4` | Social media, connection |
-| bitcoin-twitter | Twitter Blue | Light Blue | `#1da1f2` / `#add8e6` | Microblogging |
-| bitcoin-exchange | Gold | Amber | `#d97706` / `#ffbf00` | Trading, finance |
-| bitcoin-drive | Blue | Steel Blue | `#2563eb` / `#4682b4` | Storage, cloud |
-| bitcoin-spreadsheets | Green | Emerald | `#16a34a` / `#50c878` | Data, calculations |
-| bitcoin-code | Dark Gray | Neon Green | `#374151` / `#39ff14` | Development, terminal |
-| bitcoin-browser | Chrome Blue | Silver | `#4285f4` / `#c0c0c0` | Web browsing |
-| bitcoin-search | Deep Teal | Aqua | `#0d9488` / `#00ffff` | Search, discovery |
-| bitcoin-maps | Earth Green | Ocean Blue | `#059669` / `#0077be` | Geography, navigation |
-| bitcoin-books | Maroon | Beige | `#991b1b` / `#f5f5dc` | Reading, knowledge |
-| bitcoin-education | Academic Blue | Light Yellow | `#1d4ed8` / `#ffffe0` | Learning, growth |
-| bitcoin-jobs | Corporate Blue | Green | `#1e40af` / `#22c55e` | Employment, success |
-| bitcoin-crm | Business Gray | Orange | `#6b7280` / `#fb923c` | Customer relations |
-| bitcoin-cms | Content Blue | White | `#3b82f6` / `#ffffff` | Content management |
-| bitcoin-contracts | Legal Navy | Gold | `#1e293b` / `#fbbf24` | Legal, contracts |
-| bitcoin-shares | Market Green | Red | `#15803d` / `#dc2626` | Equity, trading |
-| bitcoin-paint | Artist Purple | Rainbow | `#8b5cf6` / `#ff6b35` | Creative tools |
-| bitcoin-dns | Network Blue | Green | `#0ea5e9` / `#10b981` | Infrastructure |
-| bitcoin-ai | Neural Purple | Electric Blue | `#7c2d92` / `#0080ff` | AI, intelligence |
+| App | Primary Color | Secondary Color | Hex Codes | Usage | Notes |
+|-----|---------------|-----------------|-----------|-------|-------|
+| bitcoin-writer | Black | White | `#0a0a0a` / `#ffffff` | Text editing, professional | High contrast for text |
+| bitcoin-email | Red | Dark Red | `#ff4444` / `#cc0000` | Communication, urgent | Alert/notification colors |
+| bitcoin-music | Bitcoin Orange | Yellow | `#f7931a` / `#fbbf24` | Creative, audio | Bitcoin brand alignment |
+| bitcoin-video | Dark Red | Orange | `#b91c1c` / `#ff6600` | Media, entertainment | Media/entertainment |
+| bitcoin-photos | Indigo | Light Blue | `#4338ca` / `#87ceeb` | Visual, sky-like | Visual/photography |
+| bitcoin-art | Magenta | Gold | `#be185d` / `#ffd700` | Creative, luxury | Creative/artistic |
+| bitcoin-3d | Teal | Mint | `#0f766e` / `#00ff9f` | 3D modeling, spatial | 3D/spatial |
+| bitcoin-gaming | Dark Orange | Yellow | `#ea580c` / `#ffff00` | Gaming, energy | Gaming/energy |
+| bitcoin-calendar | Navy | Sky Blue | `#1e3a8a` / `#87ceeb` | Scheduling, time | Time/scheduling |
+| bitcoin-chat | Purple | Lavender | `#7c3aed` / `#dda0dd` | Communication, social | Communication |
+| bitcoin-social | Pink | Rose | `#ec4899` / `#ff69b4` | Social media, connection | Social/connection |
+| bitcoin-twitter | Twitter Blue | Light Blue | `#1da1f2` / `#add8e6` | Microblogging | Twitter brand |
+| bitcoin-exchange | Bitcoin Orange | Yellow | `#f7931a` / `#fbbf24` | Trading, finance | Bitcoin trading |
+| bitcoin-drive | Blue | Steel Blue | `#2563eb` / `#4682b4` | Storage, cloud | Storage/reliability |
+| bitcoin-spreadsheets | Green | Emerald | `#16a34a` / `#50c878` | Data, calculations | Data/calculations |
+| bitcoin-code | Dark Gray | Neon Green | `#1e293b` / `#39ff14` | Development, terminal | Development/terminal |
+| bitcoin-browser | Chrome Blue | Silver | `#4285f4` / `#c0c0c0` | Web browsing | Web browsing |
+| bitcoin-search | Deep Teal | Aqua | `#0d9488` / `#00ffff` | Search, discovery | Search/discovery |
+| bitcoin-maps | Earth Green | Ocean Blue | `#059669` / `#0077be` | Geography, navigation | Geography/maps |
+| bitcoin-books | Maroon | Beige | `#991b1b` / `#f5f5dc` | Reading, knowledge | Reading/books |
+| bitcoin-education | Academic Blue | Light Yellow | `#1d4ed8` / `#ffffe0` | Learning, growth | Education/learning |
+| bitcoin-jobs | Corporate Blue | Green | `#1e40af` / `#22c55e` | Employment, success | Jobs/employment |
+| bitcoin-crm | Business Gray | Orange | `#6b7280` / `#fb923c` | Customer relations | Business/CRM |
+| bitcoin-cms | Content Blue | White | `#3b82f6` / `#ffffff` | Content management | Content/CMS |
+| bitcoin-contracts | Legal Navy | Gold | `#1e293b` / `#fbbf24` | Legal, contracts | Legal/contracts |
+| bitcoin-shares | Market Green | Red | `#15803d` / `#dc2626` | Equity, trading | Trading/shares |
+| bitcoin-paint | Artist Purple | Rainbow | `#8b5cf6` / `#ff6b35` | Creative tools | Art/creativity |
+| bitcoin-dns | Network Blue | Green | `#0ea5e9` / `#10b981` | Infrastructure | Network/DNS |
+| bitcoin-ai | Neural Purple | Electric Blue | `#7c2d92` / `#0080ff` | AI, intelligence | AI/intelligence |
+| bitcoin-wallet | Bitcoin Orange | Yellow | `#f7931a` / `#fbbf24` | Wallet, finance | Bitcoin brand |
 
 ## Component Standards
 
