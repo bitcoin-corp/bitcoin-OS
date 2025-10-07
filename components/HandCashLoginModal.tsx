@@ -13,7 +13,7 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
   const [handle, setHandle] = useState('')
   const [email, setEmail] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
-  const [activeTab, setActiveTab] = useState<'handcash' | 'centbee' | 'yours' | 'bitcoin-wallet' | 'metanet' | 'keypair' | 'email'>('handcash')
+  const [activeTab, setActiveTab] = useState<'handcash' | 'centbee' | 'yours' | 'bitcoin-wallet' | 'metanet' | 'keypair' | 'email' | 'rock-wallet'>('handcash')
 
   if (!isOpen) return null
 
@@ -90,7 +90,7 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
           {/* Second Row */}
           <div className="grid grid-cols-3 gap-2">
             {[
-              { id: 'bitcoin-wallet', label: 'Bitcoin Wallet', icon: Wallet, color: 'bg-yellow-500 hover:bg-yellow-600' },
+              { id: 'rock-wallet', label: 'Rock Wallet', icon: Wallet, color: 'bg-gray-600 hover:bg-gray-700' },
               { id: 'metanet', label: 'MetaNet', icon: Globe, color: 'bg-teal-600 hover:bg-teal-700' },
               { id: 'keypair', label: 'Key Pair', icon: Key, color: 'bg-purple-600 hover:bg-purple-700' }
             ].map(({ id, label, icon: Icon, color }) => (

@@ -23,6 +23,7 @@
   height: 64px;
   padding: 0 8px;
   width: 100%;
+  min-width: 900px;
 }
 
 .dock-apps {
@@ -186,6 +187,8 @@
   align-items: center;
   gap: 6px;
   cursor: default;
+  min-width: 120px;
+  justify-content: flex-end;
 }
 
 .status-time span {

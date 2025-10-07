@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, MoreHorizontal, Grid3X3 } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, MoreHorizontal, Grid3X3, Home } from 'lucide-react';
 import './Dock.css';
 
 interface DockApp {
@@ -97,6 +97,39 @@ const Dock: React.FC = () => {
       <div className="dock-container">
         {/* App icons on the left */}
         <div className="dock-apps">
+          {/* Home button */}
+          <button
+            className="dock-app"
+            onClick={() => window.location.href = '/'}
+            title="Home"
+          >
+            <div 
+              className="dock-app-icon-wrapper"
+              style={{
+                background: 'linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)',
+                borderRadius: '12px',
+                padding: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '40px',
+                height: '40px',
+                boxShadow: '0 4px 12px #3b82f640'
+              }}
+            >
+              <Home 
+                className="dock-app-icon" 
+                size={20}
+                style={{ 
+                  color: '#ffffff',
+                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))'
+                }} 
+              />
+            </div>
+          </button>
+          
+          <div className="dock-divider" />
+          
           {dockApps.map((app, index) => {
           const Icon = app.icon;
           return (
