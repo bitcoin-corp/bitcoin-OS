@@ -39,10 +39,16 @@ export default function BitcoinOS() {
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
 
   useEffect(() => {
-    // Simulate boot process
+    // Simulate boot process - match the progress bar timing
     setTimeout(() => {
       setIsBooting(false)
-    }, 1000)
+      // Play startup sound when boot screen finishes and video starts
+      const audio = new Audio('/startup4.wav')
+      audio.play().catch(err => {
+        // Handle autoplay restrictions - some browsers require user interaction first
+        console.log('Audio autoplay prevented:', err)
+      })
+    }, 3000)
   }, [])
 
   useEffect(() => {
