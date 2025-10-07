@@ -6,6 +6,7 @@ import { getAppIcon } from '@/lib/app-icons'
 import DraggableDesktop from '@/components/DraggableDesktop'
 import OSTaskbar from '@/components/OSTaskbar'
 import TopMenuBar from '@/components/TopMenuBar'
+import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
 import Window from '@/components/Window'
@@ -307,6 +308,7 @@ export default function BitcoinOS() {
   // Desktop Layout
   return (
     <div className="h-screen flex flex-col relative bg-black">
+      <ProofOfConceptBar />
       <TopMenuBar onOpenApp={openApp} />
       
       <div className="flex-1 relative overflow-hidden">

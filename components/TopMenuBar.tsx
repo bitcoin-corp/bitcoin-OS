@@ -29,24 +29,21 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const bitcoinApps = [
-    { name: 'Bitcoin 3D', color: '#ec4899', url: 'https://bitcoin-3d.vercel.app' },
-    { name: 'Bitcoin Apps Store', color: '#f7931a', url: 'https://www.bitcoinapps.store/' },
-    { name: 'Bitcoin Books', color: '#10b981', url: 'https://bitcoin-books-bay.vercel.app' },
+    { name: 'Bitcoin Auth', color: '#ef4444', url: '#' },
     { name: 'Bitcoin Calendar', color: '#d946ef', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Chat', color: '#ff6500', url: 'https://bitcoin-chat.vercel.app' },
-    { name: 'Bitcoin Code', color: '#0ea5e9', url: 'https://bitcoin-code.vercel.app' },
-    { name: 'Bitcoin Domains', color: '#eab308', url: 'https://bitcoin-dns.vercel.app' },
+    { name: 'Bitcoin Chat', color: '#ff6500', url: '#' },
+    { name: 'Bitcoin Domains', color: '#eab308', url: '#' },
+    { name: 'Bitcoin Draw', color: '#10b981', url: '#' },
     { name: 'Bitcoin Drive', color: '#22c55e', url: 'https://bitcoin-drive.vercel.app' },
     { name: 'Bitcoin Email', color: '#06b6d4', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Exchange', color: '#3b82f6', url: 'https://bitcoin-exchange.vercel.app' },
-    { name: 'Bitcoin Games', color: '#8b5cf6', url: 'https://bitcoin-gaming.vercel.app' },
-    { name: 'Bitcoin Jobs', color: '#6b7280', url: 'https://bitcoin-jobs.vercel.app' },
-    { name: 'Bitcoin Maps', color: '#f59e0b', url: 'https://bitcoin-maps.vercel.app' },
+    { name: 'Bitcoin Jobs', color: '#6b7280', url: '#' },
     { name: 'Bitcoin Music', color: '#8b5cf6', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Paint', color: '#a855f7', url: 'https://bitcoin-paint.vercel.app' },
-    { name: 'Bitcoin Photos', color: '#ec4899', url: 'https://bitcoin-photos.vercel.app' },
+    { name: 'Bitcoin Paint', color: '#a855f7', url: '#' },
+    { name: 'Bitcoin Pics', color: '#ec4899', url: '#' },
+    { name: 'Bitcoin Registry', color: '#f43f5e', url: '#' },
     { name: 'Bitcoin Search', color: '#6b7280', url: 'https://bitcoin-search.vercel.app' },
-    { name: 'Bitcoin Social', color: '#f43f5e', url: 'https://bitcoin-social.vercel.app' },
+    { name: 'Bitcoin Shares', color: '#f43f5e', url: 'https://bitcoin-shares.vercel.app' },
     { name: 'Bitcoin Spreadsheets', color: '#3b82f6', url: 'https://bitcoin-spreadsheet.vercel.app' },
     { name: 'Bitcoin Video', color: '#65a30d', url: 'https://bitcoin-video-nine.vercel.app' },
     { name: 'Bitcoin Wallet', color: '#f59e0b', url: 'https://bitcoin-wallet-sable.vercel.app' },
@@ -80,33 +77,15 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Lock Screen', 
           shortcut: '⌘L',
-          action: () => {
-            if (document.body.requestFullscreen) {
-              document.body.requestFullscreen()
-            }
-            alert('Screen locked - press F11 or Escape to unlock')
-          }
+          action: () => console.log('Lock Screen')
         },
         { 
           label: 'Log Out', 
-          action: () => {
-            if (confirm('Are you sure you want to log out?')) {
-              localStorage.clear()
-              window.location.href = '/'
-            }
-          }
+          action: () => console.log('Log Out')
         },
         { 
           label: 'Shut Down', 
-          action: () => {
-            if (confirm('Are you sure you want to shut down Bitcoin OS?')) {
-              try {
-                window.close()
-              } catch {
-                window.location.href = 'about:blank'
-              }
-            }
-          }
+          action: () => console.log('Shut Down')
         },
       ]
     },
@@ -116,47 +95,29 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'New Window', 
           shortcut: '⌘N',
-          action: () => window.open('/', '_blank')
+          action: () => console.log('New Window')
         },
         { 
           label: 'New Folder', 
           shortcut: '⇧⌘N',
-          action: () => alert('File management coming soon!')
+          action: () => console.log('New Folder')
         },
         { divider: true },
         { 
           label: 'Open', 
           shortcut: '⌘O',
-          action: () => {
-            const input = document.createElement('input')
-            input.type = 'file'
-            input.click()
-          }
+          action: () => console.log('Open')
         },
         { 
           label: 'Save', 
           shortcut: '⌘S',
-          action: () => {
-            const data = 'Bitcoin OS Session Data'
-            const blob = new Blob([data], { type: 'text/plain' })
-            const url = URL.createObjectURL(blob)
-            const a = document.createElement('a')
-            a.href = url
-            a.download = 'bitcoin-os-session.txt'
-            a.click()
-          }
+          action: () => console.log('Save')
         },
         { divider: true },
         { 
           label: 'Close Window', 
           shortcut: '⌘W',
-          action: () => {
-            try {
-              window.close()
-            } catch {
-              alert('Cannot close this window')
-            }
-          }
+          action: () => console.log('Close')
         }
       ]
     },
@@ -198,32 +159,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Find...', 
           shortcut: '⌘F',
-          action: () => {
-            const search = prompt('Find on page:')
-            if (search) {
-              // Use modern Find API or fallback
-              if ('find' in window) {
-                (window as any).find(search)
-              } else {
-                // Fallback: just highlight search term
-                const selection = window.getSelection()
-                const range = document.createRange()
-                const walker = document.createTreeWalker(
-                  document.body,
-                  NodeFilter.SHOW_TEXT
-                )
-                let node
-                while (node = walker.nextNode()) {
-                  if (node.textContent?.toLowerCase().includes(search.toLowerCase())) {
-                    range.selectNodeContents(node)
-                    selection?.removeAllRanges()
-                    selection?.addRange(range)
-                    break
-                  }
-                }
-              }
-            }
-          }
+          action: () => console.log('Find')
         }
       ]
     },
@@ -236,7 +172,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         },
         { 
           label: 'Show All Windows', 
-          action: () => alert('All windows are already visible')
+          action: () => console.log('Show All Windows')
         },
         { divider: true },
         { 
@@ -291,20 +227,16 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         { 
           label: 'Minimize', 
           shortcut: '⌘M',
-          action: () => alert('Window minimization not supported in browser')
+          action: () => console.log('Minimize')
         },
         { 
           label: 'Zoom', 
-          action: () => {
-            const currentZoom = parseFloat(document.body.style.zoom) || 1
-            const newZoom = currentZoom >= 1.5 ? 1 : currentZoom + 0.1
-            document.body.style.zoom = newZoom.toString()
-          }
+          action: () => console.log('Zoom')
         },
         { divider: true },
         { 
           label: 'Bring All to Front', 
-          action: () => window.focus()
+          action: () => console.log('Bring All to Front')
         },
         { divider: true },
         { 
@@ -368,25 +300,22 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
       }
     }
 
-    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keydown', handleKeyDown)
     
     return () => {
-      document.removeEventListener('click', handleClickOutside)
+      document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
 
   return (
     <div ref={menuRef} className="bitcoin-os-taskbar">
-      {/* Content overlay */}
-      <div className="taskbar-content">
       {/* Bitcoin Logo with BApps Menu */}
       <div style={{ position: 'relative' }}>
         <button 
           className={`taskbar-logo ${showBAppsMenu ? 'menu-open' : ''}`}
-          onClick={(e) => {
-            e.stopPropagation()
+          onClick={() => {
             setShowBAppsMenu(!showBAppsMenu)
             setActiveMenu(null)
           }}
@@ -410,7 +339,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         {showBAppsMenu && (
           <div style={{
             position: 'absolute',
-            top: '40px',
+            top: '28px',
             left: 0,
             minWidth: '220px',
             background: '#1a1a1a',
@@ -419,7 +348,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
             borderRadius: '8px',
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8)',
             padding: '8px 0',
-            zIndex: 10001
+            zIndex: 1000
           }}>
             <div style={{
               padding: '8px 16px',
@@ -484,10 +413,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
           <div key={menu.label} className="menu-container">
             <button
               className={`menu-button ${activeMenu === menu.label ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                setActiveMenu(activeMenu === menu.label ? null : menu.label)
-              }}
+              onClick={() => setActiveMenu(activeMenu === menu.label ? null : menu.label)}
               onMouseEnter={() => activeMenu && setActiveMenu(menu.label)}
             >
               {menu.label}
@@ -559,18 +485,6 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         >
           <BookOpen className="taskbar-link-icon" />
         </a>
-        <a 
-          href="https://x.com/Bitcoin_OS_X" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="taskbar-link"
-          title="Follow @Bitcoin_OS_X"
-        >
-          <svg className="taskbar-link-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
-      </div>
       </div>
     </div>
   )

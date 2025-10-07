@@ -332,45 +332,113 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         </div>
       </div>
       
-      {/* Trash Window */}
+      {/* Trash Window - macOS Style Filesystem */}
       {showTrashWindow && (
         <div className="absolute inset-0 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg shadow-2xl p-6 w-96 max-h-96 overflow-y-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-white text-xl font-bold">Trash ({trashedItems.length} items)</h2>
-              <button 
-                onClick={() => setShowTrashWindow(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                ✕
-              </button>
+          <div className="bg-gray-900/95 rounded-xl shadow-2xl border border-gray-600 backdrop-blur-lg w-[600px] h-[500px] flex flex-col overflow-hidden">
+            {/* Window Title Bar */}
+            <div className="flex items-center justify-between bg-gray-800/80 px-4 py-3 border-b border-gray-600">
+              <div className="flex items-center gap-3">
+                {/* macOS Window Controls */}
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => setShowTrashWindow(false)}
+                    className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600 transition-colors"
+                    title="Close"
+                  />
+                  <button className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors" title="Minimize" />
+                  <button className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 transition-colors" title="Maximize" />
+                </div>
+                <Trash2 className="w-5 h-5 text-gray-400" />
+                <span className="text-white font-medium">Trash</span>
+                <span className="text-gray-400 text-sm">({trashedItems.length} items)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button className="text-gray-400 hover:text-white text-sm px-2 py-1 rounded" title="View Options">
+                  <Grid3X3 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            {trashedItems.length === 0 ? (
-              <p className="text-gray-400">Trash is empty</p>
-            ) : (
-              <div className="space-y-2">
-                {trashedItems.map((item) => (
-                  <div key={item.id} className="flex items-center justify-between bg-gray-700 p-2 rounded">
-                    <span className="text-white">{item.name}</span>
-                    <button 
-                      onClick={() => {
-                        setDesktopApps([...desktopApps, item])
-                        setTrashedItems(trashedItems.filter(t => t.id !== item.id))
-                      }}
-                      className="text-blue-400 hover:text-blue-300 text-sm"
-                    >
-                      Restore
-                    </button>
-                  </div>
-                ))}
+
+            {/* Toolbar */}
+            <div className="flex items-center justify-between bg-gray-800/60 px-4 py-2 border-b border-gray-700">
+              <div className="flex items-center gap-3">
+                <button className="text-gray-400 hover:text-white text-sm px-2 py-1 rounded hover:bg-gray-700">
+                  ← Back
+                </button>
+                <button className="text-gray-400 hover:text-white text-sm px-2 py-1 rounded hover:bg-gray-700">
+                  → Forward
+                </button>
+                <span className="text-gray-400 text-sm">Bitcoin OS / Trash</span>
+              </div>
+              <div className="flex items-center gap-2">
                 <button 
                   onClick={() => setTrashedItems([])}
-                  className="w-full mt-4 bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+                  disabled={trashedItems.length === 0}
+                  className="text-red-400 hover:text-red-300 text-sm px-3 py-1 rounded hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Empty Trash
                 </button>
               </div>
-            )}
+            </div>
+
+            {/* File List */}
+            <div className="flex-1 overflow-auto">
+              {trashedItems.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                  <Trash2 className="w-16 h-16 mb-4 opacity-50" />
+                  <p className="text-lg font-medium">Trash is empty</p>
+                  <p className="text-sm">Drag items here to delete them</p>
+                </div>
+              ) : (
+                <div className="p-4">
+                  {/* List Header */}
+                  <div className="grid grid-cols-12 gap-4 text-xs text-gray-400 font-medium mb-2 px-2 py-1 border-b border-gray-700">
+                    <div className="col-span-6">Name</div>
+                    <div className="col-span-2">Type</div>
+                    <div className="col-span-2">Size</div>
+                    <div className="col-span-2">Action</div>
+                  </div>
+                  
+                  {/* File Items */}
+                  <div className="space-y-1">
+                    {trashedItems.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div 
+                          key={item.id} 
+                          className="grid grid-cols-12 gap-4 items-center p-2 rounded hover:bg-gray-800/50 transition-colors group"
+                        >
+                          <div className="col-span-6 flex items-center gap-3">
+                            <Icon className={`w-5 h-5 ${item.color}`} />
+                            <span className="text-white text-sm truncate">{item.name}</span>
+                          </div>
+                          <div className="col-span-2 text-gray-400 text-sm">Application</div>
+                          <div className="col-span-2 text-gray-400 text-sm">--</div>
+                          <div className="col-span-2">
+                            <button 
+                              onClick={() => {
+                                setDesktopApps([...desktopApps, item])
+                                setTrashedItems(trashedItems.filter(t => t.id !== item.id))
+                              }}
+                              className="text-blue-400 hover:text-blue-300 text-sm px-2 py-1 rounded hover:bg-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              Restore
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Status Bar */}
+            <div className="bg-gray-800/60 px-4 py-2 border-t border-gray-700 text-xs text-gray-400 flex justify-between">
+              <span>{trashedItems.length} items</span>
+              <span>{trashedItems.length > 0 ? 'Click items to restore' : 'Drag apps here to delete'}</span>
+            </div>
           </div>
         </div>
       )}
