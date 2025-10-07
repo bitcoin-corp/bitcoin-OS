@@ -27,6 +27,7 @@
     "build": "next build",
     "start": "next start -p 2050",
     "lint": "next lint",
+    "kill:2050": "lsof -ti:2050 | xargs kill -9",
     "kill:3000": "lsof -ti:3000 | xargs kill -9",
     "kill:dev": "lsof -ti:3000 | xargs kill -9 && lsof -ti:3001 | xargs kill -9",
     "kill:all": "for port in {3000..3010}; do lsof -ti:$port | xargs kill -9 2>/dev/null || true; done"
