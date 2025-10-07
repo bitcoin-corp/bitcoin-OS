@@ -40,7 +40,7 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-end pr-24 pointer-events-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none" style={{ paddingLeft: '60%', paddingRight: '15%', paddingTop: '12%', paddingBottom: '18%' }}>
       {/* Modal - positioned without backdrop */}
       <div 
         className="relative bg-gray-900/95 border border-gray-600 rounded-2xl p-6 w-full max-w-lg shadow-2xl backdrop-blur-md pointer-events-auto"
