@@ -74,3 +74,31 @@ body.no-animations * {
   animation-duration: 0s !important;
   transition-duration: 0s !important;
 }
+
+/* Dark Background Cycling */
+.background-cycle {
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a0a1a 16.66%,
+    #0a1a1a 33.33%,
+    #0a0a2a 50%,
+    #1a1a0a 66.66%,
+    #2a0a0a 83.33%,
+    #0a0a0a 100%
+  );
+  background-size: 400% 400%;
+  animation: backgroundCycle 30s ease infinite;
+}
+
+@keyframes backgroundCycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

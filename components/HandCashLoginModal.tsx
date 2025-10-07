@@ -13,7 +13,7 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
   const [handle, setHandle] = useState('')
   const [email, setEmail] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
-  const [activeTab, setActiveTab] = useState<'handcash' | 'keypair' | 'email' | 'metanet'>('handcash')
+  const [activeTab, setActiveTab] = useState<'handcash' | 'centbee' | 'yours' | 'bitcoin-wallet' | 'metanet' | 'keypair' | 'email'>('handcash')
 
   if (!isOpen) return null
 
@@ -63,27 +63,66 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
           <p className="text-gray-400 text-sm">Choose your preferred wallet connection method</p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex space-x-1 mb-6 bg-gray-800 rounded-lg p-1">
-          {[
-            { id: 'handcash', label: 'HandCash', icon: Wallet },
-            { id: 'keypair', label: 'Key Pair', icon: Key },
-            { id: 'email', label: 'Email', icon: Mail },
-            { id: 'metanet', label: 'MetaNet', icon: Globe }
-          ].map(({ id, label, icon: Icon }) => (
+        {/* Wallet Options - Organized Layout */}
+        <div className="space-y-2 mb-6">
+          {/* First Row */}
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { id: 'handcash', label: 'HandCash', icon: Wallet, color: 'bg-green-600 hover:bg-green-700' },
+              { id: 'centbee', label: 'CentBee', icon: Wallet, color: 'bg-yellow-600 hover:bg-yellow-700' },
+              { id: 'yours', label: 'Yours', icon: Wallet, color: 'bg-blue-600 hover:bg-blue-700' }
+            ].map(({ id, label, icon: Icon, color }) => (
+              <button
+                key={id}
+                onClick={() => setActiveTab(id as any)}
+                className={`flex flex-col items-center gap-2 py-3 px-2 rounded-lg text-sm font-medium transition-all ${
+                  activeTab === id
+                    ? `${color} text-white`
+                    : 'bg-gray-800 text-gray-400 hover:text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-xs">{label}</span>
+              </button>
+            ))}
+          </div>
+          
+          {/* Second Row */}
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { id: 'bitcoin-wallet', label: 'Bitcoin Wallet', icon: Wallet, color: 'bg-yellow-500 hover:bg-yellow-600' },
+              { id: 'metanet', label: 'MetaNet', icon: Globe, color: 'bg-teal-600 hover:bg-teal-700' },
+              { id: 'keypair', label: 'Key Pair', icon: Key, color: 'bg-purple-600 hover:bg-purple-700' }
+            ].map(({ id, label, icon: Icon, color }) => (
+              <button
+                key={id}
+                onClick={() => setActiveTab(id as any)}
+                className={`flex flex-col items-center gap-2 py-3 px-2 rounded-lg text-sm font-medium transition-all ${
+                  activeTab === id
+                    ? `${color} text-white`
+                    : 'bg-gray-800 text-gray-400 hover:text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-xs">{label}</span>
+              </button>
+            ))}
+          </div>
+          
+          {/* Third Row - Email Full Width */}
+          <div className="w-full">
             <button
-              key={id}
-              onClick={() => setActiveTab(id as any)}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium transition-all ${
-                activeTab === id
-                  ? 'bg-gray-700 text-white'
-                  : 'text-gray-400 hover:text-gray-300'
+              onClick={() => setActiveTab('email')}
+              className={`flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-sm font-medium transition-all w-full ${
+                activeTab === 'email'
+                  ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:text-gray-300 hover:bg-gray-700'
               }`}
             >
-              <Icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{label}</span>
+              <Mail className="w-5 h-5" />
+              <span className="text-sm">Sign up with Email</span>
             </button>
-          ))}
+          </div>
         </div>
 
         {/* Content based on active tab */}
@@ -175,15 +214,75 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
             </>
           )}
 
+          {activeTab === 'centbee' && (
+            <>
+              <div className="text-center py-4">
+                <Wallet className="w-12 h-12 text-yellow-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Connect with CentBee Wallet</p>
+              </div>
+              <button
+                onClick={() => handleConnect('centbee', 'centbee-wallet')}
+                className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+              >
+                Connect CentBee Wallet
+              </button>
+              <button
+                onClick={() => window.open('https://centbee.com', '_blank')}
+                className="w-full bg-gray-800 text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-700 border border-gray-600 transition-colors text-sm mt-2"
+              >
+                Download CentBee App
+              </button>
+            </>
+          )}
+
+          {activeTab === 'yours' && (
+            <>
+              <div className="text-center py-4">
+                <Wallet className="w-12 h-12 text-blue-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Connect with Yours Wallet</p>
+              </div>
+              <button
+                onClick={() => handleConnect('yours', 'yours-wallet')}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+              >
+                Connect Yours Wallet
+              </button>
+              <button
+                onClick={() => window.open('https://yours.org', '_blank')}
+                className="w-full bg-gray-800 text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-700 border border-gray-600 transition-colors text-sm mt-2"
+              >
+                Visit Yours.org
+              </button>
+            </>
+          )}
+
+          {activeTab === 'bitcoin-wallet' && (
+            <>
+              <div className="text-center py-4">
+                <Wallet className="w-12 h-12 text-yellow-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Connect with Bitcoin Wallet</p>
+              </div>
+              <button
+                onClick={() => handleConnect('bitcoin-wallet', 'bitcoin-wallet')}
+                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+              >
+                Connect Bitcoin Wallet
+              </button>
+              <p className="text-xs text-gray-500 text-center">
+                Generic Bitcoin wallet connection
+              </p>
+            </>
+          )}
+
           {activeTab === 'metanet' && (
             <>
               <div className="text-center py-4">
-                <Globe className="w-12 h-12 text-orange-400 mx-auto mb-3" />
+                <Globe className="w-12 h-12 text-teal-400 mx-auto mb-3" />
                 <p className="text-gray-400 mb-4">Connect with MetaNet Desktop BRC100 Wallet</p>
               </div>
               <button
                 onClick={() => handleConnect('metanet', 'metanet-wallet')}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
               >
                 Connect MetaNet Wallet
               </button>

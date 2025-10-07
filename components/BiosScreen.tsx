@@ -25,30 +25,68 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   const [bootStatuses, setBootStatuses] = useState(bootLines.map(line => line.status))
 
   useEffect(() => {
-    // Start boot sequence immediately and run super fast
-    const timer = setTimeout(() => {
-      setHasUserInteracted(true)
-      onUserInteraction?.()
-      
-      const animateBootSequence = () => {
-        if (currentBootLine < bootLines.length) {
-          setTimeout(() => {
-            setCurrentBootLine(prev => prev + 1)
-          }, 50) // Much faster - 50ms instead of 500ms
+    // Auto-start boot sequence and set up click listener for sound
+    const autoStartTimer = setTimeout(() => {
+      if (!hasUserInteracted) {
+        setHasUserInteracted(true)
+        onUserInteraction?.()
+        
+        // Start boot sequence automatically
+        const animateBootSequence = () => {
+          if (currentBootLine < bootLines.length) {
+            setTimeout(() => {
+              setCurrentBootLine(prev => prev + 1)
+            }, 20)
+          }
         }
+        animateBootSequence()
       }
-      animateBootSequence()
-    }, 100) // Start almost immediately
+    }, 200) // Auto-start after 200ms
 
-    return () => clearTimeout(timer)
-  }, [onUserInteraction])
+    // Add click listener for sound (optional)
+    const handleUserInteraction = () => {
+      if (!hasUserInteracted) {
+        clearTimeout(autoStartTimer)
+        setHasUserInteracted(true)
+        onUserInteraction?.()
+        
+        // Play startup sound if clicked
+        const audio = new Audio('/startup4.wav')
+        audio.volume = 0.7
+        audio.play().catch(err => {
+          console.log('Audio playback failed:', err)
+        })
+        
+        // Start boot sequence
+        const animateBootSequence = () => {
+          if (currentBootLine < bootLines.length) {
+            setTimeout(() => {
+              setCurrentBootLine(prev => prev + 1)
+            }, 20)
+          }
+        }
+        animateBootSequence()
+      }
+    }
+
+    document.addEventListener('keydown', handleUserInteraction)
+    document.addEventListener('click', handleUserInteraction)
+    document.addEventListener('touchstart', handleUserInteraction)
+
+    return () => {
+      clearTimeout(autoStartTimer)
+      document.removeEventListener('keydown', handleUserInteraction)
+      document.removeEventListener('click', handleUserInteraction)
+      document.removeEventListener('touchstart', handleUserInteraction)
+    }
+  }, [hasUserInteracted, onUserInteraction, currentBootLine])
 
   useEffect(() => {
     // Continue boot sequence animation
     if (hasUserInteracted && currentBootLine > 0 && currentBootLine < bootLines.length) {
       const timer = setTimeout(() => {
         setCurrentBootLine(prev => prev + 1)
-      }, 50) // Much faster
+      }, 20) // Much faster
       return () => clearTimeout(timer)
     }
   }, [currentBootLine, bootLines.length, hasUserInteracted])
@@ -79,15 +117,15 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
               setIsComplete(true)
               setTimeout(() => {
                 onComplete()
-              }, 200) // Much shorter completion delay
+              }, 100) // Much shorter completion delay
               return 100
             }
-            setTimeout(updateProgress, 100) // Faster updates
+            setTimeout(updateProgress, 50) // Faster updates
             return newProgress
           })
         }
         updateProgress()
-      }, 100) // Start progress bar almost immediately
+      }, 50) // Start progress bar almost immediately
 
       return () => clearTimeout(progressTimer)
     }
@@ -186,15 +224,9 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
         <div className="opacity-0 animate-fadeIn" style={{ animationDelay: '2s' }}>
           Press DEL to enter BIOS Setup | F8 for Boot Menu | F12 for Network Boot
         </div>
-        {!hasUserInteracted ? (
-          <div className="mt-2 text-green-600 animate-pulse">
-            Starting Bitcoin OS...<span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse"></span>
-          </div>
-        ) : (
-          <div className="mt-2 text-green-600">
-            Starting Bitcoin OS...<span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse"></span>
-          </div>
-        )}
+        <div className="mt-2 text-green-600">
+          {hasUserInteracted ? 'Starting Bitcoin OS...' : 'Initializing System...'}<span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse"></span>
+        </div>
       </div>
 
       <style jsx>{`
