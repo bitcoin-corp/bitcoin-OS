@@ -63,7 +63,7 @@ export default function TopMenuBar({ onOpenApp }: TopMenuBarProps) {
         },
         { divider: true },
         { 
-          label: '$bOS Token', 
+          label: '$bOS', 
           action: () => window.location.href = '/token'
         },
         { 
