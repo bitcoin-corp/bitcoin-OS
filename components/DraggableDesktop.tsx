@@ -197,9 +197,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           const duration = video.duration;
           const currentTime = video.currentTime;
           
-          // Start fading when 90% through the video
-          if (duration && currentTime / duration > 0.9) {
-            const fadeProgress = (currentTime / duration - 0.9) / 0.1; // 0 to 1 over last 10%
+          // Start fading when 70% through the video
+          if (duration && currentTime / duration > 0.7) {
+            const fadeProgress = (currentTime / duration - 0.7) / 0.3; // 0 to 1 over last 30%
             video.style.opacity = (1 - fadeProgress).toString();
           }
         }}
