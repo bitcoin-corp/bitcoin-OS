@@ -253,7 +253,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       <WindowManager windows={openWindows} onClose={closeWindow} />
       
       {/* Bitcoin Corp, Trust and NPG - Top Right (small, vertical) */}
-      <div className="absolute right-8 top-8 flex flex-col gap-4 z-20">
+      <div className="absolute right-8 top-20 flex flex-col gap-4 z-20">
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
