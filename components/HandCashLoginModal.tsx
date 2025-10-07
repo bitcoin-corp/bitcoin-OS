@@ -291,6 +291,27 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
               </p>
             </>
           )}
+
+          {activeTab === 'rock-wallet' && (
+            <>
+              <div className="text-center py-4">
+                <Wallet className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-400 mb-4">Connect with Rock Wallet</p>
+              </div>
+              <button
+                onClick={() => handleConnect('rock-wallet', 'rock-wallet')}
+                className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+              >
+                Connect Rock Wallet
+              </button>
+              <button
+                onClick={() => window.open('https://rockwallet.com', '_blank')}
+                className="w-full bg-gray-800 text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-700 border border-gray-600 transition-colors text-sm mt-2"
+              >
+                Download Rock Wallet App
+              </button>
+            </>
+          )}
         </div>
 
         {/* Skip option */}
