@@ -23,6 +23,10 @@ import { CSS } from '@dnd-kit/utilities'
 import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box, Camera, MapPin, MessageCircle, Users, Gamepad2 } from 'lucide-react'
 import WindowManager from './WindowManager'
 
+interface DraggableDesktopProps {
+  onVideoEnded?: () => void
+}
+
 interface DesktopIcon {
   id: string
   name: string
@@ -74,7 +78,7 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
   )
 }
 
-export default function DraggableDesktop() {
+export default function DraggableDesktop({ onVideoEnded }: DraggableDesktopProps = {}) {
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   
@@ -185,6 +189,10 @@ export default function DraggableDesktop() {
         onEnded={(e) => {
           const video = e.target as HTMLVideoElement;
           video.style.opacity = '0';
+          // Trigger login modal after video fades out (1 second transition)
+          setTimeout(() => {
+            onVideoEnded?.();
+          }, 1000);
         }}
       >
         <source src="/b-OS-pro2.mp4" type="video/mp4" />
