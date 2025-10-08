@@ -20,10 +20,10 @@ export default function BootScreen() {
     let messageIndex = 0
 
     const interval = setInterval(() => {
-      currentProgress += 10
+      currentProgress += 25 // Much faster progress
       setProgress(currentProgress)
 
-      if (currentProgress % 20 === 0 && messageIndex < messages.length) {
+      if (currentProgress % 25 === 0 && messageIndex < messages.length) {
         setMessage(messages[messageIndex])
         messageIndex++
       }
@@ -31,7 +31,7 @@ export default function BootScreen() {
       if (currentProgress >= 100) {
         clearInterval(interval)
       }
-    }, 30)
+    }, 15) // Faster updates
 
     return () => clearInterval(interval)
   }, [])

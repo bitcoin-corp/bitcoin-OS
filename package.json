@@ -43,7 +43,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-rnd": "^10.5.2",
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "yours-wallet-provider": "^3.7.0"
   },
   "devDependencies": {
     "@types/node": "^22",

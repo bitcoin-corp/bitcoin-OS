@@ -82,15 +82,15 @@ export default function BitcoinOS() {
   }
 
   useEffect(() => {
-    // Boot screen completes after 3 seconds, don't wait for video
+    // Boot screen completes quickly after BIOS
     if (!showBios) {
       const bootTimer = setTimeout(() => {
         setIsBooting(false)
         // Show login modal immediately when desktop loads
         setTimeout(() => {
           setShowLoginModal(true)
-        }, 500)
-      }, 3000)
+        }, 200)
+      }, 800) // Much faster boot screen
       
       return () => clearTimeout(bootTimer)
     }

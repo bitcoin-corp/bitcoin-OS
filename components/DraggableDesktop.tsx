@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -62,9 +62,10 @@ function DraggableIcon({
     left: app.position.x,
     top: app.position.y,
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: isDragging ? 'none' : transition, // Disable transition during drag for better precision
     opacity: isDragging ? 0.5 : app.disabled ? 0.5 : 1,
     zIndex: isDragging ? 1000 : 1,
+    cursor: isDragging ? 'grabbing' : 'grab',
   }
 
   const Icon = app.icon
@@ -114,8 +115,8 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     isSelecting: false
   })
   
-  // Desktop apps with pixel positions (creating a nice spread across the desktop)
-  const [desktopApps, setDesktopApps] = useState<DesktopIcon[]>([
+  // Default desktop app positions (used for initial layout)
+  const defaultAppPositions: DesktopIcon[] = [
     { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 50, y: 50 } },
     { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 180, y: 50 } },
     { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 310, y: 50 } },
@@ -140,15 +141,63 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     { id: 'social', name: 'Bitcoin Social', icon: Users, color: 'text-pink-400', url: 'https://bitcoin-social.vercel.app', position: { x: 310, y: 700 } },
     { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 440, y: 700 } },
     { id: 'books', name: 'Bitcoin Books', icon: BookOpen, color: 'text-amber-500', url: 'https://bitcoin-books-bay.vercel.app', position: { x: 570, y: 50 } },
-  ])
+  ]
+
+  // Snap to grid settings
+  const GRID_SIZE = 20 // Snap grid size in pixels
+  const SNAP_THRESHOLD = 10 // Pixels within which to snap
+  
+  // Helper function to snap position to grid
+  const snapToGrid = (position: { x: number; y: number }) => {
+    return {
+      x: Math.round(position.x / GRID_SIZE) * GRID_SIZE,
+      y: Math.round(position.y / GRID_SIZE) * GRID_SIZE
+    }
+  }
+  
+  // Desktop apps with positions loaded from localStorage or defaults
+  const [desktopApps, setDesktopApps] = useState<DesktopIcon[]>(defaultAppPositions)
 
   const [activeId, setActiveId] = useState<string | null>(null)
   const [openWindows, setOpenWindows] = useState<Array<{ id: string; app: DesktopIcon }>>([])
 
+  // Load saved positions from localStorage on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedPositions = localStorage.getItem('bitcoinOS-desktop-positions')
+      if (savedPositions) {
+        try {
+          const positions = JSON.parse(savedPositions)
+          // Merge saved positions with default apps
+          const updatedApps = defaultAppPositions.map(app => {
+            const savedApp = positions.find((p: any) => p.id === app.id)
+            return savedApp ? { ...app, position: savedApp.position } : app
+          })
+          setDesktopApps(updatedApps)
+        } catch (error) {
+          console.error('Failed to load desktop positions:', error)
+        }
+      }
+    }
+  }, [])
+
+  // Save positions to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const positionsToSave = desktopApps.map(app => ({
+        id: app.id,
+        position: app.position
+      }))
+      localStorage.setItem('bitcoinOS-desktop-positions', JSON.stringify(positionsToSave))
+    }
+  }, [desktopApps])
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8,
+        distance: 3,
+        delay: 100,
+        tolerance: 2,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -168,22 +217,38 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         return items.map((item) => {
           // If this icon is selected and being dragged, move all selected icons
           if (selectedIcons.includes(item.id) && selectedIcons.includes(active.id as string)) {
+            const newX = item.position.x + delta.x
+            const newY = item.position.y + delta.y
+            
+            // Get viewport dimensions (accounting for sidebar)
+            const maxX = window.innerWidth - (showDevSidebar ? 260 : 0) - 120 // Icon width + padding
+            const maxY = window.innerHeight - 150 // Icon height + dock space
+            
+            const boundedX = Math.max(0, Math.min(maxX, newX))
+            const boundedY = Math.max(80, Math.min(maxY, newY))
+            const snappedPosition = snapToGrid({ x: boundedX, y: boundedY })
+            
             return {
               ...item,
-              position: {
-                x: Math.max(0, item.position.x + delta.x),
-                y: Math.max(0, item.position.y + delta.y)
-              }
+              position: snappedPosition
             }
           }
           // If only this icon is being dragged (not part of selection)
           else if (item.id === active.id) {
+            const newX = item.position.x + delta.x
+            const newY = item.position.y + delta.y
+            
+            // Get viewport dimensions (accounting for sidebar)
+            const maxX = window.innerWidth - (showDevSidebar ? 260 : 0) - 120 // Icon width + padding
+            const maxY = window.innerHeight - 150 // Icon height + dock space
+            
+            const boundedX = Math.max(0, Math.min(maxX, newX))
+            const boundedY = Math.max(80, Math.min(maxY, newY))
+            const snappedPosition = snapToGrid({ x: boundedX, y: boundedY })
+            
             return {
               ...item,
-              position: {
-                x: Math.max(0, item.position.x + delta.x),
-                y: Math.max(0, item.position.y + delta.y)
-              }
+              position: snappedPosition
             }
           }
           return item
@@ -256,10 +321,14 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
 
       const selectedIds = desktopApps
         .filter(app => {
-          const iconCenterX = app.position.x + 50 // Approximate icon center
-          const iconCenterY = app.position.y + 50
-          return iconCenterX >= minX && iconCenterX <= maxX &&
-                 iconCenterY >= minY && iconCenterY <= maxY
+          // More accurate icon dimensions (icon + text area)
+          const iconLeft = app.position.x
+          const iconRight = app.position.x + 100 // Icon width + padding
+          const iconTop = app.position.y
+          const iconBottom = app.position.y + 120 // Icon height + text + padding
+          
+          // Check if selection box overlaps with icon bounds
+          return !(iconRight < minX || iconLeft > maxX || iconBottom < minY || iconTop > maxY)
         })
         .map(app => app.id)
 
@@ -270,6 +339,45 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const handleMouseUp = () => {
     setSelectionBox(prev => ({ ...prev, isSelecting: false }))
   }
+
+  // Reset desktop icons to default positions
+  const resetDesktopPositions = () => {
+    setDesktopApps(defaultAppPositions)
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('bitcoinOS-desktop-positions')
+    }
+  }
+
+  // Keyboard shortcut for resetting positions (Cmd/Ctrl + R + R - double R)
+  useEffect(() => {
+    let resetKeyCount = 0
+    let resetTimeout: NodeJS.Timeout
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'r') {
+        event.preventDefault()
+        resetKeyCount++
+        
+        if (resetKeyCount === 2) {
+          resetDesktopPositions()
+          console.log('Desktop positions reset to defaults')
+          resetKeyCount = 0
+        }
+        
+        // Reset count after 1 second
+        clearTimeout(resetTimeout)
+        resetTimeout = setTimeout(() => {
+          resetKeyCount = 0
+        }, 1000)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      clearTimeout(resetTimeout)
+    }
+  }, [])
 
   const openApp = useCallback((app: DesktopIcon) => {
     if (app.disabled) return

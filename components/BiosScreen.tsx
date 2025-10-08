@@ -29,9 +29,9 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
     { text: 'Initializing Bitcoin Core...', status: 'ok' },
     { text: 'Loading Blockchain Headers...', status: 'ok' },
     { text: 'Verifying Wallet Security...', status: 'ok' },
-    { text: 'Establishing P2P Connections...', status: 'loading', delay: 4000 },
-    { text: 'Synchronizing Mempool...', status: 'loading', delay: 5000 },
-    { text: 'Starting Mining Service...', status: 'loading', delay: 6000 }
+    { text: 'Establishing P2P Connections...', status: 'loading', delay: 800 },
+    { text: 'Synchronizing Mempool...', status: 'loading', delay: 1000 },
+    { text: 'Starting Mining Service...', status: 'loading', delay: 1200 }
   ]
 
   const [bootStatuses, setBootStatuses] = useState(bootLines.map(line => line.status))
@@ -48,12 +48,12 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
           if (currentBootLine < bootLines.length) {
             setTimeout(() => {
               setCurrentBootLine(prev => prev + 1)
-            }, 20)
+            }, 10)
           }
         }
         animateBootSequence()
       }
-    }, 200) // Auto-start after 200ms
+    }, 50) // Auto-start after 50ms
 
     // Add click listener for sound (optional)
     const handleUserInteraction = () => {
@@ -74,7 +74,7 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
           if (currentBootLine < bootLines.length) {
             setTimeout(() => {
               setCurrentBootLine(prev => prev + 1)
-            }, 20)
+            }, 10)
           }
         }
         animateBootSequence()
@@ -98,7 +98,7 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
     if (hasUserInteracted && currentBootLine > 0 && currentBootLine < bootLines.length) {
       const timer = setTimeout(() => {
         setCurrentBootLine(prev => prev + 1)
-      }, 20) // Much faster
+      }, 5) // Even faster
       return () => clearTimeout(timer)
     }
   }, [currentBootLine, bootLines.length, hasUserInteracted])
@@ -124,20 +124,20 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
       const progressTimer = setTimeout(() => {
         const updateProgress = () => {
           setProgress(prev => {
-            const newProgress = prev + Math.random() * 25 + 20 // Much faster progress jumps
+            const newProgress = prev + Math.random() * 40 + 30 // Even faster progress jumps
             if (newProgress >= 100) {
               setIsComplete(true)
               setTimeout(() => {
                 onComplete()
-              }, 100) // Much shorter completion delay
+              }, 50) // Minimal completion delay
               return 100
             }
-            setTimeout(updateProgress, 50) // Faster updates
+            setTimeout(updateProgress, 25) // Much faster updates
             return newProgress
           })
         }
         updateProgress()
-      }, 50) // Start progress bar almost immediately
+      }, 25) // Start progress bar immediately
 
       return () => clearTimeout(progressTimer)
     }

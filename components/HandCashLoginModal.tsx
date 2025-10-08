@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { X, Wallet, Key, Mail, Globe, Move } from 'lucide-react'
+import { X, Wallet, Key, Mail, Globe, Move, Shield, Award, Zap } from 'lucide-react'
+import { brc100Wallet, BRC100Identity } from '@/lib/brc100'
+import { yoursWallet, YoursWalletAPI } from '@/lib/yours-wallet'
 
 interface HandCashLoginModalProps {
   isOpen: boolean
@@ -13,6 +15,8 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
   const [handle, setHandle] = useState('')
   const [email, setEmail] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
+  const [brc100Identity, setBrc100Identity] = useState<BRC100Identity | null>(null)
+  const [yoursWalletAvailable, setYoursWalletAvailable] = useState(false)
   const [activeTab, setActiveTab] = useState<'handcash' | 'centbee' | 'yours' | 'bitcoin-wallet' | 'metanet' | 'keypair' | 'email' | 'rock-wallet'>('handcash')
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
@@ -35,6 +39,15 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
     setIsDragging(false)
   }, [])
 
+  // Check Yours Wallet availability
+  useEffect(() => {
+    const checkYoursWallet = async () => {
+      const available = await yoursWallet.isAvailable()
+      setYoursWalletAvailable(available)
+    }
+    checkYoursWallet()
+  }, [])
+
   // Add global mouse event listeners
   useEffect(() => {
     if (isDragging) {
@@ -55,9 +68,56 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
     setIsConnecting(true)
     
     try {
-      // Simulate connection
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      onLogin(identifier, method)
+      // Handle Yours Wallet connection
+      if (method === 'yours') {
+        try {
+          const connection = await yoursWallet.connect()
+          if (connection.isConnected && connection.address) {
+            // Create BRC100 identity for Yours Wallet
+            const identity = await brc100Wallet.createIdentity({ backup: true })
+            setBrc100Identity(identity)
+            
+            // Create certificate with Yours Wallet info
+            await brc100Wallet.createCertificate({
+              type: 'yours-wallet',
+              method: 'yours',
+              address: connection.address,
+              publicKey: connection.publicKey,
+              createdAt: new Date().toISOString(),
+              device: navigator.userAgent
+            })
+            
+            console.log('Yours Wallet connected:', connection)
+            onLogin(connection.address, method)
+          } else {
+            throw new Error('Failed to connect to Yours Wallet')
+          }
+        } catch (error) {
+          console.error('Yours Wallet connection failed:', error)
+          throw error
+        }
+      }
+      // Handle BRC100 identity creation for compatible methods
+      else if (['metanet', 'bitcoin-wallet', 'keypair'].includes(method)) {
+        const identity = await brc100Wallet.createIdentity({ backup: true })
+        setBrc100Identity(identity)
+        
+        // Create default identity certificate
+        await brc100Wallet.createCertificate({
+          type: 'identity',
+          method: method,
+          createdAt: new Date().toISOString(),
+          device: navigator.userAgent
+        })
+        
+        console.log('BRC100 Identity created:', identity)
+        onLogin(identity.address, method)
+      } else {
+        // Standard wallet connection
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        onLogin(identifier, method)
+      }
+      
       onClose()
     } catch (error) {
       console.error(`${method} connection failed:`, error)
@@ -217,19 +277,32 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
             <>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Import Private Key or Generate New
+                  Import Private Key or Generate New BRC100 Identity
                 </label>
                 <textarea
-                  placeholder="Paste your private key here or leave empty to generate new"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  placeholder="Paste your private key here or leave empty to generate new BRC100 identity"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   rows={3}
                 />
+                <div className="bg-gray-800 rounded-lg p-3 mt-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Key className="w-4 h-4 text-purple-400" />
+                    <span className="text-sm font-medium text-gray-300">BRC100 Key Features</span>
+                  </div>
+                  <ul className="text-xs text-gray-400 space-y-1">
+                    <li>• ECDSA/Schnorr signature support</li>
+                    <li>• Identity certificate generation</li>
+                    <li>• Secure backup & restore</li>
+                    <li>• App permission management</li>
+                  </ul>
+                </div>
               </div>
               <button
                 onClick={() => handleConnect('keypair', 'generated-key')}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                disabled={isConnecting}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Import/Generate Key Pair
+                {isConnecting ? 'Creating BRC100 Identity...' : 'Import/Generate BRC100 Key Pair'}
               </button>
             </>
           )}
@@ -288,18 +361,39 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
               <div className="text-center py-4">
                 <Wallet className="w-12 h-12 text-blue-400 mx-auto mb-3" />
                 <p className="text-gray-400 mb-4">Connect with Yours Wallet</p>
+                <div className="bg-gray-800 rounded-lg p-3 mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-4 h-4 text-blue-400" />
+                    <span className="text-sm font-medium text-gray-300">1Sat Ordinals Support</span>
+                  </div>
+                  <ul className="text-xs text-gray-400 space-y-1">
+                    <li>• Non-custodial BSV wallet</li>
+                    <li>• 1Sat Ordinals management</li>
+                    <li>• Open source & audited</li>
+                    <li>• Browser extension</li>
+                  </ul>
+                </div>
+                {!yoursWalletAvailable && (
+                  <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-3 mb-4">
+                    <p className="text-xs text-yellow-400 text-center">
+                      Yours Wallet extension not detected
+                    </p>
+                  </div>
+                )}
               </div>
               <button
                 onClick={() => handleConnect('yours', 'yours-wallet')}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                disabled={!yoursWalletAvailable || isConnecting}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Connect Yours Wallet
+                {isConnecting ? 'Connecting to Yours Wallet...' : 
+                 yoursWalletAvailable ? 'Connect Yours Wallet' : 'Install Yours Wallet'}
               </button>
               <button
-                onClick={() => window.open('https://yours.org', '_blank')}
+                onClick={() => window.open(yoursWalletAvailable ? 'https://yours.org' : YoursWalletAPI.getInstallUrl(), '_blank')}
                 className="w-full bg-gray-800 text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-700 border border-gray-600 transition-colors text-sm mt-2"
               >
-                Visit Yours.org
+                {yoursWalletAvailable ? 'Visit Yours.org' : 'Install Yours Wallet Extension'}
               </button>
             </>
           )}
@@ -309,13 +403,25 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
               <div className="text-center py-4">
                 <Wallet className="w-12 h-12 text-orange-400 mx-auto mb-3" />
                 <p className="text-gray-400 mb-4">Use Bitcoin OS Native Wallet</p>
-                <p className="text-xs text-gray-500 mb-4">The built-in wallet for Bitcoin OS - secure, fast, and integrated</p>
+                <div className="bg-gray-800 rounded-lg p-3 mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="w-4 h-4 text-orange-400" />
+                    <span className="text-sm font-medium text-gray-300">Native Integration</span>
+                  </div>
+                  <ul className="text-xs text-gray-400 space-y-1">
+                    <li>• Built-in BRC100 support</li>
+                    <li>• Seamless app integration</li>
+                    <li>• Local key management</li>
+                    <li>• Instant authentication</li>
+                  </ul>
+                </div>
               </div>
               <button
                 onClick={() => handleConnect('bitcoin-wallet', 'bitcoin-os-wallet')}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                disabled={isConnecting}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create Bitcoin OS Wallet
+                {isConnecting ? 'Creating BRC100 Wallet...' : 'Create Bitcoin OS Wallet'}
               </button>
             </>
           )}
@@ -325,15 +431,28 @@ export default function HandCashLoginModal({ isOpen, onClose, onLogin }: HandCas
               <div className="text-center py-4">
                 <Globe className="w-12 h-12 text-teal-400 mx-auto mb-3" />
                 <p className="text-gray-400 mb-4">Connect with MetaNet Desktop BRC100 Wallet</p>
+                <div className="bg-gray-800 rounded-lg p-3 mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Award className="w-4 h-4 text-teal-400" />
+                    <span className="text-sm font-medium text-gray-300">BRC100 Features</span>
+                  </div>
+                  <ul className="text-xs text-gray-400 space-y-1">
+                    <li>• Cryptographic identity certificates</li>
+                    <li>• Secure message signing</li>
+                    <li>• Transaction authorization</li>
+                    <li>• Cross-app authentication</li>
+                  </ul>
+                </div>
               </div>
               <button
                 onClick={() => handleConnect('metanet', 'metanet-wallet')}
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+                disabled={isConnecting}
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Connect MetaNet Wallet
+                {isConnecting ? 'Creating BRC100 Identity...' : 'Connect MetaNet Wallet'}
               </button>
               <p className="text-xs text-gray-500 text-center">
-                Requires MetaNet Desktop application
+                Creates BRC100 compatible identity
               </p>
             </>
           )}
