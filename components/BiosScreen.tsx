@@ -44,6 +44,13 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
         setHasUserInteracted(true)
         onUserInteraction?.()
         
+        // Play startup sound automatically
+        const audio = new Audio('/startup4.wav')
+        audio.volume = 0.6
+        audio.play().catch(err => {
+          console.log('Auto audio playback failed (expected on some browsers):', err)
+        })
+        
         // Start boot sequence automatically
         const animateBootSequence = () => {
           if (currentBootLine < bootLines.length) {
@@ -63,11 +70,11 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
         setHasUserInteracted(true)
         onUserInteraction?.()
         
-        // Play startup sound if clicked
+        // Play startup sound if clicked (with slightly higher volume for manual trigger)
         const audio = new Audio('/startup4.wav')
-        audio.volume = 0.7
+        audio.volume = 0.8
         audio.play().catch(err => {
-          console.log('Audio playback failed:', err)
+          console.log('Manual audio playback failed:', err)
         })
         
         // Start boot sequence

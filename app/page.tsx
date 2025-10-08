@@ -72,6 +72,7 @@ export default function BitcoinOS() {
       setHasUserInteracted(true)
       // Play startup sound immediately on user interaction
       const audio = new Audio('/startup4.wav')
+      audio.volume = 0.7
       audio.play().catch(err => {
         console.log('Audio playback failed:', err)
       })
