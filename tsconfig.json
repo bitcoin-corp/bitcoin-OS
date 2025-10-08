@@ -36,6 +36,7 @@
   ],
   "exclude": [
     "node_modules",
-    "packages/bitcoin-os-bridge/examples"
+    "packages/bitcoin-os-bridge/examples",
+    "apps/**/*"
   ]
 }
