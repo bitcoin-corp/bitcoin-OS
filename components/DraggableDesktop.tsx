@@ -37,7 +37,17 @@ interface DesktopIcon {
 }
 
 // Desktop icon component with drag functionality
-function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick: () => void }) {
+function DraggableIcon({ 
+  app, 
+  onDoubleClick, 
+  isSelected, 
+  onSelect 
+}: { 
+  app: DesktopIcon; 
+  onDoubleClick: () => void;
+  isSelected: boolean;
+  onSelect: (id: string, event: React.MouseEvent) => void;
+}) {
   const {
     attributes,
     listeners,
@@ -67,8 +77,13 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
       {...listeners}
       className={`desktop-icon-draggable ${app.disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       onDoubleClick={!app.disabled ? onDoubleClick : undefined}
+      onClick={(e) => onSelect(app.id, e)}
     >
-      <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all select-none">
+      <div className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all select-none ${
+        isSelected 
+          ? 'bg-blue-500/30 border-2 border-blue-400 shadow-lg shadow-blue-500/20' 
+          : 'hover:bg-white/10'
+      }`}>
         <Icon 
           className={`w-12 h-12 ${app.color} drop-shadow-2xl`} 
           strokeWidth={1.5}
@@ -84,6 +99,20 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
 export default function DraggableDesktop({ isVideoReady, showDevSidebar = false }: DraggableDesktopProps = {}) {
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
+  const [selectedIcons, setSelectedIcons] = useState<string[]>([])
+  const [selectionBox, setSelectionBox] = useState<{
+    startX: number
+    startY: number
+    currentX: number
+    currentY: number
+    isSelecting: boolean
+  }>({
+    startX: 0,
+    startY: 0,
+    currentX: 0,
+    currentY: 0,
+    isSelecting: false
+  })
   
   // Desktop apps with pixel positions (creating a nice spread across the desktop)
   const [desktopApps, setDesktopApps] = useState<DesktopIcon[]>([
@@ -137,11 +166,22 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     if (delta.x !== 0 || delta.y !== 0) {
       setDesktopApps((items) => {
         return items.map((item) => {
-          if (item.id === active.id) {
+          // If this icon is selected and being dragged, move all selected icons
+          if (selectedIcons.includes(item.id) && selectedIcons.includes(active.id as string)) {
             return {
               ...item,
               position: {
-                x: Math.max(0, item.position.x + delta.x), // Prevent negative positioning
+                x: Math.max(0, item.position.x + delta.x),
+                y: Math.max(0, item.position.y + delta.y)
+              }
+            }
+          }
+          // If only this icon is being dragged (not part of selection)
+          else if (item.id === active.id) {
+            return {
+              ...item,
+              position: {
+                x: Math.max(0, item.position.x + delta.x),
                 y: Math.max(0, item.position.y + delta.y)
               }
             }
@@ -152,6 +192,83 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     }
 
     setActiveId(null)
+  }
+
+  // Handle icon selection
+  const handleIconSelect = (iconId: string, event: React.MouseEvent) => {
+    event.stopPropagation()
+    
+    if (event.ctrlKey || event.metaKey) {
+      // Multi-select with Ctrl/Cmd
+      setSelectedIcons(prev => 
+        prev.includes(iconId) 
+          ? prev.filter(id => id !== iconId)
+          : [...prev, iconId]
+      )
+    } else {
+      // Single select
+      setSelectedIcons([iconId])
+    }
+  }
+
+  // Handle desktop click (clear selection)
+  const handleDesktopClick = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      setSelectedIcons([])
+    }
+  }
+
+  // Handle selection box
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget && !event.ctrlKey && !event.metaKey) {
+      const rect = event.currentTarget.getBoundingClientRect()
+      const startX = event.clientX - rect.left
+      const startY = event.clientY - rect.top
+      
+      setSelectionBox({
+        startX,
+        startY,
+        currentX: startX,
+        currentY: startY,
+        isSelecting: true
+      })
+      setSelectedIcons([])
+    }
+  }
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    if (selectionBox.isSelecting) {
+      const rect = event.currentTarget.getBoundingClientRect()
+      const currentX = event.clientX - rect.left
+      const currentY = event.clientY - rect.top
+      
+      setSelectionBox(prev => ({
+        ...prev,
+        currentX,
+        currentY
+      }))
+
+      // Check which icons are in the selection box
+      const minX = Math.min(selectionBox.startX, currentX)
+      const maxX = Math.max(selectionBox.startX, currentX)
+      const minY = Math.min(selectionBox.startY, currentY)
+      const maxY = Math.max(selectionBox.startY, currentY)
+
+      const selectedIds = desktopApps
+        .filter(app => {
+          const iconCenterX = app.position.x + 50 // Approximate icon center
+          const iconCenterY = app.position.y + 50
+          return iconCenterX >= minX && iconCenterX <= maxX &&
+                 iconCenterY >= minY && iconCenterY <= maxY
+        })
+        .map(app => app.id)
+
+      setSelectedIcons(selectedIds)
+    }
+  }
+
+  const handleMouseUp = () => {
+    setSelectionBox(prev => ({ ...prev, isSelecting: false }))
   }
 
   const openApp = useCallback((app: DesktopIcon) => {
@@ -222,7 +339,13 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       <div className="absolute inset-0 bg-black/30 z-10"></div>
       
       {/* Desktop Icons */}
-      <div className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}>
+      <div 
+        className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}
+        onClick={handleDesktopClick}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
         <DndContext
           sensors={sensors}
           onDragStart={handleDragStart}
@@ -235,20 +358,51 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                   key={app.id}
                   app={app}
                   onDoubleClick={() => openApp(app)}
+                  isSelected={selectedIcons.includes(app.id)}
+                  onSelect={handleIconSelect}
                 />
               ))}
+              
+              {/* Selection Box */}
+              {selectionBox.isSelecting && (
+                <div
+                  className="absolute border-2 border-blue-400 bg-blue-400/10 pointer-events-none"
+                  style={{
+                    left: Math.min(selectionBox.startX, selectionBox.currentX),
+                    top: Math.min(selectionBox.startY, selectionBox.currentY),
+                    width: Math.abs(selectionBox.currentX - selectionBox.startX),
+                    height: Math.abs(selectionBox.currentY - selectionBox.startY),
+                  }}
+                />
+              )}
             </div>
           </SortableContext>
 
           <DragOverlay>
             {activeApp ? (
               <div className="opacity-80">
-                <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
-                  <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
-                  <span className="text-sm text-white text-center font-medium">
-                    {activeApp.name}
-                  </span>
-                </div>
+                {selectedIcons.includes(activeApp.id) && selectedIcons.length > 1 ? (
+                  // Show multiple icons when dragging a selection
+                  <div className="relative">
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
+                      <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                      <span className="text-sm text-white text-center font-medium">
+                        {activeApp.name}
+                      </span>
+                    </div>
+                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+                      {selectedIcons.length}
+                    </div>
+                  </div>
+                ) : (
+                  // Show single icon when dragging one item
+                  <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
+                    <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                    <span className="text-sm text-white text-center font-medium">
+                      {activeApp.name}
+                    </span>
+                  </div>
+                )}
               </div>
             ) : null}
           </DragOverlay>
