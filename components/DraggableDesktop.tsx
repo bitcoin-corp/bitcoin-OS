@@ -541,29 +541,6 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
-          onClick={() => window.location.href = 'https://bsvassociation.org/'}
-          title="BSV Association"
-        >
-          <svg className="w-10 h-10 text-blue-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 2 L22 20 L2 20 Z"/>
-          </svg>
-          <span className="text-xs text-white text-center font-medium drop-shadow-md">Ass</span>
-        </button>
-        <button 
-          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
-          onClick={() => setShowTrashWindow(true)}
-          title="Bitcoin Dojo"
-        >
-          <svg className="w-10 h-10 text-red-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M3 6 L21 6"/>
-            <path d="M4 9 L20 9"/>
-            <path d="M7 9 L7 18"/>
-            <path d="M17 9 L17 18"/>
-          </svg>
-          <span className="text-xs text-white text-center font-medium drop-shadow-md">Dojo</span>
-        </button>
-        <button 
-          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.open('https://www.ninjapunkgirls.website', '_blank')}
           title="Ninja Punk Girls"
         >
