@@ -11,6 +11,7 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   const [currentBootLine, setCurrentBootLine] = useState(0)
   const [progress, setProgress] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
+  const [isFadingOut, setIsFadingOut] = useState(false)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
 
   // Preload video immediately when BIOS starts
@@ -127,9 +128,10 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
             const newProgress = prev + Math.random() * 40 + 30 // Even faster progress jumps
             if (newProgress >= 100) {
               setIsComplete(true)
+              setIsFadingOut(true)
               setTimeout(() => {
                 onComplete()
-              }, 50) // Minimal completion delay
+              }, 300) // Allow time for fade out
               return 100
             }
             setTimeout(updateProgress, 25) // Much faster updates
@@ -162,7 +164,9 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   }
 
   return (
-    <div className="w-full h-screen bg-black text-green-400 font-mono text-sm leading-relaxed p-5 flex flex-col overflow-hidden">
+    <div className={`w-full h-screen bg-black text-green-400 font-mono text-sm leading-relaxed p-5 flex flex-col overflow-hidden transition-opacity duration-300 ease-out ${
+      isFadingOut ? 'opacity-0' : 'opacity-100'
+    }`}>
       {/* Header */}
       <div className="border-b-2 border-green-400 pb-2 mb-5">
         <div className="text-base font-bold" style={{ textShadow: '0 0 10px #00ff00' }}>

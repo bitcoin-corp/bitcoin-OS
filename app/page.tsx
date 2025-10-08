@@ -31,6 +31,7 @@ interface OpenApp {
 export default function BitcoinOS() {
   const [showBios, setShowBios] = useState(true)
   const [isBooting, setIsBooting] = useState(true)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const [openWindows, setOpenWindows] = useState<string[]>([])
   const [openApps, setOpenApps] = useState<OpenApp[]>([])
   const [activeWindow, setActiveWindow] = useState<string | null>(null)
@@ -78,19 +79,27 @@ export default function BitcoinOS() {
   }
 
   const handleBiosComplete = () => {
-    setShowBios(false)
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setShowBios(false)
+      setIsTransitioning(false)
+    }, 200) // Small delay to smooth transition
   }
 
   useEffect(() => {
     // Boot screen completes quickly after BIOS
-    if (!showBios) {
+    if (!showBios && !isTransitioning) {
       const bootTimer = setTimeout(() => {
-        setIsBooting(false)
-        // Show login modal immediately when desktop loads
+        setIsTransitioning(true)
         setTimeout(() => {
-          setShowLoginModal(true)
+          setIsBooting(false)
+          setIsTransitioning(false)
+          // Show login modal when desktop loads
+          setTimeout(() => {
+            setShowLoginModal(true)
+          }, 300)
         }, 200)
-      }, 800) // Much faster boot screen
+      }, 1000) // Slightly longer for smoother experience
       
       return () => clearTimeout(bootTimer)
     }
@@ -214,11 +223,19 @@ export default function BitcoinOS() {
   }
 
   if (showBios) {
-    return <BiosScreen onComplete={handleBiosComplete} onUserInteraction={handleUserInteraction} />
+    return (
+      <div className="transition-opacity duration-500 ease-in-out">
+        <BiosScreen onComplete={handleBiosComplete} onUserInteraction={handleUserInteraction} />
+      </div>
+    )
   }
 
   if (isBooting) {
-    return <BootScreen />
+    return (
+      <div className="transition-opacity duration-500 ease-in-out">
+        <BootScreen />
+      </div>
+    )
   }
 
   // Mobile Layout
@@ -307,8 +324,18 @@ export default function BitcoinOS() {
 
   // Desktop Layout
   return (
-    <div className="h-full relative">
-      <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
+    <>
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+      `}</style>
+      <div className="h-full relative animate-fadeIn">
+        <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
         
         {openWindows.map((appName) => (
           <Window
@@ -332,6 +359,7 @@ export default function BitcoinOS() {
             onClose={() => setPlaceholderApp(null)}
           />
         )}
-    </div>
+      </div>
+    </>
   )
 }

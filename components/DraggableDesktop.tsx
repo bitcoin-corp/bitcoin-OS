@@ -411,7 +411,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const activeApp = activeId ? desktopApps.find(app => app.id === activeId) : null
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 background-cycle">
+    <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 background-cycle transition-all duration-500 ease-in-out">
       {/* Video Background */}
       <video
         autoPlay
@@ -448,7 +448,8 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       
       {/* Desktop Icons */}
       <div 
-        className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}
+        className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-500 ease-in-out opacity-0 animate-fadeInUp ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}
+        style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
         onClick={handleDesktopClick}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -710,6 +711,22 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           </div>
         </div>
       )}
+      
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { 
+            opacity: 0; 
+            transform: translateY(20px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+      `}</style>
     </div>
   )
 }
