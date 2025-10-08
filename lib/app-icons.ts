@@ -53,6 +53,33 @@ export const appIcons = {
   'bapps-store': { icon: Store, color: '#ff6b35' }, // For BAPPS store
 }
 
-export const getAppIcon = (appId: string) => {
-  return appIcons[appId as keyof typeof appIcons] || { icon: Globe, color: '#6b7280' }
+export const getRainbowColor = (index: number): string => {
+  const rainbowColors = [
+    '#ff0000', // Red
+    '#ff8000', // Orange  
+    '#ffff00', // Yellow
+    '#80ff00', // Lime
+    '#00ff00', // Green
+    '#00ff80', // Spring Green
+    '#00ffff', // Cyan
+    '#0080ff', // Blue
+    '#0000ff', // Deep Blue
+    '#8000ff', // Purple
+    '#ff00ff', // Magenta
+    '#ff0080'  // Rose
+  ];
+  return rainbowColors[index % rainbowColors.length];
+};
+
+export const getAppIcon = (appId: string, index?: number, useRainbow?: boolean) => {
+  const defaultIcon = appIcons[appId as keyof typeof appIcons] || { icon: Globe, color: '#6b7280' }
+  
+  if (useRainbow && typeof index === 'number') {
+    return {
+      ...defaultIcon,
+      color: getRainbowColor(index)
+    }
+  }
+  
+  return defaultIcon
 }

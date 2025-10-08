@@ -73,8 +73,10 @@ export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
 
         {/* App Grid */}
         <div className="grid grid-cols-4 gap-3 px-4 pb-8 overflow-y-auto">
-          {bitcoinApps.map((app) => {
-            const { icon: Icon, color } = getAppIcon(app.id)
+          {bitcoinApps.map((app, index) => {
+            // Use rainbow colors for live apps (those with isExternal: true)
+            const isLiveApp = app.isExternal === true
+            const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp)
             return (
               <button
                 key={app.id}

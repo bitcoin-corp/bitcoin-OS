@@ -272,8 +272,10 @@ export default function BitcoinOS() {
               {/* App Grid */}
               <div className="p-4">
                 <div className="grid grid-cols-3 gap-4">
-                  {bitcoinApps.map((app) => {
-                    const { icon: Icon, color } = getAppIcon(app.id)
+                  {bitcoinApps.map((app, index) => {
+                    // Use rainbow colors for live apps (those with isExternal: true)
+                    const isLiveApp = app.isExternal === true
+                    const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp)
                     return (
                       <button
                         key={app.id}
