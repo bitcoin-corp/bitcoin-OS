@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
+import BitcoinOSLayout from '@/components/BitcoinOSLayout'
 
 export const metadata: Metadata = {
   title: 'Bitcoin OS - Bitcoin Operating System',
@@ -60,7 +61,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black text-white overflow-hidden">
         <ServiceWorkerRegistration />
-        {children}
+        <BitcoinOSLayout>
+          {children}
+        </BitcoinOSLayout>
       </body>
     </html>
   )

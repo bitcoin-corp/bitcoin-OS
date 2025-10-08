@@ -13,10 +13,8 @@ import {
   DragOverlay,
 } from '@dnd-kit/core'
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  rectSortingStrategy,
 } from '@dnd-kit/sortable'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -35,7 +33,7 @@ interface DesktopIcon {
   color: string
   url?: string
   disabled?: boolean
-  position: { x: number; y: number }
+  position: { x: number; y: number } // Now represents pixel coordinates
 }
 
 // Desktop icon component with drag functionality
@@ -50,9 +48,13 @@ function DraggableIcon({ app, onDoubleClick }: { app: DesktopIcon; onDoubleClick
   } = useSortable({ id: app.id })
 
   const style = {
+    position: 'absolute' as const,
+    left: app.position.x,
+    top: app.position.y,
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : app.disabled ? 0.5 : 1,
+    zIndex: isDragging ? 1000 : 1,
   }
 
   const Icon = app.icon
@@ -83,32 +85,32 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   
-  // Desktop apps with positions
+  // Desktop apps with pixel positions (creating a nice spread across the desktop)
   const [desktopApps, setDesktopApps] = useState<DesktopIcon[]>([
-    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 0, y: 2 } },
-    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 1, y: 2 } },
-    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 2, y: 2 } },
-    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 3, y: 2 } },
-    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 0, y: 3 } },
-    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 1, y: 3 } },
-    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 2, y: 3 } },
-    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-emerald-500', url: 'https://bitcoin-exchange-iota.vercel.app', position: { x: 3, y: 3 } },
-    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 0, y: 4 } },
-    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-blue-600', url: 'https://bitcoin-search.vercel.app', position: { x: 1, y: 4 } },
-    { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 2, y: 4 } },
-    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 3, y: 4 } },
-    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 0, y: 5 } },
-    { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 1, y: 5 } },
-    { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 2, y: 5 } },
-    { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 0, y: 6 } },
-    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 1, y: 6 } },
-    { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 2, y: 6 } },
-    { id: 'photos', name: 'Bitcoin Photos', icon: Camera, color: 'text-blue-400', url: 'https://bitcoin-photos.vercel.app', position: { x: 3, y: 6 } },
-    { id: 'maps', name: 'Bitcoin Maps', icon: MapPin, color: 'text-green-500', url: 'https://bitcoin-maps.vercel.app', position: { x: 0, y: 7 } },
-    { id: 'chat', name: 'Bitcoin Chat', icon: MessageCircle, color: 'text-blue-400', url: 'https://bitcoin-chat.vercel.app', position: { x: 1, y: 7 } },
-    { id: 'social', name: 'Bitcoin Social', icon: Users, color: 'text-pink-400', url: 'https://bitcoin-social.vercel.app', position: { x: 2, y: 7 } },
-    { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 3, y: 7 } },
-    { id: 'books', name: 'Bitcoin Books', icon: BookOpen, color: 'text-amber-500', url: 'https://bitcoin-books-bay.vercel.app', position: { x: 0, y: 8 } },
+    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 50, y: 50 } },
+    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 180, y: 50 } },
+    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 310, y: 50 } },
+    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 440, y: 50 } },
+    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 50, y: 180 } },
+    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 180, y: 180 } },
+    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 310, y: 180 } },
+    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-emerald-500', url: 'https://bitcoin-exchange-iota.vercel.app', position: { x: 440, y: 180 } },
+    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 50, y: 310 } },
+    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-blue-600', url: 'https://bitcoin-search.vercel.app', position: { x: 180, y: 310 } },
+    { id: 'shares', name: 'Bitcoin Shares', icon: Share2, color: 'text-gray-500', url: 'https://bitcoin-shares.vercel.app', disabled: true, position: { x: 310, y: 310 } },
+    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 440, y: 310 } },
+    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 50, y: 440 } },
+    { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 180, y: 440 } },
+    { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 310, y: 440 } },
+    { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 50, y: 570 } },
+    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 180, y: 570 } },
+    { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 310, y: 570 } },
+    { id: 'photos', name: 'Bitcoin Photos', icon: Camera, color: 'text-blue-400', url: 'https://bitcoin-photos.vercel.app', position: { x: 440, y: 570 } },
+    { id: 'maps', name: 'Bitcoin Maps', icon: MapPin, color: 'text-green-500', url: 'https://bitcoin-maps.vercel.app', position: { x: 50, y: 700 } },
+    { id: 'chat', name: 'Bitcoin Chat', icon: MessageCircle, color: 'text-blue-400', url: 'https://bitcoin-chat.vercel.app', position: { x: 180, y: 700 } },
+    { id: 'social', name: 'Bitcoin Social', icon: Users, color: 'text-pink-400', url: 'https://bitcoin-social.vercel.app', position: { x: 310, y: 700 } },
+    { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 440, y: 700 } },
+    { id: 'books', name: 'Bitcoin Books', icon: BookOpen, color: 'text-amber-500', url: 'https://bitcoin-books-bay.vercel.app', position: { x: 570, y: 50 } },
   ])
 
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -130,17 +132,22 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
+    const { active, delta } = event
 
-    if (active.id !== over?.id) {
+    if (delta.x !== 0 || delta.y !== 0) {
       setDesktopApps((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id)
-        const newIndex = items.findIndex((item) => item.id === over?.id)
-
-        if (oldIndex !== -1 && newIndex !== -1) {
-          return arrayMove(items, oldIndex, newIndex)
-        }
-        return items
+        return items.map((item) => {
+          if (item.id === active.id) {
+            return {
+              ...item,
+              position: {
+                x: Math.max(0, item.position.x + delta.x), // Prevent negative positioning
+                y: Math.max(0, item.position.y + delta.y)
+              }
+            }
+          }
+          return item
+        })
       })
     }
 
@@ -197,9 +204,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           const duration = video.duration;
           const currentTime = video.currentTime;
           
-          // Start fading when 70% through the video
-          if (duration && currentTime / duration > 0.7) {
-            const fadeProgress = (currentTime / duration - 0.7) / 0.3; // 0 to 1 over last 30%
+          // Start fading when 50% through the video  
+          if (duration && currentTime / duration > 0.5) {
+            const fadeProgress = (currentTime / duration - 0.5) / 0.5; // 0 to 1 over last 50%
             video.style.opacity = (1 - fadeProgress).toString();
           }
         }}
@@ -218,12 +225,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       <div className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-300 ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}>
         <DndContext
           sensors={sensors}
-          collisionDetection={closestCenter}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <SortableContext items={desktopApps} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-6 gap-6 auto-rows-min max-w-3xl">
+          <SortableContext items={desktopApps}>
+            <div className="relative w-full h-full">
               {desktopApps.map((app) => (
                 <DraggableIcon
                   key={app.id}

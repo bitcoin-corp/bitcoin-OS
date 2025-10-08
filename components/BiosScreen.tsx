@@ -13,6 +13,18 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   const [isComplete, setIsComplete] = useState(false)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
 
+  // Preload video immediately when BIOS starts
+  useEffect(() => {
+    const video = document.createElement('video')
+    video.src = '/b-OS-pro2.mp4'
+    video.muted = true
+    video.playsInline = true
+    video.preload = 'auto'
+    video.load()
+    
+    console.log('Video preload started during BIOS')
+  }, [])
+
   const bootLines = [
     { text: 'Initializing Bitcoin Core...', status: 'ok' },
     { text: 'Loading Blockchain Headers...', status: 'ok' },

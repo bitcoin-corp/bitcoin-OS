@@ -3,10 +3,6 @@
 import { useState, useEffect } from 'react'
 import { ArrowLeft, Monitor, Palette, Shield, User } from 'lucide-react'
 import Link from 'next/link'
-import ProofOfConceptBar from '@/components/ProofOfConceptBar'
-import TopMenuBar from '@/components/TopMenuBar'
-import DevSidebar from '@/components/DevSidebar'
-import Dock from '@/components/Dock'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 export default function SettingsPage() {
@@ -16,7 +12,6 @@ export default function SettingsPage() {
   const [colorCyclingEnabled, setColorCyclingEnabled] = useState(true)
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   const [soundEnabled, setSoundEnabled] = useState(true)
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
   const isMobile = useIsMobile()
 
   useEffect(() => {
@@ -46,17 +41,6 @@ export default function SettingsPage() {
     }
   }, [])
 
-  useEffect(() => {
-    // Keyboard shortcut for dev sidebar
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === 'd') {
-        e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
 
   const handleAppModeChange = (mode: 'fullscreen' | 'windowed') => {
     setAppMode(mode)
@@ -98,10 +82,6 @@ export default function SettingsPage() {
     localStorage.setItem('soundEnabled', enabled.toString())
   }
 
-  const openApp = (appName: string) => {
-    // Handle app opening - for settings page, we can just show placeholder
-    console.log('Opening app:', appName)
-  }
 
   const SettingSection = ({ icon: Icon, title, children }: { icon: any, title: string, children: React.ReactNode }) => (
     <div className="bg-black/30 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-6">
@@ -158,22 +138,7 @@ export default function SettingsPage() {
   )
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <ProofOfConceptBar />
-      <TopMenuBar onOpenApp={openApp} />
-      
-      <div className="flex-1 relative overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 bitcoin-mesh" />
-        
-        {/* Dev Sidebar */}
-        {showDevSidebar && !isMobile && <DevSidebar />}
-        
-        {/* Dock */}
-        <Dock />
-        
-        {/* Settings Content */}
-        <div className={`absolute inset-0 overflow-y-auto ${showDevSidebar && !isMobile ? 'pl-64' : ''}`}>
+    <div className="h-full overflow-auto bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 bitcoin-mesh">
           <div className="max-w-4xl mx-auto px-6 py-8">
             {/* Header */}
             <div className="mb-8">
@@ -264,8 +229,6 @@ export default function SettingsPage() {
             </SettingSection>
 
           </div>
-        </div>
-      </div>
     </div>
   )
 }

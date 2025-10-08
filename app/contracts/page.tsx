@@ -3,28 +3,11 @@
 import { useState, useEffect } from 'react'
 import { ArrowLeft, Bitcoin, ExternalLink, Code, FileText, Users, GitBranch, Coins, Shield, Zap, Network, Globe } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import OSTaskbar from '@/components/OSTaskbar'
-import TopMenuBar from '@/components/TopMenuBar'
-import DevSidebar from '@/components/DevSidebar'
-import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 export default function ContractsPage() {
   const router = useRouter()
   const isMobile = useIsMobile()
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
-
-  useEffect(() => {
-    // Keyboard shortcut for dev sidebar
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === 'd') {
-        e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
 
   const contracts = [
     {
@@ -153,8 +136,7 @@ export default function ContractsPage() {
 
   if (isMobile) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
-        <ProofOfConceptBar />
+      <div className="h-full overflow-auto bg-gradient-to-b from-gray-900 to-black">
         
         {/* Mobile Header */}
         <div className="bg-black/50 backdrop-blur-sm sticky top-0 z-10 px-4 py-3 border-b border-gray-800">
@@ -206,15 +188,7 @@ export default function ContractsPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <ProofOfConceptBar />
-      <TopMenuBar onOpenApp={() => {}} />
-      
-      <div className="flex-1 flex relative overflow-hidden">
-        {showDevSidebar && <DevSidebar />}
-        
-        <div className={`flex-1 transition-all duration-300 ${showDevSidebar ? 'md:ml-64' : ''}`}>
-          <main className="h-full overflow-auto bg-gradient-to-b from-gray-900 to-black p-8">
+    <div className="h-full overflow-auto bg-gradient-to-b from-gray-900 to-black p-8">
             {/* Header */}
             <div className="mb-8">
               <div className="flex items-center gap-4 mb-4">
@@ -359,15 +333,6 @@ export default function ContractsPage() {
                 </div>
               </div>
             </div>
-          </main>
-        </div>
-      </div>
-      
-      <OSTaskbar 
-        openWindows={['Contracts']}
-        activeWindow="Contracts"
-        onWindowClick={() => {}}
-      />
     </div>
   )
 }

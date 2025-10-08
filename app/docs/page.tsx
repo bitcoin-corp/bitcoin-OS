@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Book, Code, Terminal, Shield, Layers, Search, ExternalLink, ChevronRight, FileText, GitBranch, Package, Cpu, Database, Cloud } from 'lucide-react'
-import TopMenuBar from '@/components/TopMenuBar'
-import OSTaskbar from '@/components/OSTaskbar'
-import DevSidebar from '@/components/DevSidebar'
 
 interface DocSection {
   id: string
@@ -16,30 +13,9 @@ interface DocSection {
 }
 
 export default function DocsPage() {
-  const [activeWindow, setActiveWindow] = useState<string | null>(null)
-  const [openWindows, setOpenWindows] = useState<string[]>([])
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSection, setActiveSection] = useState('getting-started')
 
-  useEffect(() => {
-    // Keyboard shortcut for dev sidebar
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === 'd') {
-        e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
-
-  const openApp = (appName: string) => {
-    if (!openWindows.includes(appName)) {
-      setOpenWindows([...openWindows, appName])
-    }
-    setActiveWindow(appName)
-  }
 
   const sections: DocSection[] = [
     {
@@ -197,13 +173,7 @@ NEXT_PUBLIC_ELECTRUM_SERVER=electrum.blockstream.info`,
   const currentSection = sections.find(s => s.id === activeSection) || sections[0]
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <TopMenuBar onOpenApp={openApp} />
-      
-      <div className="flex-1 flex relative overflow-hidden pb-14">
-        {showDevSidebar && <DevSidebar />}
-        
-        <div className={`flex-1 flex transition-all duration-300 ${showDevSidebar ? 'md:ml-64' : ''}`}>
+    <div className="h-full overflow-auto bg-black flex">
         {/* Sidebar */}
         <div className="w-64 bg-gray-900/50 backdrop-blur-sm border-r border-gray-800 min-h-screen p-4">
           <div className="mb-6">
@@ -355,14 +325,6 @@ NEXT_PUBLIC_ELECTRUM_SERVER=electrum.blockstream.info`,
             </div>
           </div>
         </div>
-        </div>
-      </div>
-      
-      <OSTaskbar 
-        openWindows={openWindows}
-        activeWindow={activeWindow}
-        onWindowClick={setActiveWindow}
-      />
     </div>
   )
 }

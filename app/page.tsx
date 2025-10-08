@@ -307,18 +307,8 @@ export default function BitcoinOS() {
 
   // Desktop Layout
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <ProofOfConceptBar />
-      <TopMenuBar 
-        onOpenApp={openApp} 
-        onOpenWalletModal={() => setShowLoginModal(true)}
-        isConnected={!!userHandle}
-      />
-      
-      <div className="flex-1 relative overflow-hidden">
-        <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
-        <Dock />
-        {showDevSidebar && !isMobile && <DevSidebar />}
+    <div className="h-full relative">
+      <DraggableDesktop isVideoReady={isVideoReady} showDevSidebar={showDevSidebar && !isMobile} />
         
         {openWindows.map((appName) => (
           <Window
@@ -342,26 +332,6 @@ export default function BitcoinOS() {
             onClose={() => setPlaceholderApp(null)}
           />
         )}
-      </div>
-      
-      {/* HandCash Login Modal */}
-      <HandCashLoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        onLogin={(handle, method) => {
-          setUserHandle(handle)
-          setShowLoginModal(false)
-          console.log(`Connected with ${method}: ${handle}`)
-        }}
-      />
-      
-      {/* Clickable area to dismiss modal */}
-      {showLoginModal && (
-        <div 
-          className="fixed inset-0 z-40"
-          onClick={() => setShowLoginModal(false)}
-        />
-      )}
     </div>
   )
 }

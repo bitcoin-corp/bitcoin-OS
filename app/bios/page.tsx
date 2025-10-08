@@ -78,7 +78,7 @@ export default function BiosPage() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black text-green-400 font-mono text-sm overflow-hidden flex flex-col p-5">
+    <div className="h-full overflow-auto bg-black text-green-400 font-mono text-sm flex flex-col p-5">
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; }

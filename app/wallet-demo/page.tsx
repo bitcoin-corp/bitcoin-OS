@@ -7,7 +7,7 @@ import MetanetWalletDemo from '@/components/MetanetWalletDemo'
 
 export default function WalletDemoPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 p-4">
+    <div className="h-full overflow-auto bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 p-4">
       <MetanetWalletDemo />
     </div>
   )

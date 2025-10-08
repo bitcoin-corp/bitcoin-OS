@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Bitcoin, TrendingUp, TrendingDown, Activity, DollarSign, Users, Lock, Zap, ArrowUpRight, ArrowDownRight, BarChart3, PieChart } from 'lucide-react'
-import TopMenuBar from '@/components/TopMenuBar'
-import OSTaskbar from '@/components/OSTaskbar'
-import DevSidebar from '@/components/DevSidebar'
 
 interface TokenMetric {
   label: string
@@ -14,9 +11,6 @@ interface TokenMetric {
 }
 
 export default function TokenPage() {
-  const [activeWindow, setActiveWindow] = useState<string | null>(null)
-  const [openWindows, setOpenWindows] = useState<string[]>([])
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
   const [price, setPrice] = useState(0.00042)
   const [priceChange, setPriceChange] = useState(15.34)
 
@@ -29,25 +23,6 @@ export default function TokenPage() {
     }, 5000)
     return () => clearInterval(interval)
   }, [])
-
-  useEffect(() => {
-    // Keyboard shortcut for dev sidebar
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === 'd') {
-        e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
-
-  const openApp = (appName: string) => {
-    if (!openWindows.includes(appName)) {
-      setOpenWindows([...openWindows, appName])
-    }
-    setActiveWindow(appName)
-  }
 
   const metrics: TokenMetric[] = [
     { label: 'Market Cap', value: '$420K', change: 15.34, icon: DollarSign },
@@ -67,13 +42,7 @@ export default function TokenPage() {
   ]
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <TopMenuBar onOpenApp={openApp} />
-      
-      <div className="flex-1 flex relative overflow-hidden pb-14">
-        {showDevSidebar && <DevSidebar />}
-        
-        <div className={`flex-1 transition-all duration-300 overflow-auto ${showDevSidebar ? 'md:ml-64' : ''}`}>
+    <div className="h-full overflow-auto">
           <div className="p-8 max-w-7xl mx-auto">
             {/* Header */}
             <div className="mb-8">
@@ -215,14 +184,6 @@ export default function TokenPage() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <OSTaskbar 
-        openWindows={openWindows}
-        activeWindow={activeWindow}
-        onWindowClick={setActiveWindow}
-      />
     </div>
   )
 }

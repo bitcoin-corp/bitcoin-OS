@@ -112,7 +112,7 @@ function ExchangeContent() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="h-full overflow-auto bg-black text-white">
       {/* Header with live indicator */}
       <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4">

@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { CheckCircle, Circle, Plus, Trash2, Clock, Calendar, Tag, Filter } from 'lucide-react'
-import TopMenuBar from '@/components/TopMenuBar'
-import OSTaskbar from '@/components/OSTaskbar'
-import DevSidebar from '@/components/DevSidebar'
 
 interface Task {
   id: string
@@ -18,9 +15,6 @@ interface Task {
 }
 
 export default function TasksPage() {
-  const [activeWindow, setActiveWindow] = useState<string | null>(null)
-  const [openWindows, setOpenWindows] = useState<string[]>([])
-  const [showDevSidebar, setShowDevSidebar] = useState(true)
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: '1',
@@ -120,24 +114,6 @@ export default function TasksPage() {
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
   const [priorityFilter, setPriorityFilter] = useState<'all' | 'low' | 'medium' | 'high'>('all')
 
-  useEffect(() => {
-    // Keyboard shortcut for dev sidebar
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === 'd') {
-        e.preventDefault()
-        setShowDevSidebar(!showDevSidebar)
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
-
-  const openApp = (appName: string) => {
-    if (!openWindows.includes(appName)) {
-      setOpenWindows([...openWindows, appName])
-    }
-    setActiveWindow(appName)
-  }
 
   const addTask = () => {
     if (newTaskTitle.trim()) {
@@ -182,14 +158,8 @@ export default function TasksPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
-      <TopMenuBar onOpenApp={openApp} />
-      
-      <div className="flex-1 flex relative overflow-hidden pb-14">
-        {showDevSidebar && <DevSidebar />}
-        
-        <div className={`flex-1 transition-all duration-300 overflow-auto ${showDevSidebar ? 'md:ml-64' : ''}`}>
-          <div className="p-8 max-w-6xl mx-auto">
+    <div className="h-full overflow-auto bg-black">
+      <div className="p-8 max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
             <span className="text-bitcoin-orange">Contract</span>
@@ -343,15 +313,7 @@ export default function TasksPage() {
             <div className="text-sm text-gray-400">Active</div>
           </div>
         </div>
-          </div>
-        </div>
       </div>
-      
-      <OSTaskbar 
-        openWindows={openWindows}
-        activeWindow={activeWindow}
-        onWindowClick={setActiveWindow}
-      />
     </div>
   )
 }
