@@ -30,7 +30,7 @@ import {
   Palette as LucidePalette,
   GraduationCap as LucideGraduationCap,
   UserCheck as LucideUserCheck,
-  FolderOpen as LucideFolderOpen
+  Circle as LucideCircle
 } from 'lucide-react'
 
 // React Icons (Material Design) - existing
@@ -64,7 +64,7 @@ import {
   MdPalette,
   MdSchool,
   MdVerifiedUser,
-  MdFolderOpen
+  MdCircle
 } from 'react-icons/md'
 
 // Tabler Icons
@@ -98,7 +98,7 @@ import {
   IconPalette as TablerPalette,
   IconSchool as TablerSchool,
   IconUserCheck as TablerUserCheck,
-  IconFolderOpen as TablerFolderOpen
+  IconCircle as TablerCircle
 } from '@tabler/icons-react'
 
 // Hero Icons
@@ -132,7 +132,7 @@ import {
   PaintBrushIcon as HeroPalette,
   AcademicCapIcon as HeroAcademicCap,
   UserPlusIcon as HeroUserCheck,
-  FolderOpenIcon as HeroFolderOpen
+  EllipsisHorizontalCircleIcon as HeroCircle
 } from '@heroicons/react/24/outline'
 
 // Feather Icons
@@ -166,7 +166,7 @@ import {
   Droplet as FeatherPalette,
   Award as FeatherAward,
   CheckCircle as FeatherUserCheck, // Using CheckCircle instead of UserCheck
-  FolderOpen as FeatherFolderOpen
+  Circle as FeatherCircle
 } from 'react-feather'
 
 // Phosphor Icons
@@ -200,7 +200,7 @@ import {
   Palette as PhosphorPalette,
   GraduationCap as PhosphorGraduationCap,
   UserPlus as PhosphorUserCheck,
-  FolderOpen as PhosphorFolderOpen
+  Circle as PhosphorCircle
 } from 'phosphor-react'
 
 // Remix Icons - Using react-icons/ri for better compatibility
@@ -234,7 +234,7 @@ import {
   RiPaletteLine,
   RiGraduationCapLine,
   RiUserAddLine,
-  RiFolderOpenLine
+  RiCircleLine
 } from 'react-icons/ri'
 
 // Bootstrap Icons - Using react-icons/bs for better compatibility  
@@ -268,7 +268,7 @@ import {
   BsPalette,
   BsMortarboard,
   BsPersonCheck,
-  BsFolderOpen
+  BsCircle
 } from 'react-icons/bs'
 
 export interface CompleteIconMapping {
@@ -777,14 +777,14 @@ export const completeIconMappings: { [key: string]: CompleteIconMapping } = {
     bootstrap: BsTerminal
   },
   'home': {
-    lucide: LucideFolderOpen,
-    'react-icons': MdFolderOpen,
-    tabler: TablerFolderOpen,
-    heroicons: HeroFolderOpen,
-    feather: FeatherFolderOpen,
-    phosphor: PhosphorFolderOpen,
-    remix: RiFolderOpenLine,
-    bootstrap: BsFolderOpen
+    lucide: LucideCircle,
+    'react-icons': MdCircle,
+    tabler: TablerCircle,
+    heroicons: HeroCircle,
+    feather: FeatherCircle,
+    phosphor: PhosphorCircle,
+    remix: RiCircleLine,
+    bootstrap: BsCircle
   }
 }
 

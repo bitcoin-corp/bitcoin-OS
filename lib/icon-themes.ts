@@ -30,7 +30,7 @@ import {
   GraduationCap,
   UserCheck,
   Sparkles,
-  FolderOpen
+  Circle
 } from 'lucide-react'
 
 // React Icons (Material Design)
@@ -64,7 +64,7 @@ import {
   MdPalette,
   MdSchool,
   MdVerifiedUser,
-  MdFolderOpen
+  MdCircle
 } from 'react-icons/md'
 
 export interface IconMapping {
@@ -125,7 +125,7 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'senseii': { lucide: Sparkles, 'react-icons': MdTrendingUp },
   'cashboard': { lucide: TrendingUp, 'react-icons': MdShowChart },
   'bapps-store-right': { lucide: Store, 'react-icons': MdStore },
-  'home': { lucide: FolderOpen, 'react-icons': MdFolderOpen },
+  'home': { lucide: Circle, 'react-icons': MdCircle },
 }
 
 // Import the complete mappings
