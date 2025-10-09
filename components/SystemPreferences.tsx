@@ -1,7 +1,22 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, Settings, Palette, Monitor, Volume2, Wifi, Battery } from 'lucide-react'
+import { X, Settings, Palette, Monitor, Volume2, Wifi, Battery, Sparkles, Type, Zap, Download, Upload, Check } from 'lucide-react'
+import { 
+  getCurrentThemeConfig, 
+  setThemeConfig, 
+  colorThemes, 
+  fontThemes, 
+  animationPresets, 
+  presetThemes,
+  exportTheme,
+  importTheme,
+  type ThemeConfig,
+  type ColorTheme,
+  type IconTheme,
+  type AnimationStyle,
+  type FontTheme
+} from '@/lib/advanced-themes'
 
 interface SystemPreferencesProps {
   isOpen: boolean
@@ -10,25 +25,30 @@ interface SystemPreferencesProps {
 
 export default function SystemPreferences({ isOpen, onClose }: SystemPreferencesProps) {
   const [activeTab, setActiveTab] = useState('appearance')
-  const [iconTheme, setIconTheme] = useState('lucide')
+  const [themeConfig, setLocalThemeConfig] = useState<ThemeConfig>(getCurrentThemeConfig())
+  const [showImportExport, setShowImportExport] = useState(false)
+  const [importJson, setImportJson] = useState('')
 
   // Load saved preferences on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('bitcoinOS-icon-theme')
-      if (savedTheme) {
-        setIconTheme(savedTheme)
-      }
+      setLocalThemeConfig(getCurrentThemeConfig())
     }
-  }, [])
+  }, [isOpen])
 
-  // Save preferences when changed
-  const handleThemeChange = (theme: string) => {
-    setIconTheme(theme)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('bitcoinOS-icon-theme', theme)
-      // Dispatch event to notify other components
-      window.dispatchEvent(new CustomEvent('iconThemeChanged', { detail: theme }))
+  // Handle theme changes
+  const handleThemeChange = (updates: Partial<ThemeConfig>) => {
+    const newConfig = { ...themeConfig, ...updates }
+    setLocalThemeConfig(newConfig)
+    setThemeConfig(updates)
+  }
+
+  // Apply preset theme
+  const applyPreset = (presetName: string) => {
+    const preset = presetThemes[presetName]
+    if (preset) {
+      setLocalThemeConfig(preset)
+      setThemeConfig(preset)
     }
   }
 

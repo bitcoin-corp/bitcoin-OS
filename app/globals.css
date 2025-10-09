@@ -5,6 +5,9 @@
 /* Import performance optimizations */
 @import './performance.css';
 
+/* Import advanced theme system */
+@import './themes.css';
+
 @layer base {
   body {
     @apply antialiased;

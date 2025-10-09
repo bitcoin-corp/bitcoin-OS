@@ -7,7 +7,7 @@ import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
-import SystemPreferences from '@/components/SystemPreferences'
+import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface BitcoinOSLayoutProps {
@@ -130,7 +130,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
       />
       
       {/* System Preferences Modal */}
-      <SystemPreferences
+      <SystemPreferencesAdvanced
         isOpen={showSystemPreferences}
         onClose={() => setShowSystemPreferences(false)}
       />
