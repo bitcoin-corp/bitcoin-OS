@@ -9,16 +9,6 @@ export default function ProofOfConceptBar() {
       <div className="poc-content">
         {/* Navigation Links */}
         <div className="poc-nav">
-          {/* Home Link */}
-          <a href="/" className="poc-link">
-            <svg height="14" width="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
-            </svg>
-            Home
-          </a>
-
-          <span className="poc-separator">•</span>
-          
           {/* Bitcoin OS Link */}
           <a href="/platform" className="poc-link">
             <svg height="14" width="14" viewBox="0 0 24 24" fill="currentColor">
