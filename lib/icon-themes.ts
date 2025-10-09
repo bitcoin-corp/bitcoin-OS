@@ -28,7 +28,8 @@ import {
   Box,
   Palette,
   GraduationCap,
-  UserCheck
+  UserCheck,
+  Sparkles
 } from 'lucide-react'
 
 // React Icons (Material Design)
@@ -119,6 +120,9 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'social': { lucide: Users, 'react-icons': MdGroup },
   'games': { lucide: Gamepad2, 'react-icons': MdSportsEsports },
   'books': { lucide: BookOpen, 'react-icons': MdMenuBook },
+  'senseii': { lucide: Sparkles, 'react-icons': MdTrendingUp },
+  'cashboard': { lucide: TrendingUp, 'react-icons': MdShowChart },
+  'bapps-store-right': { lucide: Store, 'react-icons': MdStore },
 }
 
 // Import the complete mappings

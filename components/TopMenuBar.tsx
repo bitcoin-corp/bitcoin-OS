@@ -181,6 +181,13 @@ export default function TopMenuBar({ onOpenApp, onOpenWalletModal, isConnected }
           label: 'Show All Windows', 
           action: () => console.log('Show All Windows')
         },
+        { 
+          label: 'Tidy Desktop', 
+          action: () => {
+            const event = new CustomEvent('tidyDesktop')
+            window.dispatchEvent(event)
+          }
+        },
         { divider: true },
         { 
           label: 'Toggle Developer Sidebar', 

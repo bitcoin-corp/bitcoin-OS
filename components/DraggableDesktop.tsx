@@ -89,10 +89,35 @@ function DraggableIcon({
           ? 'bg-blue-500/30 border-2 border-blue-400 shadow-lg shadow-blue-500/20' 
           : 'hover:bg-white/10'
       }`}>
-        <Icon 
-          className={`w-12 h-12 ${app.color} drop-shadow-2xl`} 
-          strokeWidth={1.5}
-        />
+        {app.id === 'senseii' ? (
+          <svg className={`w-12 h-12 ${app.color} drop-shadow-2xl`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            {/* Torii gate design */}
+            <path d="M3 5h18" />
+            <path d="M5 5v14" />
+            <path d="M19 5v14" />
+            <path d="M3 9h18" />
+            <path d="M9 5v4" />
+            <path d="M15 5v4" />
+            <path d="M12 5v14" />
+          </svg>
+        ) : app.id === 'cashboard' ? (
+          <svg className={`w-12 h-12 ${app.color} drop-shadow-2xl`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            {/* C in circle logo */}
+            <circle cx="12" cy="12" r="10" />
+            <path d="M15 8.5C14.315 7.574 13.243 7 12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+          </svg>
+        ) : app.id === 'bapps-store-right' ? (
+          <svg className={`w-12 h-12 ${app.color} drop-shadow-2xl`} viewBox="0 0 24 24" fill="currentColor">
+            {/* Bitcoin B logo */}
+            <circle cx="12" cy="12" r="10" fill="currentColor" />
+            <text x="12" y="17" fontSize="14" fontWeight="bold" fill="black" textAnchor="middle">B</text>
+          </svg>
+        ) : (
+          <Icon 
+            className={`w-12 h-12 ${app.color} drop-shadow-2xl`} 
+            strokeWidth={1.5}
+          />
+        )}
         <span className="text-sm text-white text-center font-medium drop-shadow-lg max-w-[100px] break-words leading-tight">
           {app.name}
         </span>
@@ -122,10 +147,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   
   // Default desktop app positions (used for initial layout)
   const defaultAppPositions: DesktopIcon[] = [
-    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'text-orange-500', url: 'https://www.bitcoinapps.store/', position: { x: 50, y: 50 } },
-    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 180, y: 50 } },
-    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 310, y: 50 } },
-    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 440, y: 50 } },
+    { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 50, y: 50 } },
+    { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 180, y: 50 } },
+    { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 310, y: 50 } },
     { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 50, y: 180 } },
     { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 180, y: 180 } },
     { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 310, y: 180 } },
@@ -192,13 +216,49 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         setIconTheme(event.detail)
       }
       
+      // Listen for tidy desktop event
+      const handleTidyDesktop = () => {
+        tidyDesktop()
+      }
+      
       window.addEventListener('iconThemeChanged', handleThemeChange)
+      window.addEventListener('tidyDesktop', handleTidyDesktop)
       
       return () => {
         window.removeEventListener('iconThemeChanged', handleThemeChange)
+        window.removeEventListener('tidyDesktop', handleTidyDesktop)
       }
     }
   }, [])
+
+  // Function to tidy desktop icons into a neat grid
+  const tidyDesktop = () => {
+    const GRID_SPACING = 130 // Space between icons
+    const START_X = 50 // Starting X position
+    const START_Y = 50 // Starting Y position
+    const COLUMNS = 4 // Number of columns in the grid
+    
+    const tidiedApps = desktopApps.map((app, index) => {
+      const row = Math.floor(index / COLUMNS)
+      const col = index % COLUMNS
+      return {
+        ...app,
+        position: {
+          x: START_X + (col * GRID_SPACING),
+          y: START_Y + (row * GRID_SPACING)
+        }
+      }
+    })
+    
+    setDesktopApps(tidiedApps)
+    
+    // Save tidied positions to localStorage
+    const positionsToSave = tidiedApps.map(app => ({
+      id: app.id,
+      position: app.position
+    }))
+    localStorage.setItem('bitcoinOS-desktop-positions', JSON.stringify(positionsToSave))
+  }
 
   // Save positions to localStorage whenever they change
   useEffect(() => {
@@ -514,7 +574,29 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                   // Show multiple icons when dragging a selection
                   <div className="relative">
                     <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
-                      <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                      {activeApp.id === 'senseii' ? (
+                        <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                          <path d="M3 5h18" />
+                          <path d="M5 5v14" />
+                          <path d="M19 5v14" />
+                          <path d="M3 9h18" />
+                          <path d="M9 5v4" />
+                          <path d="M15 5v4" />
+                          <path d="M12 5v14" />
+                        </svg>
+                      ) : activeApp.id === 'cashboard' ? (
+                        <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="M15 8.5C14.315 7.574 13.243 7 12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+                        </svg>
+                      ) : activeApp.id === 'bapps-store-right' ? (
+                        <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="currentColor">
+                          <circle cx="12" cy="12" r="10" fill="currentColor" />
+                          <text x="12" y="17" fontSize="14" fontWeight="bold" fill="black" textAnchor="middle">B</text>
+                        </svg>
+                      ) : (
+                        <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                      )}
                       <span className="text-sm text-white text-center font-medium">
                         {activeApp.name}
                       </span>
@@ -526,7 +608,29 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                 ) : (
                   // Show single icon when dragging one item
                   <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
-                    <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                    {activeApp.id === 'senseii' ? (
+                      <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                        <path d="M3 5h18" />
+                        <path d="M5 5v14" />
+                        <path d="M19 5v14" />
+                        <path d="M3 9h18" />
+                        <path d="M9 5v4" />
+                        <path d="M15 5v4" />
+                        <path d="M12 5v14" />
+                      </svg>
+                    ) : activeApp.id === 'cashboard' ? (
+                      <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M15 8.5C14.315 7.574 13.243 7 12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+                      </svg>
+                    ) : activeApp.id === 'bapps-store-right' ? (
+                      <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                        <text x="12" y="17" fontSize="14" fontWeight="bold" fill="black" textAnchor="middle">B</text>
+                      </svg>
+                    ) : (
+                      <activeApp.icon className={`w-12 h-12 ${activeApp.color}`} />
+                    )}
                     <span className="text-sm text-white text-center font-medium">
                       {activeApp.name}
                     </span>
@@ -558,6 +662,38 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         >
           <Shield className="w-10 h-10 text-blue-500 drop-shadow-lg" strokeWidth={1.5} />
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Trust</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.open('https://www.bitcoinapps.store/', '_blank')}
+          title="Bitcoin Apps Store"
+        >
+          <Store className="w-8 h-8 text-orange-500 drop-shadow-lg" strokeWidth={1.5} />
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">BAPPS</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.open('https://www.cashboard.website/', '_blank')}
+          title="Cashboard"
+        >
+          <svg className="w-8 h-8 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            <circle cx="12" cy="12" r="10" />
+            <path d="M15.5 9.5C14.815 8.574 13.743 8 12.5 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+          </svg>
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">CashBoard</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
+          title="Senseii"
+        >
+          <svg className="w-8 h-8 text-red-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            <path d="M3 5h18" />
+            <path d="M6 5v14" />
+            <path d="M18 5v14" />
+            <path d="M3 9h18" />
+          </svg>
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">Senseii</span>
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"

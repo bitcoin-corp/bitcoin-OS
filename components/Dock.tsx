@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, FolderOpen } from 'lucide-react';
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes';
 import './Dock.css';
 
@@ -85,7 +85,7 @@ const Dock: React.FC = () => {
   };
 
   const dockApps: DockApp[] = [
-    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'rainbow', url: 'https://www.bitcoinapps.store/', isImage: true },
+    { name: 'Home', icon: FolderOpen, color: 'text-blue-500', url: 'https://bitcoin-os.vercel.app/' },
     { name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app' },
@@ -130,13 +130,7 @@ const Dock: React.FC = () => {
               title={app.name}
               disabled={app.disabled}
             >
-              {app.id === 'bapps-store' ? (
-                <div className="dock-app-icon">
-                  <img src="/bapps-icon.jpg" alt="BAPPS" className="dock-app-image" />
-                </div>
-              ) : (
-                <Icon className="dock-app-icon" style={{ color: getIconColor(app.color, index) }} />
-              )}
+              <Icon className="dock-app-icon" style={{ color: getIconColor(app.color, index) }} />
               {app.current && <span className="dock-indicator" />}
             </button>
           );
@@ -165,50 +159,44 @@ const Dock: React.FC = () => {
             title="Bitcoin Apps Store"
             onClick={() => window.open('https://www.bitcoinapps.store/', '_blank')}
           >
-            <svg className="status-icon" style={{ color: '#f7931a' }} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-              {/* Bitcoin B logo */}
-              <circle cx="12" cy="12" r="10" fill="currentColor" />
-              <text x="12" y="17" fontSize="14" fontWeight="bold" fill="black" textAnchor="middle">B</text>
-            </svg>
+            <Store className="status-icon" style={{ color: '#f97316' }} />
           </button>
           <button 
             className="status-button" 
-            title="Cashboard - Financial Dashboard"
+            title="CashBoard"
             onClick={() => window.open('https://www.cashboard.website/', '_blank')}
           >
-            <svg className="status-icon" style={{ color: '#22c55e' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-              {/* C in circle logo */}
+            <svg className="status-icon" style={{ color: '#ffffff' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
-              <path d="M15 8.5C14.315 7.574 13.243 7 12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+              <path d="M15.5 9.5C14.815 8.574 13.743 8 12.5 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
             </svg>
           </button>
           <button 
             className="status-button" 
-            title="Senseii - AI Assistant"
+            title="Senseii"
             onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
           >
-            <svg className="status-icon" style={{ color: '#a855f7' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {/* Torii gate design */}
+            <svg className="status-icon" style={{ color: '#ef4444' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 5h18" />
-              <path d="M5 5v14" />
-              <path d="M19 5v14" />
+              <path d="M6 5v14" />
+              <path d="M18 5v14" />
               <path d="M3 9h18" />
-              <path d="M9 5v4" />
-              <path d="M15 5v4" />
-              <path d="M12 5v14" />
             </svg>
           </button>
-          <button className="status-button" title="Connected">
-            <Wifi className="status-icon connected" />
-          </button>
-          <button className="status-button" title="Volume">
-            <Volume2 className="status-icon" />
-          </button>
-          <button className="status-button" title="Battery: 100%">
-            <Battery className="status-icon connected" />
+          <button 
+            className="status-button" 
+            title="Ninja Punk Girls"
+            onClick={() => window.open('https://www.ninjapunkgirls.website', '_blank')}
+          >
+            <svg className="status-icon" style={{ color: '#ec4899' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+              <path d="M5 3v4"/>
+              <path d="M19 17v4"/>
+              <path d="M3 5h4"/>
+              <path d="M17 19h4"/>
+            </svg>
           </button>
           <div className="status-time" title={mounted ? currentTime.toLocaleDateString() : ''}>
-            <Clock className="status-icon" />
             <span>{mounted ? currentTime.toLocaleTimeString() : '12:00:00 AM'}</span>
           </div>
         </div>
