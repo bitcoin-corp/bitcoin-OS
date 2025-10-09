@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './token.css';
+import Footer from '@/components/Footer';
 
 export default function TokenPage() {
   return (
@@ -315,6 +316,7 @@ export default function TokenPage() {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 }

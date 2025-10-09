@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './platform.css';
+import Footer from '@/components/Footer';
 
 export default function PlatformPage() {
   return (
@@ -280,6 +281,7 @@ export default function PlatformPage() {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 }

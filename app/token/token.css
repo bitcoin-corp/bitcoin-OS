@@ -6,12 +6,17 @@
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   padding-top: 96px; /* 40px POC banner + 32px taskbar + 24px spacing */
   font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .token-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
+  flex: 1;
 }
 
 /* Token Hero - Full Width Black */
