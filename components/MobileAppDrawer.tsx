@@ -74,7 +74,7 @@ export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
         <div className="flex items-center justify-between px-4 pb-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-bitcoin-orange rounded-lg flex items-center justify-center">
-              <span className="text-black font-bold">B</span>
+              <span className="text-black font-bold text-base">B</span>
             </div>
             <span className="text-lg font-semibold">
               <span className="text-bitcoin-orange">Bitcoin</span>
