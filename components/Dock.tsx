@@ -162,6 +162,17 @@ const Dock: React.FC = () => {
           </button>
           <button 
             className="status-button" 
+            title="Cashboard - Financial Dashboard"
+            onClick={() => window.open('https://www.cashboard.website/', '_blank')}
+          >
+            <svg className="status-icon" style={{ color: '#22c55e' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+              {/* C in circle logo */}
+              <circle cx="12" cy="12" r="10" />
+              <path d="M15 8.5C14.315 7.574 13.243 7 12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.243 0 2.315-.574 3-1.5" />
+            </svg>
+          </button>
+          <button 
+            className="status-button" 
             title="Senseii - AI Assistant"
             onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
           >
