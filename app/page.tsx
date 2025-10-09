@@ -413,6 +413,9 @@ export default function BitcoinOS() {
             setShowLoginModal(false)
           }}
         />
+        
+        {/* Dock at the bottom */}
+        <Dock />
       </div>
     </>
   )
