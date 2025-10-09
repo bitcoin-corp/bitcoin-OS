@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, Brain } from 'lucide-react';
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes';
 import './Dock.css';
 
@@ -159,6 +159,13 @@ const Dock: React.FC = () => {
             onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
           >
             <Shield className="status-icon" style={{ color: '#3b82f6' }} />
+          </button>
+          <button 
+            className="status-button" 
+            title="Senseii - AI Assistant"
+            onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
+          >
+            <Brain className="status-icon" style={{ color: '#a855f7' }} />
           </button>
           <button className="status-button" title="Connected">
             <Wifi className="status-icon connected" />
