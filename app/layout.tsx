@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     description: 'Experience the future with Bitcoin OS - a revolutionary distributed operating system for running Bitcoin apps with tokenized computing resources.',
     images: [
       {
+        url: 'https://www.bitcoin-os.website/bitcoin-os-social.png',
+        width: 1200,
+        height: 630,
+        alt: 'Bitcoin OS - The Distributed Operating System',
+        type: 'image/png',
+      },
+      {
         url: 'https://www.bitcoin-os.website/bitcoin-os.jpg',
         width: 1200,
         height: 630,
@@ -32,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Bitcoin OS - The Distributed Operating System for Bitcoin',
     description: 'Experience the future with Bitcoin OS - a revolutionary distributed operating system for running Bitcoin apps with tokenized computing resources.',
-    images: ['https://www.bitcoin-os.website/bitcoin-os.jpg'],
+    images: ['https://www.bitcoin-os.website/bitcoin-os-social.png', 'https://www.bitcoin-os.website/bitcoin-os.jpg'],
     creator: '@Bitcoin_OS_X',
     site: '@Bitcoin_OS_X',
   },
