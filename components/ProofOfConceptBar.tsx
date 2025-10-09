@@ -9,16 +9,22 @@ export default function ProofOfConceptBar() {
       <div className="poc-content">
         {/* Navigation Links */}
         <div className="poc-nav">
-          <span style={{ color: 'rgba(255, 255, 255, 0.95)', fontWeight: 600, fontSize: '13px', marginRight: '12px' }}>
-            Bitcoin OS
-          </span>
+          {/* Home Link */}
+          <a href="/" className="poc-link">
+            <svg height="14" width="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+            </svg>
+            Home
+          </a>
+
           <span className="poc-separator">•</span>
-          {/* Platform Link */}
+          
+          {/* Bitcoin OS Link */}
           <a href="/platform" className="poc-link">
             <svg height="14" width="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+              <path d="M20 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h6l2 3 2-3h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 12H4V5h16v10z"/>
             </svg>
-            Platform
+            Bitcoin OS
           </a>
 
           <span className="poc-separator">•</span>
