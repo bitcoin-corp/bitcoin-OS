@@ -4,9 +4,9 @@ import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import BitcoinOSLayout from '@/components/BitcoinOSLayout'
 
 export const metadata: Metadata = {
-  title: 'Bitcoin OS - Bitcoin Operating System',
-  description: 'Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration | By The Bitcoin Corporation LTD',
-  keywords: 'Bitcoin, OS, Operating System, Blockchain, Cryptocurrency, Wallet, Decentralized Apps, Bitcoin Corporation',
+  title: 'Bitcoin OS - The Distributed Operating System for Bitcoin',
+  description: 'A revolutionary distributed operating system for running Bitcoin apps with tokenized computing resources. Trade GPU, CPU, memory & storage on the $bOS token economy.',
+  keywords: 'Bitcoin, OS, Operating System, Distributed Computing, Blockchain, Cryptocurrency, Tokenized Resources, GPU Marketplace, $bOS Token, Bitcoin Apps, Bitcoin Corporation',
   authors: [{ name: 'The Bitcoin Corporation LTD' }],
   creator: 'The Bitcoin Corporation LTD',
   publisher: 'The Bitcoin Corporation LTD',
@@ -14,27 +14,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://bitcoin-os.vercel.app',
+    url: 'https://www.bitcoin-os.website',
     siteName: 'Bitcoin OS',
-    title: 'Bitcoin OS - Bitcoin Operating System',
-    description: 'Experience the future with Bitcoin OS - a revolutionary operating system featuring integrated Bitcoin wallet, decentralized apps, and seamless blockchain interaction.',
+    title: 'Bitcoin OS - The Distributed Operating System for Bitcoin',
+    description: 'Experience the future with Bitcoin OS - a revolutionary distributed operating system for running Bitcoin apps with tokenized computing resources.',
     images: [
       {
-        url: 'https://bitcoin-os.vercel.app/bitcoin-os.jpg',
+        url: 'https://www.bitcoin-os.website/bitcoin-os.jpg',
         width: 1200,
         height: 630,
-        alt: 'Bitcoin OS - Bitcoin Operating System',
+        alt: 'Bitcoin OS - The Distributed Operating System',
         type: 'image/jpeg',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bitcoin OS - Bitcoin Operating System',
-    description: 'Experience the future with Bitcoin OS - a revolutionary operating system featuring integrated Bitcoin wallet, decentralized apps, and seamless blockchain interaction.',
-    images: ['https://bitcoin-os.vercel.app/bitcoin-os.jpg'],
-    creator: '@BitcoinCorp',
-    site: '@BitcoinCorp',
+    title: 'Bitcoin OS - The Distributed Operating System for Bitcoin',
+    description: 'Experience the future with Bitcoin OS - a revolutionary distributed operating system for running Bitcoin apps with tokenized computing resources.',
+    images: ['https://www.bitcoin-os.website/bitcoin-os.jpg'],
+    creator: '@Bitcoin_OS_X',
+    site: '@Bitcoin_OS_X',
   },
   icons: {
     icon: '/favicon.ico',
