@@ -9,6 +9,7 @@ import Dock from '@/components/Dock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
 import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { getCurrentThemeConfig, applyTheme } from '@/lib/advanced-themes'
 
 interface BitcoinOSLayoutProps {
   children: ReactNode
@@ -23,6 +24,14 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   const [isBootingOrBios, setIsBootingOrBios] = useState(false)
   const isMobile = useIsMobile()
   const pathname = usePathname()
+
+  // Initialize theme on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const themeConfig = getCurrentThemeConfig()
+      applyTheme(themeConfig)
+    }
+  }, [])
 
   // Detect if we're on the homepage and check for BIOS/boot elements
   useEffect(() => {

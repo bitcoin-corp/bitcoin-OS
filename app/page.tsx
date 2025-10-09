@@ -18,7 +18,7 @@ import MobileAppLoader from '@/components/MobileAppLoader'
 import MobileAppDrawer from '@/components/MobileAppDrawer'
 import MobileTaskbar from '@/components/MobileTaskbar'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
-import SystemPreferences from '@/components/SystemPreferences'
+import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
 import { bitcoinApps, getAppByName } from '@/lib/apps.config'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
@@ -352,7 +352,7 @@ export default function BitcoinOS() {
         )}
         
         {/* System Preferences Modal (works on mobile too) */}
-        <SystemPreferences
+        <SystemPreferencesAdvanced
           isOpen={showSystemPreferences}
           onClose={() => setShowSystemPreferences(false)}
         />
@@ -399,7 +399,7 @@ export default function BitcoinOS() {
         )}
         
         {/* System Preferences Modal */}
-        <SystemPreferences
+        <SystemPreferencesAdvanced
           isOpen={showSystemPreferences}
           onClose={() => setShowSystemPreferences(false)}
         />
