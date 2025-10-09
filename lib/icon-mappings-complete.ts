@@ -29,7 +29,8 @@ import {
   Box as LucideBox,
   Palette as LucidePalette,
   GraduationCap as LucideGraduationCap,
-  UserCheck as LucideUserCheck
+  UserCheck as LucideUserCheck,
+  FolderOpen as LucideFolderOpen
 } from 'lucide-react'
 
 // React Icons (Material Design) - existing
@@ -62,7 +63,8 @@ import {
   MdViewInAr,
   MdPalette,
   MdSchool,
-  MdVerifiedUser
+  MdVerifiedUser,
+  MdFolderOpen
 } from 'react-icons/md'
 
 // Tabler Icons
@@ -95,7 +97,8 @@ import {
   IconBox as TablerBox,
   IconPalette as TablerPalette,
   IconSchool as TablerSchool,
-  IconUserCheck as TablerUserCheck
+  IconUserCheck as TablerUserCheck,
+  IconFolderOpen as TablerFolderOpen
 } from '@tabler/icons-react'
 
 // Hero Icons
@@ -128,7 +131,8 @@ import {
   CubeIcon as HeroBox,
   PaintBrushIcon as HeroPalette,
   AcademicCapIcon as HeroAcademicCap,
-  UserPlusIcon as HeroUserCheck
+  UserPlusIcon as HeroUserCheck,
+  FolderOpenIcon as HeroFolderOpen
 } from '@heroicons/react/24/outline'
 
 // Feather Icons
@@ -161,7 +165,8 @@ import {
   Box as FeatherBox,
   Droplet as FeatherPalette,
   Award as FeatherAward,
-  CheckCircle as FeatherUserCheck // Using CheckCircle instead of UserCheck
+  CheckCircle as FeatherUserCheck, // Using CheckCircle instead of UserCheck
+  FolderOpen as FeatherFolderOpen
 } from 'react-feather'
 
 // Phosphor Icons
@@ -194,7 +199,8 @@ import {
   Cube as PhosphorBox,
   Palette as PhosphorPalette,
   GraduationCap as PhosphorGraduationCap,
-  UserPlus as PhosphorUserCheck
+  UserPlus as PhosphorUserCheck,
+  FolderOpen as PhosphorFolderOpen
 } from 'phosphor-react'
 
 // Remix Icons - Using react-icons/ri for better compatibility
@@ -227,7 +233,8 @@ import {
   RiInboxLine,
   RiPaletteLine,
   RiGraduationCapLine,
-  RiUserAddLine
+  RiUserAddLine,
+  RiFolderOpenLine
 } from 'react-icons/ri'
 
 // Bootstrap Icons - Using react-icons/bs for better compatibility  
@@ -260,7 +267,8 @@ import {
   BsBox,
   BsPalette,
   BsMortarboard,
-  BsPersonCheck
+  BsPersonCheck,
+  BsFolderOpen
 } from 'react-icons/bs'
 
 export interface CompleteIconMapping {
@@ -767,6 +775,16 @@ export const completeIconMappings: { [key: string]: CompleteIconMapping } = {
     phosphor: PhosphorTerminal,
     remix: RiTerminalLine,
     bootstrap: BsTerminal
+  },
+  'home': {
+    lucide: LucideFolderOpen,
+    'react-icons': MdFolderOpen,
+    tabler: TablerFolderOpen,
+    heroicons: HeroFolderOpen,
+    feather: FeatherFolderOpen,
+    phosphor: PhosphorFolderOpen,
+    remix: RiFolderOpenLine,
+    bootstrap: BsFolderOpen
   }
 }
 
