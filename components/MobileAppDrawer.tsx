@@ -12,7 +12,7 @@ interface MobileAppDrawerProps {
 
 export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
+  const [iconTheme, setIconTheme] = useState<string>('lucide')
 
   useEffect(() => {
     // Set initial theme

@@ -73,7 +73,7 @@ export const getRainbowColor = (index: number): string => {
   return rainbowColors[index % rainbowColors.length];
 };
 
-export const getAppIcon = (appId: string, index?: number, useRainbow?: boolean, theme?: 'lucide' | 'react-icons') => {
+export const getAppIcon = (appId: string, index?: number, useRainbow?: boolean, theme?: string) => {
   const currentTheme = theme || getCurrentTheme()
   const defaultIcon = appIcons[appId as keyof typeof appIcons] || { icon: Globe, color: '#6b7280' }
   

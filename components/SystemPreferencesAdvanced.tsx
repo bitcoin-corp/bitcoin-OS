@@ -47,6 +47,11 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
     const newConfig = { ...themeConfig, ...updates }
     setLocalThemeConfig(newConfig)
     setThemeConfig(updates)
+    
+    // Dispatch specific events for icon theme changes
+    if (updates.iconTheme) {
+      window.dispatchEvent(new CustomEvent('iconThemeChanged', { detail: updates.iconTheme }))
+    }
   }
 
   // Apply preset theme
@@ -55,6 +60,11 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
     if (preset) {
       setLocalThemeConfig(preset)
       setThemeConfig(preset)
+      
+      // Dispatch icon theme change event
+      if (preset.iconTheme) {
+        window.dispatchEvent(new CustomEvent('iconThemeChanged', { detail: preset.iconTheme }))
+      }
     }
   }
 

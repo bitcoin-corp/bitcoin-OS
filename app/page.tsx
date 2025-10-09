@@ -45,7 +45,7 @@ export default function BitcoinOS() {
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
   const [isVideoReady, setIsVideoReady] = useState(false)
-  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
+  const [iconTheme, setIconTheme] = useState<string>('lucide')
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']

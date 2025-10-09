@@ -49,7 +49,7 @@ function DraggableIcon({
   onDoubleClick: () => void;
   isSelected: boolean;
   onSelect: (id: string, event: React.MouseEvent) => void;
-  iconTheme: 'lucide' | 'react-icons';
+  iconTheme: string;
 }) {
   const {
     attributes,
@@ -105,7 +105,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   const [selectedIcons, setSelectedIcons] = useState<string[]>([])
-  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
+  const [iconTheme, setIconTheme] = useState<string>('lucide')
   const [selectionBox, setSelectionBox] = useState<{
     startX: number
     startY: number

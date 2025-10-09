@@ -17,7 +17,7 @@ interface DockApp {
 const Dock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
-  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide');
+  const [iconTheme, setIconTheme] = useState<string>('lucide');
 
   useEffect(() => {
     setMounted(true);
