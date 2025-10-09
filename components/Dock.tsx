@@ -162,6 +162,17 @@ const Dock: React.FC = () => {
           </button>
           <button 
             className="status-button" 
+            title="Bitcoin Apps Store"
+            onClick={() => window.open('https://www.bitcoinapps.store/', '_blank')}
+          >
+            <svg className="status-icon" style={{ color: '#f7931a' }} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              {/* Bitcoin B logo */}
+              <circle cx="12" cy="12" r="10" fill="currentColor" />
+              <text x="12" y="17" fontSize="14" fontWeight="bold" fill="black" textAnchor="middle">B</text>
+            </svg>
+          </button>
+          <button 
+            className="status-button" 
             title="Cashboard - Financial Dashboard"
             onClick={() => window.open('https://www.cashboard.website/', '_blank')}
           >
