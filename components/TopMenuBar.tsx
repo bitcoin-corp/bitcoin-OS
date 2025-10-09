@@ -57,6 +57,11 @@ export default function TopMenuBar({ onOpenApp, onOpenWalletModal, isConnected }
       label: 'Bitcoin OS',
       items: [
         { 
+          label: 'Home', 
+          action: () => window.location.href = '/'
+        },
+        { divider: true },
+        { 
           label: 'About Bitcoin OS', 
           action: () => alert('Bitcoin OS v1.0\n\nThe Operating System for Bitcoin\n\n© 2025 The Bitcoin Corporation LTD\nRegistered in England and Wales • Company No. 16735102') 
         },
