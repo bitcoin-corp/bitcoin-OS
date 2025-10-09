@@ -119,7 +119,6 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'social': { lucide: Users, 'react-icons': MdGroup },
   'games': { lucide: Gamepad2, 'react-icons': MdSportsEsports },
   'books': { lucide: BookOpen, 'react-icons': MdMenuBook },
-  'bapps-store': { lucide: Store, 'react-icons': MdStore },
 }
 
 export const getThemedIcon = (iconId: string, theme: 'lucide' | 'react-icons' = 'lucide') => {
