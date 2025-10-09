@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, Brain } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box } from 'lucide-react';
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes';
 import './Dock.css';
 
@@ -165,7 +165,16 @@ const Dock: React.FC = () => {
             title="Senseii - AI Assistant"
             onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
           >
-            <Brain className="status-icon" style={{ color: '#a855f7' }} />
+            <svg className="status-icon" style={{ color: '#a855f7' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              {/* Torii gate design */}
+              <path d="M3 5h18" />
+              <path d="M5 5v14" />
+              <path d="M19 5v14" />
+              <path d="M3 9h18" />
+              <path d="M9 5v4" />
+              <path d="M15 5v4" />
+              <path d="M12 5v14" />
+            </svg>
           </button>
           <button className="status-button" title="Connected">
             <Wifi className="status-icon connected" />
