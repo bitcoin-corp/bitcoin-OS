@@ -7,6 +7,7 @@ import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
+import SystemPreferences from '@/components/SystemPreferences'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface BitcoinOSLayoutProps {
@@ -17,6 +18,7 @@ interface BitcoinOSLayoutProps {
 export default function BitcoinOSLayout({ children, showBackground = false }: BitcoinOSLayoutProps) {
   const [showDevSidebar, setShowDevSidebar] = useState(true) // Visible but collapsed by default
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showSystemPreferences, setShowSystemPreferences] = useState(false)
   const [userHandle, setUserHandle] = useState<string | null>(null)
   const [isBootingOrBios, setIsBootingOrBios] = useState(false)
   const isMobile = useIsMobile()
@@ -52,20 +54,29 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   // Don't show global UI components during BIOS/boot on homepage ONLY
   const shouldShowGlobalUI = pathname !== '/' || !isBootingOrBios
 
-  // Keyboard shortcut for dev sidebar
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === 'd') {
         e.preventDefault()
         setShowDevSidebar(!showDevSidebar)
       }
+      if (e.metaKey && e.key === ',') {
+        e.preventDefault()
+        setShowSystemPreferences(!showSystemPreferences)
+      }
     }
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
+  }, [showDevSidebar, showSystemPreferences])
 
   const openApp = (appName: string) => {
-    // For now, just navigate to the app URL
+    // Handle System Preferences specially
+    if (appName === 'Settings' || appName === 'System Preferences') {
+      setShowSystemPreferences(true)
+      return
+    }
+    // For other apps, just log for now
     console.log('Opening app:', appName)
   }
 
@@ -116,6 +127,12 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
           setShowLoginModal(false)
           console.log(`Connected with ${method}: ${handle}`)
         }}
+      />
+      
+      {/* System Preferences Modal */}
+      <SystemPreferences
+        isOpen={showSystemPreferences}
+        onClose={() => setShowSystemPreferences(false)}
       />
       
       {/* Modal backdrop */}
