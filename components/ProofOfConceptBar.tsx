@@ -34,14 +34,14 @@ export default function ProofOfConceptBar() {
           <span className="poc-separator">•</span>
 
           {/* $bOS Token Link */}
-          <a href="/$bOS" className="poc-link poc-token">
+          <a href="/token" className="poc-link poc-token">
             $bOS
           </a>
 
           <span className="poc-separator">•</span>
 
           {/* Jobs Link */}
-          <a href="/jobs" className="poc-link">
+          <a href="/apps/bitcoin-jobs" className="poc-link">
             <svg height="14" width="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M13.13 22.19l-1.63-3.83c-.11-.27-.4-.46-.7-.46h-1.6c-.3 0-.59.19-.7.46l-1.63 3.83c-.14.33.05.71.4.71h5.46c.35 0 .54-.38.4-.71zM5.64 12.5l-1.39 3.84c-.14.33.05.71.4.71h2.95c.3 0 .59-.19.7-.46l1.63-3.83c.14-.33-.05-.71-.4-.71H5.64zM18.36 12.5h-3.89c-.35 0-.54.38-.4.71l1.63 3.83c.11.27.4.46.7.46h2.95c.35 0 .54-.38.4-.71l-1.39-3.84zM12 2L8.5 8.5h7L12 2z"/>
             </svg>

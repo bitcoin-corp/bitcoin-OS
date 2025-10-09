@@ -1,189 +1,320 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Bitcoin, TrendingUp, TrendingDown, Activity, DollarSign, Users, Lock, Zap, ArrowUpRight, ArrowDownRight, BarChart3, PieChart } from 'lucide-react'
-
-interface TokenMetric {
-  label: string
-  value: string
-  change: number
-  icon: any
-}
+import React from 'react';
+import './token.css';
 
 export default function TokenPage() {
-  const [price, setPrice] = useState(0.00042)
-  const [priceChange, setPriceChange] = useState(15.34)
-
-  useEffect(() => {
-    // Simulate price updates
-    const interval = setInterval(() => {
-      const change = (Math.random() - 0.5) * 0.00001
-      setPrice(prev => Math.max(0, prev + change))
-      setPriceChange((Math.random() - 0.4) * 10) // Bias towards positive
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const metrics: TokenMetric[] = [
-    { label: 'Market Cap', value: '$420K', change: 15.34, icon: DollarSign },
-    { label: '24h Volume', value: '$12.5K', change: 42.1, icon: Activity },
-    { label: 'Holders', value: '1,337', change: 8.5, icon: Users },
-    { label: 'Apps Integrated', value: '11', change: 10.0, icon: Zap },
-    { label: 'Total Supply', value: '1B $bOS', change: 0, icon: Lock },
-    { label: 'Circulating', value: '100M', change: 0, icon: BarChart3 },
-  ]
-
-  const holdings = [
-    { name: 'Development Fund', amount: '200M $bOS', value: '$84K', percentage: 20 },
-    { name: 'Community Treasury', amount: '150M $bOS', value: '$63K', percentage: 15 },
-    { name: 'App Developers', amount: '100M $bOS', value: '$42K', percentage: 10 },
-    { name: 'Early Contributors', amount: '50M $bOS', value: '$21K', percentage: 5 },
-    { name: 'Liquidity Pool', amount: '100M $bOS', value: '$42K', percentage: 10 },
-  ]
-
   return (
-    <div className="h-full overflow-auto">
-          <div className="p-8 max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="mb-8">
-              <h1 className="text-4xl font-bold mb-2">
-                <span className="text-bitcoin-orange">$bOS</span>
-                <span className="text-white ml-2">Token</span>
-              </h1>
-              <p className="text-gray-400">The Bitcoin OS ecosystem token</p>
-            </div>
+    <div className="token-page">
+      <div className="token-container">
+        {/* Hero Section */}
+        <section className="token-hero">
+          <h1><span style={{color: '#ffffff'}}>The</span> <span style={{color: '#f7931a'}}>$bOS</span> <span style={{color: '#ffffff'}}>Token</span></h1>
+          <p className="token-tagline">
+            Tokenized computing resources meet sustainable economics
+          </p>
+          <div className="token-badge">$bOS</div>
+        </section>
 
-            {/* Price Display */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 mb-6">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-12 h-12 bg-bitcoin-orange/20 rounded-full flex items-center justify-center">
-                      <span className="text-bitcoin-orange text-xl font-bold">bOS</span>
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-bold text-white">Bitcoin OS Token</h2>
-                      <span className="text-gray-500 text-sm">$bOS</span>
-                    </div>
-                  </div>
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-4xl font-bold text-white">
-                      ${price.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 })}
-                    </span>
-                    <div className={`flex items-center gap-1 ${priceChange >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                      {priceChange >= 0 ? <ArrowUpRight className="w-5 h-5" /> : <ArrowDownRight className="w-5 h-5" />}
-                      <span className="font-medium">{Math.abs(priceChange).toFixed(2)}%</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm text-gray-400 mb-1">Launch Price</div>
-                  <div className="text-xl font-bold text-white">$0.00001</div>
-                  <div className="text-sm text-gray-500">Jan 1, 2025</div>
-                </div>
+        {/* Philosophy Section */}
+        <section className="philosophy-section">
+          <h2>The $bOS Token Model</h2>
+          <div className="philosophy-content">
+            <p>
+              The $bOS token is the <strong>economic foundation</strong> of Bitcoin OS, representing 
+              ownership in the distributed computing marketplace. Token holders receive dividends from 
+              the revenue generated through resource exchange fees.
+            </p>
+            <p>
+              As users buy and sell tokenized computing resources—CPU, memory, storage, and bandwidth—the 
+              platform collects exchange fees. These fees are distributed to $bOS holders, creating a 
+              sustainable economic model that rewards participation in the ecosystem.
+            </p>
+            <div className="philosophy-points">
+              <div className="point">
+                <h3>Revenue Sharing</h3>
+                <p>Earn dividends from platform exchange fees</p>
               </div>
-
-              {/* Price Chart Placeholder */}
-              <div className="mt-6 h-64 bg-black/30 rounded-lg border border-gray-800 flex items-center justify-center">
-                <div className="text-center">
-                  <BarChart3 className="w-12 h-12 text-gray-600 mx-auto mb-2" />
-                  <p className="text-gray-500">Price Chart</p>
-                </div>
+              <div className="point">
+                <h3>Governance Rights</h3>
+                <p>Vote on protocol upgrades and fee structures</p>
               </div>
-            </div>
-
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              {metrics.map((metric) => {
-                const Icon = metric.icon
-                return (
-                  <div key={metric.label} className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-gray-400 text-sm">{metric.label}</span>
-                      <Icon className="w-4 h-4 text-bitcoin-orange" />
-                    </div>
-                    <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
-                    {metric.change !== 0 && (
-                      <div className={`flex items-center gap-1 text-sm ${metric.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {metric.change >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                        <span>{Math.abs(metric.change)}%</span>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Holdings Table */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-800">
-                <h3 className="text-lg font-bold text-white">Token Distribution</h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-800">
-                      <th className="text-left px-6 py-3 text-sm font-medium text-gray-400">Allocation</th>
-                      <th className="text-right px-6 py-3 text-sm font-medium text-gray-400">Amount</th>
-                      <th className="text-right px-6 py-3 text-sm font-medium text-gray-400">Value</th>
-                      <th className="text-right px-6 py-3 text-sm font-medium text-gray-400">% of Supply</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {holdings.map((holding, index) => (
-                      <tr key={index} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-bitcoin-orange/10 rounded-full flex items-center justify-center">
-                              <span className="text-bitcoin-orange text-xs font-bold">bOS</span>
-                            </div>
-                            <span className="text-white font-medium">{holding.name}</span>
-                          </div>
-                        </td>
-                        <td className="text-right px-6 py-4 text-gray-300">{holding.amount}</td>
-                        <td className="text-right px-6 py-4 text-white font-medium">{holding.value}</td>
-                        <td className="text-right px-6 py-4">
-                          <span className="text-sm text-gray-400">{holding.percentage}%</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Ecosystem Stats */}
-            <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
-                <div className="text-bitcoin-orange mb-2">
-                  <Zap className="w-6 h-6 mx-auto" />
-                </div>
-                <div className="text-sm text-gray-400">Daily Transactions</div>
-                <div className="text-xl font-bold text-white">2,450</div>
-              </div>
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
-                <div className="text-bitcoin-orange mb-2">
-                  <Lock className="w-6 h-6 mx-auto" />
-                </div>
-                <div className="text-sm text-gray-400">Staking APY</div>
-                <div className="text-xl font-bold text-white">42.0%</div>
-              </div>
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
-                <div className="text-bitcoin-orange mb-2">
-                  <Users className="w-6 h-6 mx-auto" />
-                </div>
-                <div className="text-sm text-gray-400">Active Users</div>
-                <div className="text-xl font-bold text-white">1,337</div>
-              </div>
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-4 text-center">
-                <div className="text-bitcoin-orange mb-2">
-                  <Activity className="w-6 h-6 mx-auto" />
-                </div>
-                <div className="text-sm text-gray-400">Apps in Ecosystem</div>
-                <div className="text-xl font-bold text-white">11</div>
+              <div className="point">
+                <h3>Liquidity Mining</h3>
+                <p>Earn rewards for providing market liquidity</p>
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Token Economics Section */}
+        <section className="token-model-section">
+          <h2>Token Economics</h2>
+          <div className="model-card">
+            <h3>Revenue Sources</h3>
+            <ul>
+              <li>
+                <strong>Resource Exchange Fees:</strong> 0.5% fee on all tokenized computing resource 
+                trades, including CPU, memory, storage, and bandwidth transactions
+              </li>
+              <li>
+                <strong>bApp Marketplace:</strong> 2.5% fee on premium bApp purchases and in-app 
+                transactions within the Bitcoin OS ecosystem
+              </li>
+              <li>
+                <strong>Cross-Chain Bridge:</strong> 1% fee for bridging assets between BSV and other 
+                blockchain networks
+              </li>
+              <li>
+                <strong>Enterprise Services:</strong> Premium support, SLA guarantees, and custom 
+                deployment services for institutional clients
+              </li>
+            </ul>
+          </div>
+
+          <div className="model-card">
+            <h3>Distribution Model</h3>
+            <ul>
+              <li>
+                <strong>Dividend Distribution:</strong> 70% of platform revenues distributed quarterly 
+                to $bOS token holders proportional to their holdings
+              </li>
+              <li>
+                <strong>Development Fund:</strong> 20% allocated to ongoing development, security audits, 
+                and ecosystem growth initiatives
+              </li>
+              <li>
+                <strong>Treasury Reserve:</strong> 10% held in reserve for market stability and 
+                strategic opportunities
+              </li>
+              <li>
+                <strong>Staking Rewards:</strong> Additional tokens earned by staking $bOS to provide 
+                network security and governance participation
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Resource Market Section */}
+        <section className="business-section">
+          <h2>The Resource Exchange</h2>
+          <div className="business-content">
+            <p className="intro">
+              Bitcoin OS creates a global marketplace for computing resources, where $bOS token holders 
+              capture value from every transaction. The exchange enables efficient price discovery and 
+              instant settlement.
+            </p>
+
+            <div className="business-model">
+              <h3>Exchange Mechanics</h3>
+              <div className="revenue-streams">
+                <div className="stream">
+                  <h4>Spot Market</h4>
+                  <p>Instant resource trading</p>
+                  <p className="price">0.5% fee</p>
+                </div>
+                <div className="stream featured">
+                  <h4>Futures Market</h4>
+                  <p>Lock in future capacity</p>
+                  <p className="price">0.3% fee</p>
+                </div>
+                <div className="stream">
+                  <h4>Options Market</h4>
+                  <p>Hedge resource costs</p>
+                  <p className="price">0.8% fee</p>
+                </div>
+              </div>
+              
+              <h3 style={{marginTop: '40px'}}>Resource Categories</h3>
+              <div className="revenue-streams">
+                <div className="stream">
+                  <h4>Compute (CPU)</h4>
+                  <p>Processing power tokens</p>
+                  <p className="price">Per GHz-hour</p>
+                </div>
+                <div className="stream featured">
+                  <h4>Memory (RAM)</h4>
+                  <p>Active memory tokens</p>
+                  <p className="price">Per GB-hour</p>
+                </div>
+                <div className="stream">
+                  <h4>Storage (SSD)</h4>
+                  <p>Persistent storage tokens</p>
+                  <p className="price">Per TB-month</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="value-flow">
+              <h3>Fee Distribution Flow</h3>
+              <div className="flow-diagram">
+                <div className="flow-item">
+                  <span>Users trade computing resources</span>
+                  <span className="arrow">→</span>
+                </div>
+                <div className="flow-item">
+                  <span>Exchange collects 0.5% fee</span>
+                  <span className="arrow">→</span>
+                </div>
+                <div className="flow-item">
+                  <span>Fees accumulate in treasury</span>
+                  <span className="arrow">→</span>
+                </div>
+                <div className="flow-item">
+                  <span>Quarterly dividends to $bOS holders</span>
+                </div>
+              </div>
+              <p style={{textAlign: 'center', marginTop: '20px', fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)'}}>
+                The more resources traded on the platform, the greater the dividend yield for token holders, 
+                creating aligned incentives across the ecosystem.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Staking Section */}
+        <section className="contribute-section">
+          <h2>$bOS Staking Program</h2>
+          <div className="contribute-steps">
+            <div className="step">
+              <div className="step-number">1</div>
+              <h3>Stake Tokens</h3>
+              <p>Lock $bOS tokens in smart contract</p>
+            </div>
+            <div className="step">
+              <div className="step-number">2</div>
+              <h3>Earn Rewards</h3>
+              <p>Receive staking APY plus fee share</p>
+            </div>
+            <div className="step">
+              <div className="step-number">3</div>
+              <h3>Governance Power</h3>
+              <p>Vote on protocol parameters</p>
+            </div>
+            <div className="step">
+              <div className="step-number">4</div>
+              <h3>Compound Returns</h3>
+              <p>Auto-compound for maximum yield</p>
+            </div>
+          </div>
+
+          <div className="contribution-examples">
+            <h3>Staking Benefits</h3>
+            <ul>
+              <li>✅ 12-20% APY base staking rewards</li>
+              <li>✅ Additional share of exchange fees</li>
+              <li>✅ Governance voting rights</li>
+              <li>✅ Priority access to new features</li>
+              <li>✅ Reduced trading fees on exchange</li>
+              <li>✅ Airdrops from partner projects</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Token Stats Section */}
+        <section className="stats-section">
+          <h2>Token Metrics</h2>
+          <div className="stats-grid">
+            <div className="stat">
+              <h3>Total Supply</h3>
+              <p className="stat-value">100,000,000</p>
+              <p className="stat-label">$bOS tokens</p>
+            </div>
+            <div className="stat">
+              <h3>Circulating</h3>
+              <p className="stat-value">0</p>
+              <p className="stat-label">In circulation</p>
+            </div>
+            <div className="stat">
+              <h3>Staked</h3>
+              <p className="stat-value">0%</p>
+              <p className="stat-label">Of supply</p>
+            </div>
+            <div className="stat">
+              <h3>Network</h3>
+              <p className="stat-value">BSV</p>
+              <p className="stat-label">Blockchain</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Allocation Section */}
+        <section className="legal-section">
+          <h2>Token Allocation</h2>
+          <div className="legal-content">
+            <p>
+              <strong>Community (40%):</strong> Reserved for community rewards, airdrops, liquidity mining, 
+              and ecosystem incentives. Distributed over 4 years to ensure long-term alignment.
+            </p>
+            <p>
+              <strong>Team & Advisors (20%):</strong> Allocated to founding team and advisors with 2-year 
+              vesting schedule and 6-month cliff to ensure commitment.
+            </p>
+            <p>
+              <strong>Development Fund (20%):</strong> Reserved for ongoing development, security audits, 
+              and infrastructure costs. Released quarterly based on milestones.
+            </p>
+            <p>
+              <strong>Public Sale (15%):</strong> Available for public purchase through regulated token 
+              sale events and exchange listings.
+            </p>
+            <p>
+              <strong>Strategic Partners (5%):</strong> Reserved for strategic partnerships, exchange 
+              listings, and market makers to ensure liquidity.
+            </p>
+          </div>
+        </section>
+
+        {/* Legal Notice Section */}
+        <section className="legal-section">
+          <h2>Legal & Regulatory Notice</h2>
+          <div className="legal-content">
+            <p>
+              <strong>Security Considerations:</strong> The $bOS token is designed as a utility token 
+              for the Bitcoin OS ecosystem. However, the dividend distribution mechanism may subject 
+              it to securities regulations in certain jurisdictions.
+            </p>
+            <p>
+              <strong>Regulatory Compliance:</strong> We are committed to working with regulators to 
+              ensure compliance with applicable laws. Token holders should consult their own legal 
+              and tax advisors.
+            </p>
+            <p>
+              <strong>Risk Disclosure:</strong> Cryptocurrency investments carry significant risks. 
+              The value of $bOS tokens may fluctuate dramatically. Past performance does not guarantee 
+              future results.
+            </p>
+            <p>
+              By acquiring $bOS tokens, you acknowledge understanding these risks and agree to conduct 
+              your own due diligence. This is not investment advice or a solicitation to purchase tokens.
+            </p>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="cta-section">
+          <h2>Join the Computing Revolution</h2>
+          <div className="cta-buttons">
+            <a 
+              href="https://github.com/bitcoin-corp/bitcoin-OS" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="cta-btn primary"
+            >
+              <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              View on GitHub
+            </a>
+            <a 
+              href="/platform" 
+              className="cta-btn secondary"
+            >
+              Learn About Bitcoin OS
+            </a>
+          </div>
+        </section>
+      </div>
     </div>
-  )
+  );
 }
