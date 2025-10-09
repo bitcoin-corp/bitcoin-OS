@@ -121,24 +121,20 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'books': { lucide: BookOpen, 'react-icons': MdMenuBook },
 }
 
+// Import the complete mappings
+import { getCompleteThemedIcon, completeIconMappings } from './icon-mappings-complete'
+
 export const getThemedIcon = (iconId: string, theme: string = 'lucide') => {
-  const mapping = iconMappings[iconId]
-  if (!mapping) {
-    // Fallback to default icon
-    return theme === 'react-icons' ? MdSettings : Settings
-  }
-  // For now, only support lucide and react-icons, fallback to lucide for others
-  if (theme !== 'lucide' && theme !== 'react-icons') {
-    return mapping['lucide'] || Settings
-  }
-  return mapping[theme as 'lucide' | 'react-icons'] || Settings
+  // Use the complete icon mappings for all themes
+  return getCompleteThemedIcon(iconId, theme)
 }
 
 export const getCurrentTheme = (): string => {
   if (typeof window === 'undefined') return 'lucide'
   const theme = localStorage.getItem('bitcoinOS-icon-theme') || 'lucide'
-  // For now, only support lucide and react-icons
-  if (theme !== 'lucide' && theme !== 'react-icons') {
+  // Now supports all icon themes
+  const validThemes = ['lucide', 'react-icons', 'tabler', 'heroicons', 'feather', 'phosphor', 'remix', 'bootstrap']
+  if (!validThemes.includes(theme)) {
     return 'lucide'
   }
   return theme
