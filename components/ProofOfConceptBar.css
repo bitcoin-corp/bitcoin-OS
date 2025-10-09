@@ -52,6 +52,47 @@
   justify-content: center;
   gap: 0.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  padding: 0 16px;
+}
+
+.poc-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.poc-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid transparent;
+}
+
+.poc-link:hover {
+  opacity: 1;
+  border-bottom-color: rgba(255, 255, 255, 0.9);
+}
+
+.poc-link svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.poc-token {
+  color: #f7931a;
+  font-weight: 600;
+}
+
+.poc-separator {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .poc-text {

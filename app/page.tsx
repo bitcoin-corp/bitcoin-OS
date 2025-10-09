@@ -18,6 +18,7 @@ import MobileAppLoader from '@/components/MobileAppLoader'
 import MobileAppDrawer from '@/components/MobileAppDrawer'
 import MobileTaskbar from '@/components/MobileTaskbar'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
+import SystemPreferences from '@/components/SystemPreferences'
 import { bitcoinApps, getAppByName } from '@/lib/apps.config'
 import { useIsMobile } from '@/hooks/useIsMobile'
 
@@ -39,10 +40,12 @@ export default function BitcoinOS() {
   const [showDevSidebar, setShowDevSidebar] = useState(true)
   const [placeholderApp, setPlaceholderApp] = useState<string | null>(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showSystemPreferences, setShowSystemPreferences] = useState(false)
   const [userHandle, setUserHandle] = useState<string | null>(null)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
   const [isVideoReady, setIsVideoReady] = useState(false)
+  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
@@ -135,20 +138,46 @@ export default function BitcoinOS() {
   }, [hasUserInteracted, pendingAudio])
 
   useEffect(() => {
-    // Keyboard shortcut for dev sidebar
+    // Keyboard shortcuts
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === 'd') {
         e.preventDefault()
         setShowDevSidebar(!showDevSidebar)
       }
+      if (e.metaKey && e.key === ',') {
+        e.preventDefault()
+        setShowSystemPreferences(!showSystemPreferences)
+      }
     }
     window.addEventListener('keydown', handleKeyPress)
+    
+    // Set initial theme and listen for changes
+    if (typeof window !== 'undefined') {
+      const { getCurrentTheme } = require('@/lib/icon-themes')
+      setIconTheme(getCurrentTheme())
+      
+      const handleThemeChange = (event: any) => {
+        setIconTheme(event.detail)
+      }
+      
+      window.addEventListener('iconThemeChanged', handleThemeChange)
+      
+      return () => {
+        window.removeEventListener('keydown', handleKeyPress)
+        window.removeEventListener('iconThemeChanged', handleThemeChange)
+      }
+    }
+    
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [showDevSidebar])
+  }, [showDevSidebar, showSystemPreferences])
 
   const openApp = (appName: string) => {
     // Check if it's a placeholder app
     if (placeholderApps.includes(appName)) {
+      if (appName === 'Settings') {
+        setShowSystemPreferences(true)
+        return
+      }
       setPlaceholderApp(appName)
       return
     }
@@ -275,7 +304,7 @@ export default function BitcoinOS() {
                   {bitcoinApps.map((app, index) => {
                     // Use rainbow colors for live apps (those with isExternal: true)
                     const isLiveApp = app.isExternal === true
-                    const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp)
+                    const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp, iconTheme)
                     return (
                       <button
                         key={app.id}
@@ -321,6 +350,12 @@ export default function BitcoinOS() {
             <MobileAppDrawer onOpenApp={openApp} />
           </>
         )}
+        
+        {/* System Preferences Modal (works on mobile too) */}
+        <SystemPreferences
+          isOpen={showSystemPreferences}
+          onClose={() => setShowSystemPreferences(false)}
+        />
       </div>
     )
   }
@@ -362,6 +397,22 @@ export default function BitcoinOS() {
             onClose={() => setPlaceholderApp(null)}
           />
         )}
+        
+        {/* System Preferences Modal */}
+        <SystemPreferences
+          isOpen={showSystemPreferences}
+          onClose={() => setShowSystemPreferences(false)}
+        />
+        
+        {/* HandCash Login Modal */}
+        <HandCashLoginModal 
+          isOpen={showLoginModal} 
+          onClose={() => setShowLoginModal(false)}
+          onLogin={(handle) => {
+            setUserHandle(handle)
+            setShowLoginModal(false)
+          }}
+        />
       </div>
     </>
   )

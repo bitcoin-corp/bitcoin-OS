@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box } from 'lucide-react';
+import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes';
 import './Dock.css';
 
 interface DockApp {
@@ -16,13 +17,28 @@ interface DockApp {
 const Dock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
+  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide');
 
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer);
+    
+    // Set initial theme
+    setIconTheme(getCurrentTheme());
+    
+    // Listen for theme changes
+    const handleThemeChange = (event: any) => {
+      setIconTheme(event.detail);
+    };
+    
+    window.addEventListener('iconThemeChanged', handleThemeChange);
+    
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('iconThemeChanged', handleThemeChange);
+    };
   }, []);
 
   const getRainbowColor = (index: number): string => {
@@ -104,7 +120,8 @@ const Dock: React.FC = () => {
         {/* App icons on the left */}
         <div className="dock-apps">
           {dockApps.map((app, index) => {
-          const Icon = app.icon;
+          // Get themed icon
+          const Icon = app.id === 'bapps-store' ? app.icon : getThemedIcon(app.id || app.name.toLowerCase().replace('bitcoin ', ''), iconTheme);
           return (
             <button
               key={app.name}

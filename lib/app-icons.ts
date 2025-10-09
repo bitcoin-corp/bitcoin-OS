@@ -28,6 +28,8 @@ import {
   Palette
 } from 'lucide-react'
 
+import { getThemedIcon, getCurrentTheme } from './icon-themes'
+
 export const appIcons = {
   'bitcoin-wallet': { icon: Wallet, color: '#ffd700' }, // Gold yellow from wallet app
   'bitcoin-email': { icon: Mail, color: '#ef4444' },
@@ -71,15 +73,24 @@ export const getRainbowColor = (index: number): string => {
   return rainbowColors[index % rainbowColors.length];
 };
 
-export const getAppIcon = (appId: string, index?: number, useRainbow?: boolean) => {
+export const getAppIcon = (appId: string, index?: number, useRainbow?: boolean, theme?: 'lucide' | 'react-icons') => {
+  const currentTheme = theme || getCurrentTheme()
   const defaultIcon = appIcons[appId as keyof typeof appIcons] || { icon: Globe, color: '#6b7280' }
+  
+  // Get themed icon
+  const ThemedIcon = getThemedIcon(appId, currentTheme)
+  
+  const result = {
+    ...defaultIcon,
+    icon: ThemedIcon
+  }
   
   if (useRainbow && typeof index === 'number') {
     return {
-      ...defaultIcon,
+      ...result,
       color: getRainbowColor(index)
     }
   }
   
-  return defaultIcon
+  return result
 }

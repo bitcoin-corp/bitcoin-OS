@@ -19,6 +19,7 @@ import {
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box, Camera, MapPin, MessageCircle, Users, Gamepad2, Grid3X3, UserCheck } from 'lucide-react'
+import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes'
 import WindowManager from './WindowManager'
 
 interface DraggableDesktopProps {
@@ -41,12 +42,14 @@ function DraggableIcon({
   app, 
   onDoubleClick, 
   isSelected, 
-  onSelect 
+  onSelect,
+  iconTheme
 }: { 
   app: DesktopIcon; 
   onDoubleClick: () => void;
   isSelected: boolean;
   onSelect: (id: string, event: React.MouseEvent) => void;
+  iconTheme: 'lucide' | 'react-icons';
 }) {
   const {
     attributes,
@@ -68,7 +71,8 @@ function DraggableIcon({
     cursor: isDragging ? 'grabbing' : 'grab',
   }
 
-  const Icon = app.icon
+  // Get themed icon
+  const Icon = getThemedIcon(app.id, iconTheme)
 
   return (
     <div
@@ -101,6 +105,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const [trashedItems, setTrashedItems] = useState<DesktopIcon[]>([])
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   const [selectedIcons, setSelectedIcons] = useState<string[]>([])
+  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
   const [selectionBox, setSelectionBox] = useState<{
     startX: number
     startY: number
@@ -177,6 +182,20 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         } catch (error) {
           console.error('Failed to load desktop positions:', error)
         }
+      }
+      
+      // Set initial theme
+      setIconTheme(getCurrentTheme())
+      
+      // Listen for theme changes
+      const handleThemeChange = (event: any) => {
+        setIconTheme(event.detail)
+      }
+      
+      window.addEventListener('iconThemeChanged', handleThemeChange)
+      
+      return () => {
+        window.removeEventListener('iconThemeChanged', handleThemeChange)
       }
     }
   }, [])
@@ -469,6 +488,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                   onDoubleClick={() => openApp(app)}
                   isSelected={selectedIcons.includes(app.id)}
                   onSelect={handleIconSelect}
+                  iconTheme={iconTheme}
                 />
               ))}
               

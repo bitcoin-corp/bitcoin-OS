@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Bitcoin, X, ChevronUp } from 'lucide-react'
 import { bitcoinApps } from '@/lib/apps.config'
 import { getAppIcon } from '@/lib/app-icons'
+import { getCurrentTheme } from '@/lib/icon-themes'
 
 interface MobileAppDrawerProps {
   onOpenApp: (appName: string) => void
@@ -11,6 +12,23 @@ interface MobileAppDrawerProps {
 
 export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [iconTheme, setIconTheme] = useState<'lucide' | 'react-icons'>('lucide')
+
+  useEffect(() => {
+    // Set initial theme
+    setIconTheme(getCurrentTheme())
+    
+    // Listen for theme changes
+    const handleThemeChange = (event: any) => {
+      setIconTheme(event.detail)
+    }
+    
+    window.addEventListener('iconThemeChanged', handleThemeChange)
+    
+    return () => {
+      window.removeEventListener('iconThemeChanged', handleThemeChange)
+    }
+  }, [])
 
   // Function to launch app
   const launchApp = (app: typeof bitcoinApps[0]) => {
@@ -76,7 +94,7 @@ export default function MobileAppDrawer({ onOpenApp }: MobileAppDrawerProps) {
           {bitcoinApps.map((app, index) => {
             // Use rainbow colors for live apps (those with isExternal: true)
             const isLiveApp = app.isExternal === true
-            const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp)
+            const { icon: Icon, color } = getAppIcon(app.id, index, isLiveApp, iconTheme)
             return (
               <button
                 key={app.id}
