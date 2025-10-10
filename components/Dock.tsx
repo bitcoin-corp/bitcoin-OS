@@ -15,15 +15,11 @@ interface DockApp {
 }
 
 const Dock: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
   const [iconTheme, setIconTheme] = useState<string>('lucide');
 
   useEffect(() => {
     setMounted(true);
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
     
     // Set initial theme
     setIconTheme(getCurrentTheme());
@@ -36,7 +32,6 @@ const Dock: React.FC = () => {
     window.addEventListener('iconThemeChanged', handleThemeChange);
     
     return () => {
-      clearInterval(timer);
       window.removeEventListener('iconThemeChanged', handleThemeChange);
     };
   }, []);
@@ -196,9 +191,6 @@ const Dock: React.FC = () => {
               <path d="M17 19h4"/>
             </svg>
           </button>
-          <div className="status-time" title={mounted ? currentTime.toLocaleDateString() : ''}>
-            <span>{mounted ? currentTime.toLocaleTimeString() : '12:00:00 AM'}</span>
-          </div>
         </div>
       </div>
     </div>
