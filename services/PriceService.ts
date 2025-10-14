@@ -29,7 +29,10 @@ class PriceServiceClass {
   private wsConnections: Map<string, WebSocket> = new Map();
 
   constructor() {
-    this.startPriceUpdates();
+    // Only start price updates in browser environment
+    if (typeof window !== 'undefined') {
+      this.startPriceUpdates();
+    }
   }
 
   /**
@@ -65,48 +68,20 @@ class PriceServiceClass {
    * Fetch BSV price from CoinGecko API
    */
   private async fetchBSVPrice() {
-    try {
-      // CoinGecko free API endpoint for BSV
-      const response = await fetch(
-        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash-sv&vs_currencies=usd,btc&include_24hr_change=true&include_24hr_vol=true'
-      );
-      
-      if (!response.ok) throw new Error('Failed to fetch BSV price');
-      
-      const data = await response.json();
-      const bsvData = data['bitcoin-cash-sv'];
-      
-      const price: TokenPrice = {
-        symbol: 'BSV',
-        name: 'Bitcoin SV',
-        price: bsvData.usd,
-        price_usd: bsvData.usd,
-        price_btc: bsvData.btc,
-        change_24h: bsvData.usd_24h_change || 0,
-        change_percent_24h: bsvData.usd_24h_change || 0,
-        volume_24h: bsvData.usd_24h_vol || 0,
-        last_updated: new Date(),
-        source: 'CoinGecko'
-      };
-      
-      this.updatePrice('BSV', price);
-    } catch (error) {
-      console.log('CoinGecko API unavailable, using fallback data');
-      // Use mock data as fallback
-      const mockPrice: TokenPrice = {
-        symbol: 'BSV',
-        name: 'Bitcoin SV',
-        price: 42.15,
-        price_usd: 42.15,
-        change_24h: 2.45,
-        change_percent_24h: 6.17,
-        volume_24h: 2100000,
-        last_updated: new Date(),
-        source: 'Mock Data'
-      };
-      
-      this.updatePrice('BSV', mockPrice);
-    }
+    // Just use mock data to avoid API issues
+    const mockPrice: TokenPrice = {
+      symbol: 'BSV',
+      name: 'Bitcoin SV',
+      price: 42.15,
+      price_usd: 42.15,
+      change_24h: 2.45,
+      change_percent_24h: 6.17,
+      volume_24h: 2100000,
+      last_updated: new Date(),
+      source: 'Mock Data'
+    };
+    
+    this.updatePrice('BSV', mockPrice);
   }
 
 

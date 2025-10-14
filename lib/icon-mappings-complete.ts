@@ -30,7 +30,8 @@ import {
   Palette as LucidePalette,
   GraduationCap as LucideGraduationCap,
   UserCheck as LucideUserCheck,
-  Circle as LucideCircle
+  Circle as LucideCircle,
+  Monitor as LucideMonitor
 } from 'lucide-react'
 
 // React Icons (Material Design) - existing
@@ -64,7 +65,8 @@ import {
   MdPalette,
   MdSchool,
   MdVerifiedUser,
-  MdCircle
+  MdCircle,
+  MdMonitor
 } from 'react-icons/md'
 
 // Tabler Icons
@@ -785,6 +787,16 @@ export const completeIconMappings: { [key: string]: CompleteIconMapping } = {
     phosphor: PhosphorCircle,
     remix: RiCircleLine,
     bootstrap: BsCircle
+  },
+  'bitcoin-os': {
+    lucide: LucideMonitor,
+    'react-icons': MdMonitor,
+    tabler: LucideMonitor,
+    heroicons: LucideMonitor,
+    feather: LucideMonitor,
+    phosphor: LucideMonitor,
+    remix: LucideMonitor,
+    bootstrap: LucideMonitor
   }
 }
 
