@@ -132,6 +132,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   const [selectedIcons, setSelectedIcons] = useState<string[]>([])
   const [iconTheme, setIconTheme] = useState<string>('lucide')
+  const [isTickerCollapsed, setIsTickerCollapsed] = useState(false)
   const [selectionBox, setSelectionBox] = useState<{
     startX: number
     startY: number
@@ -222,12 +223,19 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         tidyDesktop()
       }
       
+      // Listen for ticker sidebar collapse state changes
+      const handleTickerToggle = (event: any) => {
+        setIsTickerCollapsed(event.detail)
+      }
+
       window.addEventListener('iconThemeChanged', handleThemeChange)
       window.addEventListener('tidyDesktop', handleTidyDesktop)
+      window.addEventListener('tickerToggled', handleTickerToggle)
       
       return () => {
         window.removeEventListener('iconThemeChanged', handleThemeChange)
         window.removeEventListener('tidyDesktop', handleTidyDesktop)
+        window.removeEventListener('tickerToggled', handleTickerToggle)
       }
     }
   }, [])
@@ -650,7 +658,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       <TickerSidebar />
       
       {/* Bitcoin Corp, Trust and NPG - Top Right (small, vertical) */}
-      <div className="absolute right-[320px] top-20 flex flex-col gap-4 z-20">
+      <div 
+        className={`absolute top-20 flex flex-col gap-4 z-20 transition-all duration-300 ease-in-out ${
+          isTickerCollapsed ? 'right-[80px]' : 'right-[300px]'
+        }`}
+      >
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
@@ -710,7 +722,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       </div>
       
       {/* Trash Basket - Bottom Right (interactive) */}
-      <div className="absolute bottom-8 right-8 z-20">
+      <div 
+        className={`absolute bottom-8 z-20 transition-all duration-300 ease-in-out ${
+          isTickerCollapsed ? 'right-[80px]' : 'right-[300px]'
+        }`}
+      >
         <div 
           className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-all cursor-pointer select-none"
           title={`Trash (${trashedItems.length} items)`}

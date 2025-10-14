@@ -191,7 +191,12 @@ const TickerSidebar: React.FC<TickerSidebarProps> = ({
         <div className="ticker-header-controls">
           <button 
             className="ticker-toggle"
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={() => {
+              const newCollapsed = !isCollapsed;
+              setIsCollapsed(newCollapsed);
+              // Emit event for desktop icons to listen to
+              window.dispatchEvent(new CustomEvent('tickerToggled', { detail: newCollapsed }));
+            }}
             title={isCollapsed ? 'Expand ticker' : 'Collapse ticker'}
           >
             {isCollapsed ? '←' : '→'}
