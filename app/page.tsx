@@ -9,6 +9,7 @@ import TopMenuBar from '@/components/TopMenuBar'
 import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
+import MinimalDock from '@/components/MinimalDock'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
 import BiosScreen from '@/components/BiosScreen'
@@ -46,6 +47,7 @@ export default function BitcoinOS() {
   const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
   const [isVideoReady, setIsVideoReady] = useState(false)
   const [iconTheme, setIconTheme] = useState<string>('lucide')
+  const [dockStyle, setDockStyle] = useState<string>('large')
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
@@ -151,20 +153,27 @@ export default function BitcoinOS() {
     }
     window.addEventListener('keydown', handleKeyPress)
     
-    // Set initial theme and listen for changes
+    // Set initial theme and dock style, listen for changes
     if (typeof window !== 'undefined') {
       const { getCurrentTheme } = require('@/lib/icon-themes')
       setIconTheme(getCurrentTheme())
+      setDockStyle(localStorage.getItem('dockStyle') || 'large')
       
       const handleThemeChange = (event: any) => {
         setIconTheme(event.detail)
       }
       
+      const handleDockStyleChange = (event: any) => {
+        setDockStyle(event.detail)
+      }
+      
       window.addEventListener('iconThemeChanged', handleThemeChange)
+      window.addEventListener('dockStyleChanged', handleDockStyleChange)
       
       return () => {
         window.removeEventListener('keydown', handleKeyPress)
         window.removeEventListener('iconThemeChanged', handleThemeChange)
+        window.removeEventListener('dockStyleChanged', handleDockStyleChange)
       }
     }
     
@@ -415,7 +424,7 @@ export default function BitcoinOS() {
         />
         
         {/* Dock at the bottom */}
-        <Dock />
+        {dockStyle === 'minimal' ? <MinimalDock /> : <Dock />}
       </div>
     </>
   )

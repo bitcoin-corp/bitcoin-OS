@@ -21,6 +21,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box, Camera, MapPin, MessageCircle, Users, Gamepad2, Grid3X3, UserCheck } from 'lucide-react'
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes'
 import WindowManager from './WindowManager'
+import TickerSidebar from './TickerSidebar'
 
 interface DraggableDesktopProps {
   isVideoReady?: boolean
@@ -527,7 +528,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       
       {/* Desktop Icons */}
       <div 
-        className={`absolute inset-0 pt-20 pb-8 pr-8 z-20 transition-all duration-500 ease-in-out opacity-0 animate-fadeInUp ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}
+        className={`absolute inset-0 pt-20 pb-8 pr-[300px] z-20 transition-all duration-500 ease-in-out opacity-0 animate-fadeInUp ${showDevSidebar ? 'pl-[260px]' : 'pl-4'}`}
         style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
         onClick={handleDesktopClick}
         onMouseDown={handleMouseDown}
@@ -645,8 +646,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       {/* Window Manager for opened apps */}
       <WindowManager windows={openWindows} onClose={closeWindow} />
       
+      {/* Ticker Sidebar */}
+      <TickerSidebar />
+      
       {/* Bitcoin Corp, Trust and NPG - Top Right (small, vertical) */}
-      <div className="absolute right-8 top-20 flex flex-col gap-4 z-20">
+      <div className="absolute right-[320px] top-20 flex flex-col gap-4 z-20">
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
           onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}

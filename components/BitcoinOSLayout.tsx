@@ -6,6 +6,7 @@ import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
+import MinimalDock from '@/components/MinimalDock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
 import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -17,19 +18,22 @@ interface BitcoinOSLayoutProps {
 }
 
 export default function BitcoinOSLayout({ children, showBackground = false }: BitcoinOSLayoutProps) {
+  const pathname = usePathname()
+  const isMobile = useIsMobile()
+  
   const [showDevSidebar, setShowDevSidebar] = useState(true) // Visible but collapsed by default
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showSystemPreferences, setShowSystemPreferences] = useState(false)
   const [userHandle, setUserHandle] = useState<string | null>(null)
-  const [isBootingOrBios, setIsBootingOrBios] = useState(false)
-  const isMobile = useIsMobile()
-  const pathname = usePathname()
+  const [isBootingOrBios, setIsBootingOrBios] = useState(pathname === '/')
+  const [dockStyle, setDockStyle] = useState<string>('large')
 
-  // Initialize theme on mount
+  // Initialize theme and dock style on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const themeConfig = getCurrentThemeConfig()
       applyTheme(themeConfig)
+      setDockStyle(localStorage.getItem('dockStyle') || 'large')
     }
   }, [])
 
@@ -38,15 +42,27 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
     if (pathname === '/') {
       // Check if BIOS or boot screen elements are present
       const checkBootState = () => {
-        const hasBiosScreen = document.querySelector('.bg-black.text-green-400.font-mono')
-        const hasBootScreen = document.querySelector('.h-screen.bg-black.flex.flex-col.items-center.justify-center')
-        setIsBootingOrBios(!!(hasBiosScreen || hasBootScreen))
+        // Look for BIOS screen
+        const hasBiosScreen = document.querySelector('[data-component="bios-screen"]') || 
+                              document.querySelector('.text-green-400.font-mono') ||
+                              document.textContent?.includes('Bitcoin OS BIOS')
+        
+        // Look for boot screen 
+        const hasBootScreen = document.querySelector('[data-component="boot-screen"]') ||
+                              document.querySelector('.text-yellow-400.text-8xl.font-bold.animate-pulse') ||
+                              document.textContent?.includes('Initializing Bitcoin OS')
+        
+        const isBooting = !!(hasBiosScreen || hasBootScreen)
+        setIsBootingOrBios(isBooting)
       }
       
-      // Check immediately and set up observer
-      checkBootState()
+      // Initial check with delay to ensure DOM is ready
+      setTimeout(checkBootState, 0)
       
-      const observer = new MutationObserver(checkBootState)
+      const observer = new MutationObserver(() => {
+        // Add small delay to avoid rapid checking
+        setTimeout(checkBootState, 10)
+      })
       observer.observe(document.body, { 
         childList: true, 
         subtree: true, 
@@ -63,7 +79,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   // Don't show global UI components during BIOS/boot on homepage ONLY
   const shouldShowGlobalUI = pathname !== '/' || !isBootingOrBios
 
-  // Keyboard shortcuts
+  // Keyboard shortcuts and dock style listener
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === 'd') {
@@ -75,8 +91,18 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         setShowSystemPreferences(!showSystemPreferences)
       }
     }
+    
+    const handleDockStyleChange = (event: any) => {
+      setDockStyle(event.detail)
+    }
+    
     window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
+    window.addEventListener('dockStyleChanged', handleDockStyleChange)
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+      window.removeEventListener('dockStyleChanged', handleDockStyleChange)
+    }
   }, [showDevSidebar, showSystemPreferences])
 
   const openApp = (appName: string) => {
@@ -118,11 +144,10 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
           {children}
         </div>
         
-        {/* Only show Dev Sidebar and Dock on desktop when not during BIOS/boot */}
+        {/* Only show Dev Sidebar on desktop when not during BIOS/boot */}
         {!isMobile && shouldShowGlobalUI && (
           <>
             {showDevSidebar && <DevSidebar />}
-            <Dock />
           </>
         )}
       </div>

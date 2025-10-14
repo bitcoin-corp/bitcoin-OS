@@ -171,9 +171,12 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   }
 
   return (
-    <div className={`w-full h-screen bg-black text-green-400 font-mono text-sm leading-relaxed p-5 flex flex-col overflow-hidden transition-opacity duration-300 ease-out ${
-      isFadingOut ? 'opacity-0' : 'opacity-100'
-    }`}>
+    <div 
+      data-component="bios-screen"
+      className={`w-full h-screen bg-black text-green-400 font-mono text-sm leading-relaxed p-5 flex flex-col overflow-hidden transition-opacity duration-300 ease-out ${
+        isFadingOut ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
       {/* Header */}
       <div className="border-b-2 border-green-400 pb-2 mb-5">
         <div className="text-base font-bold" style={{ textShadow: '0 0 10px #00ff00' }}>

@@ -42,9 +42,12 @@ export default function BootScreen() {
   }, [])
 
   return (
-    <div className={`h-screen bg-black flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
-      isFadingOut ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-    }`}>
+    <div 
+      data-component="boot-screen"
+      className={`h-screen bg-black flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+        isFadingOut ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+      }`}
+    >
       <div className="text-center space-y-8">
         <div className="flex justify-center">
           <span className="text-yellow-400 text-8xl font-bold animate-pulse">₿</span>
