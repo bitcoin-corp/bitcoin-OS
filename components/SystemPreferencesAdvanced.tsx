@@ -34,6 +34,12 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
   const [showImportExport, setShowImportExport] = useState(false)
   const [importJson, setImportJson] = useState('')
   const [customAccent, setCustomAccent] = useState(themeConfig.accentColor || '#f7931a')
+  const [dockStyle, setDockStyle] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('dockStyle') || 'large'
+    }
+    return 'large'
+  })
 
   // Load saved preferences on mount
   useEffect(() => {
@@ -66,6 +72,14 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
         window.dispatchEvent(new CustomEvent('iconThemeChanged', { detail: preset.iconTheme }))
       }
     }
+  }
+
+  // Handle dock style change
+  const handleDockStyleChange = (style: string) => {
+    setDockStyle(style)
+    localStorage.setItem('dockStyle', style)
+    // Dispatch event to update dock component
+    window.dispatchEvent(new CustomEvent('dockStyleChanged', { detail: style }))
   }
 
   // Export current theme
@@ -442,8 +456,40 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
           {activeTab === 'display' && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-white mb-4">Display Settings</h3>
+              
+              {/* Dock Style */}
               <div className="bg-gray-800/40 rounded-xl p-6 border border-gray-700">
-                <p className="text-gray-400">Display settings coming soon...</p>
+                <h4 className="text-white font-medium mb-4">Dock Style</h4>
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="dockStyle"
+                      value="large"
+                      checked={dockStyle === 'large'}
+                      onChange={(e) => handleDockStyleChange(e.target.value)}
+                      className="w-4 h-4 text-blue-500"
+                    />
+                    <div className="flex-1">
+                      <span className="text-white font-medium">Large Icons</span>
+                      <p className="text-gray-400 text-sm">Full-size floating dock with large app icons</p>
+                    </div>
+                  </label>
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="dockStyle"
+                      value="minimal"
+                      checked={dockStyle === 'minimal'}
+                      onChange={(e) => handleDockStyleChange(e.target.value)}
+                      className="w-4 h-4 text-blue-500"
+                    />
+                    <div className="flex-1">
+                      <span className="text-white font-medium">Minimal</span>
+                      <p className="text-gray-400 text-sm">Compact dock with small icons and system status</p>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
           )}

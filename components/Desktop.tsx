@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Wallet, Mail, Music, FileText, HardDrive, Globe, Terminal, Settings, Calendar, Search, LineChart, Briefcase, Table, Share2, Store, ShoppingBag, TriangleAlert, Box, TrendingUp } from 'lucide-react'
 import Image from 'next/image'
 import Desktop3D from './Desktop3D'
 import Dock from './Dock'
+import MinimalDock from './MinimalDock'
+import TickerSidebar from './TickerSidebar'
 
 interface DesktopProps {
   onOpenApp: (appName: string) => void
@@ -30,6 +32,24 @@ const desktopApps = [
 
 export default function Desktop({ onOpenApp }: DesktopProps) {
   const [is3DMode, setIs3DMode] = useState(false)
+  const [dockStyle, setDockStyle] = useState<string>('large')
+
+  // Initialize dock style and listen for changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDockStyle(localStorage.getItem('dockStyle') || 'large')
+    }
+
+    const handleDockStyleChange = (event: any) => {
+      setDockStyle(event.detail)
+    }
+
+    window.addEventListener('dockStyleChanged', handleDockStyleChange)
+
+    return () => {
+      window.removeEventListener('dockStyleChanged', handleDockStyleChange)
+    }
+  }, [])
 
   // Function to launch app
   const launchApp = (app: typeof desktopApps[0]) => {
@@ -59,7 +79,7 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
           if (app) launchApp(app)
         }} />
       ) : (
-        <div className="flex-1 p-8 grid grid-cols-8 gap-4 content-start">
+        <div className="flex-1 p-8 grid grid-cols-8 gap-4 content-start" style={{ marginRight: '300px' }}>
           {desktopApps.map((app) => {
             const Icon = app.icon
             return (
@@ -89,7 +109,10 @@ export default function Desktop({ onOpenApp }: DesktopProps) {
       )}
       
       {/* Floating Dock */}
-      <Dock />
+      {dockStyle === 'minimal' ? <MinimalDock /> : <Dock />}
+      
+      {/* Ticker Sidebar */}
+      <TickerSidebar />
     </div>
   )
 }

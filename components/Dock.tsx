@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, FolderOpen } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, FolderOpen, Minimize2, Monitor, Home } from 'lucide-react';
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes';
 import './Dock.css';
 
@@ -17,6 +17,7 @@ interface DockApp {
 const Dock: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [iconTheme, setIconTheme] = useState<string>('lucide');
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     setMounted(true);
@@ -31,8 +32,14 @@ const Dock: React.FC = () => {
     
     window.addEventListener('iconThemeChanged', handleThemeChange);
     
+    // Timer for clock
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    
     return () => {
       window.removeEventListener('iconThemeChanged', handleThemeChange);
+      clearInterval(timer);
     };
   }, []);
 
@@ -80,7 +87,7 @@ const Dock: React.FC = () => {
   };
 
   const dockApps: DockApp[] = [
-    { name: 'Home', icon: FolderOpen, color: 'text-blue-500', url: 'https://bitcoin-os.vercel.app/' },
+    { id: 'bitcoin-os', name: 'Bitcoin OS', icon: Monitor, color: 'rainbow', url: 'https://bitcoin-os.vercel.app/', current: true },
     { name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app' },
     { name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app' },
     { name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app' },
@@ -109,6 +116,12 @@ const Dock: React.FC = () => {
     }
   };
 
+  const toggleDockSize = () => {
+    const newDockStyle = 'minimal';
+    localStorage.setItem('dockStyle', newDockStyle);
+    window.dispatchEvent(new CustomEvent('dockStyleChanged', { detail: newDockStyle }));
+  };
+
   return (
     <div className="bitcoin-dock">
       <div className="dock-container">
@@ -135,6 +148,13 @@ const Dock: React.FC = () => {
         {/* Status icons on the right */}
         <div className="dock-status">
           <div className="dock-divider" />
+          <button 
+            className="status-button" 
+            title="Switch to Minimal Dock"
+            onClick={toggleDockSize}
+          >
+            <Minimize2 className="status-icon" style={{ color: '#6b7280' }} />
+          </button>
           <button 
             className="status-button" 
             title="Bitcoin Corporation"
@@ -191,6 +211,22 @@ const Dock: React.FC = () => {
               <path d="M17 19h4"/>
             </svg>
           </button>
+          <button 
+            className="status-button" 
+            title="Connected"
+          >
+            <Wifi className="status-icon" style={{ color: '#22c55e' }} />
+          </button>
+          <button 
+            className="status-button" 
+            title="Battery: 100%"
+          >
+            <Battery className="status-icon" style={{ color: '#22c55e' }} />
+          </button>
+          <div className="status-button" title={mounted ? currentTime.toLocaleDateString() : ''} style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#ffffff', fontSize: '12px' }}>
+            <Clock className="status-icon" style={{ color: '#ffffff' }} />
+            <span>{mounted ? currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '12:00'}</span>
+          </div>
         </div>
       </div>
     </div>
