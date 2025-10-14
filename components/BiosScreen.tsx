@@ -27,8 +27,8 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   }, [])
 
   const bootLines = [
-    { text: 'Initializing Bitcoin Core...', status: 'ok' },
-    { text: 'Loading Blockchain Headers...', status: 'ok' },
+    { text: 'Initializing Bitcoin SV Node...', status: 'ok' },
+    { text: 'Loading BSV Blockchain Headers...', status: 'ok' },
     { text: 'Verifying Wallet Security...', status: 'ok' },
     { text: 'Establishing P2P Connections...', status: 'loading', delay: 800 },
     { text: 'Synchronizing Mempool...', status: 'loading', delay: 1000 },
@@ -180,9 +180,9 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
       {/* System Info */}
       <div className="mb-8">
         {[
-          'CPU: Bitcoin Core Processor @ 3.7 GHz',
+          'CPU: Bitcoin SV Processor @ 3.7 GHz',
           'RAM: 256 GB DDR5 Memory',
-          'Storage: 1 TB NVMe SSD (Blockchain Ready)',
+          'Storage: 1 TB NVMe SSD (BSV Blockchain Ready)',
           'Network: P2P Protocol v2.0 Enabled',
           'Security: SHA-256 Hardware Acceleration'
         ].map((info, index) => (
