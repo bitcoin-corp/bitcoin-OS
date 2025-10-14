@@ -36,9 +36,9 @@ export default function SystemPreferencesAdvanced({ isOpen, onClose }: SystemPre
   const [customAccent, setCustomAccent] = useState(themeConfig.accentColor || '#f7931a')
   const [dockStyle, setDockStyle] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('dockStyle') || 'large'
+      return localStorage.getItem('dockStyle') || 'minimal'
     }
-    return 'large'
+    return 'minimal'
   })
 
   // Load saved preferences on mount

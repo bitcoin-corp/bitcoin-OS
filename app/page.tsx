@@ -47,7 +47,7 @@ export default function BitcoinOS() {
   const [pendingAudio, setPendingAudio] = useState<HTMLAudioElement | null>(null)
   const [isVideoReady, setIsVideoReady] = useState(false)
   const [iconTheme, setIconTheme] = useState<string>('lucide')
-  const [dockStyle, setDockStyle] = useState<string>('large')
+  const [dockStyle, setDockStyle] = useState<string>('minimal')
   const isMobile = useIsMobile()
   
   const placeholderApps = ['Bitcoin Shares', 'Browser', 'Terminal', 'Settings']
@@ -157,7 +157,7 @@ export default function BitcoinOS() {
     if (typeof window !== 'undefined') {
       const { getCurrentTheme } = require('@/lib/icon-themes')
       setIconTheme(getCurrentTheme())
-      setDockStyle(localStorage.getItem('dockStyle') || 'large')
+      setDockStyle(localStorage.getItem('dockStyle') || 'minimal')
       
       const handleThemeChange = (event: any) => {
         setIconTheme(event.detail)

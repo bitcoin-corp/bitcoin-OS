@@ -26,14 +26,14 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   const [showSystemPreferences, setShowSystemPreferences] = useState(false)
   const [userHandle, setUserHandle] = useState<string | null>(null)
   const [isBootingOrBios, setIsBootingOrBios] = useState(pathname === '/')
-  const [dockStyle, setDockStyle] = useState<string>('large')
+  const [dockStyle, setDockStyle] = useState<string>('minimal')
 
   // Initialize theme and dock style on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const themeConfig = getCurrentThemeConfig()
       applyTheme(themeConfig)
-      setDockStyle(localStorage.getItem('dockStyle') || 'large')
+      setDockStyle(localStorage.getItem('dockStyle') || 'minimal')
     }
   }, [])
 

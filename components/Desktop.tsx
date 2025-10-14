@@ -32,12 +32,12 @@ const desktopApps = [
 
 export default function Desktop({ onOpenApp }: DesktopProps) {
   const [is3DMode, setIs3DMode] = useState(false)
-  const [dockStyle, setDockStyle] = useState<string>('large')
+  const [dockStyle, setDockStyle] = useState<string>('minimal')
 
   // Initialize dock style and listen for changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setDockStyle(localStorage.getItem('dockStyle') || 'large')
+      setDockStyle(localStorage.getItem('dockStyle') || 'minimal')
     }
 
     const handleDockStyleChange = (event: any) => {
