@@ -15,7 +15,7 @@
   position: fixed;
   left: 0;
   top: 72px; /* Below ProofOfConceptBar (40px) + TopMenuBar (32px) - No gap */
-  bottom: 0;
+  bottom: 32px; /* Make room for mini dock (32px height) */
   width: 260px;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
