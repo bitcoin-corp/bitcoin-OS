@@ -147,31 +147,38 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     isSelecting: false
   })
   
-  // Default desktop app positions (used for initial layout)
+  // Default desktop app positions (used for initial layout) - 6x4 grid (6 across, 4 down)
   const defaultAppPositions: DesktopIcon[] = [
+    // Row 1 (6 apps)
     { id: 'wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'text-yellow-500', url: 'https://bitcoin-wallet-sable.vercel.app', position: { x: 50, y: 50 } },
     { id: 'email', name: 'Bitcoin Email', icon: Mail, color: 'text-red-500', url: 'https://bitcoin-email.vercel.app', position: { x: 180, y: 50 } },
     { id: 'music', name: 'Bitcoin Music', icon: Music, color: 'text-purple-500', url: 'https://bitcoin-music.vercel.app', position: { x: 310, y: 50 } },
-    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 50, y: 180 } },
-    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 180, y: 180 } },
-    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 310, y: 180 } },
-    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-emerald-500', url: 'https://bitcoin-exchange-iota.vercel.app', position: { x: 440, y: 180 } },
-    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 50, y: 310 } },
-    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-blue-600', url: 'https://bitcoin-search.vercel.app', position: { x: 180, y: 310 } },
-    { id: 'identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'text-blue-500', url: 'https://bitcoin-identity.vercel.app/', position: { x: 310, y: 310 } },
-    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 440, y: 310 } },
-    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 50, y: 440 } },
-    { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 180, y: 440 } },
-    { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 310, y: 440 } },
-    { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 50, y: 570 } },
-    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 180, y: 570 } },
-    { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 310, y: 570 } },
-    { id: 'photos', name: 'Bitcoin Photos', icon: Camera, color: 'text-blue-400', url: 'https://bitcoin-photos.vercel.app', position: { x: 440, y: 570 } },
-    { id: 'maps', name: 'Bitcoin Maps', icon: MapPin, color: 'text-green-500', url: 'https://bitcoin-maps.vercel.app', position: { x: 50, y: 700 } },
-    { id: 'chat', name: 'Bitcoin Chat', icon: MessageCircle, color: 'text-blue-400', url: 'https://bitcoin-chat.vercel.app', position: { x: 180, y: 700 } },
-    { id: 'social', name: 'Bitcoin Social', icon: Users, color: 'text-pink-400', url: 'https://bitcoin-social.vercel.app', position: { x: 310, y: 700 } },
-    { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 440, y: 700 } },
-    { id: 'books', name: 'Bitcoin Books', icon: BookOpen, color: 'text-amber-500', url: 'https://bitcoin-books-bay.vercel.app', position: { x: 570, y: 50 } },
+    { id: 'books', name: 'Bitcoin Books', icon: BookOpen, color: 'text-amber-500', url: 'https://bitcoin-books-bay.vercel.app', position: { x: 440, y: 50 } },
+    { id: 'writer', name: 'Bitcoin Writer', icon: FileText, color: 'text-orange-500', url: 'https://bitcoin-writer.vercel.app', position: { x: 570, y: 50 } },
+    { id: 'code', name: 'Bitcoin Code', icon: Code, color: 'text-indigo-500', url: 'https://bitcoin-code.vercel.app', position: { x: 700, y: 50 } },
+    
+    // Row 2 (6 apps)
+    { id: 'drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'text-green-500', url: 'https://bitcoin-drive.vercel.app', position: { x: 50, y: 180 } },
+    { id: 'calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'text-fuchsia-500', url: 'https://bitcoin-calendar.vercel.app', position: { x: 180, y: 180 } },
+    { id: 'exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'text-emerald-500', url: 'https://bitcoin-exchange-iota.vercel.app', position: { x: 310, y: 180 } },
+    { id: 'search', name: 'Bitcoin Search', icon: Search, color: 'text-blue-600', url: 'https://bitcoin-search.vercel.app', position: { x: 440, y: 180 } },
+    { id: 'spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'text-sky-400', url: 'https://bitcoin-spreadsheet.vercel.app', position: { x: 570, y: 180 } },
+    { id: 'video', name: 'Bitcoin Video', icon: Video, color: 'text-green-500', url: 'https://bitcoin-video-nine.vercel.app', position: { x: 700, y: 180 } },
+    
+    // Row 3 (6 apps)
+    { id: 'photos', name: 'Bitcoin Photos', icon: Camera, color: 'text-blue-400', url: 'https://bitcoin-photos.vercel.app', position: { x: 50, y: 310 } },
+    { id: 'maps', name: 'Bitcoin Maps', icon: MapPin, color: 'text-green-500', url: 'https://bitcoin-maps.vercel.app', position: { x: 180, y: 310 } },
+    { id: 'chat', name: 'Bitcoin Chat', icon: MessageCircle, color: 'text-blue-400', url: 'https://bitcoin-chat.vercel.app', position: { x: 310, y: 310 } },
+    { id: 'social', name: 'Bitcoin Social', icon: Users, color: 'text-pink-400', url: 'https://bitcoin-social.vercel.app', position: { x: 440, y: 310 } },
+    { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 570, y: 310 } },
+    { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 700, y: 310 } },
+    
+    // Row 4 (6 apps)
+    { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 50, y: 440 } },
+    { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 180, y: 440 } },
+    { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 310, y: 440 } },
+    { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 440, y: 440 } },
+    { id: 'identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'text-blue-500', url: 'https://bitcoin-identity.vercel.app/', position: { x: 570, y: 440 } },
   ]
 
   // Snap to grid settings
@@ -245,7 +252,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     const GRID_SPACING = 130 // Space between icons
     const START_X = 50 // Starting X position
     const START_Y = 50 // Starting Y position
-    const COLUMNS = 4 // Number of columns in the grid
+    const COLUMNS = 6 // Number of columns in the grid (6 across, 4 down)
     
     const tidiedApps = desktopApps.map((app, index) => {
       const row = Math.floor(index / COLUMNS)
@@ -428,13 +435,26 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     setSelectionBox(prev => ({ ...prev, isSelecting: false }))
   }
 
-  // Reset desktop icons to default positions
+  // Reset desktop icons to default positions (6x4 grid)
   const resetDesktopPositions = () => {
     setDesktopApps(defaultAppPositions)
     if (typeof window !== 'undefined') {
       localStorage.removeItem('bitcoinOS-desktop-positions')
     }
   }
+  
+  // Force reset to new 6x4 layout on initial load
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLayout = localStorage.getItem('bitcoinOS-layout-version')
+      if (savedLayout !== '6x4') {
+        // Clear old layout and set new default
+        localStorage.removeItem('bitcoinOS-desktop-positions')
+        localStorage.setItem('bitcoinOS-layout-version', '6x4')
+        setDesktopApps(defaultAppPositions)
+      }
+    }
+  }, [])
 
   // Keyboard shortcut for resetting positions (Cmd/Ctrl + R + R - double R)
   useEffect(() => {
