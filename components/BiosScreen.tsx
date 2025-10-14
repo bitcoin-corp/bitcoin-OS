@@ -50,16 +50,6 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
         audio.play().catch(err => {
           console.log('Auto audio playback failed (expected on some browsers):', err)
         })
-        
-        // Start boot sequence automatically
-        const animateBootSequence = () => {
-          if (currentBootLine < bootLines.length) {
-            setTimeout(() => {
-              setCurrentBootLine(prev => prev + 1)
-            }, 10)
-          }
-        }
-        animateBootSequence()
       }
     }, 50) // Auto-start after 50ms
 
@@ -76,16 +66,6 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
         audio.play().catch(err => {
           console.log('Manual audio playback failed:', err)
         })
-        
-        // Start boot sequence
-        const animateBootSequence = () => {
-          if (currentBootLine < bootLines.length) {
-            setTimeout(() => {
-              setCurrentBootLine(prev => prev + 1)
-            }, 10)
-          }
-        }
-        animateBootSequence()
       }
     }
 
@@ -99,14 +79,24 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
       document.removeEventListener('click', handleUserInteraction)
       document.removeEventListener('touchstart', handleUserInteraction)
     }
-  }, [hasUserInteracted, onUserInteraction, currentBootLine])
+  }, [hasUserInteracted, onUserInteraction])
 
+  // Start boot sequence when user interacts
   useEffect(() => {
-    // Continue boot sequence animation
+    if (hasUserInteracted && currentBootLine === 0) {
+      const timer = setTimeout(() => {
+        setCurrentBootLine(1)
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [hasUserInteracted, currentBootLine])
+
+  // Continue boot sequence animation
+  useEffect(() => {
     if (hasUserInteracted && currentBootLine > 0 && currentBootLine < bootLines.length) {
       const timer = setTimeout(() => {
         setCurrentBootLine(prev => prev + 1)
-      }, 5) // Even faster
+      }, 150) // Slower for better visibility
       return () => clearTimeout(timer)
     }
   }, [currentBootLine, bootLines.length, hasUserInteracted])
@@ -127,30 +117,30 @@ export default function BiosScreen({ onComplete, onUserInteraction }: BiosScreen
   }, [])
 
   useEffect(() => {
-    // Start progress bar after user interaction and boot sequence
-    if (hasUserInteracted && currentBootLine >= bootLines.length) {
+    // Start progress bar after boot sequence completes
+    if (hasUserInteracted && currentBootLine >= bootLines.length && progress === 0) {
       const progressTimer = setTimeout(() => {
+        let currentProgress = 0
         const updateProgress = () => {
-          setProgress(prev => {
-            const newProgress = prev + Math.random() * 40 + 30 // Even faster progress jumps
-            if (newProgress >= 100) {
-              setIsComplete(true)
-              setIsFadingOut(true)
-              setTimeout(() => {
-                onComplete()
-              }, 300) // Allow time for fade out
-              return 100
-            }
-            setTimeout(updateProgress, 25) // Much faster updates
-            return newProgress
-          })
+          currentProgress += Math.random() * 15 + 10
+          if (currentProgress >= 100) {
+            setProgress(100)
+            setIsComplete(true)
+            setIsFadingOut(true)
+            setTimeout(() => {
+              onComplete()
+            }, 500) // Allow time for fade out
+            return
+          }
+          setProgress(currentProgress)
+          setTimeout(updateProgress, 100) // Regular updates
         }
         updateProgress()
-      }, 25) // Start progress bar immediately
+      }, 200) // Start progress bar after a small delay
 
       return () => clearTimeout(progressTimer)
     }
-  }, [onComplete, hasUserInteracted, currentBootLine, bootLines.length])
+  }, [onComplete, hasUserInteracted, currentBootLine, bootLines.length, progress])
 
   const getStatusText = (status: string) => {
     switch (status) {
