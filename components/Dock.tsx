@@ -128,8 +128,15 @@ const Dock: React.FC = () => {
         {/* App icons on the left */}
         <div className="dock-apps">
           {dockApps.map((app, index) => {
-          // Get themed icon
-          const Icon = app.id === 'bapps-store' ? app.icon : getThemedIcon(app.id || app.name.toLowerCase().replace('bitcoin ', ''), iconTheme);
+          // Get themed icon, but force Monitor for bitcoin-os
+          let Icon;
+          if (app.id === 'bapps-store') {
+            Icon = app.icon;
+          } else if (app.id === 'bitcoin-os') {
+            Icon = Monitor; // Force Monitor icon for bitcoin-os
+          } else {
+            Icon = getThemedIcon(app.id || app.name.toLowerCase().replace('bitcoin ', ''), iconTheme);
+          }
           return (
             <button
               key={app.name}

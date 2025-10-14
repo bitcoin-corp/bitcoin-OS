@@ -30,7 +30,8 @@ import {
   GraduationCap,
   UserCheck,
   Sparkles,
-  Circle
+  Circle,
+  Monitor
 } from 'lucide-react'
 
 // React Icons (Material Design)
@@ -64,7 +65,8 @@ import {
   MdPalette,
   MdSchool,
   MdVerifiedUser,
-  MdCircle
+  MdCircle,
+  MdMonitor
 } from 'react-icons/md'
 
 export interface IconMapping {
@@ -97,6 +99,7 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'bapps-store': { lucide: Store, 'react-icons': MdStore },
   'bitcoin-education': { lucide: GraduationCap, 'react-icons': MdSchool },
   'bitcoin-identity': { lucide: UserCheck, 'react-icons': MdVerifiedUser },
+  'bitcoin-os': { lucide: Monitor, 'react-icons': MdMonitor },
   
   // Desktop icons
   'wallet': { lucide: Wallet, 'react-icons': MdAccountBalanceWallet },
@@ -126,6 +129,7 @@ export const iconMappings: { [key: string]: IconMapping } = {
   'cashboard': { lucide: TrendingUp, 'react-icons': MdShowChart },
   'bapps-store-right': { lucide: Store, 'react-icons': MdStore },
   'home': { lucide: Circle, 'react-icons': MdCircle },
+  'os': { lucide: Monitor, 'react-icons': MdMonitor },
 }
 
 // Import the complete mappings

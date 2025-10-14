@@ -44,13 +44,11 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
       const checkBootState = () => {
         // Look for BIOS screen
         const hasBiosScreen = document.querySelector('[data-component="bios-screen"]') || 
-                              document.querySelector('.text-green-400.font-mono') ||
-                              document.textContent?.includes('Bitcoin OS BIOS')
+                              document.querySelector('.text-green-400.font-mono')
         
         // Look for boot screen 
         const hasBootScreen = document.querySelector('[data-component="boot-screen"]') ||
-                              document.querySelector('.text-yellow-400.text-8xl.font-bold.animate-pulse') ||
-                              document.textContent?.includes('Initializing Bitcoin OS')
+                              document.querySelector('.text-yellow-400.text-8xl.font-bold.animate-pulse')
         
         const isBooting = !!(hasBiosScreen || hasBootScreen)
         setIsBootingOrBios(isBooting)
