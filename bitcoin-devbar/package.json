@@ -1,0 +1,38 @@
+{
+  "name": "@bitcoin-os/devbar",
+  "version": "1.0.0",
+  "description": "Developer sidebar components for Bitcoin OS ecosystem apps",
+  "main": "components/DevLayout.tsx",
+  "types": "components/DevLayout.tsx",
+  "files": [
+    "components/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "echo 'No build needed - React components'"
+  },
+  "keywords": [
+    "bitcoin",
+    "devbar",
+    "sidebar",
+    "developer",
+    "components",
+    "react",
+    "bitcoin-os"
+  ],
+  "author": "Bitcoin OS",
+  "license": "Open BSV License",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "next": ">=14.0.0",
+    "lucide-react": ">=0.400.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-os/bitcoin-devbar"
+  },
+  "homepage": "https://github.com/bitcoin-os/bitcoin-devbar#readme",
+  "bugs": {
+    "url": "https://github.com/bitcoin-os/bitcoin-devbar/issues"
+  }
+}
