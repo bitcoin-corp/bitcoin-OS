@@ -149,6 +149,9 @@ const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) 
       setExpandTimeout(null);
     }
     setIsHovered(false);
+    
+    // If we're currently in minimal dock and user rolls off, stay minimal
+    // This prevents expansion when user quickly moves mouse over and off
   };
 
   return (
