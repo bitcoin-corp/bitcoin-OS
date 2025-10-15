@@ -129,7 +129,7 @@
   pointer-events: none;
   opacity: 0;
   animation: tooltip-appear 0.2s ease forwards;
-  animation-delay: 0.3s;
+  animation-delay: 0s;
   z-index: 1000;
   backdrop-filter: blur(10px);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
