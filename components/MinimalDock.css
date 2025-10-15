@@ -10,7 +10,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .minimal-dock:hover {
@@ -55,7 +55,7 @@
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
   flex-shrink: 0;
 }
@@ -77,7 +77,7 @@
 .minimal-dock-icon {
   width: 14px;
   height: 14px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .minimal-dock:hover .minimal-dock-icon {
@@ -90,7 +90,7 @@
   height: 14px;
   object-fit: cover;
   border-radius: 2px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .minimal-dock:hover .minimal-dock-icon-image {
@@ -129,7 +129,7 @@
   pointer-events: none;
   opacity: 0;
   animation: tooltip-appear 0.2s ease forwards;
-  animation-delay: 0.8s;
+  animation-delay: 0.3s;
   z-index: 1000;
   backdrop-filter: blur(10px);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;

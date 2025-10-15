@@ -142,10 +142,10 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
   };
 
   const handleMouseLeave = () => {
-    // Minimize after 1 second of not hovering
+    // Minimize after 300ms of not hovering
     const timeout = setTimeout(() => {
       toggleDockSize();
-    }, 1000);
+    }, 300);
     setMinimizeTimeout(timeout);
   };
 
