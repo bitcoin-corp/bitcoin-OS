@@ -28,7 +28,7 @@ const TickerSidebar: React.FC<TickerSidebarProps> = ({
   const [prices, setPrices] = useState<TokenPrice[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   useEffect(() => {
     // Generate trending OS tokens with contract IDs
