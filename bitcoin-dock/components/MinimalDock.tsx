@@ -20,14 +20,21 @@ interface MinimalDockProps {
 const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [expandTimeout, setExpandTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      clearInterval(timer);
+      if (expandTimeout) {
+        clearTimeout(expandTimeout);
+      }
+    };
+  }, [expandTimeout]);
 
   const getRainbowColor = (index: number): string => {
     const rainbowColors = [
@@ -75,7 +82,7 @@ const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) 
 
   const dockApps: DockApp[] = [
     { id: 'bitcoin-os', name: 'Bitcoin OS', icon: Monitor, color: 'rainbow', url: 'https://bitcoin-os.vercel.app/', current: currentApp === 'bitcoin-os' },
-    { id: 'bitcoin-identity', name: 'Bitcoin Identity', icon: Shield, color: 'rainbow', url: 'https://bitcoin-identity.vercel.app/', current: currentApp === 'bitcoin-identity' },
+    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'rainbow', url: 'https://www.bitcoinapps.store/', isImage: true, current: currentApp === 'bapps-store' },
     { id: 'bitcoin-wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app', current: currentApp === 'bitcoin-wallet' },
     { id: 'bitcoin-email', name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app', current: currentApp === 'bitcoin-email' },
     { id: 'bitcoin-music', name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app', current: currentApp === 'bitcoin-music' },
@@ -122,9 +129,30 @@ const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) 
     window.dispatchEvent(new CustomEvent('dockStyleChanged', { detail: newDockStyle }));
   };
 
+  const handleMouseEnter = () => {
+    if (expandTimeout) {
+      clearTimeout(expandTimeout);
+      setExpandTimeout(null);
+    }
+    setIsHovered(true);
+    // Expand after 500ms of hovering
+    const timeout = setTimeout(() => {
+      toggleDockSize();
+    }, 500);
+    setExpandTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    if (expandTimeout) {
+      clearTimeout(expandTimeout);
+      setExpandTimeout(null);
+    }
+    setIsHovered(false);
+  };
+
   return (
-    <div className="minimal-dock">
-      <div className="minimal-dock-container">
+    <div className="minimal-dock" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className={`minimal-dock-container ${isHovered ? 'hovered' : ''}`}>
         {/* All apps on the left */}
         <div className="minimal-dock-apps">
           {dockApps.map((app, index) => {
@@ -137,7 +165,13 @@ const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) 
                 title={app.name}
                 disabled={app.disabled}
               >
-                <Icon className="minimal-dock-icon" style={{ color: getIconColor(app.color, index) }} />
+                {app.id === 'bapps-store' ? (
+                  <div className="minimal-dock-icon">
+                    <img src="/bapps-icon.jpg" alt="BAPPS" className="minimal-dock-app-image" />
+                  </div>
+                ) : (
+                  <Icon className="minimal-dock-icon" style={{ color: getIconColor(app.color, index) }} />
+                )}
                 {app.current && <span className="minimal-dock-indicator" />}
               </button>
             );

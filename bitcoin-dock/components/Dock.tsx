@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, FolderOpen, Minimize2, Monitor, Home } from 'lucide-react';
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Briefcase, Store, Wifi, Volume2, Battery, Clock, TrendingUp, Building2, Shield, Video, Code2, Camera, MapPin, MessageCircle, Users, Gamepad2, BookOpen, Globe, Box, FolderOpen, Minimize2, Monitor, Home, GraduationCap, Paintbrush, UserCheck, Sparkles } from 'lucide-react';
 import { getThemedIcon, getCurrentTheme } from '../lib/icon-themes';
 import './Dock.css';
 
@@ -22,6 +22,7 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
   const [mounted, setMounted] = useState(false);
   const [iconTheme, setIconTheme] = useState<string>('lucide');
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [minimizeTimeout, setMinimizeTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -44,8 +45,11 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
     return () => {
       window.removeEventListener('iconThemeChanged', handleThemeChange);
       clearInterval(timer);
+      if (minimizeTimeout) {
+        clearTimeout(minimizeTimeout);
+      }
     };
-  }, []);
+  }, [minimizeTimeout]);
 
   const getRainbowColor = (index: number): string => {
     const rainbowColors = [
@@ -92,7 +96,7 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
 
   const dockApps: DockApp[] = [
     { id: 'bitcoin-os', name: 'Bitcoin OS', icon: Monitor, color: 'rainbow', url: 'https://bitcoin-os.vercel.app/', current: currentApp === 'bitcoin-os' },
-    { id: 'bitcoin-identity', name: 'Bitcoin Identity', icon: Shield, color: 'rainbow', url: 'https://bitcoin-identity.vercel.app/', current: currentApp === 'bitcoin-identity' },
+    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'rainbow', url: 'https://www.bitcoinapps.store/', isImage: true, current: currentApp === 'bapps-store' },
     { id: 'bitcoin-wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app', current: currentApp === 'bitcoin-wallet' },
     { id: 'bitcoin-email', name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app', current: currentApp === 'bitcoin-email' },
     { id: 'bitcoin-music', name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app', current: currentApp === 'bitcoin-music' },
@@ -111,8 +115,11 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
     { id: 'bitcoin-games', name: 'Bitcoin Games', icon: Gamepad2, color: 'rainbow', url: 'https://bitcoin-gaming.vercel.app', current: currentApp === 'bitcoin-games' },
     { id: 'bitcoin-books', name: 'Bitcoin Books', icon: BookOpen, color: 'rainbow', url: 'https://bitcoin-books-bay.vercel.app', current: currentApp === 'bitcoin-books' },
     { id: 'bitcoin-domains', name: 'Bitcoin Domains', icon: Globe, color: 'rainbow', url: 'https://bitcoin-dns.vercel.app', current: currentApp === 'bitcoin-domains' },
-    { id: 'bitcoin-3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', current: currentApp === 'bitcoin-3d' },
+    { id: 'bitcoin-3d', name: 'Bitcoin 3D', icon: Box, color: 'rainbow', url: 'https://bitcoin-3d.vercel.app', current: currentApp === 'bitcoin-3d' },
     { id: 'bitcoin-jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'rainbow', url: 'https://bitcoin-jobs.vercel.app/', current: currentApp === 'bitcoin-jobs' },
+    { id: 'bitcoin-education', name: 'Bitcoin Education', icon: GraduationCap, color: 'rainbow', url: 'https://bitcoin-education-theta.vercel.app', current: currentApp === 'bitcoin-education' },
+    { id: 'bitcoin-paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'rainbow', url: 'https://bitcoin-paint.vercel.app/', current: currentApp === 'bitcoin-paint' },
+    { id: 'bitcoin-identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'rainbow', url: 'https://bitcoin-identity.vercel.app/', current: currentApp === 'bitcoin-identity' },
   ];
 
   const handleAppClick = (app: DockApp) => {
@@ -127,8 +134,23 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
     window.dispatchEvent(new CustomEvent('dockStyleChanged', { detail: newDockStyle }));
   };
 
+  const handleMouseEnter = () => {
+    if (minimizeTimeout) {
+      clearTimeout(minimizeTimeout);
+      setMinimizeTimeout(null);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Minimize after 2 seconds of not hovering
+    const timeout = setTimeout(() => {
+      toggleDockSize();
+    }, 2000);
+    setMinimizeTimeout(timeout);
+  };
+
   return (
-    <div className="bitcoin-dock">
+    <div className="bitcoin-dock" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="dock-container">
         {/* App icons on the left */}
         <div className="dock-apps">
@@ -152,7 +174,13 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
               title={app.name}
               disabled={app.disabled}
             >
-              <Icon className="dock-app-icon" style={{ color: getIconColor(app.color, index) }} />
+              {app.id === 'bapps-store' ? (
+                <div className="dock-app-icon">
+                  <img src="/bapps-icon.jpg" alt="BAPPS" className="dock-app-image" />
+                </div>
+              ) : (
+                <Icon className="dock-app-icon" style={{ color: getIconColor(app.color, index) }} />
+              )}
               {app.current && <span className="dock-indicator" />}
             </button>
           );
@@ -214,16 +242,10 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
           </button>
           <button 
             className="status-button" 
-            title="Ninja Punk Girls"
-            onClick={() => window.open('https://www.ninjapunkgirls.website', '_blank')}
+            title="NPG"
+            onClick={() => window.location.href = 'https://www.ninjapunkgirls.website'}
           >
-            <svg className="status-icon" style={{ color: '#ec4899' }} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-              <path d="M5 3v4"/>
-              <path d="M19 17v4"/>
-              <path d="M3 5h4"/>
-              <path d="M17 19h4"/>
-            </svg>
+            <Sparkles className="status-icon" style={{ color: '#ec4899' }} />
           </button>
           <button 
             className="status-button" 
