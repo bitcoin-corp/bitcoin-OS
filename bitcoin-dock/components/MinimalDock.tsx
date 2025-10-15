@@ -135,10 +135,10 @@ const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) 
       setExpandTimeout(null);
     }
     setIsHovered(true);
-    // Expand after 500ms of hovering
+    // Expand after 150ms of hovering
     const timeout = setTimeout(() => {
       toggleDockSize();
-    }, 500);
+    }, 150);
     setExpandTimeout(timeout);
   };
 
