@@ -13,17 +13,28 @@ interface DockApp {
   isImage?: boolean;
 }
 
-const MinimalDock: React.FC = () => {
+interface MinimalDockProps {
+  currentApp?: string; // ID of the current app (e.g., 'bitcoin-identity', 'bitcoin-writer')
+}
+
+const MinimalDock: React.FC<MinimalDockProps> = ({ currentApp = 'bitcoin-os' }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [mounted, setMounted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [expandTimeout, setExpandTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      clearInterval(timer);
+      if (expandTimeout) {
+        clearTimeout(expandTimeout);
+      }
+    };
+  }, [expandTimeout]);
 
   const getRainbowColor = (index: number): string => {
     const rainbowColors = [
@@ -70,31 +81,31 @@ const MinimalDock: React.FC = () => {
   };
 
   const dockApps: DockApp[] = [
-    { id: 'bitcoin-os', name: 'Bitcoin OS', icon: Monitor, color: 'rainbow', current: true },
-    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'rainbow', url: 'https://www.bitcoinapps.store/', isImage: true },
-    { name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app' },
-    { name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app' },
-    { name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app' },
-    { name: 'Bitcoin Writer', icon: FileText, color: 'rainbow', url: 'https://bitcoin-writer.vercel.app' },
-    { name: 'Bitcoin Code', icon: Code2, color: 'rainbow', url: 'https://bitcoin-code.vercel.app' },
-    { name: 'Bitcoin Drive', icon: HardDrive, color: 'rainbow', url: 'https://bitcoin-drive.vercel.app' },
-    { name: 'Bitcoin Calendar', icon: Calendar, color: 'rainbow', url: 'https://bitcoin-calendar.vercel.app' },
-    { name: 'Bitcoin Exchange', icon: TrendingUp, color: 'rainbow', url: 'https://bitcoin-exchange-iota.vercel.app' },
-    { name: 'Bitcoin Search', icon: Search, color: 'rainbow', url: 'https://bitcoin-search.vercel.app' },
-    { name: 'Bitcoin Spreadsheet', icon: Table, color: 'rainbow', url: 'https://bitcoin-spreadsheet.vercel.app' },
-    { name: 'Bitcoin Video', icon: Video, color: 'rainbow', url: 'https://bitcoin-video-nine.vercel.app' },
-    { name: 'Bitcoin Photos', icon: Camera, color: 'rainbow', url: 'https://bitcoin-photos.vercel.app' },
-    { name: 'Bitcoin Maps', icon: MapPin, color: 'rainbow', url: 'https://bitcoin-maps.vercel.app' },
-    { name: 'Bitcoin Chat', icon: MessageCircle, color: 'rainbow', url: 'https://bitcoin-chat.vercel.app' },
-    { name: 'Bitcoin Social', icon: Users, color: 'rainbow', url: 'https://bitcoin-social.vercel.app' },
-    { name: 'Bitcoin Games', icon: Gamepad2, color: 'rainbow', url: 'https://bitcoin-gaming.vercel.app' },
-    { name: 'Bitcoin Books', icon: BookOpen, color: 'rainbow', url: 'https://bitcoin-books-bay.vercel.app' },
-    { name: 'Bitcoin Domains', icon: Globe, color: 'rainbow', url: 'https://bitcoin-dns.vercel.app' },
-    { name: 'Bitcoin 3D', icon: Box, color: 'rainbow', url: 'https://bitcoin-3d.vercel.app' },
-    { name: 'Bitcoin Jobs', icon: Briefcase, color: 'rainbow', url: 'https://bitcoin-jobs.vercel.app/' },
-    { name: 'Bitcoin Education', icon: GraduationCap, color: 'rainbow', url: 'https://bitcoin-education-theta.vercel.app' },
-    { name: 'Bitcoin Paint', icon: Paintbrush, color: 'rainbow', url: 'https://bitcoin-paint.vercel.app/' },
-    { name: 'Bitcoin Identity', icon: UserCheck, color: 'rainbow', url: 'https://bitcoin-identity.vercel.app/' },
+    { id: 'bitcoin-os', name: 'Bitcoin OS', icon: Monitor, color: 'rainbow', url: 'https://bitcoin-os.vercel.app/', current: currentApp === 'bitcoin-os' },
+    { id: 'bapps-store', name: 'Bitcoin Apps Store', icon: Store, color: 'rainbow', url: 'https://www.bitcoinapps.store/', isImage: true, current: currentApp === 'bapps-store' },
+    { id: 'bitcoin-wallet', name: 'Bitcoin Wallet', icon: Wallet, color: 'rainbow', url: 'https://bitcoin-wallet-sable.vercel.app', current: currentApp === 'bitcoin-wallet' },
+    { id: 'bitcoin-email', name: 'Bitcoin Email', icon: Mail, color: 'rainbow', url: 'https://bitcoin-email.vercel.app', current: currentApp === 'bitcoin-email' },
+    { id: 'bitcoin-music', name: 'Bitcoin Music', icon: Music, color: 'rainbow', url: 'https://bitcoin-music.vercel.app', current: currentApp === 'bitcoin-music' },
+    { id: 'bitcoin-writer', name: 'Bitcoin Writer', icon: FileText, color: 'rainbow', url: 'https://bitcoin-writer.vercel.app', current: currentApp === 'bitcoin-writer' },
+    { id: 'bitcoin-code', name: 'Bitcoin Code', icon: Code2, color: 'rainbow', url: 'https://bitcoin-code.vercel.app', current: currentApp === 'bitcoin-code' },
+    { id: 'bitcoin-drive', name: 'Bitcoin Drive', icon: HardDrive, color: 'rainbow', url: 'https://bitcoin-drive.vercel.app', current: currentApp === 'bitcoin-drive' },
+    { id: 'bitcoin-calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'rainbow', url: 'https://bitcoin-calendar.vercel.app', current: currentApp === 'bitcoin-calendar' },
+    { id: 'bitcoin-exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'rainbow', url: 'https://bitcoin-exchange-iota.vercel.app', current: currentApp === 'bitcoin-exchange' },
+    { id: 'bitcoin-search', name: 'Bitcoin Search', icon: Search, color: 'rainbow', url: 'https://bitcoin-search.vercel.app', current: currentApp === 'bitcoin-search' },
+    { id: 'bitcoin-spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'rainbow', url: 'https://bitcoin-spreadsheet.vercel.app', current: currentApp === 'bitcoin-spreadsheet' },
+    { id: 'bitcoin-video', name: 'Bitcoin Video', icon: Video, color: 'rainbow', url: 'https://bitcoin-video-nine.vercel.app', current: currentApp === 'bitcoin-video' },
+    { id: 'bitcoin-photos', name: 'Bitcoin Photos', icon: Camera, color: 'rainbow', url: 'https://bitcoin-photos.vercel.app', current: currentApp === 'bitcoin-photos' },
+    { id: 'bitcoin-maps', name: 'Bitcoin Maps', icon: MapPin, color: 'rainbow', url: 'https://bitcoin-maps.vercel.app', current: currentApp === 'bitcoin-maps' },
+    { id: 'bitcoin-chat', name: 'Bitcoin Chat', icon: MessageCircle, color: 'rainbow', url: 'https://bitcoin-chat.vercel.app', current: currentApp === 'bitcoin-chat' },
+    { id: 'bitcoin-social', name: 'Bitcoin Social', icon: Users, color: 'rainbow', url: 'https://bitcoin-social.vercel.app', current: currentApp === 'bitcoin-social' },
+    { id: 'bitcoin-games', name: 'Bitcoin Games', icon: Gamepad2, color: 'rainbow', url: 'https://bitcoin-gaming.vercel.app', current: currentApp === 'bitcoin-games' },
+    { id: 'bitcoin-books', name: 'Bitcoin Books', icon: BookOpen, color: 'rainbow', url: 'https://bitcoin-books-bay.vercel.app', current: currentApp === 'bitcoin-books' },
+    { id: 'bitcoin-domains', name: 'Bitcoin Domains', icon: Globe, color: 'rainbow', url: 'https://bitcoin-dns.vercel.app', current: currentApp === 'bitcoin-domains' },
+    { id: 'bitcoin-3d', name: 'Bitcoin 3D', icon: Box, color: 'rainbow', url: 'https://bitcoin-3d.vercel.app', current: currentApp === 'bitcoin-3d' },
+    { id: 'bitcoin-jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'rainbow', url: 'https://bitcoin-jobs.vercel.app/', current: currentApp === 'bitcoin-jobs' },
+    { id: 'bitcoin-education', name: 'Bitcoin Education', icon: GraduationCap, color: 'rainbow', url: 'https://bitcoin-education-theta.vercel.app', current: currentApp === 'bitcoin-education' },
+    { id: 'bitcoin-paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'rainbow', url: 'https://bitcoin-paint.vercel.app/', current: currentApp === 'bitcoin-paint' },
+    { id: 'bitcoin-identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'rainbow', url: 'https://bitcoin-identity.vercel.app/', current: currentApp === 'bitcoin-identity' },
   ];
 
   // Special right-side mini icons
@@ -119,9 +130,30 @@ const MinimalDock: React.FC = () => {
     window.dispatchEvent(new CustomEvent('dockStyleChanged', { detail: newDockStyle }));
   };
 
+  const handleMouseEnter = () => {
+    if (expandTimeout) {
+      clearTimeout(expandTimeout);
+      setExpandTimeout(null);
+    }
+    setIsHovered(true);
+    // Expand after 500ms of hovering
+    const timeout = setTimeout(() => {
+      toggleDockSize();
+    }, 500);
+    setExpandTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    if (expandTimeout) {
+      clearTimeout(expandTimeout);
+      setExpandTimeout(null);
+    }
+    setIsHovered(false);
+  };
+
   return (
-    <div className="minimal-dock">
-      <div className="minimal-dock-container">
+    <div className="minimal-dock" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className={`minimal-dock-container ${isHovered ? 'hovered' : ''}`}>
         {/* All apps on the left */}
         <div className="minimal-dock-apps">
           {dockApps.map((app, index) => {
