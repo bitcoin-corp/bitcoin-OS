@@ -132,7 +132,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
   const [showTrashWindow, setShowTrashWindow] = useState(false)
   const [selectedIcons, setSelectedIcons] = useState<string[]>([])
   const [iconTheme, setIconTheme] = useState<string>('lucide')
-  const [isTickerCollapsed, setIsTickerCollapsed] = useState(false)
+  const [isTickerCollapsed, setIsTickerCollapsed] = useState(true)
   const [selectionBox, setSelectionBox] = useState<{
     startX: number
     startY: number

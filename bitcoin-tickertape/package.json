@@ -1,0 +1,16 @@
+{
+  "name": "bitcoin-tickertape",
+  "version": "1.0.0",
+  "description": "Universal ticker tape component for Bitcoin ecosystem with live market data",
+  "main": "index.tsx",
+  "keywords": ["bitcoin", "ticker", "cryptocurrency", "market-data", "react", "component"],
+  "author": "Bitcoin Corporation",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.0.0",
+    "lucide-react": "^0.544.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  }
+}

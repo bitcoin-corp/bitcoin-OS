@@ -1,0 +1,176 @@
+{
+  "organization_search": {
+    "env_files": [],
+    "secret_keywords": [],
+    "credential_files": []
+  },
+  "commit_analysis": [
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-code",
+      "sha": "14ca96306c6913ebf552e2d959339ff7656978da",
+      "message": "Enhance contracts page with sophisticated UI from bitcoin-writer\n\n- Add GitHub issues integration with beautiful contract cards\n- Implement multi-provider authentication (GitHub, Google, HandCash)\n- Add contract claiming workflow with modal interfaces\n- Integrate BSV payment distribution system with BCODE tokens\n- Port glassmorphism design with green color scheme adaptation\n- Enable contract lifecycle tracking from GitHub issues to PRs\n- Add priority badges, status tracking, and skills tagging\n- Implement responsive design for mobile and desktop\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-code/commit/14ca96306c6913ebf552e2d959339ff7656978da",
+      "author": "Richard Boase",
+      "date": "2025-10-15T09:58:43Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-code",
+      "sha": "1a92456c8b632fd2b83f94e120bea9f20baea8ac",
+      "message": "Complete orange to green color theme transition\n\nUpdated comprehensive color scheme across entire Bitcoin Code platform:\n- Footer colors: Orange (#ff9500, #f7931a) \u2192 Green (#22c55e)\n- MinimalDock indicators: Orange \u2192 Green\n- TokenDashboard gradients: Orange \u2192 Green\n- All component CSS files: Orange (#FF6B35, #F7931E, #f7931a) \u2192 Green (#22c55e, #16a34a)\n- Updated 25+ CSS files with consistent green branding\n- Maintained brand consistency across all pages and components\n- Preserved all functionality while updating visual theme\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-code/commit/1a92456c8b632fd2b83f94e120bea9f20baea8ac",
+      "author": "Richard Boase",
+      "date": "2025-10-15T09:43:48Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-code",
+      "sha": "317080052bdb4e95cd6a592a17458828ff2b9efe",
+      "message": "Update color scheme from orange to green for Bitcoin Code theme\n\n\ud83c\udfa8 Color Scheme Updates:\n\u2022 Changed primary color from #ff6b35 to #22c55e (green)\n\u2022 Updated accent color from #f7931a to #16a34a (dark green)\n\u2022 Applied across all pages: Contracts, Bitcoin Git, App.css\n\n\ud83d\udcdd Contracts Page Improvements:\n\u2022 Updated title from \"Bitcoin App Contracts\" to \"Bitcoin Code Contracts\"\n\u2022 Changed \"Writing Contracts\" tab to \"Code Contracts\" for dual-use platform\n\u2022 Updated category logic from writing-focused to code-focused keywords\n\u2022 Enhanced tagline: \"Code algorithms, fulfill contracts, get paid in $BCODE\"\n\n\ud83d\udd27 Contract Categories:\n\u2022 Developer Contracts: Full-stack development, UI/UX, integration\n\u2022 Code Contracts: Algorithms, functions, libraries, API implementations\n\n\u2728 Visual Consistency:\n\u2022 Green gradient buttons and highlights\n\u2022 Consistent color scheme across Bitcoin Code ecosystem\n\u2022 Professional green branding aligned with development theme\n\n\ud83c\udfaf Platform Evolution:\n\u2022 Dual-use contract platform for comprehensive development needs\n\u2022 Enhanced categorization for better contract organization\n\u2022 Improved visual hierarchy and brand consistency\n\n\ud83e\udd16 Generated with Claude Code (https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "key",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-code/commit/317080052bdb4e95cd6a592a17458828ff2b9efe",
+      "author": "Richard Boase",
+      "date": "2025-10-15T09:39:46Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-code",
+      "sha": "e5ed3273ecf5c7f07c536ad9409c372885b1705d",
+      "message": "Add Bitcoin Git architecture page and GitHub issues integration\n\n\ud83d\udd17 Bitcoin Git Page (/bitcoin-git):\n\u2022 Comprehensive overview of Git + BSV integration\n\u2022 Technical architecture documentation with 4-phase roadmap\n\u2022 Professional UI with tabbed interface and terminal demo\n\u2022 Integration guide showing seamless Bitcoin Code connection\n\u2022 Links to bitcoin-git repository at /Users/b0ase/Projects/bitcoin-git\n\n\ud83d\udccb Contracts Page Enhancement:\n\u2022 Updated to fetch from bitcoin-apps-suite/bitcoin-code repository\n\u2022 Enhanced parsing for new \ud83d\udcb0 token format (e.g., \"\ud83d\udcb0 10M - Feature\")\n\u2022 Changed token display from BAPP to $BCODE tokens\n\u2022 Live integration with 11 GitHub issues (#35-48)\n\u2022 Real-time contract status and reward tracking\n\n\ud83d\udcb0 Token Opportunities Available:\n\u2022 Revenue Sharing Smart Contracts (30M $BCODE)\n\u2022 Developer Token Allocation System (25M $BCODE)\n\u2022 App Launch & Exchange Integration (22M $BCODE)\n\u2022 Code Compilation & Execution (20M $BCODE)\n\u2022 Code NFT Creation (18M $BCODE)\n\u2022 File System Management (15M $BCODE)\n\u2022 App Store Integration (15M $BCODE)\n\u2022 Wallet Integration (12M $BCODE)\n\u2022 Code Provenance Tracking (12M $BCODE)\n\u2022 Enhanced Authentication (10M $BCODE)\n\u2022 Package Management Integration (10M $BCODE)\n\n\ud83c\udfd7\ufe0f Platform Architecture:\n\u2022 Bitcoin Git as foundational version control system\n\u2022 Immutable commit timestamping via BSV blockchain\n\u2022 Decentralized repository storage and collaboration\n\u2022 Micropayment integration for developer contributions\n\u2022 Complete censorship-resistant development environment\n\n\ud83c\udfaf Next Phase:\n\u2022 Revenue Sharing Dashboard implementation\n\u2022 App Deployment Pipeline to bitcoinapps.store\n\u2022 Full decentralized GitHub alternative\n\n\ud83e\udd16 Generated with Claude Code (https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-code/commit/e5ed3273ecf5c7f07c536ad9409c372885b1705d",
+      "author": "Richard Boase",
+      "date": "2025-10-15T09:35:29Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-code",
+      "sha": "8a0d5502744dd6a67701146938a608990dbb8961",
+      "message": "Implement comprehensive Bitcoin development platform with MinimalDock integration\n\n\ud83d\ude80 Core Features Added:\n\u2022 TokenDashboard: Real-time developer analytics and performance tracking\n\u2022 ContractWizard: 6-step developer contract creation with blockchain integration\n\u2022 MinimalDock: Collapsible dock with seamless toggle functionality\n\u2022 DeveloperContractService: Smart contract management with BSV timestamping\n\u2022 TokenAllocationManager: 500M $BCODE token pool with performance multipliers\n\u2022 GitBlockchainService: Git operations with automatic blockchain verification\n\n\ud83d\udc8e Token System:\n\u2022 Strategic allocation: 50% of 1B $BCODE tokens for developers\n\u2022 Performance-based multipliers (0.5x to 3x)\n\u2022 Vesting schedules for large allocations (>15M tokens)\n\u2022 Quality assessment and automated rewards\n\n\ud83d\udd17 Blockchain Integration:\n\u2022 BSV timestamping for all contracts and commits\n\u2022 Hash verification and data integrity\n\u2022 Mock implementations with production-ready interfaces\n\u2022 Revenue sharing architecture\n\n\ud83c\udfa8 UI/UX Enhancements:\n\u2022 Dual dock system (full/minimal) with localStorage persistence\n\u2022 Rainbow-colored Bitcoin app icons with smooth animations\n\u2022 Mobile-responsive design with optimized touch targets\n\u2022 Real-time status indicators and system integration\n\n\ud83d\udee0\ufe0f Technical Improvements:\n\u2022 Event-driven architecture for dock state management\n\u2022 Service-oriented design with singleton patterns\n\u2022 Comprehensive error handling and validation\n\u2022 ESLint warnings resolved, production build ready\n\n\ud83e\uddea Testing & Build:\n\u2022 Successful production build with 154.28 kB main bundle\n\u2022 All TypeScript errors resolved\n\u2022 Mobile-optimized responsive layouts\n\u2022 Cross-browser compatibility ensured\n\n\ud83d\udd27 Development Tools:\n\u2022 Added npm scripts for port management\n\u2022 Enhanced build pipeline with react-app-rewired\n\u2022 Git integration preparation for blockchain timestamping\n\n\ud83c\udf08 Bitcoin Ecosystem:\n\u2022 Complete Bitcoin OS integration\n\u2022 24 Bitcoin apps with rainbow theming\n\u2022 Corporate branding and trust indicators\n\u2022 Community links and partnership integrations\n\n\ud83c\udfaf Next Phase Ready:\n\u2022 Revenue Sharing Dashboard foundation\n\u2022 App Deployment Pipeline to bitcoinapps.store\n\u2022 Full Git blockchain integration architecture\n\n\ud83e\udd16 Generated with Claude Code (https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-code/commit/8a0d5502744dd6a67701146938a608990dbb8961",
+      "author": "Richard Boase",
+      "date": "2025-10-15T08:32:51Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-identity",
+      "sha": "1063ae00e9255384a6e370e2b8fc7e752f62d226",
+      "message": "Complete Bitcoin Identity platform overhaul with consistent styling and GitHub issues\n\n\u2022 Applied bitcoin-writer margin structure to all pages for consistent layout\n\u2022 Updated task equity distribution to 10% total (from 1.2%) with comprehensive scope\n\u2022 Created 27 GitHub issues matching the complete platform roadmap:\n  - 3 priority tasks (3.0% equity): Authentication, Document Verification, Bitcoin Integration\n  - 24 category tasks (7.0% equity): Frontend, Backend, Database, Bitcoin, Security, Testing\n\u2022 Fixed all page layouts using simple margin structure: page > * { max-width: 1200px; margin: auto; }\n\u2022 Updated contracts page with proper structure and consistent styling\n\u2022 Enhanced tasks page with realistic development tasks for complete identity platform\n\u2022 Added comprehensive contributor tracking and task management systems\n\nTotal: 217,000 $BID tokens and 10% equity for complete Bitcoin Identity platform\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-identity/commit/1063ae00e9255384a6e370e2b8fc7e752f62d226",
+      "author": "Richard Boase",
+      "date": "2025-10-15T14:26:43Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-identity",
+      "sha": "587d71720386325d3143bf0b6432aa5d74381c12",
+      "message": "Add complete identity tokenization platform with ticker and connection modal\n\n\u2022 Import and customize TickerSidebar from bitcoin-os for identity market\n\u2022 Create comprehensive /bitcoin-identity marketing page explaining celebrity tokenization\n\u2022 Add UnifiedAuth connection modal supporting Google, HandCash, and Substack\n\u2022 Update ticker to show revenue-generating identity tokens ($ZERODICE, $BOASE, etc.)\n\u2022 Implement proper SSR handling for localStorage in auth components\n\u2022 Position ticker below taskbar/poc bar to avoid overlap\n\u2022 Add blue theme styling throughout all components\n\u2022 Create HandCashService and GoogleAuth components for Next.js compatibility\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-identity/commit/587d71720386325d3143bf0b6432aa5d74381c12",
+      "author": "Richard Boase",
+      "date": "2025-10-15T12:55:48Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-identity",
+      "sha": "56cf08a4132e491bc7cecec7990af951b2ce51e7",
+      "message": "Add comprehensive government ID verification system for Bitcoin Identity\n\n- Create identity verification page (/identity) with document upload workflow\n- Build asset ownership registry (/assets) for real estate, vehicles, IP tracking\n- Implement KYC/AML compliance dashboard (/compliance) with risk assessment\n- Add DocumentVerification component for government ID processing\n- Update navigation links in Dock and Taskbar to connect new features\n- Fix token page SSR issues and import paths\n- Establish state-compliant identity framework for regulatory partnerships\n\nThis creates the foundation for \"Digital Government ID on Bitcoin\" with:\n\u2705 Government partnership model - States can issue digital certificates\n\u2705 Asset tokenization - Everything tokenized with BSV addresses\n\u2705 Legal identity foundation - Real government ID verification\n\u2705 Market-ready MVP - Familiar interfaces hiding BSV complexity\n\u2705 Regulatory compliance - KYC/AML built-in from day one\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-identity/commit/56cf08a4132e491bc7cecec7990af951b2ce51e7",
+      "author": "Richard Boase",
+      "date": "2025-10-14T20:54:28Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-identity",
+      "sha": "bcf052efb9e19e7cbc3343700430865e46f9fe0c",
+      "message": "Add local Dock component from Bitcoin-OS main repo\n\n- Copied Dock.tsx and Dock.css from /Users/b0ase/Projects/bitcoin-OS/components/\n- Integrated local Dock component with Bitcoin Identity context\n- Build passes successfully with local component\n- Added vercel.json for proper deployment configuration\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "config",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-identity/commit/bcf052efb9e19e7cbc3343700430865e46f9fe0c",
+      "author": "Richard Boase",
+      "date": "2025-10-08T15:45:23Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-video",
+      "sha": "99d286a6b4247f83d4712f6318b036c6926a0da6",
+      "message": "fix: Resolve deployment build errors by disabling ESLint during builds\n\n- Fixed unescaped quotes in commissions, contracts, and features pages\n- Added proper TypeScript interfaces for GitHub API responses\n- Disabled ESLint during builds to prevent deployment failures\n- Installed ESLint dev dependency to satisfy build requirements\n- Updated next.config.ts to ignore ESLint during builds\n- Build now passes successfully with all components working\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "api",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-video/commit/99d286a6b4247f83d4712f6318b036c6926a0da6",
+      "author": "Richard Boase",
+      "date": "2025-10-15T14:20:03Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-music",
+      "sha": "86d54d7495feee5e285df7dec93e19eb2e2a54c0",
+      "message": "Add TickerSidebar with music-themed token trading\n\n- Implement collapsible right sidebar with music market data\n- Show BSV, BMUSIC, and user tokens at top\n- Display artist tokens (BBEAT, BRAP, etc.) with streaming data\n- Include trending track tokens with play counts\n- Purple theme matching music app branding\n- Responsive design - hidden on mobile, adaptive layout\n- Real-time price updates every 30 seconds\n- Smooth expand/contract animations affecting main content\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "token",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-music/commit/86d54d7495feee5e285df7dec93e19eb2e2a54c0",
+      "author": "Richard Boase",
+      "date": "2025-10-15T15:11:23Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-music",
+      "sha": "24ce1e036c54a42c680663970183dcd4ec48cd15",
+      "message": "Integrate BSV ordinals music discovery with complete MinimalDock\n\n- Add comprehensive BSV ordinals indexer and discovery system\n- Integrate ordinals.bsv.direct functionality for music browsing\n- Implement advanced ordinals music player with playlist support\n- Update marketplace with ordinals integration and navigation\n- Complete MinimalDock with full Bitcoin OS app suite and rainbow icons\n- Fix webpack configuration for BSV SDK browser compatibility\n- Add ordinals search, filtering, and metadata extraction\n- Standardize right-side dock icon sizing for consistency\n- Include BAPPS icon and proper Bitcoin ecosystem navigation\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "config",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-music/commit/24ce1e036c54a42c680663970183dcd4ec48cd15",
+      "author": "Richard Boase",
+      "date": "2025-10-14T21:13:37Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-music",
+      "sha": "790438d18b2b717aaf94425aae508a35e233000d",
+      "message": "Fix CORS configuration to allow Bitcoin OS embedding\n\n- Replace X-Frame-Options with Content-Security-Policy for better control\n- Allow embedding only from Bitcoin OS domains and localhost\n- Add proper CORS headers for cross-origin requests\n- Enables Bitcoin Music to run inside Bitcoin OS iframe\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "keyword": "config",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-music/commit/790438d18b2b717aaf94425aae508a35e233000d",
+      "author": "Richard Boase",
+      "date": "2025-10-06T11:25:46Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-git",
+      "sha": "c96add7552f9270e24dab90d005f7fad62dbb3e8",
+      "message": "Merge branch 'ja/doc-markup-attached-paragraph-fix'\n\nDocumentation mark-up fix.\n\n* ja/doc-markup-attached-paragraph-fix:\n  doc: fix indentation of refStorage item in git-config(1)\n  doc: change the markup of paragraphs following a nested list item",
+      "keyword": "config",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-git/commit/c96add7552f9270e24dab90d005f7fad62dbb3e8",
+      "author": "Junio C Hamano",
+      "date": "2025-10-14T05:00:35Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-git",
+      "sha": "7ac17316205e8313948a94379ce185065517d87d",
+      "message": "Merge branch 'ps/ci-avoid-broken-sudo-on-ubuntu'\n\nOur CI script requires \"sudo\" that can be told to preserve\nenvironment, but Ubuntu replaced with \"sudo\" with an implementation\nthat lacks the feature.  Work this around by reinstalling the\noriginal version.\n\n* ps/ci-avoid-broken-sudo-on-ubuntu:\n  ci: fix broken jobs on Ubuntu 25.10 caused by switch to sudo-rs(1)",
+      "keyword": "env",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-git/commit/7ac17316205e8313948a94379ce185065517d87d",
+      "author": "Junio C Hamano",
+      "date": "2025-10-14T05:00:34Z"
+    },
+    {
+      "type": "suspicious_commit_message",
+      "repository": "bitcoin-git",
+      "sha": "fddb4842552b70a8b46a9dd8a2a450b973d3dd1e",
+      "message": "ci: fix broken jobs on Ubuntu 25.10 caused by switch to sudo-rs(1)\n\nUbuntu 25.10 has been released. One prominent change in this version of\nUbuntu is the switch to some Rust-based utilities. Part of this switch\nis also that Ubuntu now defaults to sudo-rs(1).\n\nUnfortunately, this breaks our CI because sudo-rs(1) does not support\nthe `--preserve-env` flag. Let's revert back to the C-based sudo(1)\nimplementation to fix this.\n\nSigned-off-by: Patrick Steinhardt <ps@pks.im>\nSigned-off-by: Junio C Hamano <gitster@pobox.com>",
+      "keyword": "env",
+      "url": "https://github.com/bitcoin-apps-suite/bitcoin-git/commit/fddb4842552b70a8b46a9dd8a2a450b973d3dd1e",
+      "author": "Patrick Steinhardt",
+      "date": "2025-10-10T09:41:14Z"
+    }
+  ],
+  "config_analysis": [],
+  "summary": {
+    "total_repos_checked": 46,
+    "detailed_analysis_repos": 5,
+    "total_potential_issues": 16,
+    "scan_timestamp": "2025-10-15 19:58:12"
+  }
+}
