@@ -1,0 +1,61 @@
+/* Bitcoin Tickertape Styles */
+.bitcoin-tickertape {
+  /* Base styles are handled via inline styles for portability */
+}
+
+/* Animation for continuous scrolling */
+@keyframes bitcoin-ticker-scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Optional: Override styles for specific themes */
+.bitcoin-tickertape.theme-dark {
+  background: linear-gradient(90deg, #1f1f23 0%, #2d2d30 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.bitcoin-tickertape.theme-light {
+  background: linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.bitcoin-tickertape.theme-bitcoin {
+  background: linear-gradient(90deg, #f7931a 0%, #ff6b35 100%);
+}
+
+.bitcoin-tickertape.theme-green {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .bitcoin-tickertape {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  
+  .bitcoin-tickertape .w-3 {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bitcoin-tickertape {
+    font-size: 11px;
+    height: 36px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .bitcoin-tickertape {
+    letter-spacing: 0.3px;
+  }
+}

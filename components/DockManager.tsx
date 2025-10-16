@@ -9,11 +9,11 @@ interface DockManagerProps {
 }
 
 const DockManager: React.FC<DockManagerProps> = ({ currentApp = 'bitcoin-os' }) => {
-  const [dockStyle, setDockStyle] = useState<string>('large');
+  const [dockStyle, setDockStyle] = useState<string>('minimal');
 
   useEffect(() => {
     // Get initial dock style from localStorage
-    const savedStyle = localStorage.getItem('dockStyle') || 'large';
+    const savedStyle = localStorage.getItem('dockStyle') || 'minimal';
     setDockStyle(savedStyle);
 
     // Listen for dock style changes
