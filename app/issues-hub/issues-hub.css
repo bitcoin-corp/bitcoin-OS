@@ -2,11 +2,15 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   padding: 2rem;
+  overflow-y: auto;
+  height: 100vh;
+  position: relative;
 }
 
 .issues-hub-container {
   max-width: 1400px;
   margin: 0 auto;
+  padding-bottom: 2rem;
 }
 
 /* Header */
