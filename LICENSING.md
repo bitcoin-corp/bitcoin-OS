@@ -41,6 +41,13 @@ For commercial licensing inquiries:
 - Website: https://thebitcoincorporation.website
 - Revenue sharing options available
 
+### Payment Methods
+
+Commercial licenses can be paid using:
+- **Cryptocurrency**: BTC, BCH, ETH, SOL, and other major cryptocurrencies
+- **Traditional**: Bank wire, credit card
+- **Flexible Terms**: Monthly, annual, or perpetual license options
+
 ---
 
 **The Bitcoin Corporation LTD** - Pioneering the future of Bitcoin-native computing.
