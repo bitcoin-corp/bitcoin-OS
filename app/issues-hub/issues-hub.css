@@ -165,6 +165,20 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Core Apps Section */
+.core-apps-section {
+  margin-bottom: 2rem;
+}
+
+.core-table {
+  background: linear-gradient(135deg, rgba(247, 147, 26, 0.05), rgba(247, 147, 26, 0.02));
+  border-color: rgba(247, 147, 26, 0.2);
+}
+
+.core-row {
+  font-weight: 500;
+}
+
 /* Apps Table */
 .apps-section {
   margin-bottom: 3rem;
@@ -275,6 +289,29 @@
   background: rgba(247, 147, 26, 0.15);
   border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-1px);
+}
+
+/* React App Styling */
+.app-row.react-app {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.05), rgba(33, 150, 243, 0.02));
+  border-left: 3px solid rgba(33, 150, 243, 0.4);
+}
+
+.app-row.react-app:hover {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.08), rgba(33, 150, 243, 0.04));
+}
+
+.react-badge {
+  margin-left: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(33, 150, 243, 0.2);
+  color: #64b5f6;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(33, 150, 243, 0.3);
 }
 
 /* Quick Actions */
