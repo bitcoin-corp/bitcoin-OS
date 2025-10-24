@@ -14,12 +14,20 @@ import {
 } from 'lucide-react';
 import './issues-hub.css';
 
+// Core financial apps (shown at top)
+const coreApps = [
+  { name: 'Bitcoin Wallet', repo: 'bitcoin-wallet', icon: '👛' },
+  { name: 'Bitcoin Exchange', repo: 'bitcoin-exchange', icon: '💱' },
+  { name: 'Bitcoin Apps Suite', repo: 'bitcoin-apps-suite', icon: '🏢' }
+];
+
+// Regular apps with React framework marked
 const bitcoinApps = [
   { name: 'Bitcoin 3D', repo: 'bitcoin-3d', icon: '🎮' },
   { name: 'Bitcoin AI', repo: 'bitcoin-ai', icon: '🤖' },
   { name: 'Bitcoin App', repo: 'bitcoin-app', icon: '📱' },
   { name: 'Bitcoin Art', repo: 'bitcoin-art', icon: '🎨' },
-  { name: 'Bitcoin Books', repo: 'bitcoin-books', icon: '📚' },
+  { name: 'Bitcoin Books', repo: 'bitcoin-books', icon: '📚', isReact: true },
   { name: 'Bitcoin Browser', repo: 'bitcoin-browser', icon: '🌐' },
   { name: 'Bitcoin Calendar', repo: 'bitcoin-calendar', icon: '📅' },
   { name: 'Bitcoin Chat', repo: 'bitcoin-chat', icon: '💬' },
@@ -29,9 +37,8 @@ const bitcoinApps = [
   { name: 'Bitcoin CRM', repo: 'bitcoin-crm', icon: '👥' },
   { name: 'Bitcoin DNS', repo: 'bitcoin-dns', icon: '🌍' },
   { name: 'Bitcoin Drive', repo: 'bitcoin-drive', icon: '💾' },
-  { name: 'Bitcoin Education', repo: 'bitcoin-education', icon: '🎓' },
+  { name: 'Bitcoin Education', repo: 'bitcoin-education', icon: '🎓', isReact: true },
   { name: 'Bitcoin Email', repo: 'bitcoin-email', icon: '✉️' },
-  { name: 'Bitcoin Exchange', repo: 'bitcoin-exchange', icon: '💱' },
   { name: 'Bitcoin Gaming', repo: 'bitcoin-gaming', icon: '🎯' },
   { name: 'Bitcoin Identity', repo: 'bitcoin-identity', icon: '🆔' },
   { name: 'Bitcoin Jobs', repo: 'bitcoin-jobs', icon: '💼' },
@@ -43,8 +50,8 @@ const bitcoinApps = [
   { name: 'Bitcoin Radio', repo: 'bitcoin-radio', icon: '📻' },
   { name: 'Bitcoin Search', repo: 'bitcoin-search', icon: '🔍' },
   { name: 'Bitcoin Shares', repo: 'bitcoin-shares', icon: '📊' },
-  { name: 'Bitcoin Social', repo: 'bitcoin-social', icon: '👫' },
-  { name: 'Bitcoin Spreadsheets', repo: 'bitcoin-spreadsheets', icon: '📈' },
+  { name: 'Bitcoin Social', repo: 'bitcoin-social', icon: '👫', isReact: true },
+  { name: 'Bitcoin Spreadsheets', repo: 'bitcoin-spreadsheets', icon: '📈', isReact: true },
   { name: 'Bitcoin Twitter', repo: 'bitcoin-twitter', icon: '🐦' },
   { name: 'Bitcoin Video', repo: 'bitcoin-video', icon: '🎬' },
   { name: 'Bitcoin Writer', repo: 'bitcoin-writer', icon: '✍️' }
@@ -116,11 +123,56 @@ export default function IssuesHubPage() {
           </div>
         </div>
 
+        {/* Core Apps Section */}
+        <div className="core-apps-section">
+          <div className="section-header">
+            <h2>Core Financial Infrastructure</h2>
+            <span className="badge primary">Priority Apps</span>
+          </div>
+          
+          <div className="apps-table core-table">
+            {coreApps.map((app) => (
+              <div key={app.repo} className="app-row core-row">
+                <div className="app-info">
+                  <span className="app-icon">{app.icon}</span>
+                  <span className="app-name">{app.name}</span>
+                </div>
+                
+                <div className="app-actions">
+                  <a 
+                    href={`https://github.com/bitcoin-apps-suite/${app.repo}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="action-link repo"
+                    title="View Repository"
+                  >
+                    <GitBranch size={16} />
+                    Repository
+                    <ExternalLink size={12} />
+                  </a>
+                  
+                  <a 
+                    href={`https://github.com/bitcoin-apps-suite/${app.repo}/issues`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="action-link issues"
+                    title="View Issues"
+                  >
+                    <Bug size={16} />
+                    Issues
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Bitcoin Apps Section */}
         <div className="apps-section">
           <div className="section-header">
-            <h2>Bitcoin Apps Suite</h2>
-            <span className="badge">33 Applications</span>
+            <h2>Bitcoin Applications</h2>
+            <span className="badge">30 Applications</span>
           </div>
           
           <div className="apps-table">
@@ -130,10 +182,13 @@ export default function IssuesHubPage() {
             </div>
             
             {bitcoinApps.map((app) => (
-              <div key={app.repo} className="app-row">
+              <div key={app.repo} className={`app-row ${app.isReact ? 'react-app' : ''}`}>
                 <div className="app-info">
                   <span className="app-icon">{app.icon}</span>
-                  <span className="app-name">{app.name}</span>
+                  <span className="app-name">
+                    {app.name}
+                    {app.isReact && <span className="react-badge">React - Migration Needed</span>}
+                  </span>
                 </div>
                 
                 <div className="app-actions">
