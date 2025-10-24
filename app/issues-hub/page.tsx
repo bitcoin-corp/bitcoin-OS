@@ -123,36 +123,41 @@ export default function IssuesHubPage() {
             <span className="badge">33 Applications</span>
           </div>
           
-          <div className="apps-grid">
+          <div className="apps-table">
+            <div className="table-header">
+              <div className="col-app">Application</div>
+              <div className="col-actions">Actions</div>
+            </div>
+            
             {bitcoinApps.map((app) => (
-              <div key={app.repo} className="app-card">
-                <div className="app-header">
+              <div key={app.repo} className="app-row">
+                <div className="app-info">
                   <span className="app-icon">{app.icon}</span>
-                  <h3>{app.name}</h3>
+                  <span className="app-name">{app.name}</span>
                 </div>
                 
-                <div className="app-links">
-                  <a 
-                    href={`https://github.com/bitcoin-apps-suite/${app.repo}/issues`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-btn"
-                    title="View Issues"
-                  >
-                    <Bug size={16} />
-                    Issues
-                    <ExternalLink size={12} />
-                  </a>
-                  
+                <div className="app-actions">
                   <a 
                     href={`https://github.com/bitcoin-apps-suite/${app.repo}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-btn secondary"
+                    className="action-link repo"
                     title="View Repository"
                   >
                     <GitBranch size={16} />
-                    Repo
+                    Repository
+                    <ExternalLink size={12} />
+                  </a>
+                  
+                  <a 
+                    href={`https://github.com/bitcoin-apps-suite/${app.repo}/issues`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="action-link issues"
+                    title="View Issues"
+                  >
+                    <Bug size={16} />
+                    Issues
                     <ExternalLink size={12} />
                   </a>
                 </div>

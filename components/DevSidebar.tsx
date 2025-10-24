@@ -12,6 +12,7 @@ import {
   Coins,
   Github,
   GitPullRequest,
+  GitBranch,
   ExternalLink,
   BookOpen,
   History,
@@ -70,6 +71,7 @@ export default function DevSidebar() {
     { path: '/token', icon: Coins, label: '$bOS' },
     { path: '/exchange', icon: Zap, label: 'Compute Exchange' },
     { path: '/contracts', icon: Terminal, label: 'Contracts' },
+    { path: '/issues-hub', icon: GitBranch, label: 'Issues Hub', badge: issueCount > 0 ? issueCount.toString() : undefined },
     
     // HPC & Computational Resources
     { divider: true },
