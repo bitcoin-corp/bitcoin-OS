@@ -1,0 +1,394 @@
+.issues-hub-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  padding: 2rem;
+}
+
+.issues-hub-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.hub-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-icon {
+  color: #f7931a;
+}
+
+.hub-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.header-description {
+  color: #888;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+}
+
+.badge.primary {
+  background: rgba(247, 147, 26, 0.1);
+  border-color: rgba(247, 147, 26, 0.3);
+  color: #f7931a;
+}
+
+/* Main Repository Section */
+.main-repo-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.main-repo-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.main-repo-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(247, 147, 26, 0.3);
+  transform: translateY(-2px);
+}
+
+.repo-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.repo-icon {
+  color: #f7931a;
+}
+
+.repo-details h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.repo-details p {
+  color: #888;
+  margin: 0;
+}
+
+.repo-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #f7931a, #e8851a);
+  color: #000;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(247, 147, 26, 0.3);
+}
+
+.action-btn.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ccc;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Apps Grid */
+.apps-section {
+  margin-bottom: 3rem;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.app-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.app-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(247, 147, 26, 0.2);
+  transform: translateY(-2px);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.app-icon {
+  font-size: 1.5rem;
+}
+
+.app-header h3 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+  flex: 1;
+}
+
+.app-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(247, 147, 26, 0.1);
+  color: #f7931a;
+  border: 1px solid rgba(247, 147, 26, 0.2);
+  transition: all 0.3s ease;
+}
+
+.link-btn:hover {
+  background: rgba(247, 147, 26, 0.15);
+  border-color: rgba(247, 147, 26, 0.3);
+  transform: translateY(-1px);
+}
+
+.link-btn.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #888;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.link-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #aaa;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Quick Actions */
+.quick-actions {
+  margin-bottom: 3rem;
+}
+
+.quick-actions h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.action-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.action-card {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.action-card .icon {
+  margin-top: 0.25rem;
+}
+
+.action-card .icon.warning {
+  color: #ff9800;
+}
+
+.action-card .icon.feature {
+  color: #4caf50;
+}
+
+.action-card .icon.success {
+  color: #2196f3;
+}
+
+.action-card h4 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.action-card p {
+  color: #888;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Footer */
+.hub-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hub-footer p {
+  color: #888;
+  margin: 0;
+}
+
+.hub-footer a {
+  color: #f7931a;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.hub-footer a:hover {
+  color: #ffb74d;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .apps-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .main-repo-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .repo-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .issues-hub-page {
+    padding: 1rem;
+  }
+  
+  .hub-header h1 {
+    font-size: 2rem;
+  }
+  
+  .header-title {
+    flex-direction: column;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hub-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header-description {
+    font-size: 1rem;
+  }
+  
+  .app-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .link-btn {
+    justify-content: center;
+  }
+}
