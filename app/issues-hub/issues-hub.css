@@ -71,6 +71,123 @@
   color: #f7931a;
 }
 
+/* Contracts Section */
+.contracts-section {
+  margin-bottom: 2rem;
+}
+
+.contracts-card {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.05), rgba(138, 43, 226, 0.02));
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.contracts-card:hover {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(138, 43, 226, 0.04));
+  border-color: rgba(138, 43, 226, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Main Products Grid */
+.main-products-section {
+  margin-bottom: 3rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.product-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(247, 147, 26, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(247, 147, 26, 0.1);
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-icon {
+  font-size: 2rem;
+}
+
+.product-header h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.product-description {
+  color: #888;
+  margin: 0 0 1.5rem 0;
+  flex: 1;
+}
+
+.product-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.product-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+  justify-content: center;
+  border: 1px solid transparent;
+}
+
+.product-link.repo {
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.product-link.repo:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.product-link.issues {
+  background: rgba(247, 147, 26, 0.1);
+  color: #f7931a;
+  border-color: rgba(247, 147, 26, 0.2);
+}
+
+.product-link.issues:hover {
+  background: rgba(247, 147, 26, 0.15);
+  border-color: rgba(247, 147, 26, 0.3);
+}
+
 /* Main Repository Section */
 .main-repo-section {
   margin-bottom: 3rem;
@@ -398,7 +515,8 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .main-repo-card {
+  .main-repo-card,
+  .contracts-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
@@ -415,6 +533,10 @@
   
   .col-actions {
     width: 280px;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
   }
 }
 

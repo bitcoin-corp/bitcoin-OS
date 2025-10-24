@@ -14,11 +14,12 @@ import {
 } from 'lucide-react';
 import './issues-hub.css';
 
-// Core financial apps (shown at top)
-const coreApps = [
-  { name: 'Bitcoin Wallet', repo: 'bitcoin-wallet', icon: '👛' },
-  { name: 'Bitcoin Exchange', repo: 'bitcoin-exchange', icon: '💱' },
-  { name: 'Bitcoin Apps Suite', repo: 'bitcoin-apps-suite', icon: '🏢' }
+// Main products - 2x2 grid
+const mainProducts = [
+  { name: 'Bitcoin OS', repo: 'bitcoin-OS', icon: '🖥️', org: 'bitcoin-corp', description: 'Core operating system' },
+  { name: 'Bitcoin Wallet', repo: 'bitcoin-wallet', icon: '👛', org: 'bitcoin-apps-suite', description: 'Digital wallet solution' },
+  { name: 'Bitcoin Exchange', repo: 'bitcoin-exchange', icon: '💱', org: 'bitcoin-apps-suite', description: 'Trading platform' },
+  { name: 'Bitcoin Apps Suite', repo: 'bitcoin-apps-suite', icon: '🏢', org: 'bitcoin-apps-suite', description: 'Application ecosystem' }
 ];
 
 // Regular apps with React framework marked
@@ -33,7 +34,6 @@ const bitcoinApps = [
   { name: 'Bitcoin Chat', repo: 'bitcoin-chat', icon: '💬' },
   { name: 'Bitcoin CMS', repo: 'bitcoin-cms', icon: '📝' },
   { name: 'Bitcoin Code', repo: 'bitcoin-code', icon: '💻' },
-  { name: 'Bitcoin Contracts', repo: 'bitcoin-contracts', icon: '📜' },
   { name: 'Bitcoin CRM', repo: 'bitcoin-crm', icon: '👥' },
   { name: 'Bitcoin DNS', repo: 'bitcoin-dns', icon: '🌍' },
   { name: 'Bitcoin Drive', repo: 'bitcoin-drive', icon: '💾' },
@@ -74,25 +74,35 @@ export default function IssuesHubPage() {
           </div>
         </div>
 
-        {/* Main Repository Section */}
-        <div className="main-repo-section">
+        {/* Bitcoin Contracts Section - Foundation */}
+        <div className="contracts-section">
           <div className="section-header">
-            <h2>Core Repository</h2>
-            <span className="badge primary">Main</span>
+            <h2>Smart Contract Foundation</h2>
+            <span className="badge primary">Infrastructure</span>
           </div>
           
-          <div className="main-repo-card">
+          <div className="contracts-card">
             <div className="repo-info">
-              <Package size={24} className="repo-icon" />
+              <span className="app-icon">📜</span>
               <div className="repo-details">
-                <h3>Bitcoin OS</h3>
-                <p>Core operating system and ecosystem management</p>
+                <h3>Bitcoin Contracts</h3>
+                <p>BSV smart contracts powering the entire ecosystem</p>
               </div>
             </div>
             
             <div className="repo-actions">
               <a 
-                href="https://github.com/bitcoin-corp/bitcoin-OS/issues" 
+                href="https://github.com/bitcoin-apps-suite/bitcoin-contracts" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="action-btn secondary"
+              >
+                <GitBranch size={18} />
+                Repository
+                <ExternalLink size={14} />
+              </a>
+              <a 
+                href="https://github.com/bitcoin-apps-suite/bitcoin-contracts/issues" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="action-btn primary"
@@ -101,66 +111,47 @@ export default function IssuesHubPage() {
                 View Issues
                 <ExternalLink size={14} />
               </a>
-              <a 
-                href="https://github.com/bitcoin-corp/bitcoin-OS/issues/new" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="action-btn secondary"
-              >
-                <Zap size={18} />
-                New Issue
-              </a>
-              <a 
-                href="https://github.com/bitcoin-corp/bitcoin-OS/pulls" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="action-btn secondary"
-              >
-                <GitPullRequest size={18} />
-                Pull Requests
-              </a>
             </div>
           </div>
         </div>
 
-        {/* Core Apps Section */}
-        <div className="core-apps-section">
+        {/* Main Products Grid - 2x2 */}
+        <div className="main-products-section">
           <div className="section-header">
-            <h2>Core Financial Infrastructure</h2>
-            <span className="badge primary">Priority Apps</span>
+            <h2>Main Products</h2>
+            <span className="badge primary">Bitcoin Corporation</span>
           </div>
           
-          <div className="apps-table core-table">
-            {coreApps.map((app) => (
-              <div key={app.repo} className="app-row core-row">
-                <div className="app-info">
-                  <span className="app-icon">{app.icon}</span>
-                  <span className="app-name">{app.name}</span>
+          <div className="products-grid">
+            {mainProducts.map((product) => (
+              <div key={product.repo} className="product-card">
+                <div className="product-header">
+                  <span className="product-icon">{product.icon}</span>
+                  <h3>{product.name}</h3>
                 </div>
+                <p className="product-description">{product.description}</p>
                 
-                <div className="app-actions">
+                <div className="product-actions">
                   <a 
-                    href={`https://github.com/bitcoin-apps-suite/${app.repo}`}
+                    href={`https://github.com/${product.org}/${product.repo}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="action-link repo"
+                    className="product-link repo"
                     title="View Repository"
                   >
                     <GitBranch size={16} />
                     Repository
-                    <ExternalLink size={12} />
                   </a>
                   
                   <a 
-                    href={`https://github.com/bitcoin-apps-suite/${app.repo}/issues`}
+                    href={`https://github.com/${product.org}/${product.repo}/issues`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="action-link issues"
+                    className="product-link issues"
                     title="View Issues"
                   >
                     <Bug size={16} />
                     Issues
-                    <ExternalLink size={12} />
                   </a>
                 </div>
               </div>
