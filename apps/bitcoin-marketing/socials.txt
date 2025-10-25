@@ -1,0 +1,13 @@
+Bitcoin Marketing Social Media Links
+==================================
+
+Discord: https://discord.gg/xBB8r8dj
+Twitter/X: https://x.com/bitcoin_writer
+GitHub Organization: https://github.com/bitcoin-apps-suite
+GitHub Repository: https://github.com/bitcoin-apps-suite/bitcoin-marketing
+
+Website: https://bitcoin-marketing.vercel.app
+Contributions Page: https://bitcoin-marketing.vercel.app/contributions
+Token Info: https://bitcoin-marketing.vercel.app/token
+
+Contact Email: admin@bitcoinwriter.io
