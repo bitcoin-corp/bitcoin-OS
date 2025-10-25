@@ -22,12 +22,21 @@ import {
   ArrowDownRight,
   Play,
   Pause,
-  Settings
+  Settings,
+  Zap as Lightning,
+  Globe,
+  Shield,
+  Sparkles,
+  Flame,
+  Target,
+  Layers,
+  Monitor,
+  Rocket
 } from 'lucide-react'
 
 interface ComputeOrder {
   id: string
-  type: 'GPU' | 'CPU' | 'Storage' | 'Bandwidth' | 'RAM'
+  type: 'AI_GPU' | 'Gaming_GPU' | 'CPU_Cores' | 'Quantum_Sim' | 'Edge_Compute' | 'Storage_TB' | 'Bandwidth_Gbps' | 'RAM_DDR5'
   provider: string
   specs: string
   pricePerHour: number
@@ -35,22 +44,28 @@ interface ComputeOrder {
   quantity: number
   timestamp: Date
   status: 'active' | 'filled' | 'cancelled'
+  tier: 'premium' | 'standard' | 'budget'
 }
 
 interface MarketData {
   type: string
+  name: string
   price: number
   change24h: number
   volume24h: number
   trades24h: number
   highestBid: number
   lowestAsk: number
+  marketCap: number
+  tier: 'premium' | 'standard' | 'budget'
+  icon: string
+  description: string
 }
 
 function ExchangeContent() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<'trade' | 'orders' | 'analytics'>('trade')
-  const [selectedMarket, setSelectedMarket] = useState<'GPU' | 'CPU' | 'Storage' | 'Bandwidth' | 'RAM'>('GPU')
+  const [selectedMarket, setSelectedMarket] = useState<'AI_GPU' | 'Gaming_GPU' | 'CPU_Cores' | 'Quantum_Sim' | 'Edge_Compute' | 'Storage_TB' | 'Bandwidth_Gbps' | 'RAM_DDR5'>('AI_GPU')
   const [isLive, setIsLive] = useState(true)
   const [orders, setOrders] = useState<ComputeOrder[]>([])
   
@@ -61,13 +76,120 @@ function ExchangeContent() {
     }
   }, [searchParams])
 
-  // Mock market data with live updates
+  // Premium compute market data with live updates
   const [marketData, setMarketData] = useState<Record<string, MarketData>>({
-    GPU: { type: 'GPU', price: 2.45, change24h: 12.5, volume24h: 1250, trades24h: 450, highestBid: 2.44, lowestAsk: 2.46 },
-    CPU: { type: 'CPU', price: 0.85, change24h: -3.2, volume24h: 890, trades24h: 320, highestBid: 0.84, lowestAsk: 0.86 },
-    Storage: { type: 'Storage', price: 0.12, change24h: 8.7, volume24h: 2100, trades24h: 680, highestBid: 0.11, lowestAsk: 0.13 },
-    Bandwidth: { type: 'Bandwidth', price: 4.20, change24h: 15.8, volume24h: 560, trades24h: 180, highestBid: 4.18, lowestAsk: 4.22 },
-    RAM: { type: 'RAM', price: 1.15, change24h: -1.5, volume24h: 780, trades24h: 290, highestBid: 1.14, lowestAsk: 1.16 }
+    AI_GPU: { 
+      type: 'AI_GPU', 
+      name: 'AI Training GPUs', 
+      price: 24.50, 
+      change24h: 18.7, 
+      volume24h: 12750, 
+      trades24h: 1450, 
+      highestBid: 24.44, 
+      lowestAsk: 24.56,
+      marketCap: 2400000,
+      tier: 'premium',
+      icon: 'Sparkles',
+      description: 'H100, A100, V100 clusters for AI/ML training'
+    },
+    Gaming_GPU: { 
+      type: 'Gaming_GPU', 
+      name: 'Gaming GPUs', 
+      price: 8.45, 
+      change24h: -2.1, 
+      volume24h: 8900, 
+      trades24h: 920, 
+      highestBid: 8.42, 
+      lowestAsk: 8.48,
+      marketCap: 890000,
+      tier: 'standard',
+      icon: 'Monitor',
+      description: 'RTX 4090, RTX 4080 for gaming/streaming'
+    },
+    CPU_Cores: { 
+      type: 'CPU_Cores', 
+      name: 'CPU Cores', 
+      price: 1.25, 
+      change24h: 5.3, 
+      volume24h: 21000, 
+      trades24h: 2680, 
+      highestBid: 1.24, 
+      lowestAsk: 1.26,
+      marketCap: 125000,
+      tier: 'budget',
+      icon: 'Cpu',
+      description: 'Intel Xeon, AMD EPYC core-hours'
+    },
+    Quantum_Sim: { 
+      type: 'Quantum_Sim', 
+      name: 'Quantum Simulation', 
+      price: 125.00, 
+      change24h: 45.8, 
+      volume24h: 2560, 
+      trades24h: 89, 
+      highestBid: 124.50, 
+      lowestAsk: 125.50,
+      marketCap: 5600000,
+      tier: 'premium',
+      icon: 'Zap',
+      description: 'Quantum circuit simulation on classical hardware'
+    },
+    Edge_Compute: { 
+      type: 'Edge_Compute', 
+      name: 'Edge Computing', 
+      price: 3.20, 
+      change24h: 12.4, 
+      volume24h: 5600, 
+      trades24h: 780, 
+      highestBid: 3.18, 
+      lowestAsk: 3.22,
+      marketCap: 320000,
+      tier: 'standard',
+      icon: 'Globe',
+      description: 'Distributed edge nodes worldwide'
+    },
+    Storage_TB: { 
+      type: 'Storage_TB', 
+      name: 'Storage (TB)', 
+      price: 0.45, 
+      change24h: -1.2, 
+      volume24h: 15600, 
+      trades24h: 1980, 
+      highestBid: 0.44, 
+      lowestAsk: 0.46,
+      marketCap: 45000,
+      tier: 'budget',
+      icon: 'HardDrive',
+      description: 'NVMe SSD, HDD storage capacity'
+    },
+    Bandwidth_Gbps: { 
+      type: 'Bandwidth_Gbps', 
+      name: 'Network Bandwidth', 
+      price: 12.80, 
+      change24h: 8.9, 
+      volume24h: 3400, 
+      trades24h: 450, 
+      highestBid: 12.75, 
+      lowestAsk: 12.85,
+      marketCap: 680000,
+      tier: 'standard',
+      icon: 'Wifi',
+      description: 'High-speed network connectivity'
+    },
+    RAM_DDR5: { 
+      type: 'RAM_DDR5', 
+      name: 'DDR5 Memory', 
+      price: 2.15, 
+      change24h: 3.7, 
+      volume24h: 7800, 
+      trades24h: 1190, 
+      highestBid: 2.14, 
+      lowestAsk: 2.16,
+      marketCap: 215000,
+      tier: 'standard',
+      icon: 'Database',
+      description: 'Latest DDR5 RAM modules'
+    }
   })
 
   // Simulate live price updates
@@ -89,19 +211,32 @@ function ExchangeContent() {
     return () => clearInterval(interval)
   }, [isLive])
 
-  const getMarketIcon = (type: string) => {
-    switch (type) {
-      case 'GPU':
-      case 'CPU':
-        return <Cpu className="w-5 h-5" />
-      case 'Storage':
-        return <HardDrive className="w-5 h-5" />
-      case 'RAM':
-        return <Database className="w-5 h-5" />
-      case 'Bandwidth':
-        return <Wifi className="w-5 h-5" />
+  const getMarketIcon = (iconName: string, tier: string) => {
+    const iconClass = `w-5 h-5 ${
+      tier === 'premium' ? 'text-yellow-400' : 
+      tier === 'standard' ? 'text-blue-400' : 
+      'text-gray-400'
+    }`
+    
+    switch (iconName) {
+      case 'Sparkles':
+        return <Sparkles className={iconClass} />
+      case 'Monitor':
+        return <Monitor className={iconClass} />
+      case 'Cpu':
+        return <Cpu className={iconClass} />
+      case 'Zap':
+        return <Zap className={iconClass} />
+      case 'Globe':
+        return <Globe className={iconClass} />
+      case 'HardDrive':
+        return <HardDrive className={iconClass} />
+      case 'Wifi':
+        return <Wifi className={iconClass} />
+      case 'Database':
+        return <Database className={iconClass} />
       default:
-        return <Server className="w-5 h-5" />
+        return <Server className={iconClass} />
     }
   }
 
@@ -112,135 +247,256 @@ function ExchangeContent() {
   }
 
   return (
-    <div className="h-full overflow-auto bg-black text-white">
-      {/* Header with live indicator */}
-      <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4">
+    <div className="h-full overflow-auto bg-gradient-to-br from-black via-gray-900 to-black text-white">
+      {/* Futuristic Header */}
+      <div className="relative border-b border-orange-500/20 bg-gradient-to-r from-black/90 via-gray-900/90 to-black/90 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-orange-500/5" />
+        <div className="relative container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                Compute Exchange
-              </h1>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`} />
-                <span className="text-sm text-gray-400">{isLive ? 'Live' : 'Paused'}</span>
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center">
+                    <Lightning className="w-6 h-6 text-black" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black animate-pulse" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-400 via-yellow-500 to-orange-600 bg-clip-text text-transparent">
+                    bEX
+                  </h1>
+                  <p className="text-sm text-gray-400 font-mono">Bitcoin Compute Exchange</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full">
+                  <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-gray-500'}`} />
+                  <span className="text-sm font-medium text-green-400">{isLive ? 'LIVE TRADING' : 'MARKET CLOSED'}</span>
+                  <div className="w-px h-4 bg-green-500/30" />
+                  <span className="text-xs text-green-300 font-mono">1,247 traders</span>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-sm text-gray-400">Global Volume</div>
+                  <div className="text-lg font-bold text-orange-400 font-mono">₿OS 47.2K</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-sm text-gray-400">Network Load</div>
+                  <div className="text-lg font-bold text-blue-400 font-mono">68%</div>
+                </div>
               </div>
             </div>
             
             <div className="flex items-center gap-4">
               <button
+                type="button"
                 onClick={() => setIsLive(!isLive)}
-                className="flex items-center gap-2 px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border border-orange-500/30 rounded-lg hover:from-orange-500/30 hover:to-yellow-500/30 transition-all duration-300"
               >
                 {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                <span className="text-sm">{isLive ? 'Pause' : 'Resume'}</span>
+                <span className="text-sm font-medium">{isLive ? 'Pause Feed' : 'Resume Feed'}</span>
               </button>
-              <button className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
-                <Settings className="w-4 h-4" />
+              
+              <button 
+                type="button"
+                className="p-3 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-lg transition-all duration-300 hover:border-orange-500/50"
+                title="Settings"
+              >
+                <Settings className="w-5 h-5" />
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex h-[calc(100vh-80px)]">
-        {/* Sidebar - Market Selection */}
-        <div className="w-80 border-r border-gray-800 bg-gray-900/30">
-          <div className="p-4 border-b border-gray-800">
-            <h3 className="font-bold text-lg mb-4">Markets</h3>
-            <div className="space-y-2">
+      <div className="flex h-[calc(100vh-100px)]">
+        {/* Enhanced Sidebar - Market Selection */}
+        <div className="w-96 border-r border-orange-500/20 bg-gradient-to-b from-gray-900/80 via-black/90 to-gray-900/80 backdrop-blur-sm">
+          <div className="p-6 border-b border-orange-500/20">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center">
+                <Flame className="w-4 h-4 text-black" />
+              </div>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-yellow-500 bg-clip-text text-transparent">
+                Live Markets
+              </h3>
+            </div>
+            
+            <div className="space-y-3">
               {Object.values(marketData).map((market) => (
                 <button
                   key={market.type}
+                  type="button"
                   onClick={() => setSelectedMarket(market.type as any)}
-                  className={`w-full p-3 rounded-lg transition-all text-left ${
+                  className={`w-full p-4 rounded-xl transition-all duration-300 text-left group border ${
                     selectedMarket === market.type
-                      ? 'bg-orange-500/20 border border-orange-500/50'
-                      : 'bg-gray-800/50 hover:bg-gray-700/50'
+                      ? 'bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border-orange-500/50 shadow-lg shadow-orange-500/20'
+                      : 'bg-gray-800/30 hover:bg-gray-700/40 border-gray-700/50 hover:border-orange-500/30'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      {getMarketIcon(market.type)}
-                      <span className="font-medium">{market.type}</span>
+                      <div className={`p-2 rounded-lg ${
+                        market.tier === 'premium' ? 'bg-yellow-500/20' :
+                        market.tier === 'standard' ? 'bg-blue-500/20' :
+                        'bg-gray-500/20'
+                      }`}>
+                        {getMarketIcon(market.icon, market.tier)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white group-hover:text-orange-400 transition-colors">
+                          {market.name}
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          {market.description}
+                        </div>
+                      </div>
                     </div>
-                    <div className={`flex items-center gap-1 ${
-                      market.change24h >= 0 ? 'text-green-500' : 'text-red-500'
+                    
+                    <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                      market.change24h >= 0 ? 'text-green-400 bg-green-500/20' : 'text-red-400 bg-red-500/20'
                     }`}>
                       {market.change24h >= 0 ? 
                         <ArrowUpRight className="w-3 h-3" /> : 
                         <ArrowDownRight className="w-3 h-3" />
                       }
-                      <span className="text-xs">{formatChange(market.change24h)}</span>
+                      {formatChange(market.change24h)}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-mono">{formatPrice(market.price)}/hr</span>
-                    <span className="text-gray-400">{market.trades24h} trades</span>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-lg font-bold font-mono text-white">
+                        {formatPrice(market.price)}<span className="text-sm text-gray-400">/hr</span>
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Vol: ₿OS {(market.volume24h / 1000).toFixed(1)}K
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className="text-sm text-gray-400">{market.trades24h} trades</div>
+                      <div className={`text-xs px-2 py-1 rounded-full ${
+                        market.tier === 'premium' ? 'text-yellow-400 bg-yellow-500/20' :
+                        market.tier === 'standard' ? 'text-blue-400 bg-blue-500/20' :
+                        'text-gray-400 bg-gray-500/20'
+                      }`}>
+                        {market.tier.toUpperCase()}
+                      </div>
+                    </div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Global Stats */}
-          <div className="p-4">
-            <h4 className="font-medium mb-3 text-gray-300">Global Stats</h4>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-orange-500" />
-                  <span className="text-sm">Total Volume</span>
+          {/* Enhanced Global Stats */}
+          <div className="p-6">
+            <div className="flex items-center gap-2 mb-6">
+              <Target className="w-5 h-5 text-orange-500" />
+              <h4 className="font-semibold text-orange-400">Network Status</h4>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-orange-500" />
+                    <span className="text-sm text-gray-300">Total Volume</span>
+                  </div>
+                  <span className="font-mono text-lg font-bold text-orange-400">₿OS 847K</span>
                 </div>
-                <span className="font-mono text-sm">$47.2K</span>
+                <div className="text-xs text-gray-500">+24.5% from yesterday</div>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-500" />
-                  <span className="text-sm">Active Traders</span>
+              
+              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-blue-500" />
+                    <span className="text-sm text-gray-300">Active Nodes</span>
+                  </div>
+                  <span className="font-mono text-lg font-bold text-blue-400">12,847</span>
                 </div>
-                <span className="font-mono text-sm">1,247</span>
+                <div className="text-xs text-gray-500">Across 67 countries</div>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Gauge className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Network Load</span>
+              
+              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Gauge className="w-4 h-4 text-green-500" />
+                    <span className="text-sm text-gray-300">Network Load</span>
+                  </div>
+                  <span className="font-mono text-lg font-bold text-green-400">68%</span>
                 </div>
-                <span className="font-mono text-sm">68%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-yellow-500" />
-                  <span className="text-sm">Avg. Response</span>
+                <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                  <div className="bg-gradient-to-r from-green-500 to-yellow-500 h-2 rounded-full" style={{width: '68%'}}></div>
                 </div>
-                <span className="font-mono text-sm">12ms</span>
               </div>
+              
+              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Lightning className="w-4 h-4 text-yellow-500" />
+                    <span className="text-sm text-gray-300">Avg Response</span>
+                  </div>
+                  <span className="font-mono text-lg font-bold text-yellow-400">8ms</span>
+                </div>
+                <div className="text-xs text-gray-500">Ultra-low latency</div>
+              </div>
+            </div>
+            
+            {/* Market Health Indicator */}
+            <div className="mt-6 p-4 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/30 rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-green-400" />
+                <span className="text-sm font-medium text-green-400">Market Health: EXCELLENT</span>
+              </div>
+              <div className="text-xs text-gray-400">All systems operational • High liquidity • Fast execution</div>
             </div>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-          {/* Tabs */}
-          <div className="flex border-b border-gray-800 bg-gray-900/30">
+          {/* Enhanced Tabs */}
+          <div className="flex border-b border-orange-500/20 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm">
             {[
-              { id: 'trade', label: 'Trade', icon: TrendingUp },
-              { id: 'orders', label: 'Orders', icon: Clock },
-              { id: 'analytics', label: 'Analytics', icon: BarChart3 }
-            ].map(({ id, label, icon: Icon }) => (
+              { id: 'trade', label: 'Live Trading', icon: TrendingUp, color: 'orange' },
+              { id: 'orders', label: 'Order Book', icon: Layers, color: 'blue' },
+              { id: 'analytics', label: 'Market Data', icon: BarChart3, color: 'purple' }
+            ].map(({ id, label, icon: Icon, color }) => (
               <button
                 key={id}
+                type="button"
                 onClick={() => setActiveTab(id as any)}
-                className={`flex items-center gap-2 px-6 py-4 border-b-2 transition-colors ${
+                className={`flex items-center gap-3 px-8 py-5 border-b-2 transition-all duration-300 group relative ${
                   activeTab === id
-                    ? 'border-orange-500 text-orange-500 bg-orange-500/10'
-                    : 'border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50'
+                    ? `border-${color}-500 text-${color}-400 bg-${color}-500/10 shadow-lg`
+                    : 'border-transparent text-gray-400 hover:text-white hover:bg-gray-800/30 hover:border-gray-600'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {label}
+                <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
+                  activeTab === id ? `text-${color}-400` : ''
+                }`} />
+                <span className="font-medium">{label}</span>
+                {activeTab === id && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-yellow-500/5 rounded-t-lg" />
+                )}
               </button>
             ))}
+            
+            {/* Real-time indicator */}
+            <div className="ml-auto flex items-center gap-3 px-6">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-xs font-mono text-green-400">REAL-TIME</span>
+              </div>
+              <div className="text-xs text-gray-500">
+                Last update: {new Date().toLocaleTimeString()}
+              </div>
+            </div>
           </div>
 
           {/* Tab Content */}
