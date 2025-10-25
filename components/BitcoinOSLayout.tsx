@@ -138,7 +138,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         )}
         
         {/* Page content */}
-        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-0' : ''}`}>
+        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-0 pb-[80px]' : ''}`}>
           {children}
         </div>
         
@@ -167,6 +167,17 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         onClose={() => setShowSystemPreferences(false)}
       />
       
+      {/* Dock - always show on desktop when not during BIOS/boot */}
+      {!isMobile && shouldShowGlobalUI && (
+        <>
+          {dockStyle === 'minimal' ? (
+            <MinimalDock onOpenApp={openApp} />
+          ) : (
+            <Dock onOpenApp={openApp} />
+          )}
+        </>
+      )}
+
       {/* Modal backdrop */}
       {showLoginModal && (
         <div 
