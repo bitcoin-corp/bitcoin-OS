@@ -1,0 +1,298 @@
+[
+  {
+    "number": 47,
+    "title": "🟠 Implement MAIP (Multi-Authoring in Public) Foundation",
+    "body": "## Vision: Multi-Authoring in Public (MAIP)\nRevolutionary collaborative writing system where multiple authors work together in real-time on the blockchain, with every contribution tracked and rewarded through micropayments.\n\n## Current Foundation in Bitcoin Marketing\nBitcoin Marketing already has key components that make MAIP possible:\n\n### ✅ Existing Infrastructure\n- **Document Versioning**: Git-style version control with WorkTree visualization\n- **Blockchain Publishing**: Documents stored on BSV blockchain\n- **User Authentication**: HandCash integration for payments\n- **Real-time Editing**: Document editor with auto-save\n- **Content Tracking**: Word/character counts, edit history\n\n### ✅ Recent Enhancements  \n- **Document Persistence**: Users can access published documents across sessions\n- **Protocol Integration**: Foundation for B://, D://, Bcat protocols\n- **Version Management**: HEAD pointers and checkout functionality\n\n## MAIP Implementation Plan\n\n### Phase 1: Collaborative Infrastructure (Week 1-2)\n**Goal**: Enable multiple authors to work on the same document\n\n#### Technical Components:\n```typescript\ninterface MAIPDocument {\n  id: string;\n  title: string;\n  collaborators: string[];\n  permissions: CollaboratorPermissions;\n  bountyPool: number; // BSV satoshis\n  contributionTracking: ContributionEntry[];\n}\n\ninterface ContributionEntry {\n  author: string;\n  timestamp: string;\n  changeType: 'addition' | 'deletion' | 'modification';\n  content: string;\n  valueScore: number; // AI-calculated contribution value\n  payment: number; // BSV satoshis earned\n}\n```\n\n#### Features:\n- Document invitation system via D:// URLs\n- Real-time collaborative editing (operational transforms)\n- Contribution tracking per character/word\n- Initial bounty pool setup by document creator\n\n### Phase 2: Value Attribution System (Week 3-4)\n**Goal**: AI-powered assessment of contribution value\n\n#### AI Valuation Engine:\n- **Quality Metrics**: Grammar improvements, clarity, factual accuracy\n- **Originality**: New content vs. edits vs. deletions\n- **Impact**: Readability improvements, structural enhancements\n- **Peer Review**: Other collaborators can rate contributions\n\n#### Smart Contracts:\n```typescript\nclass MAIPContract {\n  async trackContribution(author: string, changes: DocumentChange[]): Promise<number>\n  async calculateValue(contribution: ContributionEntry): Promise<number>\n  async distributeBounty(contributions: ContributionEntry[]): Promise<PaymentResult[]>\n}\n```\n\n### Phase 3: Real-time Economy (Week 5-6)\n**Goal**: Instant micropayments for valuable contributions\n\n#### Payment System:\n- Automatic BSV micropayments for each contribution\n- Reader payments flowing to all contributors proportionally\n- Quality bonuses for high-value additions\n- Reputation staking system\n\n#### Economics:\n```typescript\ninterface MAIPEconomics {\n  initiationBounty: number; // Creator stakes BSV to attract contributors\n  readerPayments: number; // Per-read micropayments\n  qualityMultipliers: { [key: string]: number }; // Bonus for excellent work\n  reputationStaking: number; // Authors stake reputation tokens\n}\n```\n\n### Phase 4: Public Collaboration (Week 7-8)  \n**Goal**: Open documents that anyone can improve\n\n#### Public Document Types:\n- **Academic Papers**: Researchers collaborate globally with peer review\n- **News Articles**: Journalists add facts/perspectives from different regions\n- **Technical Docs**: Developers improve documentation together\n- **Creative Writing**: Stories evolving through collective imagination\n\n#### Discovery & Sharing:\n- Public document directory\n- Tag-based categorization\n- Contribution leaderboards\n- Quality-based ranking\n\n## Integration with Existing Bitcoin Marketing\n\n### DocumentEditor Enhancements\n```typescript\n// Add collaboration features\nconst [collaborators, setCollaborators] = useState<string[]>([]);\nconst [contributionMode, setContributionMode] = useState<'solo' | 'maip'>('solo');\nconst [realtimeEdits, setRealtimeEdits] = useState<EditEvent[]>([]);\n\n// Track contributions in real-time\nconst trackContribution = (changes: DocumentChange[]) => {\n  changes.forEach(change => {\n    const contribution: ContributionEntry = {\n      author: currentUser.handle,\n      timestamp: new Date().toISOString(),\n      changeType: detectChangeType(change),\n      content: change.text,\n      valueScore: 0, // To be calculated by AI\n      payment: 0 // To be distributed from bounty pool\n    };\n    \n    maipService.trackContribution(contribution);\n  });\n};\n```\n\n### DocumentSidebar MAIP Indicators\n- 👥 Show collaborative documents\n- 💰 Display bounty pools and earnings\n- 📊 Contribution statistics per document\n- 🏆 Reputation scores\n\n### Version Control Integration\n- MAIP documents use git-style branching\n- Contributors work on feature branches\n- Merge conflicts resolved through voting\n- All contributions preserved in blockchain history\n\n## Technical Architecture\n\n### Backend Services\n```typescript\nclass MAIPService {\n  async createCollaborativeDocument(bounty: number): Promise<MAIPDocument>\n  async inviteCollaborator(docId: string, userHandle: string): Promise<void>\n  async trackRealTimeEdits(docId: string, edits: EditEvent[]): Promise<void>\n  async calculateContributionValue(contribution: ContributionEntry): Promise<number>\n  async distributeBountyPayments(docId: string): Promise<PaymentResult[]>\n}\n\nclass RealtimeCollaboration {\n  async syncEdits(docId: string, operation: Operation): Promise<void>\n  async resolveConflicts(conflicts: Conflict[]): Promise<Resolution>\n  async broadcastChanges(docId: string, changes: DocumentChange[]): Promise<void>\n}\n```\n\n### Blockchain Integration\n- Document state stored using D:// protocol (mutable references)\n- Individual contributions stored as B:// transactions\n- Payment history immutable on blockchain\n- Reputation system using blockchain-based tokens\n\n## Revolutionary Use Cases\n\n### Academic Research\n- Global collaboration on research papers\n- Real-time peer review with compensation\n- Citation tracking and credit attribution\n- Multi-institutional authorship\n\n### Journalism\n- Breaking news with multiple correspondents\n- Fact-checking crowdsourcing\n- Regional perspective integration\n- Real-time corrections and updates\n\n### Open Source Documentation\n- Developer documentation improvement\n- Tutorial creation and enhancement\n- Code example contributions\n- Multi-language translations\n\n### Creative Collaboration\n- Collaborative storytelling\n- Screenplay development\n- Poetry and artistic writing\n- Community-driven content\n\n## Success Metrics\n- ✅ Real-time collaborative editing working\n- ✅ AI contribution valuation accuracy >80%\n- ✅ Micropayment distribution <1 second latency\n- ✅ 100+ active collaborative documents\n- ✅ Average contributor earnings >$5/month\n- ✅ Academic institution partnerships\n\n## Timeline & Phases\n- **Phase 1** (Weeks 1-2): Collaborative infrastructure\n- **Phase 2** (Weeks 3-4): AI valuation system  \n- **Phase 3** (Weeks 5-6): Payment automation\n- **Phase 4** (Weeks 7-8): Public collaboration launch\n\n**Priority**: 🟠 High (Revolutionary feature)  \n**Bounty**: 0.8% (Paradigm shift in collaborative writing)  \n**Dependencies**: Enhanced document persistence, BSV protocol integration\n\n---\n*MAIP transforms Bitcoin Marketing from a document editor into a collaborative knowledge creation platform, creating new economic models for content creation.*",
+    "created_at": "2025-10-08T10:14:58Z",
+    "labels": []
+  },
+  {
+    "number": 45,
+    "title": "🔴 Enhance Document Persistence - Users Cannot Access Published Documents on Re-login",
+    "body": "## Problem Statement\nCurrently, users cannot see their published documents when they log back into Bitcoin Marketing. Published documents are not persisted in a way that allows retrieval across sessions.\n\n## Current Behavior\n- ✅ Documents saved locally work fine\n- ❌ Documents published to blockchain disappear on re-login\n- ❌ No document library showing blockchain documents\n- ❌ Cross-device access not possible\n\n## Expected Behavior\n- Users should see all their documents (local + blockchain) on login\n- Documents should persist across devices\n- Clear indicators showing storage location (local vs blockchain)\n\n## Implementation Status\n**✅ COMPLETED** - Enhanced document retrieval system implemented:\n\n### Changes Made:\n1. **Enhanced `BlockchainDocumentService.getDocuments()`**:\n   - Now loads from multiple sources (metadata + published docs)\n   - Merges and deduplicates documents\n   - Sorts by updated date\n\n2. **Added `storePublishedDocument()` method**:\n   - Persists documents across sessions\n   - Stores decrypted content for easy access\n   - Prevents storage bloat (max 100 docs)\n\n3. **Auto-sync on login**:\n   - `syncUserDocuments()` called on service initialization\n   - Emits sync events for UI updates\n   - Future-ready for blockchain querying\n\n4. **Enhanced UI indicators**:\n   - Updated storage icons (⛓️ blockchain, 💾 local, 🔗 hashed)\n   - DocumentSidebar listens for sync events\n   - Better visual distinction between sources\n\n## Technical Details\n- Documents stored in `published_docs_${userHandle}` localStorage key\n- Automatic persistence when publishing via `storePublishedDocument()`\n- Backwards compatible with existing documents\n- Ready for future D:// protocol integration\n\n## Testing\n- [x] Publish document → logout → login → document still visible\n- [x] Multiple documents persist correctly\n- [x] Icons show correct storage method\n- [x] Sync events trigger UI refresh\n\n## Next Steps\n1. Add blockchain querying (D:// protocol) for true decentralization\n2. Implement cross-device sync via blockchain indexing\n3. Add conflict resolution for local vs blockchain versions\n\n**Priority**: 🔴 Critical (Core functionality)  \n**Bounty**: 0.3% (High impact on user experience)\n\n---\n*This resolves the core issue preventing users from accessing their published work.*",
+    "created_at": "2025-10-08T10:13:45Z",
+    "labels": []
+  },
+  {
+    "number": 44,
+    "title": "Replace deprecated execCommand with modern alternatives",
+    "body": "## 📋 Description\nThe document.execCommand API is deprecated and will be removed from browsers. We need to replace all instances with modern ContentEditable APIs or custom implementations to ensure long-term compatibility.\n\n## 🎯 Requirements\n- Audit all execCommand usage in the codebase\n- Research modern alternatives for each command\n- Implement custom formatting functions\n- Ensure cross-browser compatibility\n- Update all formatting toolbar buttons\n- Maintain undo/redo functionality\n- Add comprehensive tests for all formatting operations\n\n## ✅ Acceptance Criteria\n- [ ] All execCommand calls are removed from codebase\n- [ ] Bold, italic, underline formatting works correctly\n- [ ] List creation (ordered/unordered) functions properly\n- [ ] Text alignment options work\n- [ ] Undo/redo functionality maintained\n- [ ] Copy/paste works properly\n- [ ] Browser compatibility verified (Chrome, Firefox, Safari, Edge)\n- [ ] Performance is equal or better than before\n- [ ] All existing tests pass\n- [ ] New tests added for refactored code\n\n## 📁 Files to Modify\n- `src/components/DocumentEditor.tsx` (multiple instances)\n- `src/utils/editorCommands.ts` (if exists)\n- Create: `src/utils/modernEditorAPI.ts`\n- Create: `src/utils/editorFormatting.ts`\n- Update all formatting-related components\n\n## 💰 Contract Details\n- **Priority:** High\n- **Estimated Hours:** 12\n- **Token Reward:** 4,000 BWRITER\n- **Category:** Technical Debt\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This is a critical technical debt item\n- Requires deep understanding of ContentEditable API\n- Must maintain backward compatibility\n- Performance testing required\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*",
+    "created_at": "2025-09-22T00:10:22Z",
+    "labels": [
+      "enhancement",
+      "help wanted"
+    ]
+  },
+  {
+    "number": 43,
+    "title": "Implement Google Drive OAuth Integration",
+    "body": "## 📋 Description\nEnable users to save and load documents directly from their Google Drive, providing seamless cloud storage integration alongside blockchain storage.\n\n## 🎯 Requirements\n- Set up Google Cloud Console project and obtain OAuth credentials\n- Implement OAuth 2.0 authentication flow\n- Integrate Google Drive API v3\n- Create file picker UI component\n- Implement save to Drive functionality\n- Implement load from Drive functionality\n- Handle permission scopes properly\n- Add sync status indicators\n\n## ✅ Acceptance Criteria\n- [ ] OAuth login flow completes successfully\n- [ ] Google Drive files are listed in picker UI\n- [ ] Documents save to user's Drive with proper metadata\n- [ ] Documents load from Drive into editor\n- [ ] File permissions are handled correctly\n- [ ] Sync status shows for Drive documents\n- [ ] Token refresh works for long sessions\n- [ ] Logout properly revokes access\n\n## 📁 Files to Modify\n- `src/components/SaveToBlockchainModal.tsx` (line 379)\n- Create: `src/services/GoogleDriveService.ts`\n- Create: `src/components/GoogleDrivePicker.tsx`\n- Create: `src/components/GoogleAuthButton.tsx`\n- Update: `src/App.tsx` for auth state management\n\n## 💰 Contract Details\n- **Priority:** High\n- **Estimated Hours:** 16\n- **Token Reward:** 5,000 BWRITER\n- **Category:** Integration\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- Requires Google Cloud Console setup knowledge\n- Must follow Google's OAuth best practices\n- Token storage must be secure\n- Rate limiting must be handled\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*",
+    "created_at": "2025-09-22T00:10:20Z",
+    "labels": [
+      "enhancement"
+    ]
+  },
+  {
+    "number": 41,
+    "title": "Implement Token Distribution System",
+    "body": "## 📋 Description\nAdd the ability to export documents as PDF files with proper formatting, images, and metadata preservation.\n\n## 🎯 Requirements\n- Research and integrate PDF generation library (e.g., jsPDF, PDFKit)\n- Preserve document formatting and styles\n- Include images and media in PDF\n- Add document metadata to PDF\n- Implement download functionality\n- Support different page sizes and orientations\n\n## ✅ Acceptance Criteria\n- [ ] Export to PDF button works in toolbar\n- [ ] PDFs maintain document formatting\n- [ ] Images are embedded correctly\n- [ ] PDF metadata includes title, author, date\n- [ ] Different page sizes supported (A4, Letter, etc.)\n- [ ] Download works across all browsers\n- [ ] Large documents export without timeout\n\n## 📁 Files to Modify\n- `src/components/CleanTaskbar.tsx` (line 94)\n- Create: `src/services/PDFExportService.ts`\n- Create: `src/components/ExportOptionsModal.tsx`\n- Update: `src/components/DocumentEditor.tsx`\n\n## 💰 Contract Details\n- **Priority:** High\n- **Estimated Hours:** 12\n- **Token Reward:** 4,000 BWRITER\n- **Category:** Export Feature\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue (#41)\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This contract will expire if not completed within the deadline\n- Code must pass all tests and linting\n- Documentation must be updated where applicable\n- Follow the project's coding standards\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*\n",
+    "created_at": "2025-09-21T23:58:12Z",
+    "labels": [
+      "enhancement"
+    ]
+  },
+  {
+    "number": 40,
+    "title": "Implement Export to PDF",
+    "body": "## 📋 Description\nImplement real HandCash cryptographic signature verification to secure contract claims and transactions. Currently using mock signatures which is a security risk.\n\n## 🎯 Requirements\n- Integrate HandCash SDK for signature creation\n- Implement signature verification on claims\n- Add signature validation for transactions\n- Create audit trail of signed operations\n- Implement signature expiry/replay protection\n\n## ✅ Acceptance Criteria\n- [ ] HandCash wallet can sign contract claims\n- [ ] Signatures are cryptographically verified\n- [ ] Invalid signatures are rejected with clear error\n- [ ] Signature includes timestamp and nonce\n- [ ] All signed operations are logged for audit\n- [ ] Replay attacks are prevented\n- [ ] Integration tests cover signature flows\n\n## 📁 Files to Modify\n- `src/services/TaskContractService.ts` (line 177)\n- `src/components/TaskClaimModal.tsx` (line 122)\n- Create: `src/services/HandCashSignatureService.ts`\n- Update: `src/pages/ContractsPage.tsx`\n\n## 💰 Contract Details\n- **Priority:** Critical\n- **Estimated Hours:** 16\n- **Token Reward:** 8,000 BWRITER\n- **Category:** Security\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue (#40)\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This contract will expire if not completed within the deadline\n- Code must pass all tests and linting\n- Documentation must be updated where applicable\n- Follow the project's coding standards\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*\n",
+    "created_at": "2025-09-21T23:58:11Z",
+    "labels": [
+      "enhancement"
+    ]
+  },
+  {
+    "number": 39,
+    "title": "Integrate Micro-Ordinals for Document Inscription",
+    "body": "## 📋 Description\nReplace the current placeholder inscription system with actual micro-ordinals implementation. This will enable permanent, immutable document storage on the BSV blockchain using the ordinals protocol.\n\n## 🎯 Requirements\n- Research and understand micro-ordinals protocol specification\n- Integrate micro-ordinals library/SDK\n- Implement inscription creation for documents\n- Handle inscription retrieval by ordinal ID\n- Calculate and display inscription fees\n- Implement inscription verification\n- Add inscription explorer links\n\n## ✅ Acceptance Criteria\n- [ ] Documents are inscribed using actual micro-ordinals protocol\n- [ ] Each inscription has a unique ordinal ID\n- [ ] Inscriptions can be retrieved and verified on-chain\n- [ ] Gas fees are calculated accurately before inscription\n- [ ] Inscription status updates in real-time\n- [ ] Explorer links work for viewing inscriptions\n- [ ] Error handling for failed inscriptions\n- [ ] Inscription metadata is stored correctly\n\n## 📁 Files to Modify\n- `src/services/DocumentInscriptionService.ts` (lines 83, 225, 282)\n- `src/pages/BMarketingContributionsPage.tsx` (line 94)\n- Create: `src/services/MicroOrdinalsService.ts`\n- Update: `src/components/SaveToBlockchainModal.tsx`\n\n## 💰 Contract Details\n- **Priority:** Critical\n- **Estimated Hours:** 24\n- **Token Reward:** 10,000 BWRITER\n- **Category:** Blockchain\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue (#39)\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This contract will expire if not completed within the deadline\n- Code must pass all tests and linting\n- Documentation must be updated where applicable\n- Follow the project's coding standards\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*\n",
+    "created_at": "2025-09-21T23:58:08Z",
+    "labels": [
+      "enhancement",
+      "help wanted"
+    ]
+  },
+  {
+    "number": 38,
+    "title": "Implement Save As Functionality",
+    "body": "## 📋 Description\nThe 'Save As' feature allows users to save documents with a new name while preserving the original. This is essential for creating document copies and versions.\n\n## 🎯 Requirements\n- Create Save As dialog with name input\n- Generate new transaction for the copy\n- Preserve all document metadata\n- Update document list with new copy\n- Handle naming conflicts\n\n## ✅ Acceptance Criteria\n- [ ] Save As dialog appears with current document name\n- [ ] User can enter a new document name\n- [ ] Original document remains unchanged\n- [ ] New document is saved to blockchain with new transaction\n- [ ] Success notification shows transaction ID\n- [ ] Document list updates to show both documents\n\n## 📁 Files to Modify\n- `src/App.tsx` (line 349)\n- `src/components/SaveToBlockchainModal.tsx`\n- `src/services/BlockchainDocumentService.ts`\n\n## 💰 Contract Details\n- **Priority:** High\n- **Estimated Hours:** 8\n- **Token Reward:** 3,000 BWRITER\n- **Category:** Core Feature\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue (#38)\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This contract will expire if not completed within the deadline\n- Code must pass all tests and linting\n- Documentation must be updated where applicable\n- Follow the project's coding standards\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*\n",
+    "created_at": "2025-09-21T23:58:07Z",
+    "labels": [
+      "enhancement"
+    ]
+  },
+  {
+    "number": 37,
+    "title": "Implement Open Document from Blockchain",
+    "body": "## 📋 Description\nCurrently, the 'Open' functionality in the File menu shows a 'Coming soon' alert. We need to implement the ability to open documents stored on the BSV blockchain. This includes loading documents by transaction ID, handling encryption, and supporting various document formats.\n\n## 🎯 Requirements\n- Implement document browser for blockchain-stored documents\n- Create transaction ID input/search functionality  \n- Add document preview before opening\n- Handle encrypted document decryption\n- Support multiple document formats (text, markdown, rich text)\n- Implement proper loading states and error handling\n\n## ✅ Acceptance Criteria\n- [ ] User can browse all their blockchain documents\n- [ ] Search by transaction ID works correctly\n- [ ] Document preview shows metadata (title, size, date, encryption status)\n- [ ] Encrypted documents prompt for decryption key\n- [ ] Documents load correctly in the editor\n- [ ] Loading spinners and error messages display appropriately\n- [ ] Recent documents list is updated\n\n## 📁 Files to Modify\n- `src/App.tsx` (line 335)\n- `src/services/BlockchainDocumentService.ts`\n- Create new component: `src/components/OpenDocumentModal.tsx`\n- Update: `src/components/DocumentEditor.tsx`\n\n## 💰 Contract Details\n- **Priority:** High\n- **Estimated Hours:** 16\n- **Token Reward:** 5,000 BWRITER\n- **Category:** Core Feature\n\n## 🚀 How to Claim This Contract\n1. Visit [Contracts Page](https://bitcoin-marketing.vercel.app/contracts)\n2. Click \"Claim Contract\" on this issue\n3. Sign in with your GitHub account\n4. Provide your HandCash wallet handle\n5. Complete the work within your agreed deadline\n6. Submit a PR referencing this issue (#37)\n7. Get your PR merged to receive tokens\n\n## 💬 Discussion\n- Comment on this issue for clarifications\n- Join our [Discord](https://discord.gg/bitcoinwriter) for real-time discussion\n- Tag @bitcoin-marketing-team for urgent questions\n\n## 📌 Important Notes\n- This contract will expire if not completed within the deadline\n- Code must pass all tests and linting\n- Documentation must be updated where applicable\n- Follow the project's coding standards\n\n---\n*This is a Bitcoin Marketing development contract. By claiming this issue, you agree to the terms outlined in our [Contributor Agreement](https://bitcoin-marketing.vercel.app/docs/contributing).*\n",
+    "created_at": "2025-09-21T23:57:20Z",
+    "labels": [
+      "enhancement"
+    ]
+  },
+  {
+    "number": 36,
+    "title": "🟡 Two-Factor Authentication - 0.15% Bounty",
+    "body": "## Description\\nAdd 2FA support for enhanced account security\\n\\n## Token Reward\\n🪙 **0.15% of  tokens** (1,500,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🔒 Security\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #36",
+    "created_at": "2025-09-21T10:40:04Z",
+    "labels": []
+  },
+  {
+    "number": 35,
+    "title": "🟠 Security Audit - 0.2% Bounty",
+    "body": "## Description\\nConduct comprehensive security audit and implement recommendations\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n🔒 Security\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #35",
+    "created_at": "2025-09-21T10:40:02Z",
+    "labels": []
+  },
+  {
+    "number": 34,
+    "title": "🟡 Unit Test Coverage - 0.125% Bounty",
+    "body": "## Description\\nAchieve 80% unit test coverage with Jest and React Testing Library\\n\\n## Token Reward\\n🪙 **0.125% of  tokens** (1,250,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🧪 Testing\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #34",
+    "created_at": "2025-09-21T10:39:59Z",
+    "labels": []
+  },
+  {
+    "number": 33,
+    "title": "🟡 End-to-End Testing Suite - 0.15% Bounty",
+    "body": "## Description\\nImplement Cypress E2E tests for critical user flows\\n\\n## Token Reward\\n🪙 **0.15% of  tokens** (1,500,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🧪 Testing\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #33",
+    "created_at": "2025-09-21T10:39:56Z",
+    "labels": []
+  },
+  {
+    "number": 32,
+    "title": "🟡 API Documentation - 0.1% Bounty",
+    "body": "## Description\\nWrite comprehensive API documentation with OpenAPI spec and SDK guides\\n\\n## Token Reward\\n🪙 **0.1% of  tokens** (1,000,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n📚 Documentation\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #32",
+    "created_at": "2025-09-21T10:39:53Z",
+    "labels": []
+  },
+  {
+    "number": 31,
+    "title": "🟡 Version Control UI - 0.175% Bounty",
+    "body": "## Description\\nBuild UI for document version history, diffs, and rollback functionality\\n\\n## Token Reward\\n🪙 **0.175% of  tokens** (1,750,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🎨 UI/UX\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #31",
+    "created_at": "2025-09-21T10:39:50Z",
+    "labels": []
+  },
+  {
+    "number": 30,
+    "title": "🟠 E-Signature Integration - 0.225% Bounty",
+    "body": "## Description\\nAdd legally binding e-signature functionality with blockchain verification\\n\\n## Token Reward\\n🪙 **0.225% of  tokens** (2,250,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n⛓️ Blockchain\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #30",
+    "created_at": "2025-09-21T10:39:47Z",
+    "labels": []
+  },
+  {
+    "number": 29,
+    "title": "🟡 Voice Dictation & Commands - 0.15% Bounty",
+    "body": "## Description\\nImplement voice-to-text and voice commands using Web Speech API\\n\\n## Token Reward\\n🪙 **0.15% of  tokens** (1,500,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n✨ Features\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #29",
+    "created_at": "2025-09-21T10:39:45Z",
+    "labels": []
+  },
+  {
+    "number": 28,
+    "title": "🟡 Accessibility Improvements - 0.15% Bounty",
+    "body": "## Description\\nEnsure WCAG 2.1 AA compliance, screen reader support, keyboard navigation\\n\\n## Token Reward\\n🪙 **0.15% of  tokens** (1,500,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🎨 UI/UX\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #28",
+    "created_at": "2025-09-21T10:39:42Z",
+    "labels": []
+  },
+  {
+    "number": 27,
+    "title": "🟡 Multi-language Support (i18n) - 0.125% Bounty",
+    "body": "## Description\\nImplement internationalization for UI in Spanish, Chinese, Japanese, French, German\\n\\n## Token Reward\\n🪙 **0.125% of  tokens** (1,250,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🎨 UI/UX\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #27",
+    "created_at": "2025-09-21T10:39:39Z",
+    "labels": []
+  },
+  {
+    "number": 26,
+    "title": "🟢 Writing Analytics - 0.1% Bounty",
+    "body": "## Description\\nTrack writing productivity, word count goals, and writing streaks\\n\\n## Token Reward\\n🪙 **0.1% of  tokens** (1,000,000 tokens)\\n\\n## Difficulty\\n🟢 **Easy**\\n\\n## Category\\n📊 Analytics\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #26",
+    "created_at": "2025-09-21T10:39:36Z",
+    "labels": []
+  },
+  {
+    "number": 25,
+    "title": "🟡 Document Analytics Dashboard - 0.125% Bounty",
+    "body": "## Description\\nAdd analytics for document views, shares, earnings, and reader engagement\\n\\n## Token Reward\\n🪙 **0.125% of  tokens** (1,250,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n📊 Analytics\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #25",
+    "created_at": "2025-09-21T10:39:33Z",
+    "labels": []
+  },
+  {
+    "number": 24,
+    "title": "🔴 Smart Contract Templates - 0.25% Bounty",
+    "body": "## Description\\nCreate reusable smart contract templates for document agreements and escrow\\n\\n## Token Reward\\n🪙 **0.25% of  tokens** (2,500,000 tokens)\\n\\n## Difficulty\\n🔴 **Expert**\\n\\n## Category\\n⛓️ Blockchain\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #24",
+    "created_at": "2025-09-21T10:39:30Z",
+    "labels": []
+  },
+  {
+    "number": 23,
+    "title": "🟡 Document Template Library - 0.125% Bounty",
+    "body": "## Description\\nCreate template library for contracts, letters, resumes, invoices, and more\\n\\n## Token Reward\\n🪙 **0.125% of  tokens** (1,250,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n✨ Features\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #23",
+    "created_at": "2025-09-21T10:39:27Z",
+    "labels": []
+  },
+  {
+    "number": 22,
+    "title": "🟠 Browser Extension - 0.2% Bounty",
+    "body": "## Description\\nBuild Chrome/Firefox extension for quick document creation and web clipping\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n🔌 Extensions\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #22",
+    "created_at": "2025-09-21T10:39:24Z",
+    "labels": []
+  },
+  {
+    "number": 21,
+    "title": "🔴 React Native Mobile App - 0.4% Bounty",
+    "body": "## Description\\nBuild React Native mobile app for iOS and Android with full feature parity\\n\\n## Token Reward\\n🪙 **0.4% of  tokens** (4,000,000 tokens)\\n\\n## Difficulty\\n🔴 **Expert**\\n\\n## Category\\n📱 Mobile\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #21",
+    "created_at": "2025-09-21T10:39:21Z",
+    "labels": []
+  },
+  {
+    "number": 20,
+    "title": "🟠 MS Word Import/Export - 0.2% Bounty",
+    "body": "## Description\\nAdd support for .docx file import and export with formatting preservation\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n✨ Features\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #20",
+    "created_at": "2025-09-21T10:39:18Z",
+    "labels": []
+  },
+  {
+    "number": 19,
+    "title": "🟡 PDF Import/Export - 0.15% Bounty",
+    "body": "## Description\\nEnable users to import PDF documents for editing and export as PDF\\n\\n## Token Reward\\n🪙 **0.15% of  tokens** (1,500,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n✨ Features\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #19",
+    "created_at": "2025-09-21T10:39:15Z",
+    "labels": []
+  },
+  {
+    "number": 17,
+    "title": "🟠 Optimize Performance - 0.175% Bounty",
+    "body": "## Description\\nImprove document loading times, reduce bundle size by 30%, implement code splitting\\n\\n## Token Reward\\n🪙 **0.175% of  tokens** (1,750,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n⚡ Performance\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #17",
+    "created_at": "2025-09-21T10:39:09Z",
+    "labels": []
+  },
+  {
+    "number": 16,
+    "title": "🟠 IPFS Storage Integration - 0.2% Bounty",
+    "body": "## Description\\nAdd IPFS as an alternative storage backend for documents, with pinning service integration\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n💾 Storage\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #16",
+    "created_at": "2025-09-21T10:39:06Z",
+    "labels": []
+  },
+  {
+    "number": 15,
+    "title": "🟡 Comment & Review System - 0.2% Bounty",
+    "body": "## Description\\nImplement commenting, suggestions, and review workflow for documents\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n👥 Collaboration\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #15",
+    "created_at": "2025-09-21T10:39:03Z",
+    "labels": []
+  },
+  {
+    "number": 14,
+    "title": "🔴 Real-time Collaborative Editing - 0.35% Bounty",
+    "body": "## Description\\nAdd real-time collaborative editing using WebRTC and CRDTs for multiple users\\n\\n## Token Reward\\n🪙 **0.35% of  tokens** (3,500,000 tokens)\\n\\n## Difficulty\\n🔴 **Expert**\\n\\n## Category\\n👥 Collaboration\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #14",
+    "created_at": "2025-09-21T10:39:00Z",
+    "labels": []
+  },
+  {
+    "number": 13,
+    "title": "🟠 AI Model Fine-tuning - 0.25% Bounty",
+    "body": "## Description\\nFine-tune language models for specific writing tasks and document types\\n\\n## Token Reward\\n🪙 **0.25% of  tokens** (2,500,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n🤖 AI\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #13",
+    "created_at": "2025-09-21T10:38:58Z",
+    "labels": []
+  },
+  {
+    "number": 12,
+    "title": "🟡 Enhance AI Assistant - 0.2% Bounty",
+    "body": "## Description\\nImprove AI chat with document context awareness, auto-suggestions, and writing style learning\\n\\n## Token Reward\\n🪙 **0.2% of  tokens** (2,000,000 tokens)\\n\\n## Difficulty\\n🟡 **Medium**\\n\\n## Category\\n🤖 AI\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #12",
+    "created_at": "2025-09-21T10:38:55Z",
+    "labels": []
+  },
+  {
+    "number": 11,
+    "title": "🟠 Document NFT Marketplace - 0.3% Bounty",
+    "body": "## Description\\nCreate marketplace for buying/selling document NFTs with royalty distribution\\n\\n## Token Reward\\n🪙 **0.3% of  tokens** (3,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n🛍️ Marketplace\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #11",
+    "created_at": "2025-09-21T10:38:52Z",
+    "labels": []
+  },
+  {
+    "number": 10,
+    "title": "🔴 Bitcoin Marketing Exchange - 0.5% Bounty",
+    "body": "## Description\\nBuild decentralized exchange for trading document shares and NFTs with order book and liquidity pools\\n\\n## Token Reward\\n🪙 **0.5% of  tokens** (5,000,000 tokens)\\n\\n## Difficulty\\n🔴 **Expert**\\n\\n## Category\\n💱 Exchange\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #10",
+    "created_at": "2025-09-21T10:38:49Z",
+    "labels": []
+  },
+  {
+    "number": 9,
+    "title": "🟢 Real BSV Price Feed Integration - 0.1% Bounty",
+    "body": "## Description\\nReplace mock pricing (currently returns 0) with CoinGecko or similar API for real-time BSV/USD rates\\n\\n## Token Reward\\n🪙 **0.1% of  tokens** (1,000,000 tokens)\\n\\n## Difficulty\\n🟢 **Easy**\\n\\n## Category\\n📌 Integration\\n\\n## Code References\\n- src/utils/pricingCalculator.ts:88 (TODO: Fetch from a real API)\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #9",
+    "created_at": "2025-09-21T10:38:45Z",
+    "labels": []
+  },
+  {
+    "number": 8,
+    "title": "🟠 Document Tokenization Logic - 0.25% Bounty",
+    "body": "## Description\\nImplement actual tokenization logic in DocumentEditor.tsx to create tradeable document shares\\n\\n## Token Reward\\n🪙 **0.25% of  tokens** (2,500,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n💰 Monetization\\n\\n## Code References\\n- src/components/DocumentEditor.tsx:554 (TODO: Implement actual tokenization logic)\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #8",
+    "created_at": "2025-09-21T10:38:43Z",
+    "labels": []
+  },
+  {
+    "number": 7,
+    "title": "🟠 Paywall System Implementation - 0.3% Bounty",
+    "body": "## Description\\nCreate paywall functionality for monetizing documents with BSV micropayments. Enable creators to earn from their content.\\n\\n## Token Reward\\n🪙 **0.3% of  tokens** (3,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n💰 Monetization\\n\\n## Code References\\n- src/App.tsx:355 (TODO: Implement Paywall)\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #7",
+    "created_at": "2025-09-21T10:38:40Z",
+    "labels": []
+  },
+  {
+    "number": 4,
+    "title": "🟠 Share Token Creation System - 0.3% Bounty",
+    "body": "## Description\\nImplement document share tokens as separate inscriptions for granular access control and monetization\\n\\n## Token Reward\\n🪙 **0.3% of  tokens** (3,000,000 tokens)\\n\\n## Difficulty\\n🟠 **Hard**\\n\\n## Category\\n⛓️ Blockchain\\n\\n\\n## Requirements\\n- Fork the repository\\n- Implement the feature following best practices\\n- Include tests where applicable\\n- Update documentation\\n- Submit a pull request\\n\\n## How to Claim This Task\\n1. Click \"Claim Task\" on https://bitcoin-marketing.vercel.app/contributions#tasks\\n2. Sign in with GitHub OAuth\\n3. Sign the smart contract with your HandCash wallet\\n4. Complete the work within the deadline\\n5. Submit PR and get it merged\\n6. Receive tokens automatically\\n\\n## Discussion\\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj\\n\\n## Issue ID\\nTask #4",
+    "created_at": "2025-09-21T10:38:31Z",
+    "labels": []
+  },
+  {
+    "number": 1,
+    "title": "🔴 [CRITICAL] Implement Micro-Ordinals Inscription - 0.5% Bounty",
+    "body": "## Description\nReplace mock inscription with actual micro-ordinals implementation for document storage on BSV blockchain. Currently using localStorage as a placeholder.\n\n## Current State\n- Documents are stored in localStorage (mock implementation)\n- DocumentInscriptionService.ts has TODO comments for actual inscription\n- No real blockchain transactions occurring\n\n## Requirements\n- Implement actual micro-ordinals inscription logic\n- Connect to BSV network\n- Handle transaction fees\n- Store inscription IDs for retrieval\n\n## Token Reward\n🪙 **0.5% of  tokens** (5,000,000 tokens)\n\n## Difficulty\n🔴 **Expert**\n\n## Category\n⛓️ Blockchain Infrastructure\n\n## References\n- File: src/services/DocumentInscriptionService.ts:83 (TODO comment)\n\n## How to Claim\n1. Fork the repository\n2. Implement the feature\n3. Submit a pull request\n4. Once merged, tokens will be allocated\n\n## Discussion\nJoin our Discord for technical discussion: https://discord.gg/xBB8r8dj",
+    "created_at": "2025-09-21T10:33:33Z",
+    "labels": []
+  }
+]

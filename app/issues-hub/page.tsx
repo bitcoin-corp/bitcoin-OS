@@ -10,7 +10,8 @@ import {
   AlertCircle,
   CheckCircle2,
   GitPullRequest,
-  Package
+  Package,
+  Scale
 } from 'lucide-react';
 import './issues-hub.css';
 
@@ -239,6 +240,14 @@ export default function IssuesHubPage() {
                 <p>Help us build by contributing to open issues</p>
               </div>
             </div>
+            
+            <Link href="/licensing-strategy" className="action-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Scale size={20} className="icon primary" />
+              <div>
+                <h4>Licensing Strategy</h4>
+                <p>Understand our AGPL licensing and CLA requirements</p>
+              </div>
+            </Link>
           </div>
         </div>
 
