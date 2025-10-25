@@ -171,9 +171,9 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
       {!isMobile && shouldShowGlobalUI && (
         <>
           {dockStyle === 'minimal' ? (
-            <MinimalDock onOpenApp={openApp} />
+            <MinimalDock />
           ) : (
-            <Dock onOpenApp={openApp} />
+            <Dock />
           )}
         </>
       )}
