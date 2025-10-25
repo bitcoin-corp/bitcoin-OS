@@ -11,7 +11,8 @@ import {
   CheckCircle2,
   GitPullRequest,
   Package,
-  Scale
+  Scale,
+  Target
 } from 'lucide-react';
 import './issues-hub.css';
 
@@ -79,6 +80,14 @@ export default function IssuesHubPage() {
         <div className="quick-actions">
           <h3>Quick Actions</h3>
           <div className="action-cards">
+            <Link href="/issues-hub/roadmap" className="action-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Target size={20} className="icon primary" />
+              <div>
+                <h4>View Roadmap</h4>
+                <p>See our strategic plan for atomic contracts and git-on-bitcoin</p>
+              </div>
+            </Link>
+            
             <div className="action-card">
               <AlertCircle size={20} className="icon warning" />
               <div>
