@@ -75,6 +75,44 @@ export default function IssuesHubPage() {
           </div>
         </div>
 
+        {/* Quick Actions Section */}
+        <div className="quick-actions">
+          <h3>Quick Actions</h3>
+          <div className="action-cards">
+            <div className="action-card">
+              <AlertCircle size={20} className="icon warning" />
+              <div>
+                <h4>Report a Bug</h4>
+                <p>Found an issue? Report it to the appropriate repository</p>
+              </div>
+            </div>
+            
+            <div className="action-card">
+              <Zap size={20} className="icon feature" />
+              <div>
+                <h4>Request Feature</h4>
+                <p>Have an idea? Submit a feature request</p>
+              </div>
+            </div>
+            
+            <div className="action-card">
+              <CheckCircle2 size={20} className="icon success" />
+              <div>
+                <h4>Contribute</h4>
+                <p>Help us build by contributing to open issues</p>
+              </div>
+            </div>
+            
+            <Link href="/licensing-strategy" className="action-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Scale size={20} className="icon primary" />
+              <div>
+                <h4>Licensing Strategy</h4>
+                <p>Understand our AGPL licensing and CLA requirements</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+
         {/* Bitcoin Contracts Section - Foundation */}
         <div className="contracts-section">
           <div className="section-header">
@@ -210,44 +248,6 @@ export default function IssuesHubPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Quick Actions Section */}
-        <div className="quick-actions">
-          <h3>Quick Actions</h3>
-          <div className="action-cards">
-            <div className="action-card">
-              <AlertCircle size={20} className="icon warning" />
-              <div>
-                <h4>Report a Bug</h4>
-                <p>Found an issue? Report it to the appropriate repository</p>
-              </div>
-            </div>
-            
-            <div className="action-card">
-              <Zap size={20} className="icon feature" />
-              <div>
-                <h4>Request Feature</h4>
-                <p>Have an idea? Submit a feature request</p>
-              </div>
-            </div>
-            
-            <div className="action-card">
-              <CheckCircle2 size={20} className="icon success" />
-              <div>
-                <h4>Contribute</h4>
-                <p>Help us build by contributing to open issues</p>
-              </div>
-            </div>
-            
-            <Link href="/licensing-strategy" className="action-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Scale size={20} className="icon primary" />
-              <div>
-                <h4>Licensing Strategy</h4>
-                <p>Understand our AGPL licensing and CLA requirements</p>
-              </div>
-            </Link>
           </div>
         </div>
 
