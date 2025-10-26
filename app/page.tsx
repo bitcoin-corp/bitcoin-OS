@@ -8,7 +8,6 @@ import OSTaskbar from '@/components/OSTaskbar'
 import TopMenuBar from '@/components/TopMenuBar'
 import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import DevSidebar from '@/components/DevSidebar'
-import DockManager from '@/components/DockManager'
 import Window from '@/components/Window'
 import BootScreen from '@/components/BootScreen'
 import BiosScreen from '@/components/BiosScreen'
@@ -422,8 +421,6 @@ export default function BitcoinOS() {
           }}
         />
         
-        {/* Dock at the bottom */}
-        <DockManager currentApp="bitcoin-os" />
       </div>
     </>
   )

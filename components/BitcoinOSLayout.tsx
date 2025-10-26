@@ -2,7 +2,6 @@
 
 import { useState, useEffect, ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
-import ProofOfConceptBar from '@/components/ProofOfConceptBar'
 import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
@@ -114,11 +113,10 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   }
 
   return (
-    <div className="h-screen flex flex-col relative bg-black">
+    <div className="h-screen flex flex-col relative bg-black" data-bitcoin-os="true">
       {/* Only show these on desktop when not during BIOS/boot */}
       {!isMobile && shouldShowGlobalUI && (
         <>
-          <ProofOfConceptBar />
           <TopMenuBar 
             onOpenApp={openApp} 
             onOpenWalletModal={() => setShowLoginModal(true)}
@@ -138,7 +136,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         )}
         
         {/* Page content */}
-        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-0 pb-[80px]' : ''}`}>
+        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-[32px] pb-[80px]' : ''}`}>
           {children}
         </div>
         
