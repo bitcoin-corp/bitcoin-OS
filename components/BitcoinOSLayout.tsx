@@ -136,7 +136,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         )}
         
         {/* Page content */}
-        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-[32px] pb-[80px]' : ''}`}>
+        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-0' : ''}`}>
           {children}
         </div>
         
