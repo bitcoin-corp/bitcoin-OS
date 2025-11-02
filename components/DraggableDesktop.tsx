@@ -173,14 +173,13 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 570, y: 310 } },
     { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 700, y: 310 } },
     
-    // Row 4 (7 apps)
+    // Row 4 (6 apps)
     { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 50, y: 440 } },
     { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 180, y: 440 } },
     { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 310, y: 440 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 440, y: 440 } },
     { id: 'identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'text-blue-500', url: 'https://bitcoin-identity.vercel.app/', position: { x: 570, y: 440 } },
     { id: 'cms', name: 'Bitcoin CMS', icon: FileText, color: 'text-green-500', url: 'http://localhost:7111', position: { x: 700, y: 440 } },
-    { id: 'accelerator', name: 'Bitcoin Accelerator', icon: Rocket, color: 'text-orange-500', url: 'http://localhost:3020', position: { x: 830, y: 440 } },
   ]
 
   // Snap to grid settings
