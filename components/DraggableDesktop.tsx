@@ -179,7 +179,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 310, y: 440 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 440, y: 440 } },
     { id: 'identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'text-blue-500', url: 'https://bitcoin-identity.vercel.app/', position: { x: 570, y: 440 } },
-    { id: 'cms', name: 'Bitcoin CMS', icon: Edit, color: 'text-green-500', url: 'http://localhost:7111', position: { x: 700, y: 440 } },
+    { id: 'cms', name: 'Bitcoin CMS', icon: Edit, color: 'text-green-500', url: 'https://bitcoin-cms.vercel.app', position: { x: 700, y: 440 } },
   ]
 
   // Snap to grid settings
