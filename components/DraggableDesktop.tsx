@@ -18,7 +18,7 @@ import {
 } from '@dnd-kit/sortable'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box, Camera, MapPin, MessageCircle, Users, Gamepad2, Grid3X3, UserCheck } from 'lucide-react'
+import { Wallet, Mail, Music, FileText, HardDrive, Calendar, Search, Table, Share2, Briefcase, Store, TrendingUp, Building2, Shield, Trash2, Video, GraduationCap, Code, Paintbrush, Sparkles, Zap, BookOpen, Globe, Box, Camera, MapPin, MessageCircle, Users, Gamepad2, Grid3X3, UserCheck, Rocket } from 'lucide-react'
 import { getThemedIcon, getCurrentTheme } from '@/lib/icon-themes'
 import WindowManager from './WindowManager'
 import TickerSidebar from './TickerSidebar'
@@ -173,12 +173,14 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
     { id: 'games', name: 'Bitcoin Games', icon: Gamepad2, color: 'text-purple-400', url: 'https://bitcoin-gaming.vercel.app', position: { x: 570, y: 310 } },
     { id: 'education', name: 'Bitcoin Education', icon: GraduationCap, color: 'text-blue-500', url: 'https://bitcoin-education-theta.vercel.app', position: { x: 700, y: 310 } },
     
-    // Row 4 (6 apps)
+    // Row 4 (7 apps)
     { id: 'domains', name: 'Bitcoin Domains', icon: Globe, color: 'text-cyan-400', url: 'https://bitcoin-dns.vercel.app', position: { x: 50, y: 440 } },
     { id: '3d', name: 'Bitcoin 3D', icon: Box, color: 'text-pink-500', url: 'https://bitcoin-3d.vercel.app', position: { x: 180, y: 440 } },
     { id: 'jobs', name: 'Bitcoin Jobs', icon: Briefcase, color: 'text-cyan-400', url: 'https://bitcoin-jobs.vercel.app/', position: { x: 310, y: 440 } },
     { id: 'paint', name: 'Bitcoin Paint', icon: Paintbrush, color: 'text-red-500', url: 'https://bitcoin-paint.vercel.app/', position: { x: 440, y: 440 } },
     { id: 'identity', name: 'Bitcoin Identity', icon: UserCheck, color: 'text-blue-500', url: 'https://bitcoin-identity.vercel.app/', position: { x: 570, y: 440 } },
+    { id: 'cms', name: 'Bitcoin CMS', icon: FileText, color: 'text-green-500', url: 'http://localhost:7111', position: { x: 700, y: 440 } },
+    { id: 'accelerator', name: 'Bitcoin Accelerator', icon: Rocket, color: 'text-orange-500', url: 'http://localhost:3020', position: { x: 830, y: 440 } },
   ]
 
   // Snap to grid settings
@@ -698,6 +700,14 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         >
           <Building2 className="w-10 h-10 text-bitcoin-orange drop-shadow-lg" strokeWidth={1.5} />
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Corp</span>
+        </button>
+        <button 
+          className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
+          onClick={() => window.location.href = '/accelerator'}
+          title="Bitcoin Accelerator"
+        >
+          <Rocket className="w-10 h-10 text-orange-500 drop-shadow-lg" strokeWidth={1.5} />
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">Accelerator</span>
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
