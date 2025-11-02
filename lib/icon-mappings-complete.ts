@@ -31,7 +31,8 @@ import {
   GraduationCap as LucideGraduationCap,
   UserCheck as LucideUserCheck,
   Circle as LucideCircle,
-  Monitor as LucideMonitor
+  Monitor as LucideMonitor,
+  Edit as LucideEdit
 } from 'lucide-react'
 
 // React Icons (Material Design) - existing
@@ -797,6 +798,16 @@ export const completeIconMappings: { [key: string]: CompleteIconMapping } = {
     phosphor: LucideMonitor,
     remix: LucideMonitor,
     bootstrap: LucideMonitor
+  },
+  'cms': {
+    lucide: LucideEdit,
+    'react-icons': LucideEdit,
+    tabler: LucideEdit,
+    heroicons: LucideEdit,
+    feather: LucideEdit,
+    phosphor: LucideEdit,
+    remix: LucideEdit,
+    bootstrap: LucideEdit
   }
 }
 
