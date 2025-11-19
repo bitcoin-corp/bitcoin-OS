@@ -3,20 +3,12 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { 
-  Cpu, 
-  HardDrive, 
-  Zap, 
-  DollarSign, 
+  FileText, 
   TrendingUp, 
   TrendingDown,
-  Server, 
-  Wifi, 
-  Database,
   Activity,
   Clock,
   Users,
-  Eye,
-  Gauge,
   BarChart3,
   ArrowUpRight,
   ArrowDownRight,
@@ -24,50 +16,51 @@ import {
   Pause,
   Settings,
   Zap as Lightning,
-  Globe,
   Shield,
-  Sparkles,
-  Flame,
   Target,
   Layers,
-  Monitor,
-  Rocket
+  Briefcase,
+  Building,
+  Globe,
+  Cpu,
+  Database,
+  Network,
+  Handshake
 } from 'lucide-react'
 
-interface ComputeOrder {
+interface BOSacContract {
   id: string
-  type: 'AI_GPU' | 'Gaming_GPU' | 'CPU_Cores' | 'Quantum_Sim' | 'Edge_Compute' | 'Storage_TB' | 'Bandwidth_Gbps' | 'RAM_DDR5'
-  provider: string
-  specs: string
-  pricePerHour: number
-  side: 'buy' | 'sell'
-  quantity: number
-  timestamp: Date
-  status: 'active' | 'filled' | 'cancelled'
-  tier: 'premium' | 'standard' | 'budget'
-}
-
-interface MarketData {
-  type: string
+  type: 'resource_allocation' | 'partnership' | 'supply_chain' | 'project_coordination' | 'data_sharing' | 'compute_lease' | 'talent_exchange' | 'governance'
   name: string
+  parties: string[]
+  value: number
+  duration: string
   price: number
   change24h: number
   volume24h: number
   trades24h: number
-  highestBid: number
-  lowestAsk: number
-  marketCap: number
-  tier: 'premium' | 'standard' | 'budget'
+  status: 'active' | 'pending' | 'executed' | 'expired'
+  tier: 'enterprise' | 'standard' | 'micro'
   icon: string
   description: string
+}
+
+interface MarketOrder {
+  id: string
+  contractType: string
+  side: 'buy' | 'sell'
+  price: number
+  quantity: number
+  timestamp: Date
+  status: 'active' | 'filled' | 'cancelled'
 }
 
 function ExchangeContent() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<'trade' | 'orders' | 'analytics'>('trade')
-  const [selectedMarket, setSelectedMarket] = useState<'AI_GPU' | 'Gaming_GPU' | 'CPU_Cores' | 'Quantum_Sim' | 'Edge_Compute' | 'Storage_TB' | 'Bandwidth_Gbps' | 'RAM_DDR5'>('AI_GPU')
+  const [selectedContract, setSelectedContract] = useState<string>('resource_allocation')
   const [isLive, setIsLive] = useState(true)
-  const [orders, setOrders] = useState<ComputeOrder[]>([])
+  const [orders, setOrders] = useState<MarketOrder[]>([])
   
   useEffect(() => {
     const tab = searchParams?.get('tab')
@@ -76,119 +69,135 @@ function ExchangeContent() {
     }
   }, [searchParams])
 
-  // Premium compute market data with live updates
-  const [marketData, setMarketData] = useState<Record<string, MarketData>>({
-    AI_GPU: { 
-      type: 'AI_GPU', 
-      name: 'AI Training GPUs', 
-      price: 24.50, 
-      change24h: 18.7, 
-      volume24h: 12750, 
-      trades24h: 1450, 
-      highestBid: 24.44, 
-      lowestAsk: 24.56,
-      marketCap: 2400000,
-      tier: 'premium',
-      icon: 'Sparkles',
-      description: 'H100, A100, V100 clusters for AI/ML training'
-    },
-    Gaming_GPU: { 
-      type: 'Gaming_GPU', 
-      name: 'Gaming GPUs', 
-      price: 8.45, 
-      change24h: -2.1, 
-      volume24h: 8900, 
-      trades24h: 920, 
-      highestBid: 8.42, 
-      lowestAsk: 8.48,
-      marketCap: 890000,
-      tier: 'standard',
-      icon: 'Monitor',
-      description: 'RTX 4090, RTX 4080 for gaming/streaming'
-    },
-    CPU_Cores: { 
-      type: 'CPU_Cores', 
-      name: 'CPU Cores', 
-      price: 1.25, 
-      change24h: 5.3, 
-      volume24h: 21000, 
-      trades24h: 2680, 
-      highestBid: 1.24, 
-      lowestAsk: 1.26,
-      marketCap: 125000,
-      tier: 'budget',
+  // bOSacs market data with live updates
+  const [contractData, setContractData] = useState<Record<string, BOSacContract>>({
+    resource_allocation: { 
+      id: 'bOSac_001',
+      type: 'resource_allocation', 
+      name: 'GPU Resource Allocation', 
+      parties: ['TechCorp', 'CloudProvider'],
+      value: 50000,
+      duration: '30 days',
+      price: 125.50, 
+      change24h: 12.3, 
+      volume24h: 2850, 
+      trades24h: 45, 
+      status: 'active',
+      tier: 'enterprise',
       icon: 'Cpu',
-      description: 'Intel Xeon, AMD EPYC core-hours'
+      description: 'AI training resource allocation contract'
     },
-    Quantum_Sim: { 
-      type: 'Quantum_Sim', 
-      name: 'Quantum Simulation', 
-      price: 125.00, 
-      change24h: 45.8, 
-      volume24h: 2560, 
-      trades24h: 89, 
-      highestBid: 124.50, 
-      lowestAsk: 125.50,
-      marketCap: 5600000,
-      tier: 'premium',
-      icon: 'Zap',
-      description: 'Quantum circuit simulation on classical hardware'
-    },
-    Edge_Compute: { 
-      type: 'Edge_Compute', 
-      name: 'Edge Computing', 
-      price: 3.20, 
-      change24h: 12.4, 
-      volume24h: 5600, 
-      trades24h: 780, 
-      highestBid: 3.18, 
-      lowestAsk: 3.22,
-      marketCap: 320000,
+    partnership: { 
+      id: 'bOSac_002',
+      type: 'partnership', 
+      name: 'Liquid Partnership Agreement', 
+      parties: ['StartupA', 'InvestorB', 'TechExpert'],
+      value: 25000,
+      duration: '90 days',
+      price: 85.75, 
+      change24h: -3.2, 
+      volume24h: 1200, 
+      trades24h: 23, 
+      status: 'active',
       tier: 'standard',
-      icon: 'Globe',
-      description: 'Distributed edge nodes worldwide'
+      icon: 'Handshake',
+      description: 'Dynamic profit-sharing partnership'
     },
-    Storage_TB: { 
-      type: 'Storage_TB', 
-      name: 'Storage (TB)', 
-      price: 0.45, 
-      change24h: -1.2, 
-      volume24h: 15600, 
-      trades24h: 1980, 
-      highestBid: 0.44, 
-      lowestAsk: 0.46,
-      marketCap: 45000,
-      tier: 'budget',
-      icon: 'HardDrive',
-      description: 'NVMe SSD, HDD storage capacity'
-    },
-    Bandwidth_Gbps: { 
-      type: 'Bandwidth_Gbps', 
-      name: 'Network Bandwidth', 
-      price: 12.80, 
-      change24h: 8.9, 
+    supply_chain: { 
+      id: 'bOSac_003',
+      type: 'supply_chain', 
+      name: 'Supply Chain Optimization', 
+      parties: ['Manufacturer', 'Supplier1', 'Logistics'],
+      value: 75000,
+      duration: '60 days',
+      price: 95.25, 
+      change24h: 8.7, 
       volume24h: 3400, 
-      trades24h: 450, 
-      highestBid: 12.75, 
-      lowestAsk: 12.85,
-      marketCap: 680000,
-      tier: 'standard',
-      icon: 'Wifi',
-      description: 'High-speed network connectivity'
+      trades24h: 67, 
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Network',
+      description: 'Automated supply chain coordination'
     },
-    RAM_DDR5: { 
-      type: 'RAM_DDR5', 
-      name: 'DDR5 Memory', 
-      price: 2.15, 
-      change24h: 3.7, 
-      volume24h: 7800, 
-      trades24h: 1190, 
-      highestBid: 2.14, 
-      lowestAsk: 2.16,
-      marketCap: 215000,
+    project_coordination: { 
+      id: 'bOSac_004',
+      type: 'project_coordination', 
+      name: 'Project Management Contract', 
+      parties: ['DevTeam', 'ProjectLead', 'QATeam'],
+      value: 15000,
+      duration: '45 days',
+      price: 45.80, 
+      change24h: 15.4, 
+      volume24h: 890, 
+      trades24h: 18, 
+      status: 'active',
+      tier: 'standard',
+      icon: 'Briefcase',
+      description: 'Agile project coordination with automatic task allocation'
+    },
+    data_sharing: { 
+      id: 'bOSac_005',
+      type: 'data_sharing', 
+      name: 'Data Collaboration Agreement', 
+      parties: ['DataProvider', 'Analytics', 'Researcher'],
+      value: 32000,
+      duration: '120 days',
+      price: 65.40, 
+      change24h: 5.1, 
+      volume24h: 1560, 
+      trades24h: 31, 
+      status: 'active',
       tier: 'standard',
       icon: 'Database',
-      description: 'Latest DDR5 RAM modules'
+      description: 'Secure data sharing with privacy guarantees'
+    },
+    compute_lease: { 
+      id: 'bOSac_006',
+      type: 'compute_lease', 
+      name: 'Compute Resource Lease', 
+      parties: ['CloudProvider', 'AICompany'],
+      value: 8000,
+      duration: '7 days',
+      price: 22.35, 
+      change24h: -1.8, 
+      volume24h: 2100, 
+      trades24h: 89, 
+      status: 'active',
+      tier: 'micro',
+      icon: 'Globe',
+      description: 'Short-term compute resource leasing'
+    },
+    talent_exchange: { 
+      id: 'bOSac_007',
+      type: 'talent_exchange', 
+      name: 'Talent Exchange Network', 
+      parties: ['TalentPool', 'Company1', 'Company2'],
+      value: 40000,
+      duration: '180 days',
+      price: 110.90, 
+      change24h: 22.6, 
+      volume24h: 780, 
+      trades24h: 12, 
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Users',
+      description: 'Dynamic talent allocation and skill sharing'
+    },
+    governance: { 
+      id: 'bOSac_008',
+      type: 'governance', 
+      name: 'Governance Framework', 
+      parties: ['Community', 'Council', 'Validators'],
+      value: 100000,
+      duration: '365 days',
+      price: 200.25, 
+      change24h: 7.9, 
+      volume24h: 450, 
+      trades24h: 8, 
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Building',
+      description: 'Decentralized governance coordination'
     }
   })
 
@@ -197,58 +206,71 @@ function ExchangeContent() {
     if (!isLive) return
     
     const interval = setInterval(() => {
-      setMarketData(prev => {
+      setContractData(prev => {
         const newData = { ...prev }
         Object.keys(newData).forEach(key => {
-          const change = (Math.random() - 0.5) * 0.1
-          newData[key].price = Math.max(0.01, newData[key].price + change)
-          newData[key].change24h += (Math.random() - 0.5) * 2
+          const change = (Math.random() - 0.5) * 2
+          newData[key].price = Math.max(1, newData[key].price + change)
+          newData[key].change24h += (Math.random() - 0.5) * 1
         })
         return newData
       })
-    }, 2000)
+    }, 3000)
     
     return () => clearInterval(interval)
   }, [isLive])
 
-  const getMarketIcon = (iconName: string, tier: string) => {
+  const getContractIcon = (iconName: string, tier: string) => {
     const iconClass = `w-5 h-5 ${
-      tier === 'premium' ? 'text-yellow-400' : 
+      tier === 'enterprise' ? 'text-yellow-400' : 
       tier === 'standard' ? 'text-blue-400' : 
       'text-gray-400'
     }`
     
     switch (iconName) {
-      case 'Sparkles':
-        return <Sparkles className={iconClass} />
-      case 'Monitor':
-        return <Monitor className={iconClass} />
       case 'Cpu':
         return <Cpu className={iconClass} />
-      case 'Zap':
-        return <Zap className={iconClass} />
-      case 'Globe':
-        return <Globe className={iconClass} />
-      case 'HardDrive':
-        return <HardDrive className={iconClass} />
-      case 'Wifi':
-        return <Wifi className={iconClass} />
+      case 'Handshake':
+        return <Handshake className={iconClass} />
+      case 'Network':
+        return <Network className={iconClass} />
+      case 'Briefcase':
+        return <Briefcase className={iconClass} />
       case 'Database':
         return <Database className={iconClass} />
+      case 'Globe':
+        return <Globe className={iconClass} />
+      case 'Users':
+        return <Users className={iconClass} />
+      case 'Building':
+        return <Building className={iconClass} />
       default:
-        return <Server className={iconClass} />
+        return <FileText className={iconClass} />
     }
   }
 
-  const formatPrice = (price: number) => `$${price.toFixed(3)}`
+  const formatPrice = (price: number) => `₿OS ${price.toFixed(2)}`
   const formatChange = (change: number) => {
     const sign = change >= 0 ? '+' : ''
     return `${sign}${change.toFixed(1)}%`
   }
 
+  const getTierColor = (tier: string) => {
+    switch (tier) {
+      case 'enterprise':
+        return 'text-yellow-400 bg-yellow-500/20'
+      case 'standard':
+        return 'text-blue-400 bg-blue-500/20'
+      case 'micro':
+        return 'text-gray-400 bg-gray-500/20'
+      default:
+        return 'text-gray-400 bg-gray-500/20'
+    }
+  }
+
   return (
     <div className="h-full overflow-auto bg-gradient-to-br from-black via-gray-900 to-black text-white">
-      {/* Futuristic Header */}
+      {/* Enhanced Header */}
       <div className="relative border-b border-orange-500/20 bg-gradient-to-r from-black/90 via-gray-900/90 to-black/90 backdrop-blur-xl">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-orange-500/5" />
         <div className="relative container mx-auto px-6 py-6">
@@ -257,15 +279,15 @@ function ExchangeContent() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center">
-                    <Lightning className="w-6 h-6 text-black" />
+                    <FileText className="w-6 h-6 text-black" />
                   </div>
                   <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black animate-pulse" />
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-400 via-yellow-500 to-orange-600 bg-clip-text text-transparent">
-                    bEX
+                    bOSacs Exchange
                   </h1>
-                  <p className="text-sm text-gray-400 font-mono">Bitcoin Compute Exchange</p>
+                  <p className="text-sm text-gray-400 font-mono">Bitcoin OS Atomic Contracts Trading</p>
                 </div>
               </div>
               
@@ -274,17 +296,17 @@ function ExchangeContent() {
                   <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-gray-500'}`} />
                   <span className="text-sm font-medium text-green-400">{isLive ? 'LIVE TRADING' : 'MARKET CLOSED'}</span>
                   <div className="w-px h-4 bg-green-500/30" />
-                  <span className="text-xs text-green-300 font-mono">1,247 traders</span>
+                  <span className="text-xs text-green-300 font-mono">347 active contracts</span>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-400">Global Volume</div>
-                  <div className="text-lg font-bold text-orange-400 font-mono">₿OS 47.2K</div>
+                  <div className="text-sm text-gray-400">Total Value Locked</div>
+                  <div className="text-lg font-bold text-orange-400 font-mono">₿OS 2.4M</div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-400">Network Load</div>
-                  <div className="text-lg font-bold text-blue-400 font-mono">68%</div>
+                  <div className="text-sm text-gray-400">24h Volume</div>
+                  <div className="text-lg font-bold text-blue-400 font-mono">₿OS 125K</div>
                 </div>
               </div>
             </div>
@@ -312,26 +334,26 @@ function ExchangeContent() {
       </div>
 
       <div className="flex h-[calc(100vh-100px)]">
-        {/* Enhanced Sidebar - Market Selection */}
+        {/* Contract Selection Sidebar */}
         <div className="w-96 border-r border-orange-500/20 bg-gradient-to-b from-gray-900/80 via-black/90 to-gray-900/80 backdrop-blur-sm">
           <div className="p-6 border-b border-orange-500/20">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center">
-                <Flame className="w-4 h-4 text-black" />
+                <FileText className="w-4 h-4 text-black" />
               </div>
               <h3 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-yellow-500 bg-clip-text text-transparent">
-                Live Markets
+                Active bOSacs
               </h3>
             </div>
             
             <div className="space-y-3">
-              {Object.values(marketData).map((market) => (
+              {Object.values(contractData).map((contract) => (
                 <button
-                  key={market.type}
+                  key={contract.type}
                   type="button"
-                  onClick={() => setSelectedMarket(market.type as any)}
+                  onClick={() => setSelectedContract(contract.type)}
                   className={`w-full p-4 rounded-xl transition-all duration-300 text-left group border ${
-                    selectedMarket === market.type
+                    selectedContract === contract.type
                       ? 'bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border-orange-500/50 shadow-lg shadow-orange-500/20'
                       : 'bg-gray-800/30 hover:bg-gray-700/40 border-gray-700/50 hover:border-orange-500/30'
                   }`}
@@ -339,64 +361,64 @@ function ExchangeContent() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className={`p-2 rounded-lg ${
-                        market.tier === 'premium' ? 'bg-yellow-500/20' :
-                        market.tier === 'standard' ? 'bg-blue-500/20' :
+                        contract.tier === 'enterprise' ? 'bg-yellow-500/20' :
+                        contract.tier === 'standard' ? 'bg-blue-500/20' :
                         'bg-gray-500/20'
                       }`}>
-                        {getMarketIcon(market.icon, market.tier)}
+                        {getContractIcon(contract.icon, contract.tier)}
                       </div>
                       <div>
                         <div className="font-semibold text-white group-hover:text-orange-400 transition-colors">
-                          {market.name}
+                          {contract.name}
                         </div>
                         <div className="text-xs text-gray-400 mt-1">
-                          {market.description}
+                          {contract.parties.length} parties • {contract.duration}
                         </div>
                       </div>
                     </div>
                     
                     <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                      market.change24h >= 0 ? 'text-green-400 bg-green-500/20' : 'text-red-400 bg-red-500/20'
+                      contract.change24h >= 0 ? 'text-green-400 bg-green-500/20' : 'text-red-400 bg-red-500/20'
                     }`}>
-                      {market.change24h >= 0 ? 
+                      {contract.change24h >= 0 ? 
                         <ArrowUpRight className="w-3 h-3" /> : 
                         <ArrowDownRight className="w-3 h-3" />
                       }
-                      {formatChange(market.change24h)}
+                      {formatChange(contract.change24h)}
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="text-lg font-bold font-mono text-white">
-                        {formatPrice(market.price)}<span className="text-sm text-gray-400">/hr</span>
+                        {formatPrice(contract.price)}
                       </div>
                       <div className="text-xs text-gray-500">
-                        Vol: ₿OS {(market.volume24h / 1000).toFixed(1)}K
+                        Value: ₿OS {(contract.value / 1000).toFixed(0)}K
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <div className="text-sm text-gray-400">{market.trades24h} trades</div>
-                      <div className={`text-xs px-2 py-1 rounded-full ${
-                        market.tier === 'premium' ? 'text-yellow-400 bg-yellow-500/20' :
-                        market.tier === 'standard' ? 'text-blue-400 bg-blue-500/20' :
-                        'text-gray-400 bg-gray-500/20'
-                      }`}>
-                        {market.tier.toUpperCase()}
+                      <div className="text-sm text-gray-400">{contract.trades24h} trades</div>
+                      <div className={`text-xs px-2 py-1 rounded-full ${getTierColor(contract.tier)}`}>
+                        {contract.tier.toUpperCase()}
                       </div>
                     </div>
+                  </div>
+                  
+                  <div className="mt-3 pt-3 border-t border-gray-700/50">
+                    <div className="text-xs text-gray-400">{contract.description}</div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Enhanced Global Stats */}
+          {/* Market Statistics */}
           <div className="p-6">
             <div className="flex items-center gap-2 mb-6">
               <Target className="w-5 h-5 text-orange-500" />
-              <h4 className="font-semibold text-orange-400">Network Status</h4>
+              <h4 className="font-semibold text-orange-400">Market Overview</h4>
             </div>
             
             <div className="space-y-4">
@@ -404,68 +426,55 @@ function ExchangeContent() {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Activity className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm text-gray-300">Total Volume</span>
+                    <span className="text-sm text-gray-300">Active Contracts</span>
                   </div>
-                  <span className="font-mono text-lg font-bold text-orange-400">₿OS 847K</span>
+                  <span className="font-mono text-lg font-bold text-orange-400">347</span>
                 </div>
-                <div className="text-xs text-gray-500">+24.5% from yesterday</div>
+                <div className="text-xs text-gray-500">+12 new today</div>
               </div>
               
               <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm text-gray-300">Active Nodes</span>
+                    <span className="text-sm text-gray-300">Active Parties</span>
                   </div>
-                  <span className="font-mono text-lg font-bold text-blue-400">12,847</span>
+                  <span className="font-mono text-lg font-bold text-blue-400">1,247</span>
                 </div>
-                <div className="text-xs text-gray-500">Across 67 countries</div>
-              </div>
-              
-              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <Gauge className="w-4 h-4 text-green-500" />
-                    <span className="text-sm text-gray-300">Network Load</span>
-                  </div>
-                  <span className="font-mono text-lg font-bold text-green-400">68%</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
-                  <div className="bg-gradient-to-r from-green-500 to-yellow-500 h-2 rounded-full" style={{width: '68%'}}></div>
-                </div>
+                <div className="text-xs text-gray-500">Across all contract types</div>
               </div>
               
               <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Lightning className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-gray-300">Avg Response</span>
+                    <span className="text-sm text-gray-300">Avg Settlement</span>
                   </div>
-                  <span className="font-mono text-lg font-bold text-yellow-400">8ms</span>
+                  <span className="font-mono text-lg font-bold text-yellow-400">2.3s</span>
                 </div>
-                <div className="text-xs text-gray-500">Ultra-low latency</div>
+                <div className="text-xs text-gray-500">Instant Bitcoin settlement</div>
               </div>
             </div>
             
-            {/* Market Health Indicator */}
+            {/* System Status */}
             <div className="mt-6 p-4 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/30 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="w-4 h-4 text-green-400" />
-                <span className="text-sm font-medium text-green-400">Market Health: EXCELLENT</span>
+                <span className="text-sm font-medium text-green-400">System Status: OPERATIONAL</span>
               </div>
-              <div className="text-xs text-gray-400">All systems operational • High liquidity • Fast execution</div>
+              <div className="text-xs text-gray-400">All contract types active • Real-time execution</div>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
+        {/* Main Trading Interface */}
         <div className="flex-1 flex flex-col">
-          {/* Enhanced Tabs */}
+          {/* Tabs */}
           <div className="flex border-b border-orange-500/20 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm">
             {[
-              { id: 'trade', label: 'Live Trading', icon: TrendingUp, color: 'orange' },
-              { id: 'orders', label: 'Order Book', icon: Layers, color: 'blue' },
-              { id: 'analytics', label: 'Market Data', icon: BarChart3, color: 'purple' }
+              { id: 'trade', label: 'Contract Trading', icon: TrendingUp, color: 'orange' },
+              { id: 'orders', label: 'My Contracts', icon: Layers, color: 'blue' },
+              { id: 'analytics', label: 'Market Analytics', icon: BarChart3, color: 'purple' }
             ].map(({ id, label, icon: Icon, color }) => (
               <button
                 key={id}
@@ -487,7 +496,6 @@ function ExchangeContent() {
               </button>
             ))}
             
-            {/* Real-time indicator */}
             <div className="ml-auto flex items-center gap-3 px-6">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -503,53 +511,43 @@ function ExchangeContent() {
           <div className="flex-1 p-6">
             {activeTab === 'trade' && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                {/* Order Book */}
+                {/* Contract Details */}
                 <div className="bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="p-4 border-b border-gray-800">
-                    <h3 className="font-bold">Order Book - {selectedMarket}</h3>
+                    <h3 className="font-bold">Contract Details - {contractData[selectedContract].name}</h3>
                   </div>
-                  <div className="p-4">
-                    <div className="grid grid-cols-3 gap-4 text-sm text-gray-400 mb-3">
-                      <span>Price ($bOS/hr)</span>
-                      <span className="text-right">Size (hrs)</span>
-                      <span className="text-right">Total</span>
+                  <div className="p-4 space-y-4">
+                    <div>
+                      <label className="text-sm text-gray-400">Contract ID</label>
+                      <div className="font-mono text-sm">{contractData[selectedContract].id}</div>
                     </div>
-                    
-                    {/* Sell Orders (Red) */}
-                    <div className="space-y-1 mb-4">
-                      {[...Array(8)].map((_, i) => {
-                        const price = marketData[selectedMarket].lowestAsk + (i * 0.01)
-                        const size = Math.floor(Math.random() * 100) + 10
-                        return (
-                          <div key={i} className="grid grid-cols-3 gap-4 text-sm hover:bg-red-500/10 p-1 rounded cursor-pointer">
-                            <span className="text-red-400 font-mono">{formatPrice(price)}</span>
-                            <span className="text-right font-mono">{size}</span>
-                            <span className="text-right font-mono text-gray-400">{formatPrice(price * size)}</span>
-                          </div>
-                        )
-                      })}
+                    <div>
+                      <label className="text-sm text-gray-400">Parties</label>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {contractData[selectedContract].parties.map((party, i) => (
+                          <span key={i} className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">
+                            {party}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-
-                    {/* Spread */}
-                    <div className="py-2 mb-4 text-center border-y border-gray-800">
-                      <span className="text-sm text-gray-400">
-                        Spread: {formatPrice(marketData[selectedMarket].lowestAsk - marketData[selectedMarket].highestBid)}
-                      </span>
+                    <div>
+                      <label className="text-sm text-gray-400">Duration</label>
+                      <div className="font-mono text-sm">{contractData[selectedContract].duration}</div>
                     </div>
-
-                    {/* Buy Orders (Green) */}
-                    <div className="space-y-1">
-                      {[...Array(8)].map((_, i) => {
-                        const price = marketData[selectedMarket].highestBid - (i * 0.01)
-                        const size = Math.floor(Math.random() * 100) + 10
-                        return (
-                          <div key={i} className="grid grid-cols-3 gap-4 text-sm hover:bg-green-500/10 p-1 rounded cursor-pointer">
-                            <span className="text-green-400 font-mono">{formatPrice(price)}</span>
-                            <span className="text-right font-mono">{size}</span>
-                            <span className="text-right font-mono text-gray-400">{formatPrice(price * size)}</span>
-                          </div>
-                        )
-                      })}
+                    <div>
+                      <label className="text-sm text-gray-400">Total Value</label>
+                      <div className="font-mono text-lg font-bold">₿OS {contractData[selectedContract].value.toLocaleString()}</div>
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-400">Description</label>
+                      <div className="text-sm">{contractData[selectedContract].description}</div>
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-400">Contract Tier</label>
+                      <div className={`inline-block px-2 py-1 rounded text-xs ${getTierColor(contractData[selectedContract].tier)}`}>
+                        {contractData[selectedContract].tier.toUpperCase()}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -557,41 +555,42 @@ function ExchangeContent() {
                 {/* Trading Interface */}
                 <div className="bg-gray-900/50 rounded-lg border border-gray-800">
                   <div className="p-4 border-b border-gray-800">
-                    <h3 className="font-bold">Place Order</h3>
+                    <h3 className="font-bold">Trade Contract Rights</h3>
                   </div>
                   <div className="p-4">
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <button className="py-3 bg-green-600 hover:bg-green-700 rounded-lg font-medium transition-colors">
-                        BUY {selectedMarket}
+                        BUY RIGHTS
                       </button>
                       <button className="py-3 bg-red-600 hover:bg-red-700 rounded-lg font-medium transition-colors">
-                        SELL {selectedMarket}
+                        SELL RIGHTS
                       </button>
                     </div>
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2">Price ($bOS/hr)</label>
+                        <label className="block text-sm font-medium mb-2">Price (₿OS per %)</label>
                         <input 
                           type="number" 
-                          step="0.001"
-                          defaultValue={marketData[selectedMarket].price.toFixed(3)}
+                          step="0.01"
+                          defaultValue={contractData[selectedContract].price.toFixed(2)}
                           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 font-mono"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Quantity (hours)</label>
+                        <label className="block text-sm font-medium mb-2">Percentage (%)</label>
                         <input 
                           type="number" 
                           placeholder="0"
+                          max="100"
                           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 font-mono"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Total ($bOS)</label>
+                        <label className="block text-sm font-medium mb-2">Total Cost (₿OS)</label>
                         <input 
                           type="number" 
-                          placeholder="0.000"
+                          placeholder="0.00"
                           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 font-mono"
                           readOnly
                         />
@@ -600,14 +599,18 @@ function ExchangeContent() {
 
                     <div className="mt-6">
                       <button className="w-full py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-medium transition-colors">
-                        Place Order
+                        Execute Trade
                       </button>
                     </div>
 
                     <div className="mt-4 p-3 bg-gray-800/50 rounded-lg">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm mb-2">
                         <span className="text-gray-400">Available Balance:</span>
-                        <span className="font-mono">1,247.89 $bOS</span>
+                        <span className="font-mono">2,847.23 ₿OS</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-400">Trading Fee:</span>
+                        <span className="font-mono">0.1%</span>
                       </div>
                     </div>
                   </div>
@@ -618,13 +621,13 @@ function ExchangeContent() {
             {activeTab === 'orders' && (
               <div className="bg-gray-900/50 rounded-lg border border-gray-800">
                 <div className="p-4 border-b border-gray-800">
-                  <h3 className="font-bold">My Orders</h3>
+                  <h3 className="font-bold">My Contract Positions</h3>
                 </div>
                 <div className="p-4">
                   <div className="text-center text-gray-400 py-8">
-                    <Clock className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p>No active orders</p>
-                    <p className="text-sm">Place an order to see it here</p>
+                    <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>No active contract positions</p>
+                    <p className="text-sm">Trade contract rights to see positions here</p>
                   </div>
                 </div>
               </div>
@@ -633,34 +636,40 @@ function ExchangeContent() {
             {activeTab === 'analytics' && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6">
-                  <h3 className="font-bold mb-4">Price Chart</h3>
+                  <h3 className="font-bold mb-4">Contract Performance</h3>
                   <div className="h-64 flex items-center justify-center text-gray-400">
                     <div className="text-center">
                       <BarChart3 className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                      <p>Interactive price chart</p>
-                      <p className="text-sm">Real-time {selectedMarket} pricing</p>
+                      <p>Performance analytics</p>
+                      <p className="text-sm">Track {contractData[selectedContract].name} metrics</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6">
-                  <h3 className="font-bold mb-4">Market Analytics</h3>
+                  <h3 className="font-bold mb-4">Contract Statistics</h3>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-gray-400">24h High:</span>
-                      <span className="font-mono">{formatPrice(marketData[selectedMarket].price * 1.15)}</span>
+                      <span className="text-gray-400">Current Price:</span>
+                      <span className="font-mono">{formatPrice(contractData[selectedContract].price)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-400">24h Low:</span>
-                      <span className="font-mono">{formatPrice(marketData[selectedMarket].price * 0.85)}</span>
+                      <span className="text-gray-400">24h Change:</span>
+                      <span className={`font-mono ${contractData[selectedContract].change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                        {formatChange(contractData[selectedContract].change24h)}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">24h Volume:</span>
-                      <span className="font-mono">{marketData[selectedMarket].volume24h} $bOS</span>
+                      <span className="font-mono">₿OS {contractData[selectedContract].volume24h}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-400">Market Cap:</span>
-                      <span className="font-mono">$2.4M</span>
+                      <span className="text-gray-400">Total Value:</span>
+                      <span className="font-mono">₿OS {contractData[selectedContract].value.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Execution Rate:</span>
+                      <span className="font-mono text-green-400">99.8%</span>
                     </div>
                   </div>
                 </div>
@@ -679,7 +688,7 @@ export default function ExchangePage() {
       <div className="h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-white">Loading Exchange...</p>
+          <p className="text-white">Loading bOSacs Exchange...</p>
         </div>
       </div>
     }>
