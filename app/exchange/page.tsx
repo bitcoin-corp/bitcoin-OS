@@ -735,61 +735,57 @@ function ExchangeContent() {
     <div className="h-full overflow-auto bg-gray-950 text-white">
       {/* Professional Header */}
       <div className="border-b border-gray-800 bg-gray-900">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-gray-800 border border-gray-700 flex items-center justify-center">
-                  <Briefcase className="w-5 h-5 text-gray-300" />
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                  <Briefcase className="w-4 h-4 text-gray-300" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-white">
+                  <h1 className="text-xl font-bold text-white">
                     bOS Atomic Contracts Exchange
                   </h1>
-                  <p className="text-sm text-gray-500 font-mono">Enterprise Resource Allocation | Real-time Settlement</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3 px-3 py-1 bg-gray-800 border border-gray-700">
+                <div className="flex items-center gap-2 px-2 py-1 bg-gray-800 border border-gray-700">
                   <div className="w-2 h-2 bg-green-500" />
-                  <span className="text-sm font-medium text-gray-300">LIVE</span>
-                  <div className="w-px h-3 bg-gray-600" />
+                  <span className="text-xs font-medium text-gray-300">LIVE</span>
                   <span className="text-xs text-gray-400 font-mono">{globalTPS.toLocaleString()} TPS</span>
                 </div>
                 
-                <div className="text-right">
-                  <div className="text-xs text-gray-500">TVL</div>
-                  <div className="text-sm font-bold text-white font-mono">$412.7B</div>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-500">TVL</span>
+                  <span className="text-sm font-bold text-white font-mono">$412.7B</span>
                 </div>
                 
-                <div className="text-right">
-                  <div className="text-xs text-gray-500">24h Fees</div>
-                  <div className="text-sm font-bold text-white font-mono">${(revenueMetrics.holderDividends/1000000).toFixed(1)}M</div>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-500">24h Fees</span>
+                  <span className="text-sm font-bold text-white font-mono">${(revenueMetrics.holderDividends/1000000).toFixed(1)}M</span>
                 </div>
                 
-                <div className="text-right">
-                  <div className="text-xs text-gray-500">Contracts</div>
-                  <div className="text-sm font-bold text-white font-mono">{Object.keys(contractData).length}</div>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-500">Contracts</span>
+                  <span className="text-sm font-bold text-white font-mono">{Object.keys(contractData).length}</span>
+                </div>
+                
+                <div className="flex items-center gap-2 px-2 py-1 bg-gray-800 border border-gray-700">
+                  <div className="w-2 h-2 bg-green-500" />
+                  <span className="text-xs font-mono text-gray-400">STREAMING</span>
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-2 py-1 bg-gray-800 border border-gray-700">
-                <div className="w-2 h-2 bg-green-500" />
-                <span className="text-xs font-mono text-gray-400">STREAMING</span>
-              </div>
-              
-              <button
-                type="button"
-                onClick={() => setIsLive(!isLive)}
-                className="flex items-center gap-2 px-3 py-1 bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors"
-              >
-                {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                <span className="text-sm">{isLive ? 'Pause' : 'Resume'}</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setIsLive(!isLive)}
+              className="flex items-center gap-2 px-3 py-1 bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors"
+            >
+              {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              <span className="text-sm">{isLive ? 'Pause' : 'Resume'}</span>
+            </button>
           </div>
         </div>
       </div>
