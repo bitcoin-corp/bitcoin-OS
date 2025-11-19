@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { bitcoinApps } from '../lib/apps.config'
 
 interface Desktop3DProps {
   children?: React.ReactNode
@@ -354,6 +355,12 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
           group.add(stem)
           iconMesh = noteHead
           break
+
+        case 'mint':
+          // Mint - A simple coin shape
+          const mintGeometry = new THREE.CylinderGeometry(0.8, 0.8, 0.2, 32)
+          iconMesh = new THREE.Mesh(mintGeometry, new THREE.MeshStandardMaterial({ color }))
+          break
           
         default:
           // Default cube
@@ -398,18 +405,13 @@ export default function Desktop3D({ children, onAppClick }: Desktop3DProps) {
     }
 
     // Add app icons in a grid with proper 3D representations
-    const apps = [
-      createAppIcon(-8, -8, 0x4169e1, 'Terminal', 'terminal'),
-      createAppIcon(-4, -8, 0x32cd32, 'Bitcoin Wallet', 'wallet'),
-      createAppIcon(0, -8, 0xff6347, 'Browser', 'browser'),
-      createAppIcon(4, -8, 0xffd700, 'Files', 'files'),
-      createAppIcon(8, -8, 0x9370db, 'Settings', 'settings'),
-      createAppIcon(-8, -4, 0xf7931a, 'Bitcoin Writer', 'document'),
-      createAppIcon(-4, -4, 0x00bfff, 'Bitcoin Spreadsheet', 'spreadsheet'),
-      createAppIcon(0, -4, 0x90ee90, 'Bitcoin Drive', 'drive'),
-      createAppIcon(4, -4, 0xff1493, 'Bitcoin Email', 'email'),
-      createAppIcon(8, -4, 0xda70d6, 'Bitcoin Music', 'music'),
-    ]
+    const apps = bitcoinApps.map((app, i) => {
+      const row = Math.floor(i / 5)
+      const col = i % 5
+      const x = (col - 2) * 4
+      const z = row * -4
+      return createAppIcon(x, z, new THREE.Color(app.color).getHex(), app.name, app.iconType || 'default')
+    })
     apps.forEach(app => scene.add(app))
 
     // Mouse interaction handlers
