@@ -110,14 +110,29 @@ function ExchangeContent() {
     }
   }, [searchParams])
 
-  // Initialize resource metrics
+  // Initialize expanded resource metrics
   useEffect(() => {
     setResourceMetrics({
+      // Primary Resources
       GPU: { type: 'GPU', price: 12847.50, priceChange24h: 24.7, supply: 2847291, demand: 3456789, utilizationRate: 0.847, scarcityIndex: 1.21, contracts: 12847, aiEfficiency: 0.987 },
       CPU: { type: 'CPU', price: 4567.25, priceChange24h: 12.3, supply: 8945672, demand: 7234567, utilizationRate: 0.745, scarcityIndex: 0.81, contracts: 8934, aiEfficiency: 0.954 },
       Memory: { type: 'Memory', price: 2847.80, priceChange24h: 18.9, supply: 12847291, demand: 15647382, utilizationRate: 0.923, scarcityIndex: 1.18, contracts: 15672, aiEfficiency: 0.972 },
       Storage: { type: 'Storage', price: 1234.45, priceChange24h: 8.4, supply: 45672891, demand: 42847392, utilizationRate: 0.678, scarcityIndex: 0.94, contracts: 28471, aiEfficiency: 0.941 },
-      Network: { type: 'Network', price: 6789.15, priceChange24h: 31.2, supply: 5647291, demand: 8947382, utilizationRate: 0.845, scarcityIndex: 1.58, contracts: 9847, aiEfficiency: 0.995 }
+      Network: { type: 'Network', price: 6789.15, priceChange24h: 31.2, supply: 5647291, demand: 8947382, utilizationRate: 0.845, scarcityIndex: 1.58, contracts: 9847, aiEfficiency: 0.995 },
+      
+      // Specialized Resources
+      'GPU-H100': { type: 'GPU', price: 45629.80, priceChange24h: 67.4, supply: 284729, demand: 1456789, utilizationRate: 0.987, scarcityIndex: 5.12, contracts: 4729, aiEfficiency: 0.999 },
+      'CPU-ARM': { type: 'CPU', price: 8934.15, priceChange24h: 28.7, supply: 3456789, demand: 4567891, utilizationRate: 0.823, scarcityIndex: 1.32, contracts: 12847, aiEfficiency: 0.976 },
+      'Memory-HBM': { type: 'Memory', price: 18947.50, priceChange24h: 45.2, supply: 1847291, demand: 4567382, utilizationRate: 0.954, scarcityIndex: 2.47, contracts: 5672, aiEfficiency: 0.989 },
+      'Storage-NVMe': { type: 'Storage', price: 3847.90, priceChange24h: 15.6, supply: 15672891, demand: 18947382, utilizationRate: 0.756, scarcityIndex: 1.21, contracts: 18471, aiEfficiency: 0.965 },
+      'Network-5G': { type: 'Network', price: 12847.25, priceChange24h: 52.8, supply: 2847291, demand: 6947382, utilizationRate: 0.912, scarcityIndex: 2.44, contracts: 7847, aiEfficiency: 0.993 },
+      
+      // Enterprise Resources
+      'Quantum-QPU': { type: 'CPU', price: 247891.30, priceChange24h: 124.7, supply: 8472, demand: 284729, utilizationRate: 0.999, scarcityIndex: 33.61, contracts: 847, aiEfficiency: 1.000 },
+      'Edge-Computing': { type: 'Network', price: 7834.60, priceChange24h: 22.4, supply: 8947291, demand: 12847382, utilizationRate: 0.734, scarcityIndex: 1.44, contracts: 24817, aiEfficiency: 0.954 },
+      'Neuromorphic': { type: 'CPU', price: 89472.80, priceChange24h: 89.3, supply: 47291, demand: 284729, utilizationRate: 0.945, scarcityIndex: 6.02, contracts: 1247, aiEfficiency: 0.998 },
+      'Photonic': { type: 'Network', price: 34829.40, priceChange24h: 78.6, supply: 128472, demand: 847291, utilizationRate: 0.892, scarcityIndex: 6.59, contracts: 2847, aiEfficiency: 0.997 },
+      'DNA-Storage': { type: 'Storage', price: 128947.70, priceChange24h: 156.2, supply: 2847, demand: 84729, utilizationRate: 0.978, scarcityIndex: 29.75, contracts: 184, aiEfficiency: 0.999 }
     })
   }, [])
 
@@ -306,6 +321,297 @@ function ExchangeContent() {
       resourceSupply: 12847391,
       resourceDemand: 11234567,
       aiOptimizationScore: 0.967
+    },
+    
+    // Specialized GPU Contracts
+    h100_ai_training: {
+      id: 'bOSac_H100_009',
+      type: 'h100_ai_training',
+      name: '$bH100 Ultra Performance',
+      parties: ['OpenAI', 'Anthropic', 'DeepMind', 'xAI', 'Cohere', 'Stability'],
+      value: 24700000000, // $24.7B
+      duration: '90 days',
+      price: 456789.30,
+      change24h: 67.4,
+      volume24h: 4890000000,
+      trades24h: 12847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Cpu',
+      description: 'H100 GPU clusters - extremely scarce, premium AI training',
+      region: 'Global',
+      tps: 847291,
+      resourceType: 'GPU',
+      utilizationRate: 0.987,
+      resourceSupply: 284729,
+      resourceDemand: 1456789,
+      aiOptimizationScore: 0.999
+    },
+    
+    arm_mobile_compute: {
+      id: 'bOSac_ARM_010',
+      type: 'arm_mobile_compute',
+      name: '$bARM Mobile Federation',
+      parties: ['Apple', 'Qualcomm', 'Samsung', 'MediaTek', 'ARM Holdings'],
+      value: 8900000000, // $8.9B
+      duration: '270 days',
+      price: 89347.15,
+      change24h: 28.7,
+      volume24h: 1560000000,
+      trades24h: 28471,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Cpu',
+      description: 'ARM-based mobile and edge processing power',
+      region: 'Global',
+      tps: 1247891,
+      resourceType: 'CPU',
+      utilizationRate: 0.823,
+      resourceSupply: 3456789,
+      resourceDemand: 4567891,
+      aiOptimizationScore: 0.976
+    },
+    
+    hbm_memory_consortium: {
+      id: 'bOSac_HBM_011',
+      type: 'hbm_memory_consortium',
+      name: '$bHBM Ultra-Fast Memory',
+      parties: ['Samsung', 'SK Hynix', 'Micron', 'NVIDIA', 'AMD'],
+      value: 15600000000, // $15.6B
+      duration: '180 days',
+      price: 189475.50,
+      change24h: 45.2,
+      volume24h: 2890000000,
+      trades24h: 15672,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Database',
+      description: 'High-bandwidth memory for AI workloads - massive demand',
+      region: 'Global',
+      tps: 1547291,
+      resourceType: 'Memory',
+      utilizationRate: 0.954,
+      resourceSupply: 1847291,
+      resourceDemand: 4567382,
+      aiOptimizationScore: 0.989
+    },
+    
+    nvme_ultra_storage: {
+      id: 'bOSac_NVME_012',
+      type: 'nvme_ultra_storage',
+      name: '$bNVMe Ultra-Speed Storage',
+      parties: ['Western Digital', 'Seagate', 'Samsung', 'Intel', 'Kioxia'],
+      value: 6700000000, // $6.7B
+      duration: '450 days',
+      price: 38479.90,
+      change24h: 15.6,
+      volume24h: 890000000,
+      trades24h: 34817,
+      status: 'active',
+      tier: 'institutional',
+      icon: 'Database',
+      description: 'Ultra-fast NVMe storage for real-time data processing',
+      region: 'Global',
+      tps: 1147291,
+      resourceType: 'Storage',
+      utilizationRate: 0.756,
+      resourceSupply: 15672891,
+      resourceDemand: 18947382,
+      aiOptimizationScore: 0.965
+    },
+    
+    fiveg_network_edge: {
+      id: 'bOSac_5G_013',
+      type: 'fiveg_network_edge',
+      name: '$b5G Edge Network',
+      parties: ['Verizon', 'T-Mobile', 'AT&T', 'Ericsson', 'Nokia', 'Huawei'],
+      value: 12800000000, // $12.8B
+      duration: '365 days',
+      price: 128472.25,
+      change24h: 52.8,
+      volume24h: 2340000000,
+      trades24h: 18947,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Radio',
+      description: '5G network capacity for ultra-low latency applications',
+      region: 'Global',
+      tps: 1847291,
+      resourceType: 'Network',
+      utilizationRate: 0.912,
+      resourceSupply: 2847291,
+      resourceDemand: 6947382,
+      aiOptimizationScore: 0.993
+    },
+    
+    // Ultra-Premium Resources
+    quantum_supremacy: {
+      id: 'bOSac_QSU_014',
+      type: 'quantum_supremacy',
+      name: '$bQuantum Supremacy Pool',
+      parties: ['IBM Quantum', 'Google Quantum', 'IonQ', 'Rigetti', 'PsiQuantum'],
+      value: 47800000000, // $47.8B
+      duration: '730 days',
+      price: 2478913.30,
+      change24h: 124.7,
+      volume24h: 12890000000,
+      trades24h: 1847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Zap',
+      description: 'Fault-tolerant quantum computing - ultimate scarcity',
+      region: 'Global',
+      tps: 84729,
+      resourceType: 'CPU',
+      utilizationRate: 0.999,
+      resourceSupply: 8472,
+      resourceDemand: 284729,
+      aiOptimizationScore: 1.000
+    },
+    
+    neuromorphic_processing: {
+      id: 'bOSac_NEU_015',
+      type: 'neuromorphic_processing',
+      name: '$bNeuromorphic Brain Chips',
+      parties: ['Intel Loihi', 'IBM TrueNorth', 'BrainChip', 'SynSense', 'Innatera'],
+      value: 18900000000, // $18.9B
+      duration: '540 days',
+      price: 894728.80,
+      change24h: 89.3,
+      volume24h: 3450000000,
+      trades24h: 2847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Activity',
+      description: 'Brain-inspired computing for ultra-efficient AI',
+      region: 'Global',
+      tps: 347291,
+      resourceType: 'CPU',
+      utilizationRate: 0.945,
+      resourceSupply: 47291,
+      resourceDemand: 284729,
+      aiOptimizationScore: 0.998
+    },
+    
+    photonic_networking: {
+      id: 'bOSac_PHO_016',
+      type: 'photonic_networking',
+      name: '$bPhotonic Light Networks',
+      parties: ['Lightmatter', 'Xanadu', 'PsiQuantum', 'Optera', 'Ayar Labs'],
+      value: 23400000000, // $23.4B
+      duration: '456 days',
+      price: 348294.40,
+      change24h: 78.6,
+      volume24h: 5670000000,
+      trades24h: 4817,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Zap',
+      description: 'Light-speed photonic computing and networking',
+      region: 'Global',
+      tps: 2847291,
+      resourceType: 'Network',
+      utilizationRate: 0.892,
+      resourceSupply: 128472,
+      resourceDemand: 847291,
+      aiOptimizationScore: 0.997
+    },
+    
+    dna_storage_bio: {
+      id: 'bOSac_DNA_017',
+      type: 'dna_storage_bio',
+      name: '$bDNA Biological Storage',
+      parties: ['Microsoft', 'Twist Bioscience', 'Catalog', 'DNA Script', 'Iridia'],
+      value: 34800000000, // $34.8B
+      duration: '1095 days',
+      price: 1289477.70,
+      change24h: 156.2,
+      volume24h: 8900000000,
+      trades24h: 847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Database',
+      description: 'DNA-based data storage - ultimate density and longevity',
+      region: 'Global',
+      tps: 28472,
+      resourceType: 'Storage',
+      utilizationRate: 0.978,
+      resourceSupply: 2847,
+      resourceDemand: 84729,
+      aiOptimizationScore: 0.999
+    },
+    
+    // Emerging Technologies
+    carbon_nanotube_compute: {
+      id: 'bOSac_CNT_018',
+      type: 'carbon_nanotube_compute',
+      name: '$bCarbon Nanotube Processors',
+      parties: ['IBM Research', 'MIT', 'Stanford', 'Carbon Electronics', 'Nantero'],
+      value: 12400000000, // $12.4B
+      duration: '630 days',
+      price: 567892.40,
+      change24h: 112.8,
+      volume24h: 2340000000,
+      trades24h: 1847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Cpu',
+      description: 'Next-gen carbon nanotube processors - beyond silicon',
+      region: 'Global',
+      tps: 847291,
+      resourceType: 'CPU',
+      utilizationRate: 0.967,
+      resourceSupply: 18472,
+      resourceDemand: 147291,
+      aiOptimizationScore: 0.996
+    },
+    
+    space_compute_satellite: {
+      id: 'bOSac_SPC_019',
+      type: 'space_compute_satellite',
+      name: '$bSpace Computing Constellation',
+      parties: ['SpaceX', 'Amazon Kuiper', 'OneWeb', 'Planet Labs', 'Relativity'],
+      value: 18700000000, // $18.7B
+      duration: '1825 days',
+      price: 234789.60,
+      change24h: 67.4,
+      volume24h: 4560000000,
+      trades24h: 12847,
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Satellite',
+      description: 'Space-based computing free from terrestrial constraints',
+      region: 'Orbital',
+      tps: 1247891,
+      resourceType: 'Hybrid',
+      utilizationRate: 0.834,
+      resourceSupply: 284729,
+      resourceDemand: 847291,
+      aiOptimizationScore: 0.987
+    },
+    
+    blockchain_asic_mining: {
+      id: 'bOSac_ASC_020',
+      type: 'blockchain_asic_mining',
+      name: '$bASIC Blockchain Processors',
+      parties: ['Bitmain', 'MicroBT', 'Canaan', 'Ebang', 'Innosilicon'],
+      value: 9800000000, // $9.8B
+      duration: '275 days',
+      price: 128947.80,
+      change24h: 34.7,
+      volume24h: 1890000000,
+      trades24h: 28471,
+      status: 'active',
+      tier: 'institutional',
+      icon: 'Cpu',
+      description: 'Specialized ASIC processors for blockchain operations',
+      region: 'Global',
+      tps: 3847291,
+      resourceType: 'CPU',
+      utilizationRate: 0.789,
+      resourceSupply: 1847291,
+      resourceDemand: 2234567,
+      aiOptimizationScore: 0.923
     }
   })
 
@@ -458,7 +764,7 @@ function ExchangeContent() {
                 
                 <div className="text-center">
                   <div className="text-sm text-gray-400">Global TVL</div>
-                  <div className="text-lg font-bold text-orange-400 font-mono">$147.8B</div>
+                  <div className="text-lg font-bold text-orange-400 font-mono">$412.7B</div>
                 </div>
                 
                 <div className="text-center">
@@ -467,8 +773,8 @@ function ExchangeContent() {
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-400">AI Efficiency</div>
-                  <div className="text-lg font-bold text-blue-400 font-mono">97.8%</div>
+                  <div className="text-sm text-gray-400">Active Contracts</div>
+                  <div className="text-lg font-bold text-purple-400 font-mono">{Object.keys(contractData).length}</div>
                 </div>
               </div>
             </div>
@@ -505,7 +811,7 @@ function ExchangeContent() {
               </h3>
             </div>
             
-            <div className="space-y-3 max-h-96 overflow-auto">
+            <div className="space-y-3 max-h-[600px] overflow-auto">
               {Object.values(contractData).map((contract) => (
                 <button
                   key={contract.type}
@@ -689,7 +995,7 @@ function ExchangeContent() {
               <div className="space-y-6">
                 {/* Resource Price Dashboard */}
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                  {Object.values(resourceMetrics).map(resource => {
+                  {Object.values(resourceMetrics).slice(0, 5).map(resource => {
                     const isGPU = resource.type === 'GPU'
                     const isMemory = resource.type === 'Memory'
                     const isNetwork = resource.type === 'Network'
@@ -779,6 +1085,131 @@ function ExchangeContent() {
                       </div>
                     )
                   })}
+                </div>
+                
+                {/* Specialized Resources Section */}
+                <div className="mt-8">
+                  <h3 className="text-xl font-bold mb-4 text-purple-400">Specialized Resources</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                    {Object.values(resourceMetrics).slice(5, 10).map(resource => {
+                      const isGPU = resource.type === 'GPU'
+                      const isMemory = resource.type === 'Memory'
+                      const isNetwork = resource.type === 'Network'
+                      const scarcityLevel = resource.scarcityIndex > 2 ? 'ultra' : resource.scarcityIndex > 1.5 ? 'high' : 'medium'
+                      
+                      return (
+                        <div key={resource.type} className={`rounded-lg p-4 border text-sm ${
+                          scarcityLevel === 'ultra' ? 'bg-gradient-to-br from-purple-900/50 to-pink-900/50 border-purple-700/60' :
+                          scarcityLevel === 'high' ? 'bg-gradient-to-br from-red-900/40 to-orange-900/40 border-red-700/50' :
+                          'bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border-yellow-700/50'
+                        }`}>
+                          <div className="flex items-center gap-2 mb-3">
+                            {resource.type === 'GPU' && <Cpu className="w-5 h-5 text-red-400" />}
+                            {resource.type === 'CPU' && <Server className="w-5 h-5 text-blue-400" />}
+                            {resource.type === 'Memory' && <Database className="w-5 h-5 text-purple-400" />}
+                            {resource.type === 'Storage' && <Database className="w-5 h-5 text-green-400" />}
+                            {resource.type === 'Network' && <Network className="w-5 h-5 text-orange-400" />}
+                            <div>
+                              <h4 className="font-bold text-sm">{resource.type.replace('-', ' ')}</h4>
+                              <div className={`text-xs font-bold ${
+                                scarcityLevel === 'ultra' ? 'text-purple-400' :
+                                scarcityLevel === 'high' ? 'text-red-400' :
+                                'text-yellow-400'
+                              }`}>
+                                {scarcityLevel === 'ultra' ? 'ULTRA RARE' :
+                                 scarcityLevel === 'high' ? 'HIGH DEMAND' :
+                                 'SPECIALIZED'}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">Price</span>
+                              <span className="font-mono text-sm font-bold">
+                                ₿{resource.price.toLocaleString()}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">Scarcity</span>
+                              <span className={`font-mono text-xs font-bold ${
+                                resource.scarcityIndex > 5 ? 'text-purple-400' :
+                                resource.scarcityIndex > 2 ? 'text-red-400' :
+                                'text-yellow-400'
+                              }`}>
+                                {resource.scarcityIndex.toFixed(1)}x
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">AI Efficiency</span>
+                              <span className="font-mono text-xs font-bold text-cyan-400">
+                                {(resource.aiEfficiency * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+                
+                {/* Ultra-Premium Resources Section */}
+                <div className="mt-8">
+                  <h3 className="text-xl font-bold mb-4 text-red-400">Ultra-Premium Resources</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                    {Object.values(resourceMetrics).slice(10).map(resource => {
+                      const scarcityLevel = resource.scarcityIndex > 10 ? 'legendary' : resource.scarcityIndex > 5 ? 'ultra' : 'premium'
+                      
+                      return (
+                        <div key={resource.type} className={`rounded-lg p-4 border text-sm animate-pulse ${
+                          scarcityLevel === 'legendary' ? 'bg-gradient-to-br from-yellow-900/60 to-red-900/60 border-yellow-500/80 shadow-lg shadow-yellow-500/20' :
+                          scarcityLevel === 'ultra' ? 'bg-gradient-to-br from-purple-900/50 to-pink-900/50 border-purple-700/60' :
+                          'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-blue-700/60'
+                        }`}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <Flame className={`w-5 h-5 ${
+                              scarcityLevel === 'legendary' ? 'text-yellow-400' :
+                              scarcityLevel === 'ultra' ? 'text-purple-400' :
+                              'text-blue-400'
+                            } animate-pulse`} />
+                            <div>
+                              <h4 className="font-bold text-sm">{resource.type.replace('-', ' ')}</h4>
+                              <div className={`text-xs font-bold ${
+                                scarcityLevel === 'legendary' ? 'text-yellow-400' :
+                                scarcityLevel === 'ultra' ? 'text-purple-400' :
+                                'text-blue-400'
+                              }`}>
+                                {scarcityLevel === 'legendary' ? 'LEGENDARY' :
+                                 scarcityLevel === 'ultra' ? 'ULTRA RARE' :
+                                 'PREMIUM'}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">Price</span>
+                              <span className="font-mono text-sm font-bold text-yellow-400">
+                                ₿{resource.price.toLocaleString()}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">Scarcity</span>
+                              <span className="font-mono text-xs font-bold text-red-400">
+                                {resource.scarcityIndex.toFixed(1)}x
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-400 text-xs">Utilization</span>
+                              <span className="font-mono text-xs font-bold text-purple-400">
+                                {(resource.utilizationRate * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
 
                 {/* $bOS Revenue Distribution */}
