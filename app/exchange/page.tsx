@@ -980,9 +980,82 @@ function ExchangeContent() {
           <div className="flex-1 p-6 overflow-auto">
             {activeTab === 'resources' && (
               <div className="space-y-6">
-                {/* Resource Price Dashboard */}
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                  {Object.values(resourceMetrics).slice(0, 5).map(resource => {
+                {/* Primary Resources Table */}
+                <div className="bg-gray-900 border border-gray-800">
+                  <div className="border-b border-gray-800 p-3">
+                    <h3 className="text-lg font-bold text-white">Primary Resources</h3>
+                  </div>
+                  
+                  {/* Table Header */}
+                  <div className="grid grid-cols-12 gap-4 p-3 border-b border-gray-800 bg-gray-800 text-xs font-mono text-gray-400 uppercase">
+                    <div className="col-span-2">Resource</div>
+                    <div>Price ₿</div>
+                    <div>24h Change</div>
+                    <div>Volume 24h</div>
+                    <div>Liquidity</div>
+                    <div>Dividend Yield</div>
+                    <div>Supply</div>
+                    <div>Utilization</div>
+                    <div>Scarcity</div>
+                    <div>Contracts</div>
+                    <div>AI Score</div>
+                  </div>
+                  
+                  {/* Table Content */}
+                  <div>
+                    {Object.values(resourceMetrics).slice(0, 5).map((resource, index) => {
+                      const scarcityLevel = resource.scarcityIndex > 1.2 ? 'high' : resource.scarcityIndex > 1.1 ? 'medium' : 'low'
+                      const volume24h = resource.price * resource.demand * 0.1
+                      const liquidity = resource.supply * resource.price * 0.05
+                      const dividendYield = resource.scarcityIndex * 2.5
+                      
+                      return (
+                        <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                          scarcityLevel === 'high' ? 'border-l-2 border-l-red-600' :
+                          scarcityLevel === 'medium' ? 'border-l-2 border-l-yellow-600' :
+                          'border-l-2 border-l-green-600'
+                        }`}>
+                          <div className="col-span-2 flex items-center gap-2">
+                            {resource.type === 'GPU' && <Cpu className="w-4 h-4 text-gray-400" />}
+                            {resource.type === 'CPU' && <Server className="w-4 h-4 text-gray-400" />}
+                            {resource.type === 'Memory' && <Database className="w-4 h-4 text-gray-400" />}
+                            {resource.type === 'Storage' && <Database className="w-4 h-4 text-gray-400" />}
+                            {resource.type === 'Network' && <Network className="w-4 h-4 text-gray-400" />}
+                            <div>
+                              <div className="font-medium text-white">{resource.type}</div>
+                              <div className={`text-xs font-mono ${
+                                scarcityLevel === 'high' ? 'text-red-400' :
+                                scarcityLevel === 'medium' ? 'text-yellow-400' :
+                                'text-green-400'
+                              }`}>
+                                {scarcityLevel === 'high' ? 'HIGH DEMAND' :
+                                 scarcityLevel === 'medium' ? 'MODERATE' :
+                                 'ABUNDANT'}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="font-mono text-white">{resource.price.toLocaleString()}</div>
+                          <div className={`font-mono ${
+                            resource.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
+                          }`}>
+                            {resource.priceChange24h >= 0 ? '+' : ''}{resource.priceChange24h.toFixed(1)}%
+                          </div>
+                          <div className="font-mono text-gray-300">${(volume24h/1000000).toFixed(1)}M</div>
+                          <div className="font-mono text-gray-300">${(liquidity/1000000).toFixed(1)}M</div>
+                          <div className="font-mono text-blue-400">{dividendYield.toFixed(2)}%</div>
+                          <div className="font-mono text-gray-400">{(resource.supply/1000000).toFixed(1)}M</div>
+                          <div className="font-mono text-purple-400">{(resource.utilizationRate * 100).toFixed(1)}%</div>
+                          <div className={`font-mono font-bold ${
+                            resource.scarcityIndex > 1.2 ? 'text-red-400' :
+                            resource.scarcityIndex > 1.1 ? 'text-yellow-400' :
+                            'text-green-400'
+                          }`}>
+                            {resource.scarcityIndex.toFixed(2)}x
+                          </div>
+                          <div className="font-mono text-gray-400">{resource.contracts.toLocaleString()}</div>
+                          <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
+                        </div>
+                      )
                     const isGPU = resource.type === 'GPU'
                     const isMemory = resource.type === 'Memory'
                     const isNetwork = resource.type === 'Network'
@@ -1071,14 +1144,79 @@ function ExchangeContent() {
                         </div>
                       </div>
                     )
-                  })}
+                    })}
+                  </div>
                 </div>
                 
-                {/* Specialized Resources Section */}
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-purple-400">Specialized Resources</h3>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                    {Object.values(resourceMetrics).slice(5, 10).map(resource => {
+                {/* Specialized Resources Table */}
+                <div className="bg-gray-900 border border-gray-800 mt-6">
+                  <div className="border-b border-gray-800 p-3">
+                    <h3 className="text-lg font-bold text-white">Specialized Resources</h3>
+                  </div>
+                  
+                  {/* Table Header */}
+                  <div className="grid grid-cols-12 gap-4 p-3 border-b border-gray-800 bg-gray-800 text-xs font-mono text-gray-400 uppercase">
+                    <div className="col-span-2">Resource</div>
+                    <div>Price ₿</div>
+                    <div>24h Change</div>
+                    <div>Volume 24h</div>
+                    <div>Liquidity</div>
+                    <div>Dividend Yield</div>
+                    <div>Supply</div>
+                    <div>Utilization</div>
+                    <div>Scarcity</div>
+                    <div>Contracts</div>
+                    <div>AI Score</div>
+                  </div>
+                  {Object.values(resourceMetrics).slice(5, 10).map((resource, index) => {
+                    const scarcityLevel = resource.scarcityIndex > 5 ? 'ultra' : resource.scarcityIndex > 2 ? 'high' : 'medium'
+                    const volume24h = resource.price * resource.demand * 0.08
+                    const liquidity = resource.supply * resource.price * 0.03
+                    const dividendYield = resource.scarcityIndex * 3.2
+                    
+                    return (
+                      <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                        scarcityLevel === 'ultra' ? 'border-l-2 border-l-purple-600' :
+                        scarcityLevel === 'high' ? 'border-l-2 border-l-red-600' :
+                        'border-l-2 border-l-orange-600'
+                      }`}>
+                        <div className="col-span-2 flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-gray-400" />
+                          <div>
+                            <div className="font-medium text-white">{resource.type.replace('-', ' ').toUpperCase()}</div>
+                            <div className={`text-xs font-mono ${
+                              scarcityLevel === 'ultra' ? 'text-purple-400' :
+                              scarcityLevel === 'high' ? 'text-red-400' :
+                              'text-orange-400'
+                            }`}>
+                              {scarcityLevel === 'ultra' ? 'ULTRA RARE' :
+                               scarcityLevel === 'high' ? 'HIGH DEMAND' :
+                               'SPECIALIZED'}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="font-mono text-white">{resource.price.toLocaleString()}</div>
+                        <div className={`font-mono ${
+                          resource.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {resource.priceChange24h >= 0 ? '+' : ''}{resource.priceChange24h.toFixed(1)}%
+                        </div>
+                        <div className="font-mono text-gray-300">${(volume24h/1000000).toFixed(1)}M</div>
+                        <div className="font-mono text-gray-300">${(liquidity/1000000).toFixed(1)}M</div>
+                        <div className="font-mono text-blue-400">{dividendYield.toFixed(2)}%</div>
+                        <div className="font-mono text-gray-400">{(resource.supply/1000).toFixed(0)}K</div>
+                        <div className="font-mono text-purple-400">{(resource.utilizationRate * 100).toFixed(1)}%</div>
+                        <div className={`font-mono font-bold ${
+                          resource.scarcityIndex > 5 ? 'text-purple-400' :
+                          resource.scarcityIndex > 2 ? 'text-red-400' :
+                          'text-orange-400'
+                        }`}>
+                          {resource.scarcityIndex.toFixed(2)}x
+                        </div>
+                        <div className="font-mono text-gray-400">{resource.contracts.toLocaleString()}</div>
+                        <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
+                      </div>
+                    )
                       const isGPU = resource.type === 'GPU'
                       const isMemory = resource.type === 'Memory'
                       const isNetwork = resource.type === 'Network'
@@ -1140,11 +1278,79 @@ function ExchangeContent() {
                   </div>
                 </div>
                 
-                {/* Ultra-Premium Resources Section */}
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-red-400">Ultra-Premium Resources</h3>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                    {Object.values(resourceMetrics).slice(10).map(resource => {
+                {/* Ultra-Premium Resources Table */}
+                <div className="bg-gray-900 border border-gray-800 mt-6">
+                  <div className="border-b border-gray-800 p-3">
+                    <h3 className="text-lg font-bold text-white">Ultra-Premium Resources</h3>
+                  </div>
+                  
+                  {/* Table Header */}
+                  <div className="grid grid-cols-12 gap-4 p-3 border-b border-gray-800 bg-gray-800 text-xs font-mono text-gray-400 uppercase">
+                    <div className="col-span-2">Resource</div>
+                    <div>Price ₿</div>
+                    <div>24h Change</div>
+                    <div>Volume 24h</div>
+                    <div>Liquidity</div>
+                    <div>Dividend Yield</div>
+                    <div>Supply</div>
+                    <div>Utilization</div>
+                    <div>Scarcity</div>
+                    <div>Contracts</div>
+                    <div>AI Score</div>
+                  </div>
+                  {Object.values(resourceMetrics).slice(10).map((resource, index) => {
+                    const scarcityLevel = resource.scarcityIndex > 10 ? 'legendary' : resource.scarcityIndex > 5 ? 'ultra' : 'premium'
+                    const volume24h = resource.price * resource.demand * 0.05
+                    const liquidity = resource.supply * resource.price * 0.02
+                    const dividendYield = resource.scarcityIndex * 4.8
+                    
+                    return (
+                      <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                        scarcityLevel === 'legendary' ? 'border-l-2 border-l-yellow-500 bg-yellow-500/5' :
+                        scarcityLevel === 'ultra' ? 'border-l-2 border-l-purple-600' :
+                        'border-l-2 border-l-blue-600'
+                      }`}>
+                        <div className="col-span-2 flex items-center gap-2">
+                          <Flame className={`w-4 h-4 ${
+                            scarcityLevel === 'legendary' ? 'text-yellow-400' :
+                            scarcityLevel === 'ultra' ? 'text-purple-400' :
+                            'text-blue-400'
+                          }`} />
+                          <div>
+                            <div className="font-medium text-white">{resource.type.replace('-', ' ').toUpperCase()}</div>
+                            <div className={`text-xs font-mono ${
+                              scarcityLevel === 'legendary' ? 'text-yellow-400' :
+                              scarcityLevel === 'ultra' ? 'text-purple-400' :
+                              'text-blue-400'
+                            }`}>
+                              {scarcityLevel === 'legendary' ? 'LEGENDARY' :
+                               scarcityLevel === 'ultra' ? 'ULTRA RARE' :
+                               'PREMIUM'}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="font-mono text-white">{resource.price.toLocaleString()}</div>
+                        <div className={`font-mono ${
+                          resource.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {resource.priceChange24h >= 0 ? '+' : ''}{resource.priceChange24h.toFixed(1)}%
+                        </div>
+                        <div className="font-mono text-gray-300">${(volume24h/1000000).toFixed(1)}M</div>
+                        <div className="font-mono text-gray-300">${(liquidity/1000000).toFixed(1)}M</div>
+                        <div className="font-mono text-blue-400">{dividendYield.toFixed(2)}%</div>
+                        <div className="font-mono text-gray-400">{(resource.supply/1000).toFixed(0)}K</div>
+                        <div className="font-mono text-purple-400">{(resource.utilizationRate * 100).toFixed(1)}%</div>
+                        <div className={`font-mono font-bold ${
+                          resource.scarcityIndex > 10 ? 'text-yellow-400' :
+                          resource.scarcityIndex > 5 ? 'text-purple-400' :
+                          'text-blue-400'
+                        }`}>
+                          {resource.scarcityIndex.toFixed(2)}x
+                        </div>
+                        <div className="font-mono text-gray-400">{resource.contracts.toLocaleString()}</div>
+                        <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
+                      </div>
+                    )
                       const scarcityLevel = resource.scarcityIndex > 10 ? 'legendary' : resource.scarcityIndex > 5 ? 'ultra' : 'premium'
                       
                       return (
