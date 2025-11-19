@@ -8,6 +8,7 @@ import Dock from '@/components/Dock'
 import MinimalDock from '@/components/MinimalDock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
 import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
+import ContractsBar from '@/components/ContractsBar'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { getCurrentThemeConfig, applyTheme } from '@/lib/advanced-themes'
 
@@ -175,6 +176,9 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
           )}
         </>
       )}
+
+      {/* Contracts Bar - show globally when not during BIOS/boot */}
+      {shouldShowGlobalUI && <ContractsBar />}
 
       {/* Modal backdrop */}
       {showLoginModal && (
