@@ -24,32 +24,6 @@ export default function ContractsDownloadPage() {
 
   return (
     <div className="h-screen w-full bg-black text-white overflow-y-scroll">
-      {/* Header */}
-      <div className="border-b-2 border-white bg-black">
-        <div className="max-w-7xl mx-auto px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
-                  <span className="font-bold text-black text-lg">₿</span>
-                </div>
-                <span className="font-bold text-2xl">Bitcoin OS</span>
-              </Link>
-            </div>
-            <nav className="flex items-center space-x-8">
-              <Link href="/docs" className="text-gray-300 hover:text-white transition-colors font-medium">
-                Documentation
-              </Link>
-              <Link href="/platform" className="text-gray-300 hover:text-white transition-colors font-medium">
-                Platform
-              </Link>
-              <Link href="/contracts" className="text-gray-300 hover:text-white transition-colors font-medium">
-                Contracts
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
 
       {/* Document Header */}
       <div className="bg-gray-900 border-b-2 border-gray-700 py-8">
@@ -65,7 +39,7 @@ export default function ContractsDownloadPage() {
           </h2>
           <div className="text-sm text-gray-500 border-t border-gray-700 pt-4 mt-4">
             Document Version: 2.0 | Date: November 2025 | Classification: Public<br />
-            Inventor: Richard Boase | Framework: bOSacs (Bitcoin OS Atomic Contracts)
+            Framework: bOSacs (Bitcoin OS Atomic Contracts)
           </div>
         </div>
       </div>
