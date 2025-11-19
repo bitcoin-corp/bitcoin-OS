@@ -732,66 +732,62 @@ function ExchangeContent() {
   }
 
   return (
-    <div className="h-full overflow-auto bg-gradient-to-br from-black via-gray-900 to-black text-white">
-      {/* Massive Scale Header */}
-      <div className="relative border-b border-orange-500/20 bg-gradient-to-r from-black/90 via-gray-900/90 to-black/90 backdrop-blur-xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-red-500/5 to-orange-500/5 animate-pulse" />
-        <div className="relative container mx-auto px-6 py-6">
+    <div className="h-full overflow-auto bg-gray-950 text-white">
+      {/* Professional Header */}
+      <div className="border-b border-gray-800 bg-gray-900">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-4">
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-                    <Rocket className="w-6 h-6 text-black animate-pulse" />
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black animate-pulse" />
+                <div className="w-8 h-8 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                  <Briefcase className="w-5 h-5 text-gray-300" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-400 via-red-500 to-yellow-600 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold text-white">
                     bOS Atomic Contracts Exchange
                   </h1>
-                  <p className="text-sm text-gray-400 font-mono">Enterprise Bitcoin OS Atomic Contracts • Global Scale</p>
+                  <p className="text-sm text-gray-500 font-mono">Enterprise Resource Allocation | Real-time Settlement</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3 px-4 py-2 bg-red-500/20 border border-red-500/50 rounded-full animate-pulse">
-                  <div className="w-2 h-2 bg-red-400 rounded-full animate-ping" />
-                  <span className="text-sm font-bold text-red-400">LIVE HIGH-FREQUENCY</span>
-                  <div className="w-px h-4 bg-red-500/50" />
-                  <span className="text-xs text-red-300 font-mono">{globalTPS.toLocaleString()} TPS</span>
+                <div className="flex items-center gap-3 px-3 py-1 bg-gray-800 border border-gray-700">
+                  <div className="w-2 h-2 bg-green-500" />
+                  <span className="text-sm font-medium text-gray-300">LIVE</span>
+                  <div className="w-px h-3 bg-gray-600" />
+                  <span className="text-xs text-gray-400 font-mono">{globalTPS.toLocaleString()} TPS</span>
                 </div>
                 
-                <div className="text-center">
-                  <div className="text-sm text-gray-400">Global TVL</div>
-                  <div className="text-lg font-bold text-orange-400 font-mono">$412.7B</div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500">TVL</div>
+                  <div className="text-sm font-bold text-white font-mono">$412.7B</div>
                 </div>
                 
-                <div className="text-center">
-                  <div className="text-sm text-gray-400">24h Fees → $bOS</div>
-                  <div className="text-lg font-bold text-green-400 font-mono">${(revenueMetrics.holderDividends/1000000).toFixed(1)}M</div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500">24h Fees</div>
+                  <div className="text-sm font-bold text-white font-mono">${(revenueMetrics.holderDividends/1000000).toFixed(1)}M</div>
                 </div>
                 
-                <div className="text-center">
-                  <div className="text-sm text-gray-400">Active Contracts</div>
-                  <div className="text-lg font-bold text-purple-400 font-mono">{Object.keys(contractData).length}</div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500">Contracts</div>
+                  <div className="text-sm font-bold text-white font-mono">{Object.keys(contractData).length}</div>
                 </div>
               </div>
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1 bg-green-500/20 border border-green-500/50 rounded">
-                <Radio className="w-4 h-4 text-green-400 animate-pulse" />
-                <span className="text-xs font-mono text-green-400">STREAMING</span>
+              <div className="flex items-center gap-2 px-2 py-1 bg-gray-800 border border-gray-700">
+                <div className="w-2 h-2 bg-green-500" />
+                <span className="text-xs font-mono text-gray-400">STREAMING</span>
               </div>
               
               <button
                 type="button"
                 onClick={() => setIsLive(!isLive)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg hover:from-red-500/30 hover:to-orange-500/30 transition-all duration-300"
+                className="flex items-center gap-2 px-3 py-1 bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors"
               >
                 {isLive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                <span className="text-sm font-medium">{isLive ? 'Pause Feed' : 'Resume Feed'}</span>
+                <span className="text-sm">{isLive ? 'Pause' : 'Resume'}</span>
               </button>
             </div>
           </div>
@@ -799,15 +795,15 @@ function ExchangeContent() {
       </div>
 
       <div className="flex h-[calc(100vh-100px)]">
-        {/* Enterprise Contract Sidebar */}
-        <div className="w-96 border-r border-orange-500/20 bg-gradient-to-b from-gray-900/80 via-black/90 to-gray-900/80 backdrop-blur-sm overflow-auto">
-          <div className="p-6 border-b border-orange-500/20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                <Flame className="w-4 h-4 text-black animate-pulse" />
+        {/* Contract Sidebar */}
+        <div className="w-96 border-r border-gray-800 bg-gray-900 overflow-auto">
+          <div className="p-4 border-b border-gray-800">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-6 h-6 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                <FileText className="w-4 h-4 text-gray-400" />
               </div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-red-400 to-orange-500 bg-clip-text text-transparent">
-                Enterprise Contracts
+              <h3 className="text-lg font-bold text-white">
+                Active Contracts
               </h3>
             </div>
             
@@ -817,29 +813,29 @@ function ExchangeContent() {
                   key={contract.type}
                   type="button"
                   onClick={() => setSelectedContract(contract.type)}
-                  className={`w-full p-4 rounded-xl transition-all duration-300 text-left group border ${
+                  className={`w-full p-3 text-left group border transition-colors ${
                     selectedContract === contract.type
-                      ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 border-red-500/50 shadow-lg shadow-red-500/20'
-                      : 'bg-gray-800/30 hover:bg-gray-700/40 border-gray-700/50 hover:border-red-500/30'
+                      ? 'bg-gray-800 border-gray-600'
+                      : 'bg-gray-900 hover:bg-gray-800 border-gray-800 hover:border-gray-700'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-yellow-500/20">
+                      <div className="p-1 bg-gray-800 border border-gray-700">
                         {getContractIcon(contract.icon, contract.tier)}
                       </div>
                       <div>
-                        <div className="font-semibold text-white group-hover:text-red-400 transition-colors text-sm">
+                        <div className="font-medium text-white text-sm">
                           {contract.name}
                         </div>
-                        <div className="text-xs text-gray-400 mt-1">
-                          {contract.parties.length} enterprises • {contract.region}
+                        <div className="text-xs text-gray-500 mt-1">
+                          {contract.parties.length} parties • {contract.region}
                         </div>
                       </div>
                     </div>
                     
-                    <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold ${
-                      contract.change24h >= 0 ? 'text-green-400 bg-green-500/20' : 'text-red-400 bg-red-500/20'
+                    <div className={`flex items-center gap-1 px-2 py-1 bg-gray-800 border border-gray-700 text-xs font-mono ${
+                      contract.change24h >= 0 ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {contract.change24h >= 0 ? 
                         <ArrowUpRight className="w-3 h-3" /> : 
@@ -854,23 +850,23 @@ function ExchangeContent() {
                       <div className="text-sm font-bold font-mono text-white">
                         {formatPrice(contract.price)}
                       </div>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-600">
                         TVL: {formatValue(contract.value)}
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <div className="text-xs text-gray-400">{contract.trades24h.toLocaleString()} trades</div>
-                      <div className="text-xs text-yellow-400 bg-yellow-500/20 px-2 py-1 rounded">
+                      <div className="text-xs text-gray-500">{contract.trades24h.toLocaleString()}</div>
+                      <div className="text-xs text-gray-400 bg-gray-800 border border-gray-700 px-1">
                         {contract.tier.toUpperCase()}
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-2 pt-2 border-t border-gray-700/50">
+                  <div className="mt-2 pt-2 border-t border-gray-800">
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-gray-400">{contract.description}</div>
-                      <div className="text-xs font-mono text-orange-400">
+                      <div className="text-xs text-gray-500">{contract.description}</div>
+                      <div className="text-xs font-mono text-gray-400">
                         {contract.tps.toLocaleString()} TPS
                       </div>
                     </div>
@@ -883,13 +879,13 @@ function ExchangeContent() {
           {/* Live Transaction Feed */}
           <div className="p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Activity className="w-5 h-5 text-red-500 animate-pulse" />
+              <Activity className="w-5 h-5 text-red-500 " />
               <h4 className="font-semibold text-red-400">Live Transactions</h4>
             </div>
             
             <div className="space-y-2 max-h-64 overflow-auto">
               {liveTransactions.map((tx, i) => (
-                <div key={tx.id} className="bg-gray-800/50 rounded p-3 border-l-2 border-green-500 animate-pulse">
+                <div key={tx.id} className="bg-gray-800/50 rounded p-3 border-l-2 border-green-500 ">
                   <div className="flex justify-between items-start mb-1">
                     <div className="text-xs font-mono text-green-400">
                       {tx.id}
@@ -912,7 +908,7 @@ function ExchangeContent() {
           {/* Global Network Status */}
           <div className="p-6 border-t border-gray-700/50">
             <div className="space-y-4">
-              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+              <div className="bg-gray-800/30 p-3 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Globe className="w-4 h-4 text-blue-500" />
@@ -923,7 +919,7 @@ function ExchangeContent() {
                 <div className="text-xs text-gray-500">Transactions Per Second</div>
               </div>
               
-              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+              <div className="bg-gray-800/30 p-3 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Server className="w-4 h-4 text-purple-500" />
@@ -934,7 +930,7 @@ function ExchangeContent() {
                 <div className="text-xs text-gray-500">Active nodes globally</div>
               </div>
               
-              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50">
+              <div className="bg-gray-800/30 p-3 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Lightning className="w-4 h-4 text-yellow-500" />
@@ -951,7 +947,7 @@ function ExchangeContent() {
         {/* Main Interface */}
         <div className="flex-1 flex flex-col">
           {/* Tabs */}
-          <div className="flex border-b border-red-500/20 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm">
+          <div className="flex border-b border-gray-800 bg-gray-900">
             {[
               { id: 'resources', label: 'Resource Markets', icon: Gauge, color: 'blue' },
               { id: 'global', label: 'Global Network', icon: Globe, color: 'red' },
@@ -962,19 +958,14 @@ function ExchangeContent() {
                 key={id}
                 type="button"
                 onClick={() => setActiveTab(id as any)}
-                className={`flex items-center gap-3 px-8 py-5 border-b-2 transition-all duration-300 group relative ${
+                className={`flex items-center gap-3 px-6 py-3 border-b-2 transition-colors ${
                   activeTab === id
-                    ? `border-${color}-500 text-${color}-400 bg-${color}-500/10 shadow-lg`
-                    : 'border-transparent text-gray-400 hover:text-white hover:bg-gray-800/30 hover:border-gray-600'
+                    ? 'border-white text-white bg-gray-800'
+                    : 'border-transparent text-gray-500 hover:text-white hover:bg-gray-800'
                 }`}
               >
-                <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
-                  activeTab === id ? `text-${color}-400` : ''
-                }`} />
+                <Icon className="w-4 h-4" />
                 <span className="font-medium">{label}</span>
-                {activeTab === id && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-orange-500/5 rounded-t-lg" />
-                )}
               </button>
             ))}
             
@@ -1002,10 +993,10 @@ function ExchangeContent() {
                     const scarcityLevel = resource.scarcityIndex > 1.2 ? 'high' : resource.scarcityIndex > 1.1 ? 'medium' : 'low'
                     
                     return (
-                      <div key={resource.type} className={`rounded-lg p-6 border ${
-                        scarcityLevel === 'high' ? 'bg-gradient-to-br from-red-900/40 to-orange-900/40 border-red-700/50' :
-                        scarcityLevel === 'medium' ? 'bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border-yellow-700/50' :
-                        'bg-gradient-to-br from-green-900/40 to-teal-900/40 border-green-700/50'
+                      <div key={resource.type} className={`p-4 border ${
+                        scarcityLevel === 'high' ? 'bg-gray-900 border-red-800' :
+                        scarcityLevel === 'medium' ? 'bg-gray-900 border-yellow-800' :
+                        'bg-gray-900 border-green-800'
                       }`}>
                         <div className="flex items-center gap-3 mb-4">
                           {resource.type === 'GPU' && <Cpu className="w-8 h-8 text-red-400" />}
@@ -1098,10 +1089,10 @@ function ExchangeContent() {
                       const scarcityLevel = resource.scarcityIndex > 2 ? 'ultra' : resource.scarcityIndex > 1.5 ? 'high' : 'medium'
                       
                       return (
-                        <div key={resource.type} className={`rounded-lg p-4 border text-sm ${
-                          scarcityLevel === 'ultra' ? 'bg-gradient-to-br from-purple-900/50 to-pink-900/50 border-purple-700/60' :
-                          scarcityLevel === 'high' ? 'bg-gradient-to-br from-red-900/40 to-orange-900/40 border-red-700/50' :
-                          'bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border-yellow-700/50'
+                        <div key={resource.type} className={`p-3 border text-sm ${
+                          scarcityLevel === 'ultra' ? 'bg-gray-900 border-purple-800' :
+                          scarcityLevel === 'high' ? 'bg-gray-900 border-red-800' :
+                          'bg-gray-900 border-yellow-800'
                         }`}>
                           <div className="flex items-center gap-2 mb-3">
                             {resource.type === 'GPU' && <Cpu className="w-5 h-5 text-red-400" />}
@@ -1161,17 +1152,17 @@ function ExchangeContent() {
                       const scarcityLevel = resource.scarcityIndex > 10 ? 'legendary' : resource.scarcityIndex > 5 ? 'ultra' : 'premium'
                       
                       return (
-                        <div key={resource.type} className={`rounded-lg p-4 border text-sm animate-pulse ${
-                          scarcityLevel === 'legendary' ? 'bg-gradient-to-br from-yellow-900/60 to-red-900/60 border-yellow-500/80 shadow-lg shadow-yellow-500/20' :
-                          scarcityLevel === 'ultra' ? 'bg-gradient-to-br from-purple-900/50 to-pink-900/50 border-purple-700/60' :
-                          'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-blue-700/60'
+                        <div key={resource.type} className={`p-3 border text-sm  ${
+                          scarcityLevel === 'legendary' ? 'bg-gray-900 border-yellow-600' :
+                          scarcityLevel === 'ultra' ? 'bg-gray-900 border-purple-800' :
+                          'bg-gray-900 border-blue-800'
                         }`}>
                           <div className="flex items-center gap-2 mb-3">
                             <Flame className={`w-5 h-5 ${
                               scarcityLevel === 'legendary' ? 'text-yellow-400' :
                               scarcityLevel === 'ultra' ? 'text-purple-400' :
                               'text-blue-400'
-                            } animate-pulse`} />
+                            } `} />
                             <div>
                               <h4 className="font-bold text-sm">{resource.type.replace('-', ' ')}</h4>
                               <div className={`text-xs font-bold ${
@@ -1225,7 +1216,7 @@ function ExchangeContent() {
                   </div>
                   
                   <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    <div className="bg-black/30 rounded-lg p-4 border border-green-700/30">
+                    <div className="bg-black/30 p-3 border border-green-700/30">
                       <div className="text-sm text-gray-400 mb-1">24h Total Fees</div>
                       <div className="text-2xl font-bold font-mono text-green-400">
                         ${(revenueMetrics.totalFees24h/1000000).toFixed(1)}M
@@ -1233,7 +1224,7 @@ function ExchangeContent() {
                       <div className="text-xs text-green-300 mt-1">1% of all transactions</div>
                     </div>
                     
-                    <div className="bg-black/30 rounded-lg p-4 border border-emerald-700/30">
+                    <div className="bg-black/30 p-3 border border-emerald-700/30">
                       <div className="text-sm text-gray-400 mb-1">Shareholder Dividends</div>
                       <div className="text-2xl font-bold font-mono text-emerald-400">
                         ${(revenueMetrics.holderDividends/1000000).toFixed(1)}M
@@ -1241,7 +1232,7 @@ function ExchangeContent() {
                       <div className="text-xs text-emerald-300 mt-1">75% to $bOS holders</div>
                     </div>
                     
-                    <div className="bg-black/30 rounded-lg p-4 border border-blue-700/30">
+                    <div className="bg-black/30 p-3 border border-blue-700/30">
                       <div className="text-sm text-gray-400 mb-1">Operations Fund</div>
                       <div className="text-2xl font-bold font-mono text-blue-400">
                         ${((revenueMetrics.totalFees24h - revenueMetrics.holderDividends)/1000000).toFixed(1)}M
@@ -1249,7 +1240,7 @@ function ExchangeContent() {
                       <div className="text-xs text-blue-300 mt-1">25% for development</div>
                     </div>
                     
-                    <div className="bg-black/30 rounded-lg p-4 border border-purple-700/30">
+                    <div className="bg-black/30 p-3 border border-purple-700/30">
                       <div className="text-sm text-gray-400 mb-1">Next Distribution</div>
                       <div className="text-lg font-bold font-mono text-purple-400">
                         {revenueMetrics.nextDistribution.toLocaleTimeString()}
@@ -1263,7 +1254,7 @@ function ExchangeContent() {
                 <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-700/30 p-6">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                      <Activity className="w-5 h-5 text-purple-400 animate-pulse" />
+                      <Activity className="w-5 h-5 text-purple-400 " />
                     </div>
                     <h3 className="text-xl font-bold text-purple-400">AI Coasian Load Balancing</h3>
                     <div className="text-sm text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">
@@ -1336,7 +1327,7 @@ function ExchangeContent() {
               <div className="space-y-6">
                 {/* Global Stats Dashboard */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <div className="bg-gradient-to-br from-red-900/30 to-orange-900/30 rounded-lg p-6 border border-red-700/30">
+                  <div className="bg-gradient-to-br from-red-900/30 to-orange-900/30 p-4 border border-red-700/30">
                     <div className="flex items-center gap-3 mb-4">
                       <Rocket className="w-8 h-8 text-red-400" />
                       <div>
@@ -1347,7 +1338,7 @@ function ExchangeContent() {
                     <div className="text-green-400 text-sm">+24.7% from yesterday</div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg p-6 border border-blue-700/30">
+                  <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 p-4 border border-blue-700/30">
                     <div className="flex items-center gap-3 mb-4">
                       <Building className="w-8 h-8 text-blue-400" />
                       <div>
@@ -1358,7 +1349,7 @@ function ExchangeContent() {
                     <div className="text-yellow-400 text-sm">Fortune 500 companies</div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-green-900/30 to-teal-900/30 rounded-lg p-6 border border-green-700/30">
+                  <div className="bg-gradient-to-br from-green-900/30 to-teal-900/30 p-4 border border-green-700/30">
                     <div className="flex items-center gap-3 mb-4">
                       <Lightning className="w-8 h-8 text-green-400" />
                       <div>
@@ -1369,7 +1360,7 @@ function ExchangeContent() {
                     <div className="text-green-400 text-sm">Real-time processing</div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-lg p-6 border border-yellow-700/30">
+                  <div className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 p-4 border border-yellow-700/30">
                     <div className="flex items-center gap-3 mb-4">
                       <Shield className="w-8 h-8 text-yellow-400" />
                       <div>
@@ -1389,7 +1380,7 @@ function ExchangeContent() {
                   </h3>
                   <div className="h-96 flex items-center justify-center text-gray-400 bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-lg border border-blue-700/30">
                     <div className="text-center">
-                      <Activity className="w-16 h-16 mx-auto mb-4 text-blue-400 animate-pulse" />
+                      <Activity className="w-16 h-16 mx-auto mb-4 text-blue-400 " />
                       <p className="text-lg font-semibold">Live Global Network Visualization</p>
                       <p className="text-sm">Real-time contract execution across 67 countries</p>
                       <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
@@ -1532,7 +1523,7 @@ function ExchangeContent() {
                   <h3 className="font-bold mb-4 text-xl">Network Performance Analytics</h3>
                   <div className="h-80 flex items-center justify-center text-gray-400 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-lg border border-purple-700/30">
                     <div className="text-center">
-                      <BarChart3 className="w-16 h-16 mx-auto mb-4 text-purple-400 animate-pulse" />
+                      <BarChart3 className="w-16 h-16 mx-auto mb-4 text-purple-400 " />
                       <p className="text-lg font-semibold">Enterprise Performance Dashboard</p>
                       <p className="text-sm">Real-time analytics for {contractData[selectedContract].name}</p>
                       <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
