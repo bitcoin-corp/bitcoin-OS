@@ -53,6 +53,30 @@ interface BOSacContract {
   description: string
   region: string
   tps: number
+  resourceType: 'GPU' | 'CPU' | 'Memory' | 'Storage' | 'Network' | 'Hybrid'
+  utilizationRate: number
+  resourceSupply: number
+  resourceDemand: number
+  aiOptimizationScore: number
+}
+
+interface ResourceMetrics {
+  type: 'GPU' | 'CPU' | 'Memory' | 'Storage' | 'Network'
+  price: number
+  priceChange24h: number
+  supply: number
+  demand: number
+  utilizationRate: number
+  scarcityIndex: number
+  contracts: number
+  aiEfficiency: number
+}
+
+interface RevenueMetrics {
+  totalFees24h: number
+  holderDividends: number
+  distributionRate: number
+  nextDistribution: Date
 }
 
 interface LiveTransaction {
@@ -66,168 +90,226 @@ interface LiveTransaction {
 
 function ExchangeContent() {
   const searchParams = useSearchParams()
-  const [activeTab, setActiveTab] = useState<'trade' | 'global' | 'analytics'>('global')
-  const [selectedContract, setSelectedContract] = useState<string>('supply_chain_mega')
+  const [activeTab, setActiveTab] = useState<'resources' | 'trade' | 'global' | 'analytics'>('resources')
+  const [selectedContract, setSelectedContract] = useState<string>('ai_training_gpu')
   const [isLive, setIsLive] = useState(true)
   const [globalTPS, setGlobalTPS] = useState(3247891)
   const [liveTransactions, setLiveTransactions] = useState<LiveTransaction[]>([])
+  const [resourceMetrics, setResourceMetrics] = useState<Record<string, ResourceMetrics>>({})
+  const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics>({
+    totalFees24h: 529000000, // $529M
+    holderDividends: 529000000 * 0.75, // 75% to holders
+    distributionRate: 0.01, // 1% fee
+    nextDistribution: new Date(Date.now() + 3600000) // 1 hour
+  })
   
   useEffect(() => {
     const tab = searchParams?.get('tab')
-    if (tab === 'trade' || tab === 'global' || tab === 'analytics') {
+    if (tab === 'resources' || tab === 'trade' || tab === 'global' || tab === 'analytics') {
       setActiveTab(tab)
     }
   }, [searchParams])
 
-  // Massive scale bOSacs contract data
+  // Initialize resource metrics
+  useEffect(() => {
+    setResourceMetrics({
+      GPU: { type: 'GPU', price: 12847.50, priceChange24h: 24.7, supply: 2847291, demand: 3456789, utilizationRate: 0.847, scarcityIndex: 1.21, contracts: 12847, aiEfficiency: 0.987 },
+      CPU: { type: 'CPU', price: 4567.25, priceChange24h: 12.3, supply: 8945672, demand: 7234567, utilizationRate: 0.745, scarcityIndex: 0.81, contracts: 8934, aiEfficiency: 0.954 },
+      Memory: { type: 'Memory', price: 2847.80, priceChange24h: 18.9, supply: 12847291, demand: 15647382, utilizationRate: 0.923, scarcityIndex: 1.18, contracts: 15672, aiEfficiency: 0.972 },
+      Storage: { type: 'Storage', price: 1234.45, priceChange24h: 8.4, supply: 45672891, demand: 42847392, utilizationRate: 0.678, scarcityIndex: 0.94, contracts: 28471, aiEfficiency: 0.941 },
+      Network: { type: 'Network', price: 6789.15, priceChange24h: 31.2, supply: 5647291, demand: 8947382, utilizationRate: 0.845, scarcityIndex: 1.58, contracts: 9847, aiEfficiency: 0.995 }
+    })
+  }, [])
+
+  // Dynamic resource-based bOSacs contract data
   const [contractData, setContractData] = useState<Record<string, BOSacContract>>({
-    supply_chain_mega: { 
-      id: 'bOSac_SC_001',
-      type: 'supply_chain_mega', 
-      name: 'Global Supply Chain Network', 
-      parties: ['Amazon', 'Walmart', 'FedEx', 'UPS', 'Maersk', 'DHL'],
-      value: 2400000000, // $2.4B
-      duration: '365 days',
-      price: 15847.50, 
-      change24h: 18.7, 
-      volume24h: 487000000, 
-      trades24h: 12847, 
-      status: 'active',
-      tier: 'enterprise',
-      icon: 'Network',
-      description: 'AI-optimized global logistics coordination across 67 countries',
-      region: 'Global',
-      tps: 847291
-    },
-    ai_compute_consortium: { 
-      id: 'bOSac_AI_002',
-      type: 'ai_compute_consortium', 
-      name: 'AI Compute Consortium', 
-      parties: ['OpenAI', 'Google', 'Microsoft', 'Meta', 'NVIDIA', 'Tesla'],
+    ai_training_gpu: { 
+      id: 'bOSac_GPU_001',
+      type: 'ai_training_gpu', 
+      name: '$bVideo AI Training Cluster', 
+      parties: ['OpenAI', 'Meta', 'Google', 'Anthropic', 'xAI', 'Mistral'],
       value: 8900000000, // $8.9B
       duration: '180 days',
-      price: 89247.25, 
-      change24h: 24.3, 
-      volume24h: 1200000000, 
-      trades24h: 23941, 
+      price: 89247.50, 
+      change24h: 34.7, 
+      volume24h: 2400000000, 
+      trades24h: 45872, 
       status: 'active',
       tier: 'enterprise',
       icon: 'Cpu',
-      description: 'Distributed AI training across 247 data centers globally',
+      description: 'High-demand GPU clusters for AI video generation causing GPU scarcity',
       region: 'Global',
-      tps: 1247891
+      tps: 2847291,
+      resourceType: 'GPU',
+      utilizationRate: 0.947,
+      resourceSupply: 2847291,
+      resourceDemand: 4567382,
+      aiOptimizationScore: 0.987
     },
-    finance_settlement: { 
-      id: 'bOSac_FIN_003',
-      type: 'finance_settlement', 
-      name: 'Cross-Border Settlement Network', 
-      parties: ['JPMorgan', 'SWIFT', 'Bank of America', 'HSBC', 'Deutsche Bank'],
-      value: 15600000000, // $15.6B
-      duration: '90 days',
-      price: 234567.80, 
-      change24h: 12.8, 
-      volume24h: 2890000000, 
-      trades24h: 45782, 
-      status: 'active',
-      tier: 'enterprise',
-      icon: 'Building',
-      description: 'Instant cross-border payments and settlements',
-      region: 'Global',
-      tps: 2847291
-    },
-    energy_grid: { 
-      id: 'bOSac_ENG_004',
-      type: 'energy_grid', 
-      name: 'Smart Energy Grid Protocol', 
-      parties: ['Tesla', 'Shell', 'Exxon', 'BP', 'Chevron', 'TotalEnergies'],
+    cloud_cpu_compute: { 
+      id: 'bOSac_CPU_002',
+      type: 'cloud_cpu_compute', 
+      name: '$bCompute CPU Federation', 
+      parties: ['AWS', 'Google Cloud', 'Azure', 'Oracle', 'IBM', 'Alibaba'],
       value: 6700000000, // $6.7B
-      duration: '275 days',
-      price: 67834.90, 
-      change24h: 31.5, 
+      duration: '180 days',
+      price: 45627.25, 
+      change24h: 12.3, 
       volume24h: 890000000, 
       trades24h: 18934, 
       status: 'active',
       tier: 'enterprise',
-      icon: 'Lightning',
-      description: 'Real-time energy trading and grid optimization',
+      icon: 'Server',
+      description: 'Distributed CPU workloads with balanced supply and moderate demand',
       region: 'Global',
-      tps: 567891
+      tps: 1247891,
+      resourceType: 'CPU',
+      utilizationRate: 0.745,
+      resourceSupply: 8945672,
+      resourceDemand: 7234567,
+      aiOptimizationScore: 0.954
     },
-    healthcare_data: { 
-      id: 'bOSac_MED_005',
-      type: 'healthcare_data', 
-      name: 'Global Healthcare Data Exchange', 
-      parties: ['Pfizer', 'Johnson & Johnson', 'Moderna', 'Roche', 'Novartis'],
+    memory_intensive_ai: { 
+      id: 'bOSac_MEM_003',
+      type: 'memory_intensive_ai', 
+      name: '$bAI Memory Consortium', 
+      parties: ['Tesla', 'Palantir', 'DataBricks', 'Scale AI', 'Hugging Face'],
+      value: 12600000000, // $12.6B
+      duration: '90 days',
+      price: 127834.80, 
+      change24h: 18.9, 
+      volume24h: 1890000000, 
+      trades24h: 25782, 
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Database',
+      description: 'High-memory AI workloads causing memory scarcity - prices rising',
+      region: 'Global',
+      tps: 1547291,
+      resourceType: 'Memory',
+      utilizationRate: 0.923,
+      resourceSupply: 12847291,
+      resourceDemand: 15647382,
+      aiOptimizationScore: 0.972
+    },
+    distributed_storage: { 
+      id: 'bOSac_STO_004',
+      type: 'distributed_storage', 
+      name: '$bStorage Global Network', 
+      parties: ['Filecoin', 'Storj', 'AWS S3', 'Google Drive', 'Dropbox', 'IPFS'],
       value: 4300000000, // $4.3B
-      duration: '540 days',
-      price: 43567.45, 
-      change24h: 8.9, 
-      volume24h: 234000000, 
-      trades24h: 8947, 
+      duration: '275 days',
+      price: 28734.90, 
+      change24h: 8.4, 
+      volume24h: 560000000, 
+      trades24h: 28471, 
       status: 'active',
       tier: 'institutional',
       icon: 'Database',
-      description: 'Secure medical data sharing with privacy guarantees',
+      description: 'Abundant storage capacity with low utilization - cheap pricing',
       region: 'Global',
-      tps: 287491
+      tps: 567891,
+      resourceType: 'Storage',
+      utilizationRate: 0.678,
+      resourceSupply: 45672891,
+      resourceDemand: 42847392,
+      aiOptimizationScore: 0.941
     },
-    satellite_network: { 
-      id: 'bOSac_SAT_006',
-      type: 'satellite_network', 
-      name: 'Satellite Internet Coordination', 
-      parties: ['SpaceX', 'Amazon', 'OneWeb', 'Telesat', 'Boeing'],
-      value: 12800000000, // $12.8B
+    network_bandwidth: { 
+      id: 'bOSac_NET_005',
+      type: 'network_bandwidth', 
+      name: '$bNetwork Global Bandwidth', 
+      parties: ['Cloudflare', 'Akamai', 'AWS CloudFront', 'Fastly', 'KeyCDN'],
+      value: 9800000000, // $9.8B
+      duration: '540 days',
+      price: 67834.45, 
+      change24h: 31.2, 
+      volume24h: 1234000000, 
+      trades24h: 19847, 
+      status: 'active',
+      tier: 'enterprise',
+      icon: 'Network',
+      description: 'High-demand network capacity for streaming and edge computing',
+      region: 'Global',
+      tps: 987491,
+      resourceType: 'Network',
+      utilizationRate: 0.845,
+      resourceSupply: 5647291,
+      resourceDemand: 8947382,
+      aiOptimizationScore: 0.995
+    },
+    hybrid_ai_cluster: { 
+      id: 'bOSac_HYB_006',
+      type: 'hybrid_ai_cluster', 
+      name: '$bAI Hybrid Processing', 
+      parties: ['NVIDIA', 'AMD', 'Intel', 'Qualcomm', 'Apple', 'Google'],
+      value: 15800000000, // $15.8B
       duration: '730 days',
-      price: 128745.60, 
-      change24h: 45.7, 
-      volume24h: 567000000, 
-      trades24h: 15678, 
+      price: 158745.60, 
+      change24h: 42.7, 
+      volume24h: 2567000000, 
+      trades24h: 35678, 
       status: 'active',
       tier: 'enterprise',
-      icon: 'Satellite',
-      description: 'Global satellite internet constellation management',
-      region: 'Orbital',
-      tps: 967891
+      icon: 'Cpu',
+      description: 'Mixed GPU/CPU/Memory workloads for complex AI training',
+      region: 'Global',
+      tps: 1967891,
+      resourceType: 'Hybrid',
+      utilizationRate: 0.892,
+      resourceSupply: 8947382,
+      resourceDemand: 12847391,
+      aiOptimizationScore: 0.981
     },
-    manufacturing_alliance: { 
-      id: 'bOSac_MFG_007',
-      type: 'manufacturing_alliance', 
-      name: 'Advanced Manufacturing Alliance', 
-      parties: ['Boeing', 'Airbus', 'General Electric', 'Siemens', 'Caterpillar'],
-      value: 9400000000, // $9.4B
+    quantum_compute: { 
+      id: 'bOSac_QUA_007',
+      type: 'quantum_compute', 
+      name: '$bQuantum Computing Pool', 
+      parties: ['IBM', 'Google', 'IonQ', 'Rigetti', 'D-Wave', 'Microsoft'],
+      value: 18400000000, // $18.4B
       duration: '456 days',
-      price: 94673.20, 
-      change24h: 19.2, 
-      volume24h: 1450000000, 
-      trades24h: 28741, 
+      price: 184673.20, 
+      change24h: 67.2, 
+      volume24h: 3450000000, 
+      trades24h: 8741, 
       status: 'active',
       tier: 'enterprise',
-      icon: 'Briefcase',
-      description: 'Automated manufacturing and supply coordination',
+      icon: 'Zap',
+      description: 'Extremely scarce quantum computing resources - premium pricing',
       region: 'Global',
-      tps: 847293
+      tps: 247293,
+      resourceType: 'CPU',
+      utilizationRate: 0.987,
+      resourceSupply: 847291,
+      resourceDemand: 4567382,
+      aiOptimizationScore: 0.999
     },
-    sovereign_treasury: { 
-      id: 'bOSac_GOV_008',
-      type: 'sovereign_treasury', 
-      name: 'Sovereign Treasury Management', 
-      parties: ['Federal Reserve', 'ECB', 'Bank of Japan', 'Bank of England', 'PBOC'],
-      value: 45600000000, // $45.6B
-      duration: '1095 days',
-      price: 456789.10, 
-      change24h: 6.4, 
-      volume24h: 8900000000, 
-      trades24h: 67834, 
+    edge_computing: { 
+      id: 'bOSac_EDG_008',
+      type: 'edge_computing', 
+      name: '$bEdge Global Network', 
+      parties: ['Cloudflare', 'AWS Wavelength', 'Azure Edge', 'Google Edge', 'Fastly'],
+      value: 7800000000, // $7.8B
+      duration: '365 days',
+      price: 78456.10, 
+      change24h: 15.4, 
+      volume24h: 1890000000, 
+      trades24h: 47834, 
       status: 'active',
       tier: 'enterprise',
-      icon: 'Shield',
-      description: 'Central bank digital currency coordination',
+      icon: 'Wifi',
+      description: 'Edge computing resources for low-latency applications',
       region: 'Global',
-      tps: 3847291
+      tps: 2847291,
+      resourceType: 'Network',
+      utilizationRate: 0.756,
+      resourceSupply: 12847391,
+      resourceDemand: 11234567,
+      aiOptimizationScore: 0.967
     }
   })
 
-  // Simulate massive real-time activity
+  // Simulate AI-driven resource optimization and pricing
   useEffect(() => {
     if (!isLive) return
     
@@ -238,17 +320,63 @@ function ExchangeContent() {
         return Math.max(2000000, prev + variation)
       })
       
-      // Update contract prices with realistic enterprise volatility
-      setContractData(prev => {
+      // Update resource metrics with supply/demand dynamics
+      setResourceMetrics(prev => {
         const newData = { ...prev }
-        Object.keys(newData).forEach(key => {
-          const change = (Math.random() - 0.5) * 1000 // Larger price movements for enterprise contracts
-          newData[key].price = Math.max(1000, newData[key].price + change)
-          newData[key].change24h += (Math.random() - 0.5) * 2
-          newData[key].tps = Math.floor(Math.random() * 1000000) + 500000
+        Object.keys(newData).forEach(resourceType => {
+          const resource = newData[resourceType]
+          // Simulate AI optimization adjusting supply/demand
+          const demandVariation = (Math.random() - 0.5) * 1000000
+          const supplyVariation = (Math.random() - 0.5) * 500000
+          
+          resource.demand = Math.max(1000000, resource.demand + demandVariation)
+          resource.supply = Math.max(1000000, resource.supply + supplyVariation)
+          resource.utilizationRate = Math.min(0.99, resource.demand / (resource.supply * 1.2))
+          resource.scarcityIndex = resource.demand / resource.supply
+          
+          // Price adjusts based on scarcity (Coasian economics)
+          const scarcityMultiplier = 1 + (resource.scarcityIndex - 1) * 0.5
+          const priceChange = (resource.scarcityIndex - 1) * 1000 + (Math.random() - 0.5) * 500
+          resource.price = Math.max(100, resource.price + priceChange)
+          resource.priceChange24h += (Math.random() - 0.5) * 5
+          
+          // AI efficiency improves with utilization optimization
+          resource.aiEfficiency = Math.min(0.999, resource.aiEfficiency + (Math.random() - 0.5) * 0.001)
         })
         return newData
       })
+      
+      // Update contract prices based on their resource utilization
+      setContractData(prev => {
+        const newData = { ...prev }
+        Object.keys(newData).forEach(key => {
+          const contract = newData[key]
+          const resourcePrice = resourceMetrics[contract.resourceType]?.price || 10000
+          const scarcityIndex = resourceMetrics[contract.resourceType]?.scarcityIndex || 1
+          
+          // Contract price influenced by resource scarcity
+          const priceAdjustment = (scarcityIndex - 1) * 5000 + (Math.random() - 0.5) * 2000
+          contract.price = Math.max(1000, contract.price + priceAdjustment)
+          contract.change24h += (Math.random() - 0.5) * 3
+          contract.tps = Math.floor(Math.random() * 1000000) + 500000
+          
+          // Update utilization based on demand
+          contract.utilizationRate = Math.min(0.99, contract.utilizationRate + (Math.random() - 0.5) * 0.02)
+        })
+        return newData
+      })
+      
+      // Update revenue metrics (1% fees to $bOS holders)
+      setRevenueMetrics(prev => {
+        const totalVolume = Object.values(contractData).reduce((sum, contract) => sum + contract.volume24h, 0)
+        const fees = totalVolume * prev.distributionRate
+        return {
+          ...prev,
+          totalFees24h: fees,
+          holderDividends: fees * 0.75 // 75% to holders, 25% for operations
+        }
+      })
+      
       
       // Generate live transactions
       const newTransaction: LiveTransaction = {
@@ -264,7 +392,7 @@ function ExchangeContent() {
     }, 150) // Very frequent updates for high-frequency feel
     
     return () => clearInterval(interval)
-  }, [isLive])
+  }, [isLive, resourceMetrics, contractData])
 
   const getContractIcon = (iconName: string, tier: string) => {
     const iconClass = `w-5 h-5 ${
@@ -334,13 +462,13 @@ function ExchangeContent() {
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-400">24h Volume</div>
-                  <div className="text-lg font-bold text-red-400 font-mono">$52.9B</div>
+                  <div className="text-sm text-gray-400">24h Fees → $bOS</div>
+                  <div className="text-lg font-bold text-green-400 font-mono">${(revenueMetrics.holderDividends/1000000).toFixed(1)}M</div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-400">Active Enterprises</div>
-                  <div className="text-lg font-bold text-yellow-400 font-mono">8,247</div>
+                  <div className="text-sm text-gray-400">AI Efficiency</div>
+                  <div className="text-lg font-bold text-blue-400 font-mono">97.8%</div>
                 </div>
               </div>
             </div>
@@ -519,9 +647,10 @@ function ExchangeContent() {
           {/* Tabs */}
           <div className="flex border-b border-red-500/20 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm">
             {[
+              { id: 'resources', label: 'Resource Markets', icon: Gauge, color: 'blue' },
               { id: 'global', label: 'Global Network', icon: Globe, color: 'red' },
-              { id: 'trade', label: 'Enterprise Trading', icon: TrendingUp, color: 'orange' },
-              { id: 'analytics', label: 'Network Analytics', icon: BarChart3, color: 'yellow' }
+              { id: 'trade', label: 'Contract Trading', icon: TrendingUp, color: 'orange' },
+              { id: 'analytics', label: 'AI Analytics', icon: BarChart3, color: 'yellow' }
             ].map(({ id, label, icon: Icon, color }) => (
               <button
                 key={id}
@@ -556,6 +685,222 @@ function ExchangeContent() {
 
           {/* Tab Content */}
           <div className="flex-1 p-6 overflow-auto">
+            {activeTab === 'resources' && (
+              <div className="space-y-6">
+                {/* Resource Price Dashboard */}
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  {Object.values(resourceMetrics).map(resource => {
+                    const isGPU = resource.type === 'GPU'
+                    const isMemory = resource.type === 'Memory'
+                    const isNetwork = resource.type === 'Network'
+                    const scarcityLevel = resource.scarcityIndex > 1.2 ? 'high' : resource.scarcityIndex > 1.1 ? 'medium' : 'low'
+                    
+                    return (
+                      <div key={resource.type} className={`rounded-lg p-6 border ${
+                        scarcityLevel === 'high' ? 'bg-gradient-to-br from-red-900/40 to-orange-900/40 border-red-700/50' :
+                        scarcityLevel === 'medium' ? 'bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border-yellow-700/50' :
+                        'bg-gradient-to-br from-green-900/40 to-teal-900/40 border-green-700/50'
+                      }`}>
+                        <div className="flex items-center gap-3 mb-4">
+                          {resource.type === 'GPU' && <Cpu className="w-8 h-8 text-red-400" />}
+                          {resource.type === 'CPU' && <Server className="w-8 h-8 text-blue-400" />}
+                          {resource.type === 'Memory' && <Database className="w-8 h-8 text-purple-400" />}
+                          {resource.type === 'Storage' && <Database className="w-8 h-8 text-green-400" />}
+                          {resource.type === 'Network' && <Network className="w-8 h-8 text-orange-400" />}
+                          <div>
+                            <h3 className="text-xl font-bold">{resource.type}</h3>
+                            <div className={`text-sm font-bold ${
+                              scarcityLevel === 'high' ? 'text-red-400' :
+                              scarcityLevel === 'medium' ? 'text-yellow-400' :
+                              'text-green-400'
+                            }`}>
+                              {scarcityLevel === 'high' ? 'HIGH DEMAND' :
+                               scarcityLevel === 'medium' ? 'MODERATE DEMAND' :
+                               'ABUNDANT'}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-400 text-sm">Price per Unit</span>
+                            <span className="font-mono text-lg font-bold text-white">
+                              ₿OS {resource.price.toLocaleString()}
+                            </span>
+                          </div>
+                          
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-400 text-sm">24h Change</span>
+                            <span className={`font-mono font-bold ${
+                              resource.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
+                            }`}>
+                              {resource.priceChange24h >= 0 ? '+' : ''}{resource.priceChange24h.toFixed(1)}%
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Supply</span>
+                              <span className="font-mono text-blue-400">{resource.supply.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Demand</span>
+                              <span className="font-mono text-orange-400">{resource.demand.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Utilization</span>
+                              <span className="font-mono text-purple-400">{(resource.utilizationRate * 100).toFixed(1)}%</span>
+                            </div>
+                          </div>
+                          
+                          <div className="pt-2 border-t border-gray-700/50">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-400 text-sm">Scarcity Index</span>
+                              <span className={`font-mono font-bold text-sm ${
+                                resource.scarcityIndex > 1.2 ? 'text-red-400' :
+                                resource.scarcityIndex > 1.1 ? 'text-yellow-400' :
+                                'text-green-400'
+                              }`}>
+                                {resource.scarcityIndex.toFixed(2)}x
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center mt-1">
+                              <span className="text-gray-400 text-sm">AI Efficiency</span>
+                              <span className="font-mono font-bold text-sm text-cyan-400">
+                                {(resource.aiEfficiency * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <div className="text-xs text-gray-500 mt-2">
+                            {resource.contracts.toLocaleString()} active contracts
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* $bOS Revenue Distribution */}
+                <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 rounded-lg border border-green-700/30 p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                      <Target className="w-5 h-5 text-green-400" />
+                    </div>
+                    <h3 className="text-xl font-bold text-green-400">$bOS Revenue Distribution</h3>
+                    <div className="text-sm text-green-300 bg-green-500/20 px-3 py-1 rounded-full">
+                      1% Transaction Fee Model
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <div className="bg-black/30 rounded-lg p-4 border border-green-700/30">
+                      <div className="text-sm text-gray-400 mb-1">24h Total Fees</div>
+                      <div className="text-2xl font-bold font-mono text-green-400">
+                        ${(revenueMetrics.totalFees24h/1000000).toFixed(1)}M
+                      </div>
+                      <div className="text-xs text-green-300 mt-1">1% of all transactions</div>
+                    </div>
+                    
+                    <div className="bg-black/30 rounded-lg p-4 border border-emerald-700/30">
+                      <div className="text-sm text-gray-400 mb-1">Shareholder Dividends</div>
+                      <div className="text-2xl font-bold font-mono text-emerald-400">
+                        ${(revenueMetrics.holderDividends/1000000).toFixed(1)}M
+                      </div>
+                      <div className="text-xs text-emerald-300 mt-1">75% to $bOS holders</div>
+                    </div>
+                    
+                    <div className="bg-black/30 rounded-lg p-4 border border-blue-700/30">
+                      <div className="text-sm text-gray-400 mb-1">Operations Fund</div>
+                      <div className="text-2xl font-bold font-mono text-blue-400">
+                        ${((revenueMetrics.totalFees24h - revenueMetrics.holderDividends)/1000000).toFixed(1)}M
+                      </div>
+                      <div className="text-xs text-blue-300 mt-1">25% for development</div>
+                    </div>
+                    
+                    <div className="bg-black/30 rounded-lg p-4 border border-purple-700/30">
+                      <div className="text-sm text-gray-400 mb-1">Next Distribution</div>
+                      <div className="text-lg font-bold font-mono text-purple-400">
+                        {revenueMetrics.nextDistribution.toLocaleTimeString()}
+                      </div>
+                      <div className="text-xs text-purple-300 mt-1">Automated hourly</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Coasian Load Balancing */}
+                <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-700/30 p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                      <Activity className="w-5 h-5 text-purple-400 animate-pulse" />
+                    </div>
+                    <h3 className="text-xl font-bold text-purple-400">AI Coasian Load Balancing</h3>
+                    <div className="text-sm text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">
+                      Real-time Optimization
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-white">Resource Allocation</h4>
+                      {Object.values(resourceMetrics).map(resource => (
+                        <div key={resource.type} className="flex items-center justify-between p-3 bg-black/30 rounded border border-gray-700/30">
+                          <span className="text-sm text-gray-300">{resource.type}</span>
+                          <div className="flex items-center gap-3">
+                            <div className={`w-16 h-2 rounded-full bg-gray-700 overflow-hidden`}>
+                              <div 
+                                className={`h-full transition-all duration-300 ${
+                                  resource.utilizationRate > 0.9 ? 'bg-red-400' :
+                                  resource.utilizationRate > 0.8 ? 'bg-yellow-400' :
+                                  'bg-green-400'
+                                }`}
+                                style={{ width: `${Math.min(100, resource.utilizationRate * 100)}%` }}
+                              />
+                            </div>
+                            <span className="text-xs font-mono text-gray-400 w-10">
+                              {(resource.utilizationRate * 100).toFixed(0)}%
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-white">Price Optimization</h4>
+                      <div className="space-y-3">
+                        <div className="p-4 bg-black/30 rounded border border-gray-700/30 text-center">
+                          <div className="text-sm text-gray-400">AI Adjustment Speed</div>
+                          <div className="text-2xl font-bold font-mono text-cyan-400">150ms</div>
+                        </div>
+                        <div className="p-4 bg-black/30 rounded border border-gray-700/30 text-center">
+                          <div className="text-sm text-gray-400">Price Accuracy</div>
+                          <div className="text-2xl font-bold font-mono text-green-400">99.7%</div>
+                        </div>
+                        <div className="p-4 bg-black/30 rounded border border-gray-700/30 text-center">
+                          <div className="text-sm text-gray-400">Market Efficiency</div>
+                          <div className="text-2xl font-bold font-mono text-blue-400">97.8%</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-white">Contract Impact</h4>
+                      <div className="space-y-2">
+                        <div className="text-sm text-gray-400">$bVideo → GPU scarcity → Price ↑</div>
+                        <div className="text-sm text-gray-400">$bStorage → Abundant supply → Price ↓</div>
+                        <div className="text-sm text-gray-400">$bAI → Memory demand → Price ↑</div>
+                        <div className="text-sm text-gray-400">$bNetwork → Edge computing → Price ↑</div>
+                      </div>
+                      <div className="mt-4 p-3 bg-cyan-900/20 rounded border border-cyan-700/30">
+                        <div className="text-xs text-cyan-300">Theory of the Firm optimization</div>
+                        <div className="text-sm font-semibold text-cyan-400">Coasian transaction cost minimization</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {activeTab === 'global' && (
               <div className="space-y-6">
                 {/* Global Stats Dashboard */}
