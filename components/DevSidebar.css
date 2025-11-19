@@ -34,8 +34,7 @@
 .dev-sidebar-floating-toggle {
   position: fixed;
   left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 48px; /* Top of sidebar position */
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0 8px 8px 0;
@@ -53,7 +52,7 @@
 .dev-sidebar-floating-toggle:hover {
   background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
   color: #e5e7eb;
-  transform: translateY(-50%) translateX(4px);
+  transform: translateX(4px);
 }
 
 .dev-sidebar-header {
