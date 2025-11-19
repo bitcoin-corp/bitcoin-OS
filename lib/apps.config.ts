@@ -8,6 +8,7 @@ export interface BitcoinApp {
   chromeAppId?: string // Chrome app ID for launching Chrome apps
   isLocal?: boolean // For apps running on same domain
   isExternal?: boolean // For apps that should open in new tab
+  iconType?: string
 }
 
 export const bitcoinApps: BitcoinApp[] = [
@@ -17,7 +18,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://www.bitcoinapps.store/',
     color: '#ff6b35',
     description: 'Bitcoin Apps Store',
-    isExternal: true
+    isExternal: true,
+    iconType: 'store'
   },
   {
     id: 'bitcoin-wallet',
@@ -27,7 +29,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-wallet-sable.vercel.app',
     chromeAppId: 'bitcoin-wallet',
     color: '#ffd700',
-    description: 'Manage your Bitcoin'
+    description: 'Manage your Bitcoin',
+    iconType: 'wallet'
   },
   {
     id: 'bitcoin-email',
@@ -37,7 +40,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-email.vercel.app',
     chromeAppId: 'bitcoin-email',
     color: '#ef4444',
-    description: 'Email with Bitcoin integration'
+    description: 'Email with Bitcoin integration',
+    iconType: 'email'
   },
   {
     id: 'bitcoin-music',
@@ -47,7 +51,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-music.vercel.app',
     chromeAppId: 'bitcoin-music',
     color: '#8b5cf6',
-    description: 'Stream and support artists with Bitcoin'
+    description: 'Stream and support artists with Bitcoin',
+    iconType: 'music'
   },
   {
     id: 'bitcoin-writer',
@@ -57,7 +62,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-writer.vercel.app',
     chromeAppId: 'bitcoin-writer',
     color: '#ff9500',
-    description: 'Write and publish with Bitcoin'
+    description: 'Write and publish with Bitcoin',
+    iconType: 'document'
   },
   {
     id: 'bitcoin-code',
@@ -65,7 +71,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-code.vercel.app',
     color: '#0ea5e9',
     description: 'Code development environment',
-    isExternal: true
+    isExternal: true,
+    iconType: 'terminal'
   },
   {
     id: 'bitcoin-drive',
@@ -75,7 +82,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-drive.vercel.app',
     chromeAppId: 'bitcoin-drive',
     color: '#22c55e',
-    description: 'Decentralized file storage'
+    description: 'Decentralized file storage',
+    iconType: 'drive'
   },
   {
     id: 'bitcoin-calendar',
@@ -83,7 +91,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-calendar.vercel.app',
     color: '#d946ef',
     description: 'Schedule and manage events',
-    isExternal: true
+    isExternal: true,
+    iconType: 'calendar'
   },
   {
     id: 'bitcoin-exchange',
@@ -93,7 +102,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-exchange.vercel.app',
     chromeAppId: 'bitcoin-exchange',
     color: '#10b981',
-    description: 'Trade Bitcoin and other assets'
+    description: 'Trade Bitcoin and other assets',
+    iconType: 'exchange'
   },
   {
     id: 'bitcoin-search',
@@ -101,7 +111,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-search.vercel.app',
     color: '#6b7280',
     description: 'Search the Bitcoin ecosystem',
-    isExternal: true
+    isExternal: true,
+    iconType: 'browser'
   },
   {
     id: 'bitcoin-spreadsheet',
@@ -109,7 +120,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-spreadsheet.vercel.app',
     color: '#3b82f6',
     description: 'Spreadsheets with Bitcoin integration',
-    isExternal: true
+    isExternal: true,
+    iconType: 'spreadsheet'
   },
   {
     id: 'bitcoin-video',
@@ -117,7 +129,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-video-nine.vercel.app',
     color: '#65a30d',
     description: 'Video creation and streaming',
-    isExternal: true
+    isExternal: true,
+    iconType: 'video'
   },
   {
     id: 'bitcoin-photos',
@@ -125,7 +138,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-photos.vercel.app',
     color: '#ec4899',
     description: 'Photo management and sharing',
-    isExternal: true
+    isExternal: true,
+    iconType: 'photos'
   },
   {
     id: 'bitcoin-maps',
@@ -133,7 +147,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-maps.vercel.app',
     color: '#f59e0b',
     description: 'Bitcoin location services',
-    isExternal: true
+    isExternal: true,
+    iconType: 'maps'
   },
   {
     id: 'bitcoin-chat',
@@ -141,7 +156,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-chat.vercel.app',
     color: '#ff6500',
     description: 'Chat with Bitcoin integration',
-    isExternal: true
+    isExternal: true,
+    iconType: 'chat'
   },
   {
     id: 'bitcoin-social',
@@ -149,7 +165,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-social.vercel.app',
     color: '#f43f5e',
     description: 'Social networking for Bitcoin users',
-    isExternal: true
+    isExternal: true,
+    iconType: 'social'
   },
   {
     id: 'bitcoin-games',
@@ -157,7 +174,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-gaming.vercel.app',
     color: '#8b5cf6',
     description: 'Gaming with Bitcoin rewards',
-    isExternal: true
+    isExternal: true,
+    iconType: 'games'
   },
   {
     id: 'bitcoin-books',
@@ -165,7 +183,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-books-bay.vercel.app',
     color: '#10b981',
     description: 'Digital book publishing and reading',
-    isExternal: true
+    isExternal: true,
+    iconType: 'books'
   },
   {
     id: 'bitcoin-domains',
@@ -173,7 +192,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-dns.vercel.app',
     color: '#eab308',
     description: 'Domain name services',
-    isExternal: true
+    isExternal: true,
+    iconType: 'domains'
   },
   {
     id: 'bitcoin-3d',
@@ -181,7 +201,8 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-3d.vercel.app',
     color: '#ec4899',
     description: '3D modeling and visualization',
-    isExternal: true
+    isExternal: true,
+    iconType: '3d'
   },
   {
     id: 'bitcoin-jobs',
@@ -191,7 +212,8 @@ export const bitcoinApps: BitcoinApp[] = [
       : 'https://bitcoin-jobs.vercel.app',
     chromeAppId: 'bitcoin-jobs',
     color: '#40e0d0',
-    description: 'Find jobs in the Bitcoin ecosystem'
+    description: 'Find jobs in the Bitcoin ecosystem',
+    iconType: 'jobs'
   },
   {
     id: 'bitcoin-paint',
@@ -199,7 +221,24 @@ export const bitcoinApps: BitcoinApp[] = [
     url: 'https://bitcoin-paint.vercel.app',
     color: '#a855f7',
     description: 'Digital art creation and NFTs',
-    isExternal: true
+    isExternal: true,
+    iconType: 'paint'
+  },
+  {
+    id: 'bitcoin-mint',
+    name: 'Bitcoin Mint',
+    url: '#',
+    color: '#00C4B3',
+    description: 'Mint Bitcoin-based tokens',
+    iconType: 'mint'
+  },
+  {
+    id: 'bitcoin-browser',
+    name: 'Bitcoin Browser',
+    url: '#',
+    color: '#4D82E8',
+    description: 'Browse the Bitcoin web',
+    iconType: 'browser'
   }
 ]
 

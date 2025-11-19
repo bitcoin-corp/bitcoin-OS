@@ -38,6 +38,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@heroicons/react": "^2.2.0",
     "@tabler/icons-react": "^3.35.0",
+    "@tailwindcss/postcss": "^4.1.16",
     "@types/three": "^0.180.0",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",

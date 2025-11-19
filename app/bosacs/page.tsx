@@ -1,0 +1,296 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+export default function ContractsDownloadPage() {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = () => {
+    setIsDownloading(true);
+    // Create a blob URL for the HTML content to be converted to PDF
+    const printWindow = window.open('/bitcoin-os-contracts-framework-print.html', '_blank');
+    if (printWindow) {
+      printWindow.onload = () => {
+        setTimeout(() => {
+          printWindow.print();
+          setIsDownloading(false);
+        }, 1000);
+      };
+    } else {
+      setIsDownloading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+      {/* Header */}
+      <div className="border-b border-gray-800 bg-black/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link href="/" className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center">
+                  <span className="font-bold text-black">₿</span>
+                </div>
+                <span className="font-bold text-xl">Bitcoin OS</span>
+              </Link>
+            </div>
+            <nav className="flex items-center space-x-6">
+              <Link href="/docs" className="text-gray-300 hover:text-white transition-colors">
+                Documentation
+              </Link>
+              <Link href="/platform" className="text-gray-300 hover:text-white transition-colors">
+                Platform
+              </Link>
+              <Link href="/contracts" className="text-gray-300 hover:text-white transition-colors">
+                Contracts
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-medium mb-6">
+            <span className="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
+            Technical Specification
+          </div>
+          
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            bOSacs (Bitcoin OS Atomic Contracts)
+          </h1>
+          
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Revolutionary framework fusing Ricardian Contracts with Coasian Economics for Bitcoin-OS. 
+            Download the complete technical specification and implementation guide.
+          </p>
+
+          {/* Download Button */}
+          <button
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-semibold rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            {isDownloading ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Generating PDF...
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download PDF Specification
+              </>
+            )}
+          </button>
+
+          <p className="text-sm text-gray-500 mt-4">
+            Professional document optimized for printing and corporate distribution
+          </p>
+        </div>
+
+        {/* Framework Overview */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-800">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4">
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold">Ricardian Contracts</h3>
+            </div>
+            <p className="text-gray-300">
+              Human and machine-readable contract format that creates verifiable, 
+              cryptographically signed agreements between parties with built-in 
+              legal and technical enforceability.
+            </p>
+          </div>
+
+          <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-800">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mr-4">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold">Coasian Economics</h3>
+            </div>
+            <p className="text-gray-300">
+              Theory of the firm that explains how organizations form and operate 
+              based on transaction costs, creating frameworks for efficient 
+              coordination and resource allocation.
+            </p>
+          </div>
+        </div>
+
+        {/* Key Features */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-center">Framework Innovations</h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/30 rounded-xl p-6 border border-purple-700/30">
+              <div className="text-2xl mb-3">⚛️</div>
+              <h4 className="text-lg font-semibold mb-2">Atomic Structure</h4>
+              <p className="text-gray-300 text-sm">
+                Self-contained, indivisible contract units that execute completely or not at all
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/30 rounded-xl p-6 border border-orange-700/30">
+              <div className="text-2xl mb-3">🔗</div>
+              <h4 className="text-lg font-semibold mb-2">Cryptographic Verification</h4>
+              <p className="text-gray-300 text-sm">
+                Real-time performance auditing through blockchain-based verification
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 rounded-xl p-6 border border-blue-700/30">
+              <div className="text-2xl mb-3">🤖</div>
+              <h4 className="text-lg font-semibold mb-2">AI Integration</h4>
+              <p className="text-gray-300 text-sm">
+                Intelligent micro-contracting mechanisms for automated coordination
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-900/30 to-green-800/30 rounded-xl p-6 border border-green-700/30">
+              <div className="text-2xl mb-3">💧</div>
+              <h4 className="text-lg font-semibold mb-2">Liquid Organizations</h4>
+              <p className="text-gray-300 text-sm">
+                Dynamic value networks replacing traditional hierarchical structures
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-red-900/30 to-red-800/30 rounded-xl p-6 border border-red-700/30">
+              <div className="text-2xl mb-3">⚡</div>
+              <h4 className="text-lg font-semibold mb-2">Instant Settlement</h4>
+              <p className="text-gray-300 text-sm">
+                Real-time micropayments and resource allocation through Bitcoin
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 rounded-xl p-6 border border-yellow-700/30">
+              <div className="text-2xl mb-3">📊</div>
+              <h4 className="text-lg font-semibold mb-2">Transaction Cost Reduction</h4>
+              <p className="text-gray-300 text-sm">
+                Minimizing coordination costs through automated contract execution
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Document Contents */}
+        <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 mb-16">
+          <h2 className="text-2xl font-bold mb-6">Document Contents</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-orange-400">Technical Sections</h3>
+              <ul className="space-y-2 text-gray-300">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Executive Summary & Framework Overview
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Theoretical Foundation & Economic Models
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Technical Architecture & Implementation
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Contract Structure & Atomic Properties
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Bitcoin-OS Integration Framework
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-orange-400">Implementation Guides</h3>
+              <ul className="space-y-2 text-gray-300">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Real-World Use Cases & Scenarios
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Developer Tools & APIs
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Security Considerations & Best Practices
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  Future Roadmap & Development Timeline
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                  References & Appendices
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Innovation Credit */}
+        <div className="bg-gradient-to-r from-orange-900/20 to-yellow-900/20 rounded-xl p-8 border border-orange-700/30 text-center">
+          <h3 className="text-xl font-semibold mb-4">Innovation by Richard Boase</h3>
+          <p className="text-gray-300 leading-relaxed">
+            This groundbreaking framework represents the fusion of Ian Grigg&apos;s Ricardian Contracts 
+            with Ronald Coase&apos;s Theory of the Firm, creating a new paradigm for decentralized 
+            organizational structures powered by Bitcoin technology.
+          </p>
+          <div className="mt-6 pt-6 border-t border-orange-700/30">
+            <p className="text-sm text-gray-400">
+              Developed for Bitcoin-OS by The Bitcoin Corporation LTD<br />
+              Copyright © 2025 • Open-BSV-4.0 License
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-gray-800 bg-black/50 backdrop-blur-sm mt-16">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center">
+                <span className="font-bold text-black">₿</span>
+              </div>
+              <div>
+                <div className="font-semibold">Bitcoin OS</div>
+                <div className="text-sm text-gray-400">The Bitcoin Corporation LTD</div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-6">
+              <Link href="/docs" className="text-gray-400 hover:text-white transition-colors">
+                Documentation
+              </Link>
+              <Link href="https://github.com/bitcoin-corp/bitcoin-OS" className="text-gray-400 hover:text-white transition-colors">
+                GitHub
+              </Link>
+              <Link href="/platform" className="text-gray-400 hover:text-white transition-colors">
+                Platform
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
