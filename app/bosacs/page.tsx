@@ -23,27 +23,27 @@ export default function ContractsDownloadPage() {
   };
 
   return (
-    <div className="h-screen w-full bg-white text-black overflow-y-scroll">
+    <div className="h-screen w-full bg-black text-white overflow-y-scroll">
       {/* Header */}
-      <div className="border-b-2 border-black bg-white">
+      <div className="border-b-2 border-white bg-black">
         <div className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link href="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
-                  <span className="font-bold text-white text-lg">₿</span>
+                <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
+                  <span className="font-bold text-black text-lg">₿</span>
                 </div>
                 <span className="font-bold text-2xl">Bitcoin OS</span>
               </Link>
             </div>
             <nav className="flex items-center space-x-8">
-              <Link href="/docs" className="text-gray-700 hover:text-black transition-colors font-medium">
+              <Link href="/docs" className="text-gray-300 hover:text-white transition-colors font-medium">
                 Documentation
               </Link>
-              <Link href="/platform" className="text-gray-700 hover:text-black transition-colors font-medium">
+              <Link href="/platform" className="text-gray-300 hover:text-white transition-colors font-medium">
                 Platform
               </Link>
-              <Link href="/contracts" className="text-gray-700 hover:text-black transition-colors font-medium">
+              <Link href="/contracts" className="text-gray-300 hover:text-white transition-colors font-medium">
                 Contracts
               </Link>
             </nav>
@@ -52,18 +52,18 @@ export default function ContractsDownloadPage() {
       </div>
 
       {/* Document Header */}
-      <div className="bg-gray-50 border-b-2 border-gray-300 py-8">
+      <div className="bg-gray-900 border-b-2 border-gray-700 py-8">
         <div className="max-w-6xl mx-auto px-8 text-center">
-          <div className="inline-block bg-black text-white px-4 py-2 text-sm font-bold mb-4 tracking-wider">
+          <div className="inline-block bg-white text-black px-4 py-2 text-sm font-bold mb-4 tracking-wider">
             TECHNICAL SPECIFICATION
           </div>
           <h1 className="text-4xl font-bold mb-3 tracking-tight">
             Bitcoin-OS Contracts Framework
           </h1>
-          <h2 className="text-2xl mb-4 text-gray-600">
+          <h2 className="text-2xl mb-4 text-gray-400">
             bOSacs (Bitcoin OS Atomic Contracts) - Technical Design Specification
           </h2>
-          <div className="text-sm text-gray-500 border-t border-gray-300 pt-4 mt-4">
+          <div className="text-sm text-gray-500 border-t border-gray-700 pt-4 mt-4">
             Document Version: 2.0 | Date: November 2025 | Classification: Public<br />
             Inventor: Richard Boase | Framework: bOSacs (Bitcoin OS Atomic Contracts)
           </div>
@@ -74,8 +74,8 @@ export default function ContractsDownloadPage() {
       <div className="max-w-6xl mx-auto px-8 py-12">
         {/* Executive Summary */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">1. Executive Summary</h2>
-          <div className="bg-gray-50 p-6 border-l-4 border-black">
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">1. Executive Summary</h2>
+          <div className="bg-gray-900 p-6 border-l-4 border-white">
             <p className="text-lg leading-relaxed mb-4">
               Bitcoin OS Atomic Contracts (bOSacs) represent a revolutionary framework that fuses 
               Ian Grigg's Ricardian Contracts with Ronald Coase's Theory of the Firm, creating 
@@ -88,12 +88,12 @@ export default function ContractsDownloadPage() {
             </p>
             
             {/* Download Section */}
-            <div className="mt-6 p-4 bg-white border border-gray-300">
+            <div className="mt-6 p-4 bg-black border border-gray-700">
               <h3 className="font-bold mb-3">Download Complete Specification</h3>
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className="inline-flex items-center px-6 py-3 bg-black text-white font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+                className="inline-flex items-center px-6 py-3 bg-white text-black font-medium hover:bg-gray-200 transition-colors disabled:opacity-50"
               >
                 {isDownloading ? (
                   <>
@@ -112,7 +112,7 @@ export default function ContractsDownloadPage() {
                   </>
                 )}
               </button>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-400 mt-2">
                 Complete technical specification optimized for printing and corporate distribution
               </p>
             </div>
@@ -121,10 +121,10 @@ export default function ContractsDownloadPage() {
 
         {/* Theoretical Foundation */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">2. Core Innovation: bOSacs (Bitcoin OS Atomic Contracts)</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">2. Core Innovation: bOSacs (Bitcoin OS Atomic Contracts)</h2>
           
           <div className="space-y-8">
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-xl font-bold mb-4">2.1 Ricardian Contracts Foundation</h3>
               <p className="leading-relaxed mb-4">
                 <strong>Created by Ian Grigg</strong>, Ricardian Contracts are documents that are simultaneously 
@@ -141,19 +141,19 @@ export default function ContractsDownloadPage() {
                 <li>Legal enforceability in specified jurisdictions</li>
                 <li>Immutable audit trails for compliance</li>
               </ul>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-400">
                 Reference: <a 
                   href="https://en.wikipedia.org/wiki/Ricardian_contract" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-800"
+                  className="text-blue-400 underline hover:text-blue-300"
                 >
                   Ricardian Contract - Wikipedia
                 </a>
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-xl font-bold mb-4">2.2 Coase's Theory of the Firm</h3>
               <p className="leading-relaxed mb-4">
                 <strong>Nobel Prize winner Ronald Coase's</strong> groundbreaking theory explains why firms exist 
@@ -169,19 +169,19 @@ export default function ContractsDownloadPage() {
                 <li>Market mechanisms vs. hierarchical control trade-offs</li>
                 <li>Property rights clarity enables efficient coordination</li>
               </ul>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-400">
                 Reference: <a 
                   href="https://en.wikipedia.org/wiki/Theory_of_the_firm" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-800"
+                  className="text-blue-400 underline hover:text-blue-300"
                 >
                   Theory of the Firm - Wikipedia
                 </a>
               </p>
             </div>
 
-            <div className="bg-gray-100 border-2 border-black p-6">
+            <div className="bg-gray-900 border-2 border-black p-6">
               <h3 className="text-xl font-bold mb-4">2.3 The Innovation: bOSacs Framework</h3>
               <p className="leading-relaxed mb-4">
                 <strong>bOSacs represent the revolutionary fusion</strong> of these two foundational concepts. 
@@ -200,10 +200,10 @@ export default function ContractsDownloadPage() {
 
         {/* Technical Architecture */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">3. Technical Architecture</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">3. Technical Architecture</h2>
           
           <div className="space-y-6">
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.1 Atomic Structure</h3>
               <p className="leading-relaxed">
                 Each bOSac is a self-contained, indivisible contract unit that executes completely 
@@ -212,7 +212,7 @@ export default function ContractsDownloadPage() {
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.2 Cryptographic Verification</h3>
               <p className="leading-relaxed">
                 Real-time performance auditing through blockchain-based verification provides 
@@ -221,7 +221,7 @@ export default function ContractsDownloadPage() {
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.3 Dynamic Coordination Mechanisms</h3>
               <p className="leading-relaxed">
                 Intelligent micro-contracting mechanisms enable automated coordination between 
@@ -230,7 +230,7 @@ export default function ContractsDownloadPage() {
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.4 Liquid Organizational Structures</h3>
               <p className="leading-relaxed">
                 Dynamic value networks replace traditional hierarchical structures, allowing 
@@ -239,7 +239,7 @@ export default function ContractsDownloadPage() {
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.5 Instant Bitcoin Settlement</h3>
               <p className="leading-relaxed">
                 Real-time micropayments and resource allocation through Bitcoin's payment 
@@ -248,7 +248,7 @@ export default function ContractsDownloadPage() {
               </p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">3.6 Transaction Cost Optimization</h3>
               <p className="leading-relaxed">
                 Automated contract execution minimizes coordination costs, following Coase's 
@@ -261,77 +261,77 @@ export default function ContractsDownloadPage() {
 
         {/* Use Cases */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">4. Real-World Applications</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">4. Real-World Applications</h2>
           
           <div className="space-y-6">
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">4.1 Dynamic Organizations</h3>
               <p className="leading-relaxed mb-3">
                 Organizations that automatically reorganize based on project requirements, forming 
                 temporary hierarchies for complex tasks and reverting to flat structures for routine work.
               </p>
-              <p className="text-sm text-gray-600 italic">Example: AI research collaboration networks</p>
+              <p className="text-sm text-gray-400 italic">Example: AI research collaboration networks</p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">4.2 Resource Marketplaces</h3>
               <p className="leading-relaxed mb-3">
                 Real-time trading of computational resources where contracts automatically optimize 
                 for cost, performance, and reliability based on current market conditions.
               </p>
-              <p className="text-sm text-gray-600 italic">Example: GPU compute sharing networks</p>
+              <p className="text-sm text-gray-400 italic">Example: GPU compute sharing networks</p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">4.3 Liquid Partnerships</h3>
               <p className="leading-relaxed mb-3">
                 Business partnerships that automatically adjust profit sharing, decision making, 
                 and resource allocation based on each party's real-time contributions.
               </p>
-              <p className="text-sm text-gray-600 italic">Example: Content creator collectives</p>
+              <p className="text-sm text-gray-400 italic">Example: Content creator collectives</p>
             </div>
 
-            <div className="border border-gray-300 p-6">
+            <div className="border border-gray-700 p-6">
               <h3 className="text-lg font-bold mb-3">4.4 Supply Chain Optimization</h3>
               <p className="leading-relaxed mb-3">
                 Supply chains that dynamically reconfigure based on cost, quality, and timing 
                 constraints, automatically switching between suppliers and logistics providers.
               </p>
-              <p className="text-sm text-gray-600 italic">Example: Global manufacturing networks</p>
+              <p className="text-sm text-gray-400 italic">Example: Global manufacturing networks</p>
             </div>
           </div>
         </section>
 
         {/* References */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">5. References</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">5. References</h2>
           
           <div className="space-y-4">
-            <div className="border border-gray-300 p-4">
+            <div className="border border-gray-700 p-4">
               <h3 className="font-bold mb-2">Ricardian Contracts</h3>
               <p className="text-sm leading-relaxed">
                 Grigg, Ian. "The Ricardian Contract." 1996. <br/>
-                <a href="https://en.wikipedia.org/wiki/Ricardian_contract" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                <a href="https://en.wikipedia.org/wiki/Ricardian_contract" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">
                   https://en.wikipedia.org/wiki/Ricardian_contract
                 </a>
               </p>
             </div>
 
-            <div className="border border-gray-300 p-4">
+            <div className="border border-gray-700 p-4">
               <h3 className="font-bold mb-2">Theory of the Firm</h3>
               <p className="text-sm leading-relaxed">
                 Coase, Ronald. "The Nature of the Firm." Economica, 1937. <br/>
-                <a href="https://en.wikipedia.org/wiki/Theory_of_the_firm" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                <a href="https://en.wikipedia.org/wiki/Theory_of_the_firm" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">
                   https://en.wikipedia.org/wiki/Theory_of_the_firm
                 </a>
               </p>
             </div>
 
-            <div className="border border-gray-300 p-4">
+            <div className="border border-gray-700 p-4">
               <h3 className="font-bold mb-2">Bitcoin OS Platform</h3>
               <p className="text-sm leading-relaxed">
                 The Bitcoin Corporation LTD. "Bitcoin OS Technical Documentation." 2025. <br/>
-                <a href="https://www.bitcoin-os.website" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                <a href="https://www.bitcoin-os.website" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">
                   https://www.bitcoin-os.website
                 </a>
               </p>
@@ -341,9 +341,9 @@ export default function ContractsDownloadPage() {
 
         {/* Author Information */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-200 pb-2">6. Author Information</h2>
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-gray-800 pb-2">6. Author Information</h2>
           
-          <div className="bg-gray-100 border border-gray-300 p-6">
+          <div className="bg-gray-900 border border-gray-700 p-6">
             <h3 className="text-lg font-bold mb-3">Innovation by Richard Boase</h3>
             <p className="leading-relaxed mb-4">
               This groundbreaking framework represents the fusion of Ian Grigg's Ricardian Contracts 
@@ -355,8 +355,8 @@ export default function ContractsDownloadPage() {
               of transaction costs and the provision of cryptographic certainty, while maintaining 
               legal enforceability and human readability.
             </p>
-            <div className="border-t border-gray-300 pt-4 mt-4">
-              <p className="text-sm text-gray-600">
+            <div className="border-t border-gray-700 pt-4 mt-4">
+              <p className="text-sm text-gray-400">
                 <strong>Developed for Bitcoin-OS by The Bitcoin Corporation LTD</strong><br />
                 Copyright © 2025 • Open-BSV-4.0 License<br/>
                 Document Version: 2.0 | Date: November 2025
@@ -367,20 +367,20 @@ export default function ContractsDownloadPage() {
       </div>
 
       {/* Professional Footer */}
-      <div className="border-t-2 border-black bg-gray-50 mt-12">
+      <div className="border-t-2 border-white bg-gray-900 mt-12">
         <div className="max-w-6xl mx-auto px-8 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
-                <span className="font-bold text-white text-lg">₿</span>
+              <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
+                <span className="font-bold text-black text-lg">₿</span>
               </div>
               <div>
                 <div className="font-bold text-lg">Bitcoin OS</div>
-                <div className="text-sm text-gray-600">The Bitcoin Corporation LTD</div>
+                <div className="text-sm text-gray-400">The Bitcoin Corporation LTD</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-400">
                 <strong>bOSacs Framework Specification</strong><br/>
                 Version 2.0 • November 2025<br/>
                 Open-BSV-4.0 License
