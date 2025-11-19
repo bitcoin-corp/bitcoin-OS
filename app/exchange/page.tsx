@@ -748,7 +748,7 @@ function ExchangeContent() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-400 via-red-500 to-yellow-600 bg-clip-text text-transparent">
-                    bOSacs Global Exchange
+                    bOS Atomic Contracts Exchange
                   </h1>
                   <p className="text-sm text-gray-400 font-mono">Enterprise Bitcoin OS Atomic Contracts • Global Scale</p>
                 </div>
@@ -1595,7 +1595,7 @@ export default function ExchangePage() {
       <div className="h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-red-500 mx-auto mb-4"></div>
-          <p className="text-white text-xl">Loading Global bOSacs Exchange...</p>
+          <p className="text-white text-xl">Loading bOS Atomic Contracts Exchange...</p>
           <p className="text-gray-400 text-sm">Connecting to enterprise network...</p>
         </div>
       </div>
