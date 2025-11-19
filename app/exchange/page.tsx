@@ -58,6 +58,8 @@ interface BOSacContract {
   resourceSupply: number
   resourceDemand: number
   aiOptimizationScore: number
+  liquidity?: number
+  circulation?: number
 }
 
 interface ResourceMetrics {
@@ -102,6 +104,11 @@ function ExchangeContent() {
     distributionRate: 0.01, // 1% fee
     nextDistribution: new Date(Date.now() + 3600000) // 1 hour
   })
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   
   useEffect(() => {
     const tab = searchParams?.get('tab')
@@ -289,7 +296,7 @@ function ExchangeContent() {
       trades24h: 8741, 
       status: 'active',
       tier: 'enterprise',
-      icon: 'Zap',
+      icon: 'Lightning',
       description: 'Extremely scarce quantum computing resources - premium pricing',
       region: 'Global',
       tps: 247293,
@@ -458,7 +465,7 @@ function ExchangeContent() {
       trades24h: 1847,
       status: 'active',
       tier: 'enterprise',
-      icon: 'Zap',
+      icon: 'Lightning',
       description: 'Fault-tolerant quantum computing - ultimate scarcity',
       region: 'Global',
       tps: 84729,
@@ -506,7 +513,7 @@ function ExchangeContent() {
       trades24h: 4817,
       status: 'active',
       tier: 'enterprise',
-      icon: 'Zap',
+      icon: 'Lightning',
       description: 'Light-speed photonic computing and networking',
       region: 'Global',
       tps: 2847291,
@@ -1232,7 +1239,7 @@ function ExchangeContent() {
                 <span className="text-xs font-mono text-red-400">HIGH-FREQUENCY</span>
               </div>
               <div className="text-xs text-gray-500">
-                {new Date().toLocaleTimeString()} UTC
+                {isClient ? new Date().toLocaleTimeString() : '--:--:--'} UTC
               </div>
             </div>
           </div>
@@ -1317,94 +1324,6 @@ function ExchangeContent() {
                           <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
                         </div>
                       )
-                    const isGPU = resource.type === 'GPU'
-                    const isMemory = resource.type === 'Memory'
-                    const isNetwork = resource.type === 'Network'
-                    const scarcityLevel = resource.scarcityIndex > 1.2 ? 'high' : resource.scarcityIndex > 1.1 ? 'medium' : 'low'
-                    
-                    return (
-                      <div key={resource.type} className={`p-4 border ${
-                        scarcityLevel === 'high' ? 'bg-gray-900 border-red-800' :
-                        scarcityLevel === 'medium' ? 'bg-gray-900 border-yellow-800' :
-                        'bg-gray-900 border-green-800'
-                      }`}>
-                        <div className="flex items-center gap-3 mb-4">
-                          {resource.type === 'GPU' && <Cpu className="w-8 h-8 text-red-400" />}
-                          {resource.type === 'CPU' && <Server className="w-8 h-8 text-blue-400" />}
-                          {resource.type === 'Memory' && <Database className="w-8 h-8 text-purple-400" />}
-                          {resource.type === 'Storage' && <Database className="w-8 h-8 text-green-400" />}
-                          {resource.type === 'Network' && <Network className="w-8 h-8 text-orange-400" />}
-                          <div>
-                            <h3 className="text-xl font-bold">{resource.type}</h3>
-                            <div className={`text-sm font-bold ${
-                              scarcityLevel === 'high' ? 'text-red-400' :
-                              scarcityLevel === 'medium' ? 'text-yellow-400' :
-                              'text-green-400'
-                            }`}>
-                              {scarcityLevel === 'high' ? 'HIGH DEMAND' :
-                               scarcityLevel === 'medium' ? 'MODERATE DEMAND' :
-                               'ABUNDANT'}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-400 text-sm">Price per Unit</span>
-                            <span className="font-mono text-lg font-bold text-white">
-                              ₿OS {resource.price.toLocaleString()}
-                            </span>
-                          </div>
-                          
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-400 text-sm">24h Change</span>
-                            <span className={`font-mono font-bold ${
-                              resource.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
-                            }`}>
-                              {resource.priceChange24h >= 0 ? '+' : ''}{resource.priceChange24h.toFixed(1)}%
-                            </span>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Supply</span>
-                              <span className="font-mono text-blue-400">{resource.supply.toLocaleString()}</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Demand</span>
-                              <span className="font-mono text-orange-400">{resource.demand.toLocaleString()}</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Utilization</span>
-                              <span className="font-mono text-purple-400">{(resource.utilizationRate * 100).toFixed(1)}%</span>
-                            </div>
-                          </div>
-                          
-                          <div className="pt-2 border-t border-gray-700/50">
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-400 text-sm">Scarcity Index</span>
-                              <span className={`font-mono font-bold text-sm ${
-                                resource.scarcityIndex > 1.2 ? 'text-red-400' :
-                                resource.scarcityIndex > 1.1 ? 'text-yellow-400' :
-                                'text-green-400'
-                              }`}>
-                                {resource.scarcityIndex.toFixed(2)}x
-                              </span>
-                            </div>
-                            <div className="flex justify-between items-center mt-1">
-                              <span className="text-gray-400 text-sm">AI Efficiency</span>
-                              <span className="font-mono font-bold text-sm text-cyan-400">
-                                {(resource.aiEfficiency * 100).toFixed(1)}%
-                              </span>
-                            </div>
-                          </div>
-                          
-                          <div className="text-xs text-gray-500 mt-2">
-                            {resource.contracts.toLocaleString()} active contracts
-                          </div>
-                        </div>
-                      </div>
-                    )
                     })}
                   </div>
                 </div>
@@ -1442,7 +1361,7 @@ function ExchangeContent() {
                         'border-l-2 border-l-orange-600'
                       }`}>
                         <div className="col-span-2 flex items-center gap-2">
-                          <Zap className="w-4 h-4 text-gray-400" />
+                          <Lightning className="w-4 h-4 text-gray-400" />
                           <div>
                             <div className="font-medium text-white">{resource.type.replace('-', ' ').toUpperCase()}</div>
                             <div className={`text-xs font-mono ${
@@ -1478,65 +1397,7 @@ function ExchangeContent() {
                         <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
                       </div>
                     )
-                      const isGPU = resource.type === 'GPU'
-                      const isMemory = resource.type === 'Memory'
-                      const isNetwork = resource.type === 'Network'
-                      const scarcityLevel = resource.scarcityIndex > 2 ? 'ultra' : resource.scarcityIndex > 1.5 ? 'high' : 'medium'
-                      
-                      return (
-                        <div key={resource.type} className={`p-3 border text-sm ${
-                          scarcityLevel === 'ultra' ? 'bg-gray-900 border-purple-800' :
-                          scarcityLevel === 'high' ? 'bg-gray-900 border-red-800' :
-                          'bg-gray-900 border-yellow-800'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-3">
-                            {resource.type === 'GPU' && <Cpu className="w-5 h-5 text-red-400" />}
-                            {resource.type === 'CPU' && <Server className="w-5 h-5 text-blue-400" />}
-                            {resource.type === 'Memory' && <Database className="w-5 h-5 text-purple-400" />}
-                            {resource.type === 'Storage' && <Database className="w-5 h-5 text-green-400" />}
-                            {resource.type === 'Network' && <Network className="w-5 h-5 text-orange-400" />}
-                            <div>
-                              <h4 className="font-bold text-sm">{resource.type.replace('-', ' ')}</h4>
-                              <div className={`text-xs font-bold ${
-                                scarcityLevel === 'ultra' ? 'text-purple-400' :
-                                scarcityLevel === 'high' ? 'text-red-400' :
-                                'text-yellow-400'
-                              }`}>
-                                {scarcityLevel === 'ultra' ? 'ULTRA RARE' :
-                                 scarcityLevel === 'high' ? 'HIGH DEMAND' :
-                                 'SPECIALIZED'}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">Price</span>
-                              <span className="font-mono text-sm font-bold">
-                                ₿{resource.price.toLocaleString()}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">Scarcity</span>
-                              <span className={`font-mono text-xs font-bold ${
-                                resource.scarcityIndex > 5 ? 'text-purple-400' :
-                                resource.scarcityIndex > 2 ? 'text-red-400' :
-                                'text-yellow-400'
-                              }`}>
-                                {resource.scarcityIndex.toFixed(1)}x
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">AI Efficiency</span>
-                              <span className="font-mono text-xs font-bold text-cyan-400">
-                                {(resource.aiEfficiency * 100).toFixed(1)}%
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
+                  })}
                 </div>
                 
                 {/* Ultra-Premium Resources Table */}
@@ -1612,58 +1473,7 @@ function ExchangeContent() {
                         <div className="font-mono text-cyan-400">{(resource.aiEfficiency * 100).toFixed(1)}%</div>
                       </div>
                     )
-                      const scarcityLevel = resource.scarcityIndex > 10 ? 'legendary' : resource.scarcityIndex > 5 ? 'ultra' : 'premium'
-                      
-                      return (
-                        <div key={resource.type} className={`p-3 border text-sm  ${
-                          scarcityLevel === 'legendary' ? 'bg-gray-900 border-yellow-600' :
-                          scarcityLevel === 'ultra' ? 'bg-gray-900 border-purple-800' :
-                          'bg-gray-900 border-blue-800'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Flame className={`w-5 h-5 ${
-                              scarcityLevel === 'legendary' ? 'text-yellow-400' :
-                              scarcityLevel === 'ultra' ? 'text-purple-400' :
-                              'text-blue-400'
-                            } `} />
-                            <div>
-                              <h4 className="font-bold text-sm">{resource.type.replace('-', ' ')}</h4>
-                              <div className={`text-xs font-bold ${
-                                scarcityLevel === 'legendary' ? 'text-yellow-400' :
-                                scarcityLevel === 'ultra' ? 'text-purple-400' :
-                                'text-blue-400'
-                              }`}>
-                                {scarcityLevel === 'legendary' ? 'LEGENDARY' :
-                                 scarcityLevel === 'ultra' ? 'ULTRA RARE' :
-                                 'PREMIUM'}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">Price</span>
-                              <span className="font-mono text-sm font-bold text-yellow-400">
-                                ₿{resource.price.toLocaleString()}
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">Scarcity</span>
-                              <span className="font-mono text-xs font-bold text-red-400">
-                                {resource.scarcityIndex.toFixed(1)}x
-                              </span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-gray-400 text-xs">Utilization</span>
-                              <span className="font-mono text-xs font-bold text-purple-400">
-                                {(resource.utilizationRate * 100).toFixed(1)}%
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
+                  })}
                 </div>
 
                 {/* $bOS Revenue Distribution */}
@@ -1706,7 +1516,7 @@ function ExchangeContent() {
                     <div className="bg-black/30 p-3 border border-purple-700/30">
                       <div className="text-sm text-gray-400 mb-1">Next Distribution</div>
                       <div className="text-lg font-bold font-mono text-purple-400">
-                        {revenueMetrics.nextDistribution.toLocaleTimeString()}
+                        {isClient ? revenueMetrics.nextDistribution.toLocaleTimeString() : '--:--:--'}
                       </div>
                       <div className="text-xs text-purple-300 mt-1">Automated hourly</div>
                     </div>
