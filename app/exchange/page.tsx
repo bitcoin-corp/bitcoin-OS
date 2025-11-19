@@ -1339,7 +1339,7 @@ function ExchangeContent() {
                     const dividendYield = resource.scarcityIndex * 3.2
                     
                     return (
-                      <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                      <div key={`${resource.type}-${index}`} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
                         scarcityLevel === 'ultra' ? 'border-l-2 border-l-purple-600' :
                         scarcityLevel === 'high' ? 'border-l-2 border-l-red-600' :
                         'border-l-2 border-l-orange-600'
@@ -1411,7 +1411,7 @@ function ExchangeContent() {
                     const dividendYield = resource.scarcityIndex * 4.8
                     
                     return (
-                      <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                      <div key={`${resource.type}-${index}`} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
                         scarcityLevel === 'legendary' ? 'border-l-2 border-l-yellow-500 bg-yellow-500/5' :
                         scarcityLevel === 'ultra' ? 'border-l-2 border-l-purple-600' :
                         'border-l-2 border-l-blue-600'
@@ -1522,8 +1522,8 @@ function ExchangeContent() {
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="space-y-4">
                       <h4 className="font-semibold text-white">Resource Allocation</h4>
-                      {Object.values(resourceMetrics).map(resource => (
-                        <div key={resource.type} className="flex items-center justify-between p-3 bg-black/30 rounded border border-gray-700/30">
+                      {Object.values(resourceMetrics).map((resource, index) => (
+                        <div key={`${resource.type}-${index}`} className="flex items-center justify-between p-3 bg-black/30 rounded border border-gray-700/30">
                           <span className="text-sm text-gray-300">{resource.type}</span>
                           <div className="flex items-center gap-3">
                             <div className={`w-16 h-2 rounded-full bg-gray-700 overflow-hidden`}>
