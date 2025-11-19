@@ -84,22 +84,36 @@ export default function DevSidebar() {
 
 
   return (
-    <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      <div className="dev-sidebar-header">
-        {!isCollapsed && (
-          <div className="dev-sidebar-title">
-            <Monitor className="dev-sidebar-logo" />
-            <span>Contracts Bar</span>
-          </div>
-        )}
+    <>
+      {/* Floating toggle when collapsed */}
+      {isCollapsed && (
         <button 
-          className="dev-sidebar-toggle"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          className="dev-sidebar-floating-toggle"
+          onClick={() => setIsCollapsed(false)}
+          aria-label="Expand contracts bar"
         >
-          {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          <ChevronRight size={20} />
         </button>
-      </div>
+      )}
+      
+      <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className="dev-sidebar-header">
+          {!isCollapsed && (
+            <div className="dev-sidebar-title">
+              <Monitor className="dev-sidebar-logo" />
+              <span>Contracts Bar</span>
+            </div>
+          )}
+          {!isCollapsed && (
+            <button 
+              className="dev-sidebar-toggle"
+              onClick={() => setIsCollapsed(true)}
+              aria-label="Collapse sidebar"
+            >
+              <ChevronLeft size={20} />
+            </button>
+          )}
+        </div>
 
       <nav className="dev-sidebar-nav">
         {menuItems.map((item, index) => {
@@ -160,5 +174,6 @@ export default function DevSidebar() {
 
 
     </div>
+    </>
   )
 }
