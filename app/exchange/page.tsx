@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { 
   FileText, 
   TrendingUp, 
@@ -91,8 +90,6 @@ interface LiveTransaction {
 }
 
 function ExchangeContent() {
-  const searchParams = useSearchParams()
-  const [activeTab, setActiveTab] = useState<'resources' | 'trade' | 'global' | 'analytics'>('resources')
   const [selectedContract, setSelectedContract] = useState<string>('ai_training_gpu')
   const [isLive, setIsLive] = useState(true)
   const [globalTPS, setGlobalTPS] = useState(3247891)
@@ -110,12 +107,6 @@ function ExchangeContent() {
     setIsClient(true)
   }, [])
   
-  useEffect(() => {
-    const tab = searchParams?.get('tab')
-    if (tab === 'resources' || tab === 'trade' || tab === 'global' || tab === 'analytics') {
-      setActiveTab(tab)
-    }
-  }, [searchParams])
 
   // Initialize expanded resource metrics
   useEffect(() => {
@@ -1000,6 +991,7 @@ function ExchangeContent() {
   }
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="h-full overflow-auto bg-gray-950 text-white">
       {/* Professional Header */}
       <div className="border-b border-gray-800 bg-gray-900">
@@ -1213,20 +1205,13 @@ function ExchangeContent() {
           {/* Tabs */}
           <div className="flex border-b border-gray-800 bg-gray-900">
             {[
-              { id: 'resources', label: 'Resource Markets', icon: Gauge, color: 'blue' },
-              { id: 'global', label: 'Global Network', icon: Globe, color: 'red' },
-              { id: 'trade', label: 'Contract Trading', icon: TrendingUp, color: 'orange' },
-              { id: 'analytics', label: 'AI Analytics', icon: BarChart3, color: 'yellow' }
+              { id: 'resources', label: 'Resource Markets', icon: Gauge, color: 'blue' }
             ].map(({ id, label, icon: Icon, color }) => (
               <button
                 key={id}
                 type="button"
-                onClick={() => setActiveTab(id as any)}
-                className={`flex items-center gap-3 px-6 py-3 border-b-2 transition-colors ${
-                  activeTab === id
-                    ? 'border-white text-white bg-gray-800'
-                    : 'border-transparent text-gray-500 hover:text-white hover:bg-gray-800'
-                }`}
+                onClick={() => {}}
+                className="flex items-center gap-3 px-6 py-3 border-b-2 border-white text-white bg-gray-800"
               >
                 <Icon className="w-4 h-4" />
                 <span className="font-medium">{label}</span>
@@ -1246,8 +1231,7 @@ function ExchangeContent() {
 
           {/* Tab Content */}
           <div className="flex-1 p-6 overflow-auto">
-            {activeTab === 'resources' && (
-              <div className="space-y-6">
+            <div className="space-y-6">
                 {/* Primary Resources Table */}
                 <div className="bg-gray-900 border border-gray-800">
                   <div className="border-b border-gray-800 p-3">
@@ -1278,7 +1262,7 @@ function ExchangeContent() {
                       const dividendYield = resource.scarcityIndex * 2.5
                       
                       return (
-                        <div key={resource.type} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
+                        <div key={`${resource.type}-${index}`} className={`grid grid-cols-12 gap-4 p-3 border-b border-gray-800 hover:bg-gray-800 transition-colors text-sm ${
                           scarcityLevel === 'high' ? 'border-l-2 border-l-red-600' :
                           scarcityLevel === 'medium' ? 'border-l-2 border-l-yellow-600' :
                           'border-l-2 border-l-green-600'
@@ -1593,278 +1577,15 @@ function ExchangeContent() {
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-            
-            {activeTab === 'global' && (
-              <div className="space-y-6">
-                {/* Global Stats Dashboard */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <div className="bg-gradient-to-br from-red-900/30 to-orange-900/30 p-4 border border-red-700/30">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Rocket className="w-8 h-8 text-red-400" />
-                      <div>
-                        <div className="text-2xl font-bold font-mono">${(52.9).toFixed(1)}B</div>
-                        <div className="text-sm text-gray-400">24h Volume</div>
-                      </div>
-                    </div>
-                    <div className="text-green-400 text-sm">+24.7% from yesterday</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 p-4 border border-blue-700/30">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Building className="w-8 h-8 text-blue-400" />
-                      <div>
-                        <div className="text-2xl font-bold font-mono">8,247</div>
-                        <div className="text-sm text-gray-400">Active Enterprises</div>
-                      </div>
-                    </div>
-                    <div className="text-yellow-400 text-sm">Fortune 500 companies</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-br from-green-900/30 to-teal-900/30 p-4 border border-green-700/30">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Lightning className="w-8 h-8 text-green-400" />
-                      <div>
-                        <div className="text-2xl font-bold font-mono">{globalTPS.toLocaleString()}</div>
-                        <div className="text-sm text-gray-400">TPS Global</div>
-                      </div>
-                    </div>
-                    <div className="text-green-400 text-sm">Real-time processing</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 p-4 border border-yellow-700/30">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Shield className="w-8 h-8 text-yellow-400" />
-                      <div>
-                        <div className="text-2xl font-bold font-mono">$147.8B</div>
-                        <div className="text-sm text-gray-400">Total Value Locked</div>
-                      </div>
-                    </div>
-                    <div className="text-yellow-400 text-sm">Enterprise capital</div>
-                  </div>
-                </div>
-
-                {/* Global Activity Map */}
-                <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6">
-                  <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                    <Globe className="w-6 h-6 text-blue-400" />
-                    Global Network Activity
-                  </h3>
-                  <div className="h-96 flex items-center justify-center text-gray-400 bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-lg border border-blue-700/30">
-                    <div className="text-center">
-                      <Activity className="w-16 h-16 mx-auto mb-4 text-blue-400 " />
-                      <p className="text-lg font-semibold">Live Global Network Visualization</p>
-                      <p className="text-sm">Real-time contract execution across 67 countries</p>
-                      <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
-                        <div>Americas: 1,247,891 TPS</div>
-                        <div>EMEA: 998,745 TPS</div>
-                        <div>APAC: 1,001,255 TPS</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'trade' && (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                {/* Enterprise Contract Details */}
-                <div className="bg-gray-900/50 rounded-lg border border-gray-800">
-                  <div className="p-4 border-b border-gray-800">
-                    <h3 className="font-bold text-lg">{contractData[selectedContract].name}</h3>
-                    <div className="text-sm text-gray-400">Enterprise-Grade bOSac Contract</div>
-                  </div>
-                  <div className="p-4 space-y-4">
-                    <div>
-                      <label className="text-sm text-gray-400">Contract ID</label>
-                      <div className="font-mono text-sm text-orange-400">{contractData[selectedContract].id}</div>
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-400">Enterprise Parties</label>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {contractData[selectedContract].parties.map((party, i) => (
-                          <span key={i} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">
-                            {party}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm text-gray-400">Duration</label>
-                        <div className="font-mono text-lg">{contractData[selectedContract].duration}</div>
-                      </div>
-                      <div>
-                        <label className="text-sm text-gray-400">Region</label>
-                        <div className="font-mono text-lg">{contractData[selectedContract].region}</div>
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-400">Total Value Locked</label>
-                      <div className="font-mono text-2xl font-bold text-yellow-400">{formatValue(contractData[selectedContract].value)}</div>
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-400">Processing Capacity</label>
-                      <div className="font-mono text-lg text-green-400">{contractData[selectedContract].tps.toLocaleString()} TPS</div>
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-400">Description</label>
-                      <div className="text-sm leading-relaxed">{contractData[selectedContract].description}</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Enterprise Trading Interface */}
-                <div className="bg-gray-900/50 rounded-lg border border-gray-800">
-                  <div className="p-4 border-b border-gray-800">
-                    <h3 className="font-bold text-lg">Enterprise Contract Rights</h3>
-                    <div className="text-sm text-gray-400">High-Value Institutional Trading</div>
-                  </div>
-                  <div className="p-4">
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <button className="py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg font-bold text-lg transition-colors">
-                        ACQUIRE RIGHTS
-                      </button>
-                      <button className="py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-lg font-bold text-lg transition-colors">
-                        DIVEST RIGHTS
-                      </button>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Unit Price (₿OS per basis point)</label>
-                        <input 
-                          type="number" 
-                          step="0.01"
-                          defaultValue={contractData[selectedContract].price.toFixed(2)}
-                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 font-mono text-lg"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Basis Points (0.01%)</label>
-                        <input 
-                          type="number" 
-                          placeholder="100"
-                          min="1"
-                          max="10000"
-                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 font-mono text-lg"
-                        />
-                        <div className="text-xs text-gray-500 mt-1">Minimum: 100 basis points (1%)</div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Total Investment (₿OS)</label>
-                        <input 
-                          type="number" 
-                          placeholder="0.00"
-                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 font-mono text-lg"
-                          readOnly
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-8">
-                      <button className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 rounded-lg font-bold text-lg transition-colors">
-                        EXECUTE ENTERPRISE TRADE
-                      </button>
-                    </div>
-
-                    <div className="mt-6 space-y-3">
-                      <div className="p-4 bg-gray-800/50 rounded-lg">
-                        <div className="flex justify-between text-sm mb-2">
-                          <span className="text-gray-400">Available Balance:</span>
-                          <span className="font-mono text-lg">847,291.47 ₿OS</span>
-                        </div>
-                        <div className="flex justify-between text-sm mb-2">
-                          <span className="text-gray-400">Enterprise Trading Fee:</span>
-                          <span className="font-mono">0.01%</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-400">Settlement Time:</span>
-                          <span className="font-mono text-green-400">0.89s</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'analytics' && (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6">
-                  <h3 className="font-bold mb-4 text-xl">Network Performance Analytics</h3>
-                  <div className="h-80 flex items-center justify-center text-gray-400 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-lg border border-purple-700/30">
-                    <div className="text-center">
-                      <BarChart3 className="w-16 h-16 mx-auto mb-4 text-purple-400 " />
-                      <p className="text-lg font-semibold">Enterprise Performance Dashboard</p>
-                      <p className="text-sm">Real-time analytics for {contractData[selectedContract].name}</p>
-                      <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                        <div className="bg-purple-900/20 p-3 rounded">
-                          <div className="text-purple-300 font-bold">Throughput</div>
-                          <div>{contractData[selectedContract].tps.toLocaleString()} TPS</div>
-                        </div>
-                        <div className="bg-blue-900/20 p-3 rounded">
-                          <div className="text-blue-300 font-bold">Efficiency</div>
-                          <div>99.97%</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6">
-                  <h3 className="font-bold mb-4 text-xl">Enterprise Contract Metrics</h3>
-                  <div className="space-y-6">
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">Current Valuation:</span>
-                      <span className="font-mono text-xl font-bold">{formatPrice(contractData[selectedContract].price)}</span>
-                    </div>
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">24h Performance:</span>
-                      <span className={`font-mono text-xl font-bold ${contractData[selectedContract].change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {formatChange(contractData[selectedContract].change24h)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">Trading Volume:</span>
-                      <span className="font-mono text-xl">{formatValue(contractData[selectedContract].volume24h)}</span>
-                    </div>
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">Total Value:</span>
-                      <span className="font-mono text-xl font-bold text-yellow-400">{formatValue(contractData[selectedContract].value)}</span>
-                    </div>
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">Execution Rate:</span>
-                      <span className="font-mono text-xl font-bold text-green-400">99.97%</span>
-                    </div>
-                    <div className="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg">
-                      <span className="text-gray-400">Network Uptime:</span>
-                      <span className="font-mono text-xl font-bold text-green-400">99.999%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
     </div>
+    </Suspense>
   )
 }
 
 export default function ExchangePage() {
-  return (
-    <Suspense fallback={
-      <div className="h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-red-500 mx-auto mb-4"></div>
-          <p className="text-white text-xl">Loading bOS Atomic Contracts Exchange...</p>
-          <p className="text-gray-400 text-sm">Connecting to enterprise network...</p>
-        </div>
-      </div>
-    }>
-      <ExchangeContent />
-    </Suspense>
-  )
+  return <ExchangeContent />
 }
