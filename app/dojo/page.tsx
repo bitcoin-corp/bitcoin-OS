@@ -143,8 +143,8 @@ export default function BitcoinDojo() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950">
-      <div className="relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950 overflow-auto">
+      <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-500/10 via-transparent to-bitcoin-600/10" />
         
         <motion.div 
@@ -164,13 +164,15 @@ export default function BitcoinDojo() {
                   <h1 className="text-2xl font-bold text-white">Bitcoin Dojo</h1>
                 </div>
               </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 rounded-lg text-white font-semibold hover:from-bitcoin-600 hover:to-bitcoin-700 transition-all shadow-lg"
-              >
-                Apply Now
-              </motion.button>
+              <Link href="/dojo/apply">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 py-3 bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 rounded-lg text-white font-semibold hover:from-bitcoin-600 hover:to-bitcoin-700 transition-all shadow-lg"
+                >
+                  Apply Now
+                </motion.button>
+              </Link>
             </div>
           </header>
 
@@ -357,13 +359,15 @@ export default function BitcoinDojo() {
                 Applications are reviewed on a rolling basis. Only exceptional founders will be selected.
               </p>
               <div className="flex justify-center gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 rounded-lg text-white font-semibold hover:from-bitcoin-600 hover:to-bitcoin-700 transition-all shadow-xl text-lg"
-                >
-                  Apply to Cohort 2025
-                </motion.button>
+                <Link href="/dojo/apply">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 rounded-lg text-white font-semibold hover:from-bitcoin-600 hover:to-bitcoin-700 transition-all shadow-xl text-lg"
+                  >
+                    Apply to Cohort 2025
+                  </motion.button>
+                </Link>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
