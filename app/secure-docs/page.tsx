@@ -132,7 +132,8 @@ export default function SecureDocs() {
           textAlign: 'center', 
           marginBottom: '10px',
           fontSize: '24px',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: '#000'
         }}>
           Secure Document Access
         </h1>
@@ -151,7 +152,8 @@ export default function SecureDocs() {
               display: 'block', 
               marginBottom: '8px',
               fontWeight: 'bold',
-              fontSize: '14px'
+              fontSize: '14px',
+              color: '#000'
             }}>
               Select Document
             </label>
@@ -177,7 +179,8 @@ export default function SecureDocs() {
               display: 'block', 
               marginBottom: '8px',
               fontWeight: 'bold',
-              fontSize: '14px'
+              fontSize: '14px',
+              color: '#000'
             }}>
               Password
             </label>
