@@ -28,7 +28,12 @@ import {
   Activity,
   Cpu,
   Server,
-  Zap
+  Zap,
+  DollarSign,
+  Flower2,
+  Wrench,
+  Database,
+  Bug
 } from 'lucide-react'
 import './DevSidebar.css'
 
@@ -67,19 +72,42 @@ export default function DevSidebar() {
     section?: string
     external?: boolean
   }> = [
-    // Token & Core at top
-    { path: '/token', icon: Coins, label: '$bOS' },
+    // Token & Core at top - KEEP THESE UNCHANGED
+    { path: '/token', icon: Coins, label: '$bOS', badge: 'NEW' },
     { path: '/exchange', icon: Zap, label: 'Compute Exchange' },
+    { path: '/grants', icon: Flower2, label: 'GRANTS' },
+    { path: '/maip', icon: Users, label: 'MAIP', badge: 'EXPERIMENTAL' },
+    
+    // Developers Section
+    { divider: true },
+    { section: 'DEVELOPERS' },
+    { path: '/developer/offer', icon: FileCode, label: 'Create Dev Offer' },
     { path: '/contracts', icon: Terminal, label: 'Contracts' },
     { path: '/issues-hub', icon: GitBranch, label: 'Issues Hub', badge: issueCount > 0 ? issueCount.toString() : undefined },
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS/issues', icon: Bug, label: 'Issues', external: true, badge: issueCount > 0 ? issueCount.toString() : undefined },
+    { path: '/contributions', icon: Users, label: 'Contributors', badge: '10+' },
+    { path: '/engineers', icon: Database, label: 'Engineers Spec', badge: 'TECH' },
     
-    // HPC & Computational Resources
+    // Compute Marketplace
     { divider: true },
     { section: 'COMPUTE MARKETPLACE' },
     { path: '/exchange?tab=buy', icon: Cpu, label: 'Ask for Resources' },
     { path: '/exchange?tab=sell', icon: Server, label: 'Offer Resources' },
-    { path: '/exchange?tab=my-resources', icon: Activity, label: 'My Resources' },
+    { path: '/enterprise', icon: Wrench, label: 'Enterprise Solutions' },
     
+    // System & Apps
+    { divider: true },
+    { section: 'APPS & ECOSYSTEM' },
+    { path: '/apps/offer', icon: Package, label: 'Create App Offer' },
+    { path: '/apps/marketplace', icon: Activity, label: 'App Marketplace', badge: '35+' },
+    { path: '/docs', icon: BookOpen, label: 'Documentation' },
+    
+    // System
+    { divider: true },
+    { path: '/api', icon: Package, label: 'API Reference' },
+    { path: 'https://github.com/bitcoin-apps-suite/bitcoin-OS', icon: Github, label: 'GitHub', external: true },
+    { path: '/changelog', icon: FileText, label: 'Changelog' },
+    { path: '/status', icon: Activity, label: 'Status', badge: 'OK' }
   ]
 
 
