@@ -56,6 +56,7 @@ export default function SecureDocs() {
   const switchDocument = async (newDocument: string) => {
     if (newDocument === document) return;
     
+    console.log('Switching to document:', newDocument);
     setLoading(true);
     setError('');
     setDocument(newDocument);
@@ -70,15 +71,18 @@ export default function SecureDocs() {
       });
 
       const data = await response.text();
+      console.log('Received data length:', data.length);
 
       if (response.ok) {
         setContent(data);
+        console.log('Content updated for:', newDocument);
       } else {
         setError('Failed to load document');
+        console.error('Failed to load document:', newDocument);
       }
     } catch (err) {
       setError('Network error. Please try again.');
-      console.error(err);
+      console.error('Error switching document:', err);
     } finally {
       setLoading(false);
     }
@@ -220,7 +224,7 @@ export default function SecureDocs() {
           maxWidth: '1200px',
           margin: '0 auto'
         }}>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div key={document} dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
     );
