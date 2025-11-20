@@ -702,11 +702,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
-          onClick={() => window.location.href = '/accelerator'}
-          title="Bitcoin Accelerator"
+          onClick={() => window.location.href = '/dojo'}
+          title="Bitcoin Dojo"
         >
           <Rocket className="w-10 h-10 text-orange-500 drop-shadow-lg" strokeWidth={1.5} />
-          <span className="text-xs text-white text-center font-medium drop-shadow-md">Accelerator</span>
+          <span className="text-xs text-white text-center font-medium drop-shadow-md">Dojo</span>
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
