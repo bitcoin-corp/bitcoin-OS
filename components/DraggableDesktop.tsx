@@ -705,7 +705,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           onClick={() => window.location.href = '/dojo'}
           title="Bitcoin Dojo"
         >
-          <Rocket className="w-10 h-10 text-orange-500 drop-shadow-lg" strokeWidth={1.5} />
+          <svg className="w-10 h-10 text-orange-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            {/* Torii gate icon */}
+            <path d="M3 6h18M5 6v14M19 6v14M3 10h18" />
+            <path d="M3 4l3 2M21 4l-3 2" />
+          </svg>
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Dojo</span>
         </button>
         <button 
@@ -736,10 +740,11 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           title="Senseii"
         >
           <svg className="w-8 h-8 text-red-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-            <path d="M3 5h18" />
-            <path d="M6 5v14" />
-            <path d="M18 5v14" />
-            <path d="M3 9h18" />
+            {/* Wisdom/Scroll icon */}
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v8" />
+            <path d="M8 12h8" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
           </svg>
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Senseii</span>
         </button>
