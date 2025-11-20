@@ -31,6 +31,7 @@
   opacity: 0.95;
   text-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
   transition: all 0.2s ease;
+  animation: colorCycle 15s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -43,10 +44,6 @@
   100% {
     background-position: 0% 50%;
   }
-}
-
-.bitcoin-symbol {
-  animation: colorCycle 15s ease infinite;
 }
 
 @keyframes colorCycle {
