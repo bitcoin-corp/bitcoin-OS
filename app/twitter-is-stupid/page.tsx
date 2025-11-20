@@ -10,8 +10,9 @@ export default function TwitterIsStupid() {
       height: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
+      paddingTop: '15vh',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       textAlign: 'center',
       position: 'relative'
@@ -35,7 +36,7 @@ export default function TwitterIsStupid() {
       </p>
       <p style={{
         position: 'absolute',
-        bottom: '80px',
+        bottom: '120px',
         fontSize: '24px',
         fontWeight: 600,
         opacity: 0.8
