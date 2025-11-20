@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER - The Bitcoin Corporation</title>
+    <title>NFT/FT Implementation Plan - The Bitcoin Corporation</title>
     <style>
         @page { size: A4; margin: 2cm; }
         body { font-family: 'Times New Roman', serif; line-height: 1.6; color: #000; font-size: 11pt; }
@@ -15,25 +15,186 @@
         h1 { font-size: 16pt; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px; }
         h2 { font-size: 14pt; font-weight: bold; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #000; padding-left: 12px; }
         h3 { font-size: 12pt; font-weight: bold; margin-top: 25px; margin-bottom: 12px; }
-        .content { white-space: pre-wrap; font-family: inherit; }
+        .content { font-family: inherit; }
         .download-section { border: 2px solid #000; padding: 15px; margin: 20px 0; background: #e8f4ff; text-align: center; }
         .download-link { display: inline-block; background: #000; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; margin: 5px; }
+        .code-block { background: #f8f8f8; padding: 10px; border-left: 4px solid #000; font-family: monospace; font-size: 9pt; margin: 10px 0; }
+        ul { margin: 10px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; font-size: 10pt; }
+        th { background: #f0f0f0; font-weight: bold; }
         @media print { .download-section { display: none; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="company-logo">THE BITCOIN CORPORATION</div>
-        <div class="document-title">TITLE_PLACEHOLDER</div>
-        <div class="document-subtitle">Technical Documentation</div>
+        <div class="document-title">NFT/FT Implementation Plan</div>
+        <div class="document-subtitle">Non-Fungible & Fungible Token Strategy</div>
         <div class="document-info">Document Version: 1.0 | Date: November 2025 | The Bitcoin Corporation LTD</div>
     </div>
     <div class="download-section">
         <h3>📄 Download PDF Version</h3>
-        <a href="/BASENAME_PLACEHOLDER.pdf" class="download-link" download>Download PDF</a>
+        <a href="/NFT_FT_IMPLEMENTATION_PLAN.pdf" class="download-link" download>Download PDF</a>
     </div>
     <div class="content">
-CONTENT_PLACEHOLDER
+        <h1>Bitcoin OS NFT/FT File System Implementation Plan</h1><h2>Overview</h2>
+<p>Bitcoin OS introduces two fundamental container file types:</p>
+<p><ul><li><strong><code>.nft</code> files</strong> - Non-fungible containers for unique content (music, documents, videos, data)</li></p>
+<p><li><strong><code>.ft</code> files</strong> - Fungible token containers for value/revenue distribution</li></p><h2>Token Allocation</h2>
+<p><li><strong>Total $bOS allocation for implementation</strong>: 10% (100,000,000 $bOS)</li></p>
+<p><li><strong>Maximum per task</strong>: 1% (10,000,000 $bOS)</li></p>
+<p><li><strong>Target task count</strong>: ~100 tasks</li></p><p>---</p><h2>Core Infrastructure Tasks (25 tasks)</h2><h3>File System Foundation (10 tasks)</h3>
+<p>1. <strong>NFT Container Specification</strong> - Define .nft file format specification</p>
+<p>   - Reward: 1,000,000 $bOS (0.1%)</p>
+<p>   - Skills: Protocol design, file systems</p><p>2. <strong>FT Container Specification</strong> - Define .ft file format specification</p>
+<p>   - Reward: 1,000,000 $bOS (0.1%)</p>
+<p>   - Skills: Protocol design, tokenomics</p><p>3. <strong>NFT File Parser</strong> - Build parser for reading/writing .nft files</p>
+<p>   - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>   - Skills: TypeScript, binary formats</p><p>4. <strong>FT File Parser</strong> - Build parser for reading/writing .ft files</p>
+<p>   - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>   - Skills: TypeScript, binary formats</p><p>5. <strong>File Type Registry Contract</strong> - On-chain registry for .nft/.ft files</p>
+<p>   - Reward: 3,000,000 $bOS (0.3%)</p>
+<p>   - Skills: sCrypt, BSV smart contracts</p><p>6. <strong>Content Hashing System</strong> - Implement content addressing for .nft files</p>
+<p>   - Reward: 1,500,000 $bOS (0.15%)</p>
+<p>   - Skills: Cryptography, IPFS</p><p>7. <strong>Metadata Standards</strong> - Define metadata schemas for both file types</p>
+<p>   - Reward: 1,000,000 $bOS (0.1%)</p>
+<p>   - Skills: JSON Schema, standards design</p><p>8. <strong>File Validation Library</strong> - Validate .nft/.ft file integrity</p>
+<p>   - Reward: 1,500,000 $bOS (0.15%)</p>
+<p>   - Skills: TypeScript, validation</p><p>9. <strong>Migration Tools</strong> - Convert existing files to .nft/.ft format</p>
+<p>   - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>   - Skills: Node.js, file conversion</p><p>10. <strong>File System API</strong> - REST API for file operations</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p>
+<p>    - Skills: Next.js API routes, REST</p><h3>Revenue Distribution System (8 tasks)</h3>
+<p>11. <strong>Revenue Router Contract</strong> - Smart contract for routing payments from .nft to .ft</p>
+<p>    - Reward: 5,000,000 $bOS (0.5%)</p>
+<p>    - Skills: sCrypt, DeFi</p><p>12. <strong>Share Issuance Contract</strong> - Issue shares against .nft files</p>
+<p>    - Reward: 4,000,000 $bOS (0.4%)</p>
+<p>    - Skills: sCrypt, tokenization</p><p>13. <strong>Revenue Calculator</strong> - Calculate revenue splits</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>    - Skills: Math, algorithms</p><p>14. <strong>Payment Scheduler</strong> - Automated revenue distribution</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p>
+<p>    - Skills: Cron, automation</p><p>15. <strong>Royalty Management</strong> - Handle ongoing royalties</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p>
+<p>    - Skills: Smart contracts, royalties</p><p>16. <strong>Revenue Analytics</strong> - Track and report revenue flows</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>    - Skills: Data analytics, reporting</p><p>17. <strong>Multi-token Support</strong> - Support various FT standards (BSV20, BSV21, STAS)</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p>
+<p>    - Skills: Token standards, integration</p><p>18. <strong>Revenue History Indexer</strong> - Index all revenue transactions</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p>
+<p>    - Skills: Indexing, databases</p><h3>Storage & Persistence (7 tasks)</h3>
+<p>19. <strong>On-chain Storage Contract</strong> - Store small .nft/.ft files on BSV</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p>
+<p>    - Skills: OP_RETURN, data storage</p><p>20. <strong>IPFS Integration</strong> - Store large files on IPFS</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>    - Skills: IPFS, distributed storage</p><p>21. <strong>Hybrid Storage Manager</strong> - Intelligently choose storage location</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p>
+<p>    - Skills: Storage optimization</p><p>22. <strong>Cache Layer</strong> - Fast access to frequently used files</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p>
+<p>    - Skills: Redis, caching</p><p>23. <strong>Backup System</strong> - Redundant storage for critical files</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p>
+<p>    - Skills: Backup strategies</p><p>24. <strong>Storage Pricing Oracle</strong> - Dynamic pricing for storage</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p>
+<p>    - Skills: Oracles, pricing</p><p>25. <strong>Data Availability Proofs</strong> - Prove files are available</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p>
+<p>    - Skills: Cryptographic proofs</p><p>---</p><h2>Application Integration Tasks (30 tasks)</h2><h3>Bitcoin Drive Integration (6 tasks)</h3>
+<p>26. <strong>Drive NFT Wrapper</strong> - Wrap all files in .nft containers</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>27. <strong>Drive Share Manager</strong> - Issue/manage shares for stored files</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>28. <strong>Drive Revenue Dashboard</strong> - Show earnings from shared files</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>29. <strong>Drive File Browser Update</strong> - Display .nft/.ft icons and metadata</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>30. <strong>Drive Permission System</strong> - NFT-based access control</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>31. <strong>Drive Marketplace</strong> - Buy/sell access to files</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><h3>Bitcoin Music Integration (6 tasks)</h3>
+<p>32. <strong>Music NFT Creator</strong> - Convert songs to .nft format</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>33. <strong>Streaming Royalty Distributor</strong> - Pay per stream to .ft holders</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p><p>34. <strong>Album Bundle NFTs</strong> - Bundle multiple songs in one .nft</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>35. <strong>Music Rights Manager</strong> - Manage publishing/performance rights</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>36. <strong>Fan Token Integration</strong> - Artist .ft tokens for fans</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>37. <strong>Music Analytics</strong> - Track plays and revenue</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><h3>Bitcoin Writer Integration (6 tasks)</h3>
+<p>38. <strong>Document NFT Wrapper</strong> - Convert documents to .nft</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>39. <strong>Publishing Contract</strong> - Publish and sell documents</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>40. <strong>Subscription System</strong> - Subscribe to author .ft tokens</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>41. <strong>Collaborative Writing</strong> - Multi-author .nft files</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>42. <strong>Version Control</strong> - Track document versions in .nft</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>43. <strong>Citation Rewards</strong> - Revenue for cited documents</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><h3>Bitcoin Email Integration (6 tasks)</h3>
+<p>44. <strong>Encrypted Message NFTs</strong> - Store important emails as .nft</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>45. <strong>Paid Email System</strong> - Charge .ft tokens to send email</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>46. <strong>Email Archive NFTs</strong> - Archive conversations as .nft</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>47. <strong>Newsletter Token</strong> - .ft tokens for newsletter subscribers</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>48. <strong>Email Attestation</strong> - Prove email authenticity via .nft</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>49. <strong>Spam Prevention</strong> - Require .ft stake to send emails</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><h3>Bitcoin Wallet Integration (6 tasks)</h3>
+<p>50. <strong>NFT Gallery</strong> - Display owned .nft files</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>51. <strong>FT Portfolio Manager</strong> - Manage .ft token holdings</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>52. <strong>Revenue Claim Interface</strong> - Claim earnings from .nft files</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>53. <strong>Token Swap Interface</strong> - Swap between different .ft tokens</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>54. <strong>NFT Transfer UI</strong> - Send/receive .nft files</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>55. <strong>Wallet Connect</strong> - Connect to .nft/.ft marketplaces</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>---</p><h2>UI/UX Tasks (15 tasks)</h2><p>56. <strong>File Type Icons</strong> - Design icons for .nft/.ft files</p>
+<p>    - Reward: 500,000 $bOS (0.05%)</p><p>57. <strong>File Explorer Component</strong> - Universal file browser component</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>58. <strong>NFT Preview Component</strong> - Preview .nft contents</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>59. <strong>FT Balance Widget</strong> - Show .ft token balances</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>60. <strong>Revenue Stream Visualizer</strong> - Visualize revenue flows</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>61. <strong>Share Issuance Modal</strong> - UI for issuing shares</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>62. <strong>File Properties Panel</strong> - Show .nft/.ft metadata</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>63. <strong>Drag & Drop Upload</strong> - Upload files as .nft</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>64. <strong>Batch Operations UI</strong> - Bulk file operations</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>65. <strong>Mobile Responsive Views</strong> - Mobile-optimized interfaces</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>66. <strong>Accessibility Features</strong> - ARIA labels, keyboard nav</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>67. <strong>Theme Support</strong> - Dark/light themes for file UI</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>68. <strong>Animation Library</strong> - Smooth transitions for file operations</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>69. <strong>Error Handling UI</strong> - User-friendly error messages</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>70. <strong>Loading States</strong> - Skeleton screens for file loading</p>
+<p>    - Reward: 500,000 $bOS (0.05%)</p><p>---</p><h2>Developer Tools & SDK (15 tasks)</h2><p>71. <strong>JavaScript SDK</strong> - JS/TS SDK for .nft/.ft operations</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p><p>72. <strong>Python SDK</strong> - Python library for file operations</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>73. <strong>CLI Tools</strong> - Command line tools for .nft/.ft</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>74. <strong>VS Code Extension</strong> - IDE support for file types</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>75. <strong>File Inspector Tool</strong> - Debug and inspect files</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>76. <strong>Test Suite</strong> - Comprehensive testing framework</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>77. <strong>Mock Data Generator</strong> - Generate test .nft/.ft files</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>78. <strong>Performance Profiler</strong> - Profile file operations</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>79. <strong>Migration Script Generator</strong> - Auto-generate migration scripts</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>80. <strong>Contract Templates</strong> - Boilerplate for common patterns</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>81. <strong>Integration Examples</strong> - Sample integrations</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>82. <strong>Webhook System</strong> - Webhooks for file events</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>83. <strong>GraphQL API</strong> - GraphQL interface for files</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>84. <strong>WebSocket Support</strong> - Real-time file updates</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>85. <strong>SDK Documentation Generator</strong> - Auto-generate SDK docs</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>---</p><h2>Documentation & Education (10 tasks)</h2><p>86. <strong>Technical Whitepaper</strong> - Complete technical specification</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>87. <strong>Developer Guide</strong> - Comprehensive developer documentation</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>88. <strong>Video Tutorials</strong> - Create tutorial videos</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>89. <strong>Interactive Playground</strong> - Try .nft/.ft operations online</p>
+<p>    - Reward: 2,500,000 $bOS (0.25%)</p><p>90. <strong>API Reference</strong> - Complete API documentation</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>91. <strong>Best Practices Guide</strong> - Security and optimization guide</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>92. <strong>Migration Guide</strong> - Guide for migrating existing systems</p>
+<p>    - Reward: 1,000,000 $bOS (0.1%)</p><p>93. <strong>FAQ System</strong> - Frequently asked questions</p>
+<p>    - Reward: 500,000 $bOS (0.05%)</p><p>94. <strong>Code Examples Repository</strong> - Repository of examples</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>95. <strong>Community Forum</strong> - Support forum for developers</p>
+<p>    - Reward: 1,500,000 $bOS (0.15%)</p><p>---</p><h2>Security & Compliance (5 tasks)</h2><p>96. <strong>Security Audit</strong> - Professional security audit</p>
+<p>    - Reward: 5,000,000 $bOS (0.5%)</p><p>97. <strong>Penetration Testing</strong> - Test for vulnerabilities</p>
+<p>    - Reward: 3,000,000 $bOS (0.3%)</p><p>98. <strong>Access Control Audit</strong> - Verify permission systems</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>99. <strong>Compliance Framework</strong> - Legal compliance for file storage</p>
+<p>    - Reward: 2,000,000 $bOS (0.2%)</p><p>100. <strong>Bug Bounty Program</strong> - Ongoing security rewards</p>
+<p>     - Reward: 3,000,000 $bOS (0.3%)</p><p>---</p><h2>Total Allocation Summary</h2>
+<p><li><strong>Total Tasks</strong>: 100</li></p>
+<p><li><strong>Total $bOS Allocated</strong>: 100,000,000 (10% of supply)</li></p>
+<p><li><strong>Average Reward per Task</strong>: 1,000,000 $bOS (0.1%)</li></p>
+<p><li><strong>Highest Single Task</strong>: 5,000,000 $bOS (0.5%)</li></p><h2>Implementation Phases</h2><h3>Phase 1: Foundation (Tasks 1-25)</h3>
+<p><li>Duration: 3 months</li></p>
+<p><li>Focus: Core infrastructure</li></p><h3>Phase 2: Integration (Tasks 26-55)</h3>
+<p><li>Duration: 4 months</li></p>
+<p><li>Focus: App integration</li></p><h3>Phase 3: Polish (Tasks 56-85)</h3>
+<p><li>Duration: 3 months</li></p>
+<p><li>Focus: UI/UX and developer tools</li></p><h3>Phase 4: Documentation & Security (Tasks 86-100)</h3>
+<p><li>Duration: 2 months</li></p>
+<p><li>Focus: Documentation and security</li></ul></p><h2>Next Steps</h2>
+<p>1. Create GitHub issues for each task</p>
+<p>2. Set up contracts page with authentication</p>
+<p>3. Begin recruiting developers</p>
+<p>4. Start with high-priority foundation tasks</p>
     </div>
 </body>
 </html>

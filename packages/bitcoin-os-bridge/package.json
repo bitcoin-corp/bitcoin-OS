@@ -36,7 +36,7 @@
     "sidebar",
     "the-bitcoin-corporation"
   ],
-  "author": "The Bitcoin Corporation Ltd <ceo@thebitcoincorporation.com>",
+  "author": "The Bitcoin Corporation Ltd <info@thebitcoincorporation.com>",
   "license": "Open-BSV-4.0",
   "copyright": "Copyright (c) 2025 The Bitcoin Corporation Ltd (UK Company No. 16735102)",
   "peerDependencies": {

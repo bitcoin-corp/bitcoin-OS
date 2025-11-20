@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER - The Bitcoin Corporation</title>
+    <title>Contracts Implementation - The Bitcoin Corporation</title>
     <style>
         @page { size: A4; margin: 2cm; }
         body { font-family: 'Times New Roman', serif; line-height: 1.6; color: #000; font-size: 11pt; }
@@ -15,25 +15,250 @@
         h1 { font-size: 16pt; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px; }
         h2 { font-size: 14pt; font-weight: bold; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #000; padding-left: 12px; }
         h3 { font-size: 12pt; font-weight: bold; margin-top: 25px; margin-bottom: 12px; }
-        .content { white-space: pre-wrap; font-family: inherit; }
+        .content { font-family: inherit; }
         .download-section { border: 2px solid #000; padding: 15px; margin: 20px 0; background: #e8f4ff; text-align: center; }
         .download-link { display: inline-block; background: #000; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; margin: 5px; }
+        .code-block { background: #f8f8f8; padding: 10px; border-left: 4px solid #000; font-family: monospace; font-size: 9pt; margin: 10px 0; }
+        ul { margin: 10px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; font-size: 10pt; }
+        th { background: #f0f0f0; font-weight: bold; }
         @media print { .download-section { display: none; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="company-logo">THE BITCOIN CORPORATION</div>
-        <div class="document-title">TITLE_PLACEHOLDER</div>
-        <div class="document-subtitle">Technical Documentation</div>
+        <div class="document-title">Contracts Implementation</div>
+        <div class="document-subtitle">Smart Contract Development Guidelines</div>
         <div class="document-info">Document Version: 1.0 | Date: November 2025 | The Bitcoin Corporation LTD</div>
     </div>
     <div class="download-section">
         <h3>📄 Download PDF Version</h3>
-        <a href="/BASENAME_PLACEHOLDER.pdf" class="download-link" download>Download PDF</a>
+        <a href="/CONTRACTS_IMPLEMENTATION.pdf" class="download-link" download>Download PDF</a>
     </div>
     <div class="content">
-CONTENT_PLACEHOLDER
+        <h1>Bitcoin Contracts Repository Setup</h1><h2>📁 Repository: bitcoin-corp/bitcoin-contracts</h2><p>This repository should contain all the smart contract templates for the Bitcoin Corporation multi-token ecosystem.</p><h2>🏗️ Suggested Structure</h2><p><div class="code-block"></p>
+<p>bitcoin-corp/bitcoin-contracts/</p>
+<p>├── README.md                      # Overview and documentation</p>
+<p>├── contracts/</p>
+<p>│   ├── core/</p>
+<p>│   │   ├── MasterCreator.sol     # Base contract all inherit from</p>
+<p>│   │   ├── TokenFactory.sol      # Creates new app tokens</p>
+<p>│   │   └── AtomicSwap.sol        # Token exchange mechanism</p>
+<p>│   ├── templates/</p>
+<p>│   │   ├── DeveloperContract.sol # For code contributors</p>
+<p>│   │   ├── CreatorContract.sol   # For content creators</p>
+<p>│   │   ├── DesignerContract.sol  # For UI/UX contributors</p>
+<p>│   │   └── TesterContract.sol    # For QA/testing</p>
+<p>│   ├── tokens/</p>
+<p>│   │   ├── bCorp.sol             # Master corporation token</p>
+<p>│   │   ├── bOS.sol               # Operating system token</p>
+<p>│   │   └── AppToken.sol          # Template for app tokens</p>
+<p>│   └── governance/</p>
+<p>│       ├── DAO.sol               # Decentralized governance</p>
+<p>│       └── Treasury.sol          # Revenue distribution</p>
+<p>├── scripts/</p>
+<p>│   ├── deploy.js                 # Deployment scripts</p>
+<p>│   ├── distribute.js             # Token distribution</p>
+<p>│   └── githubIntegration.js      # GitHub Actions hooks</p>
+<p>├── test/</p>
+<p>│   └── *.test.js                 # Contract tests</p>
+<p>└── package.json                   # Dependencies</p><p></div></p><h2>📝 Core Contracts to Implement</h2><h3>1. MasterCreator.sol</h3>
+<p><div class="code-block">solidity</p>
+<p>// SPDX-License-Identifier: MIT</p>
+<p>pragma solidity ^0.8.0;</p><p>/<em></em></p>
+<p> * @title MasterCreator</p>
+<p> * @dev Base contract for all Bitcoin Corp creator contracts</p>
+<p> */</p>
+<p>contract MasterCreator {</p>
+<p>    struct Creator {</p>
+<p>        address wallet;</p>
+<p>        string githubUsername;</p>
+<p>        mapping(string => uint256) tokenBalances;</p>
+<p>        uint256 totalContributions;</p>
+<p>        uint256 joinedAt;</p>
+<p>    }</p>
+<p>    </p>
+<p>    mapping(address => Creator) public creators;</p>
+<p>    mapping(string => address) public tokenContracts;</p>
+<p>    </p>
+<p>    event TokensEarned(address creator, string token, uint256 amount);</p>
+<p>    event CreatorRegistered(address creator, string githubUsername);</p>
+<p>}</p>
+<p></div></p><h3>2. DeveloperContract.sol</h3>
+<p><div class="code-block">solidity</p>
+<p>// SPDX-License-Identifier: MIT</p>
+<p>pragma solidity ^0.8.0;</p><p>import "./core/MasterCreator.sol";</p><p>/<em></em></p>
+<p> * @title DeveloperContract</p>
+<p> * @dev Handles developer contributions and token rewards</p>
+<p> */</p>
+<p>contract DeveloperContract is MasterCreator {</p>
+<p>    struct Contribution {</p>
+<p>        string repository;</p>
+<p>        string pullRequestId;</p>
+<p>        uint256 linesAdded;</p>
+<p>        uint256 linesRemoved;</p>
+<p>        uint256 filesChanged;</p>
+<p>        uint256 complexity;</p>
+<p>        uint256 reward;</p>
+<p>        uint256 timestamp;</p>
+<p>    }</p>
+<p>    </p>
+<p>    mapping(address => Contribution[]) public contributions;</p>
+<p>    </p>
+<p>    // Base rates per repository</p>
+<p>    mapping(string => uint256) public repoRates;</p>
+<p>    </p>
+<p>    constructor() {</p>
+<p>        // Set initial rates</p>
+<p>        repoRates["bitcoin-os"] = 10;</p>
+<p>        repoRates["bitcoin-music"] = 8;</p>
+<p>        repoRates["bitcoin-writer"] = 8;</p>
+<p>        repoRates["bitcoin-email"] = 7;</p>
+<p>        // ... etc</p>
+<p>    }</p>
+<p>    </p>
+<p>    function submitContribution(</p>
+<p>        address developer,</p>
+<p>        string memory repo,</p>
+<p>        string memory prId,</p>
+<p>        uint256 linesAdded,</p>
+<p>        uint256 linesRemoved,</p>
+<p>        uint256 complexity</p>
+<p>    ) external {</p>
+<p>        uint256 reward = calculateReward(repo, linesAdded, complexity);</p>
+<p>        </p>
+<p>        contributions[developer].push(Contribution({</p>
+<p>            repository: repo,</p>
+<p>            pullRequestId: prId,</p>
+<p>            linesAdded: linesAdded,</p>
+<p>            linesRemoved: linesRemoved,</p>
+<p>            filesChanged: 0,</p>
+<p>            complexity: complexity,</p>
+<p>            reward: reward,</p>
+<p>            timestamp: block.timestamp</p>
+<p>        }));</p>
+<p>        </p>
+<p>        // Issue tokens</p>
+<p>        _issueTokens(developer, repo, reward);</p>
+<p>    }</p>
+<p>    </p>
+<p>    function calculateReward(</p>
+<p>        string memory repo,</p>
+<p>        uint256 lines,</p>
+<p>        uint256 complexity</p>
+<p>    ) public view returns (uint256) {</p>
+<p>        return lines <em> complexity </em> repoRates[repo];</p>
+<p>    }</p>
+<p>}</p>
+<p></div></p><h3>3. AtomicSwap.sol</h3>
+<p><div class="code-block">solidity</p>
+<p>// SPDX-License-Identifier: MIT</p>
+<p>pragma solidity ^0.8.0;</p><p>/<em></em></p>
+<p> * @title AtomicSwap</p>
+<p> * @dev Enables token swapping between different app tokens</p>
+<p> */</p>
+<p>contract AtomicSwap {</p>
+<p>    struct SwapRate {</p>
+<p>        uint256 rate;        // Rate * 100 for precision</p>
+<p>        uint256 lastUpdated;</p>
+<p>    }</p>
+<p>    </p>
+<p>    // From token => To token => Rate</p>
+<p>    mapping(string => mapping(string => SwapRate)) public rates;</p>
+<p>    </p>
+<p>    event SwapExecuted(</p>
+<p>        address indexed user,</p>
+<p>        string fromToken,</p>
+<p>        string toToken,</p>
+<p>        uint256 amountIn,</p>
+<p>        uint256 amountOut</p>
+<p>    );</p>
+<p>    </p>
+<p>    constructor() {</p>
+<p>        // Set initial exchange rates</p>
+<p>        rates["bCorp"]["bOS"] = SwapRate(200, block.timestamp);      // 1 bCorp = 2 bOS</p>
+<p>        rates["bOS"]["bMusic"] = SwapRate(150, block.timestamp);     // 1 bOS = 1.5 bMusic</p>
+<p>        rates["bOS"]["bWriter"] = SwapRate(150, block.timestamp);    // 1 bOS = 1.5 bWriter</p>
+<p>        rates["bMusic"]["bWriter"] = SwapRate(100, block.timestamp); // 1 bMusic = 1 bWriter</p>
+<p>    }</p>
+<p>    </p>
+<p>    function swap(</p>
+<p>        string memory fromToken,</p>
+<p>        string memory toToken,</p>
+<p>        uint256 amount</p>
+<p>    ) external {</p>
+<p>        require(rates[fromToken][toToken].rate > 0, "Pair not supported");</p>
+<p>        </p>
+<p>        uint256 outputAmount = (amount * rates[fromToken][toToken].rate) / 100;</p>
+<p>        </p>
+<p>        // Execute swap logic here</p>
+<p>        </p>
+<p>        emit SwapExecuted(msg.sender, fromToken, toToken, amount, outputAmount);</p>
+<p>    }</p>
+<p>}</p>
+<p></div></p><h2>🔧 GitHub Integration Script</h2><h3>github-action.yml</h3>
+<p><div class="code-block">yaml</p>
+<p>name: Token Distribution</p><p>on:</p>
+<p>  pull_request:</p>
+<p>    types: [closed]</p>
+<p>    branches: [main]</p><p>jobs:</p>
+<p>  distribute:</p>
+<p>    if: github.event.pull_request.merged == true</p>
+<p>    runs-on: ubuntu-latest</p>
+<p>    </p>
+<p>    steps:</p>
+<p>      - uses: actions/checkout@v2</p>
+<p>      </p>
+<p>      - name: Calculate Contribution</p>
+<p>        id: calculate</p>
+<p>        run: |</p>
+<p>          echo "LINES_ADDED=$(git diff --numstat ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | awk '{sum+=$1} END {print sum}')" >> $GITHUB_OUTPUT</p>
+<p>          echo "LINES_REMOVED=$(git diff --numstat ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | awk '{sum+=$2} END {print sum}')" >> $GITHUB_OUTPUT</p>
+<p>      </p>
+<p>      - name: Submit to Smart Contract</p>
+<p>        run: |</p>
+<p>          node scripts/submitContribution.js \</p>
+<p>            --developer "${{ github.event.pull_request.user.login }}" \</p>
+<p>            --repo "${{ github.repository }}" \</p>
+<p>            --pr "${{ github.event.pull_request.number }}" \</p>
+<p>            --added "${{ steps.calculate.outputs.LINES_ADDED }}" \</p>
+<p>            --removed "${{ steps.calculate.outputs.LINES_REMOVED }}"</p>
+<p></div></p><h2>📊 Token Distribution Matrix</h2><p><tr><td> Repository </td></tr> Token <tr><td> Base Rate </td></tr> Complexity Multiplier |</p>
+<p><tr><td>------------</td></tr>-------<tr><td>-----------</td></tr>---------------------|</p>
+<p><tr><td> bitcoin-os </td></tr> $bOS <tr><td> 10 </td></tr> 1-5x |</p>
+<p><tr><td> bitcoin-music </td></tr> $bMusic <tr><td> 8 </td></tr> 1-3x |</p>
+<p><tr><td> bitcoin-writer </td></tr> $bWriter <tr><td> 8 </td></tr> 1-3x |</p>
+<p><tr><td> bitcoin-email </td></tr> $bEmail <tr><td> 7 </td></tr> 1-3x |</p>
+<p><tr><td> bitcoin-wallet </td></tr> $bWallet <tr><td> 12 </td></tr> 1-5x (security critical) |</p>
+<p><tr><td> bitcoin-contracts </td></tr> $bCorp <tr><td> 15 </td></tr> 1-5x (infrastructure) |</p><h2>🚀 Deployment Steps</h2><p>1. <strong>Clone and setup</strong></p>
+<p><div class="code-block">bash</p>
+<p>git clone https://github.com/bitcoin-corp/bitcoin-contracts</p>
+<p>cd bitcoin-contracts</p>
+<p>npm install</p>
+<p></div></p><p>2. <strong>Deploy contracts</strong></p>
+<p><div class="code-block">bash</p>
+<p>npm run deploy:mainnet</p>
+<p></div></p><p>3. <strong>Verify contracts</strong></p>
+<p><div class="code-block">bash</p>
+<p>npm run verify</p>
+<p></div></p><p>4. <strong>Set up GitHub Actions</strong></p>
+<p><div class="code-block">bash</p>
+<h1>Add secrets to each repository</h1>
+<h1>- CONTRACT_ADDRESS</h1>
+<h1>- PRIVATE_KEY</h1>
+<h1>- RPC_URL</h1>
+<p></div></p><h2>🎯 Next Steps</h2><p>1. <strong>Implement contracts</strong> in bitcoin-contracts repo</p>
+<p>2. <strong>Deploy to testnet</strong> first</p>
+<p>3. <strong>Integrate GitHub Actions</strong> in each app repo</p>
+<p>4. <strong>Create dashboard</strong> for tracking contributions</p>
+<p>5. <strong>Launch token distribution</strong> program</p><p>This creates a complete automated token economy where:</p>
+<p><ul><li>Every PR = automatic token calculation</li></p>
+<p><li>Every merge = instant token distribution</li></p>
+<p><li>Every developer = transparent earnings</li></p>
+<p><li>Every app = its own economy</li></ul></p><p>The contracts repository becomes the backbone of the entire Bitcoin Corporation token ecosystem!</p>
     </div>
 </body>
 </html>

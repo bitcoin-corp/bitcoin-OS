@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER - The Bitcoin Corporation</title>
+    <title>Bitcoin OS Integration Guide - The Bitcoin Corporation</title>
     <style>
         @page { size: A4; margin: 2cm; }
         body { font-family: 'Times New Roman', serif; line-height: 1.6; color: #000; font-size: 11pt; }
@@ -15,25 +15,198 @@
         h1 { font-size: 16pt; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px; }
         h2 { font-size: 14pt; font-weight: bold; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #000; padding-left: 12px; }
         h3 { font-size: 12pt; font-weight: bold; margin-top: 25px; margin-bottom: 12px; }
-        .content { white-space: pre-wrap; font-family: inherit; }
+        .content { font-family: inherit; }
         .download-section { border: 2px solid #000; padding: 15px; margin: 20px 0; background: #e8f4ff; text-align: center; }
         .download-link { display: inline-block; background: #000; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; margin: 5px; }
+        .success-badge { background: #28a745; color: white; padding: 3px 8px; border-radius: 3px; font-weight: bold; font-size: 9pt; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; font-size: 10pt; }
+        th { background: #f0f0f0; font-weight: bold; }
+        .code-block { background: #f8f8f8; padding: 10px; border-left: 4px solid #000; font-family: monospace; font-size: 9pt; margin: 10px 0; }
+        .architecture-tree { font-family: monospace; font-size: 9pt; background: #f8f8f8; padding: 15px; border: 1px solid #000; margin: 15px 0; }
+        ul { margin: 10px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
         @media print { .download-section { display: none; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="company-logo">THE BITCOIN CORPORATION</div>
-        <div class="document-title">TITLE_PLACEHOLDER</div>
-        <div class="document-subtitle">Technical Documentation</div>
+        <div class="document-title">🎉 Bitcoin OS Integration Guide</div>
+        <div class="document-subtitle">Complete Integration Documentation & Testing Guide</div>
         <div class="document-info">Document Version: 1.0 | Date: November 2025 | The Bitcoin Corporation LTD</div>
     </div>
     <div class="download-section">
         <h3>📄 Download PDF Version</h3>
-        <a href="/BASENAME_PLACEHOLDER.pdf" class="download-link" download>Download PDF</a>
+        <a href="/README_INTEGRATION.pdf" class="download-link" download>Download PDF</a>
     </div>
     <div class="content">
-CONTENT_PLACEHOLDER
+        <h1>🎯 Integration Status</h1>
+        
+        <p><span class="success-badge">✅ COMPLETE</span> <strong>All Bitcoin apps are now integrated with Bitcoin OS!</strong></p>
+        
+        <p>Each app can now:</p>
+        <ul>
+            <li>Run standalone (as before) at their individual URLs</li>
+            <li>Run inside Bitcoin OS as integrated apps with unified navigation</li>
+            <li>Share the same taskbar and menu system when in OS mode</li>
+            <li>Communicate with the OS through PostMessage API</li>
+        </ul>
+
+        <h1>📱 Integrated Applications</h1>
+        
+        <table>
+            <tr>
+                <th>Application</th>
+                <th>Framework</th>
+                <th>Port (Dev)</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Bitcoin Wallet</td>
+                <td>React</td>
+                <td>3001</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+            <tr>
+                <td>Bitcoin Email</td>
+                <td>Next.js 15</td>
+                <td>3002</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+            <tr>
+                <td>Bitcoin Music</td>
+                <td>Next.js 14</td>
+                <td>3003</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+            <tr>
+                <td>Bitcoin Writer</td>
+                <td>React</td>
+                <td>3004</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+            <tr>
+                <td>Bitcoin Drive</td>
+                <td>Next.js 15</td>
+                <td>3005</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+            <tr>
+                <td>Bitcoin Jobs</td>
+                <td>React</td>
+                <td>3006</td>
+                <td><span class="success-badge">✅ Integrated</span></td>
+            </tr>
+        </table>
+
+        <h1>🧪 Testing Procedures</h1>
+        
+        <h2>1. Start Bitcoin OS</h2>
+        <div class="code-block">
+cd /Users/b0ase/Projects/bitcoin-OS
+npm run dev
+# Or use the script:
+./start-bitcoin-os.sh
+        </div>
+        <p><strong>Bitcoin OS runs on: http://localhost:2050</strong></p>
+
+        <h2>2. Open Bitcoin OS in Browser</h2>
+        <ul>
+            <li>Click the rainbow Bitcoin icon (🟠) in top-left</li>
+            <li>Select any app to launch it within the OS</li>
+            <li>Apps open in draggable, resizable windows</li>
+            <li>Bottom taskbar shows all open apps</li>
+            <li>Apps menu in top bar also launches apps</li>
+        </ul>
+
+        <h2>3. Test Features</h2>
+        <ul>
+            <li><strong>Window Management</strong>: Drag, resize, minimize, maximize app windows</li>
+            <li><strong>App Switching</strong>: Click taskbar items or use app windows</li>
+            <li><strong>Unified Navigation</strong>: All apps share the same OS chrome</li>
+            <li><strong>Clean UI</strong>: Apps automatically hide their taskbars when in OS</li>
+        </ul>
+
+        <h1>⚙️ Application Behavior in OS Mode</h1>
+        
+        <p>When running inside Bitcoin OS, each app:</p>
+        <ol>
+            <li><strong>Hides its own taskbar/navigation</strong> - OS provides these</li>
+            <li><strong>Sets its window title</strong> - Shows in OS window header</li>
+            <li><strong>Removes extra padding</strong> - Fits cleanly in OS window</li>
+            <li><strong>Enables OS communication</strong> - Can talk to other apps through OS</li>
+        </ol>
+
+        <h1>🔧 Development Setup</h1>
+        
+        <p>If you want to test an app in development mode within the OS:</p>
+        
+        <h3>1. Start the app locally:</h3>
+        <div class="code-block">
+# Example for bitcoin-wallet
+cd /Users/b0ase/Projects/bitcoin-wallet
+npm start
+        </div>
+
+        <h3>2. Automatic Configuration</h3>
+        <ul>
+            <li>The OS is already configured to use local URLs in development mode</li>
+            <li>Open Bitcoin OS and launch the app - it will connect to your local instance</li>
+        </ul>
+
+        <h1>🏗️ System Architecture</h1>
+        
+        <div class="architecture-tree">
+Bitcoin OS (Port 2050)
+├── TopMenuBar (Rainbow menu + app launcher)
+├── Desktop (Icons & wallpaper)
+├── AppLoader (iframe containers)
+│   ├── Bitcoin Wallet (iframe → port 3001 or production)
+│   ├── Bitcoin Email (iframe → port 3002 or production)
+│   ├── Bitcoin Music (iframe → port 3003 or production)
+│   ├── Bitcoin Writer (iframe → port 3004 or production)
+│   ├── Bitcoin Drive (iframe → port 3005 or production)
+│   └── Bitcoin Jobs (iframe → port 3006 or production)
+└── OSTaskbar (Open apps & system tray)
+        </div>
+
+        <h1>🚀 Next Steps</h1>
+        
+        <ol>
+            <li><strong>Deploy Bitcoin OS</strong> to Vercel or your hosting</li>
+            <li><strong>Update app URLs</strong> in <code>/lib/apps.config.ts</code> if you change domains</li>
+            <li><strong>Add new apps</strong> by following the integration pattern</li>
+            <li><strong>Customize the desktop</strong> with app icons and wallpaper</li>
+            <li><strong>Test production builds</strong> of each app within the OS</li>
+        </ol>
+
+        <h1>🔍 Troubleshooting</h1>
+        
+        <h3>App not loading in OS?</h3>
+        <ul>
+            <li>Check browser console for CORS errors</li>
+            <li>Verify app is running if testing locally</li>
+            <li>Check iframe permissions in app's config</li>
+        </ul>
+
+        <h3>Taskbar still showing in app?</h3>
+        <ul>
+            <li>Check <code>isInOS</code> detection in app</li>
+            <li>Verify PostMessage communication is working</li>
+        </ul>
+
+        <h3>Can't drag/resize windows?</h3>
+        <ul>
+            <li>Check browser compatibility</li>
+            <li>Verify JavaScript is enabled</li>
+        </ul>
+
+        <h1>🎉 Success!</h1>
+        
+        <p><strong>Your Bitcoin OS is now a fully functional desktop environment for all Bitcoin apps!</strong> Each app maintains its independence while providing a unified experience when running in the OS.</p>
+        
+        <p>The integration framework provides seamless communication between applications while preserving the ability to run each app standalone when needed.</p>
     </div>
 </body>
 </html>
