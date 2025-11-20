@@ -185,6 +185,7 @@ export default function SecureDocs() {
             >
               <option value="proposal">CTO Co-Founder Contract</option>
               <option value="scope">Bitcoin OS Technical Scope</option>
+              <option value="memo">Memorandum to Dr. Wright - My Proof of Work</option>
             </select>
           </div>
 
