@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER - The Bitcoin Corporation</title>
+    <title>Publishing Guide - The Bitcoin Corporation</title>
     <style>
         @page { size: A4; margin: 2cm; }
         body { font-family: 'Times New Roman', serif; line-height: 1.6; color: #000; font-size: 11pt; }
@@ -15,25 +15,90 @@
         h1 { font-size: 16pt; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px; }
         h2 { font-size: 14pt; font-weight: bold; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #000; padding-left: 12px; }
         h3 { font-size: 12pt; font-weight: bold; margin-top: 25px; margin-bottom: 12px; }
-        .content { white-space: pre-wrap; font-family: inherit; }
+        .content { font-family: inherit; }
         .download-section { border: 2px solid #000; padding: 15px; margin: 20px 0; background: #e8f4ff; text-align: center; }
         .download-link { display: inline-block; background: #000; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; margin: 5px; }
+        .code-block { background: #f8f8f8; padding: 10px; border-left: 4px solid #000; font-family: monospace; font-size: 9pt; margin: 10px 0; }
+        ul { margin: 10px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; font-size: 10pt; }
+        th { background: #f0f0f0; font-weight: bold; }
         @media print { .download-section { display: none; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="company-logo">THE BITCOIN CORPORATION</div>
-        <div class="document-title">TITLE_PLACEHOLDER</div>
-        <div class="document-subtitle">Technical Documentation</div>
+        <div class="document-title">Publishing Guide</div>
+        <div class="document-subtitle">Content Publishing Standards & Distribution</div>
         <div class="document-info">Document Version: 1.0 | Date: November 2025 | The Bitcoin Corporation LTD</div>
     </div>
     <div class="download-section">
         <h3>📄 Download PDF Version</h3>
-        <a href="/BASENAME_PLACEHOLDER.pdf" class="download-link" download>Download PDF</a>
+        <a href="/PUBLISHING_GUIDE.pdf" class="download-link" download>Download PDF</a>
     </div>
     <div class="content">
-CONTENT_PLACEHOLDER
+        <h1>Publishing @bitcoin-os/bridge to npm</h1><h2>✅ Package Ready for Publishing!</h2><p>The <code>@bitcoin-os/bridge</code> package is now complete and ready to be published to npm. Here's how to publish it:</p><h2>Prerequisites</h2><p>1. <strong>npm Account</strong>: You need an npm account at https://npmjs.com</p>
+<p>2. <strong>npm Login</strong>: Login to npm in your terminal:</p>
+<p>   <div class="code-block">bash</p>
+<p>   npm login</p>
+<p>   </div></p><h2>Publishing Steps</h2><h3>1. Navigate to Package Directory</h3>
+<p><div class="code-block">bash</p>
+<p>cd packages/bitcoin-os-bridge</p>
+<p></div></p><h3>2. Build the Package (Already Done ✅)</h3>
+<p><div class="code-block">bash</p>
+<p>npm run build</p>
+<p></div></p><h3>3. Test Package Locally (Optional)</h3>
+<p><div class="code-block">bash</p>
+<p>npm pack</p>
+<h1>This creates a .tgz file you can test with</h1>
+<p></div></p><h3>4. Publish to npm</h3>
+<p><div class="code-block">bash</p>
+<p>npm publish</p>
+<p></div></p><h2>Package Details</h2><p><ul><li><strong>Name</strong>: <code>@bitcoin-os/bridge</code></li></p>
+<p><li><strong>Version</strong>: <code>1.0.0</code></li></p>
+<p><li><strong>Size</strong>: Lightweight (~50KB built)</li></p>
+<p><li><strong>Dependencies</strong>: Only peer dependencies (React, Lucide React)</li></p><h2>After Publishing</h2><p>Developers can install it with:</p>
+<p><div class="code-block">bash</p>
+<p>npm install @bitcoin-os/bridge</p>
+<p></div></p><p>And use it immediately:</p>
+<p><div class="code-block">tsx</p>
+<p>import { BitcoinOSProvider } from '@bitcoin-os/bridge'</p><p>function App() {</p>
+<p>  const config = {</p>
+<p>    context: {</p>
+<p>      appName: 'Bitcoin Writer',</p>
+<p>      exchangeUrl: 'https://writer-exchange.vercel.app'</p>
+<p>    }</p>
+<p>  }</p><p>  return (</p>
+<p>    <BitcoinOSProvider config={config}></p>
+<p>      <YourAppContent /></p>
+<p>    </BitcoinOSProvider></p>
+<p>  )</p>
+<p>}</p>
+<p></div></p><h2>What Developers Get</h2><p>✅ <strong>Instant Bitcoin OS Integration</strong></p>
+<p><li>ProofOfConceptBar, TopMenuBar, DevSidebar, Dock</li></p>
+<p><li>Full responsive design</li></p>
+<p><li>Color cycling animations</li></p>
+<p><li>TypeScript support</li></p><p>✅ <strong>Local Customization</strong></p>
+<p><li>App-specific exchange URLs</li></p>
+<p><li>Custom menu items</li></p>
+<p><li>Custom branding/themes</li></p>
+<p><li>App-specific functionality</li></p><p>✅ <strong>Zero Configuration</strong></p>
+<p><li>Works out of the box</li></p>
+<p><li>Sensible defaults</li></p>
+<p><li>Professional macOS-style UI</li></p><p>✅ <strong>Global Updates</strong></p>
+<p><li>Update package → all apps get improvements</li></p>
+<p><li>Consistent UI across entire Bitcoin ecosystem</li></p>
+<p><li>Centralized bug fixes and features</li></p><h2>Example Apps Using Bridge</h2><p>Any new Bitcoin app can now be built with:</p><p><div class="code-block">bash</p>
+<p>npx create-next-app bitcoin-newapp</p>
+<p>cd bitcoin-newapp</p>
+<p>npm install @bitcoin-os/bridge</p>
+<p></div></p><p>And immediately have full Bitcoin OS integration with taskbar, dock, dev sidebar, and POC bar - all customizable for their specific app needs while maintaining global consistency.</p><h2>Success Criteria Met ✅</h2><p><li><strong>Clear separation of concerns</strong>: OS chrome separated from app logic</li></p>
+<p><li><strong>Global updates</strong>: Single package manages all UI components  </li></p>
+<p><li><strong>Local customization</strong>: Each app can customize exchange links, menus, branding</li></p>
+<p><li><strong>Easy integration</strong>: Simple npm install + provider wrapper</li></p>
+<p><li><strong>Professional quality</strong>: TypeScript, documentation, examples included</li></ul></p>
     </div>
 </body>
 </html>

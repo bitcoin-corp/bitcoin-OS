@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER - The Bitcoin Corporation</title>
+    <title>Bitcoin OS - Project Overview - The Bitcoin Corporation</title>
     <style>
         @page { size: A4; margin: 2cm; }
         body { font-family: 'Times New Roman', serif; line-height: 1.6; color: #000; font-size: 11pt; }
@@ -15,25 +15,184 @@
         h1 { font-size: 16pt; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px; }
         h2 { font-size: 14pt; font-weight: bold; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #000; padding-left: 12px; }
         h3 { font-size: 12pt; font-weight: bold; margin-top: 25px; margin-bottom: 12px; }
-        .content { white-space: pre-wrap; font-family: inherit; }
+        .content { font-family: inherit; }
         .download-section { border: 2px solid #000; padding: 15px; margin: 20px 0; background: #e8f4ff; text-align: center; }
         .download-link { display: inline-block; background: #000; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; margin: 5px; }
+        .feature-list { list-style-type: none; padding-left: 0; }
+        .feature-list li { margin: 8px 0; padding-left: 20px; position: relative; }
+        .feature-list li::before { content: '✓'; position: absolute; left: 0; font-weight: bold; color: #000; }
+        .code-block { background: #f8f8f8; padding: 10px; border-left: 4px solid #000; font-family: monospace; font-size: 9pt; margin: 10px 0; }
+        .tech-list { background: #f0f0f0; padding: 15px; border: 1px solid #000; margin: 15px 0; }
+        .integration-box { background: #e8f4ff; padding: 15px; border: 2px solid #0066cc; margin: 15px 0; }
+        .quote { font-style: italic; text-align: center; font-size: 12pt; margin: 20px 0; padding: 10px; border-top: 1px solid #666; border-bottom: 1px solid #666; }
         @media print { .download-section { display: none; } }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="company-logo">THE BITCOIN CORPORATION</div>
-        <div class="document-title">TITLE_PLACEHOLDER</div>
-        <div class="document-subtitle">Technical Documentation</div>
+        <div class="document-title">🖥️ Bitcoin OS - Project Overview</div>
+        <div class="document-subtitle">Open Source Bitcoin-Powered Operating System</div>
         <div class="document-info">Document Version: 1.0 | Date: November 2025 | The Bitcoin Corporation LTD</div>
     </div>
     <div class="download-section">
         <h3>📄 Download PDF Version</h3>
-        <a href="/BASENAME_PLACEHOLDER.pdf" class="download-link" download>Download PDF</a>
+        <a href="/README.pdf" class="download-link" download>Download PDF</a>
     </div>
     <div class="content">
-CONTENT_PLACEHOLDER
+        <div class="quote">
+            <strong>"Open source Bitcoin-powered operating system with built-in wallet, decentralized apps, and blockchain integration"</strong>
+        </div>
+
+        <h1>🌟 Project Overview</h1>
+        
+        <p>Bitcoin OS is a revolutionary web-based operating system that brings the power of Bitcoin and blockchain technology to your desktop. Built by The Bitcoin Corporation LTD, it provides a familiar desktop environment while integrating cryptocurrency and decentralized applications seamlessly.</p>
+
+        <h1>✨ Core Features</h1>
+        
+        <ul class="feature-list">
+            <li><strong>Desktop Environment</strong> - Familiar OS-like interface with windows, taskbar, and desktop icons</li>
+            <li><strong>Built-in Bitcoin Wallet</strong> - Secure wallet integrated at the OS level</li>
+            <li><strong>Bitcoin Email</strong> - Encrypted email with blockchain storage</li>
+            <li><strong>Bitcoin Music</strong> - Stream and trade music NFTs</li>
+            <li><strong>Bitcoin Writer</strong> - On-chain publishing platform</li>
+            <li><strong>Bitcoin Drive</strong> - Decentralized cloud storage</li>
+            <li><strong>bApp Store</strong> - Browse and launch Bitcoin applications with tokenized shares</li>
+            <li><strong>Terminal</strong> - Command-line interface for advanced users</li>
+        </ul>
+
+        <h1>🚀 Getting Started</h1>
+        
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>Node.js 18+</li>
+            <li>npm or yarn</li>
+        </ul>
+
+        <h2>Installation</h2>
+        <div class="code-block">
+# Clone the repository
+git clone https://github.com/bitcoin-corp/bitcoin-OS.git
+
+# Navigate to the project
+cd bitcoin-OS
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+        </div>
+
+        <p><strong>Open http://localhost:2050 in your browser.</strong></p>
+
+        <h1>🛠️ Development Commands</h1>
+        
+        <div class="code-block">
+# Development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+        </div>
+
+        <h1>🏗️ Technical Architecture</h1>
+        
+        <div class="tech-list">
+            <h3>Core Technologies</h3>
+            <ul>
+                <li><strong>Next.js 15</strong> - React framework</li>
+                <li><strong>TypeScript</strong> - Type safety</li>
+                <li><strong>Tailwind CSS</strong> - Styling</li>
+                <li><strong>Bitcoin SDK</strong> - Blockchain integration</li>
+                <li><strong>Lucide Icons</strong> - UI icons</li>
+                <li><strong>Metanet Desktop Integration</strong> - BSV wallet connectivity via JSON-API</li>
+            </ul>
+        </div>
+
+        <h1>🔗 Metanet Desktop Integration</h1>
+        
+        <div class="integration-box">
+            <p>Bitcoin OS integrates with <strong>Metanet Desktop</strong> to provide native BSV wallet functionality:</p>
+            
+            <ul>
+                <li><strong>JSON-API Communication</strong> - Connects via TCP port 3321</li>
+                <li><strong>WAB Authentication</strong> - Secure app-wallet authentication</li>
+                <li><strong>Transaction Signing</strong> - Sign and broadcast BSV transactions</li>
+                <li><strong>Balance & Address Display</strong> - Real-time wallet information</li>
+                <li><strong>Permission Management</strong> - Granular app permissions</li>
+            </ul>
+
+            <h3>Setup Instructions:</h3>
+            <ol>
+                <li>Install Metanet Desktop from GitHub</li>
+                <li>Ensure it's running on localhost:3321</li>
+                <li>Bitcoin OS will automatically detect and connect</li>
+            </ol>
+        </div>
+
+        <h1>📋 BRC Standards Integration</h1>
+        
+        <p>Bitcoin OS implements BSV BRC (Bitcoin Request for Comments) specifications:</p>
+        
+        <ul>
+            <li><strong>BRC-1 Transaction Creation</strong> - Standardized wallet-to-application interface</li>
+            <li><strong>BRC-103 Identity Certificates</strong> - Verifiable identity with selective disclosure</li>
+            <li><strong>Interactive Learning</strong> - Integration with fast.brc.dev resources</li>
+            <li><strong>Transaction Broadcasting</strong> - Direct BSV network interaction</li>
+            <li><strong>Data Transactions</strong> - OP_RETURN data storage on blockchain</li>
+        </ul>
+
+        <h2>BRC Demo Features</h2>
+        <ul>
+            <li>Create standardized BSV payment transactions</li>
+            <li>Store data on-chain using OP_RETURN</li>
+            <li>Lookup identity certificates (BRC-103)</li>
+            <li>Check transaction status and confirmations</li>
+            <li>Validate transactions against BRC standards</li>
+        </ul>
+
+        <h1>📄 License</h1>
+        
+        <p><strong>Open BSV License v4</strong></p>
+
+        <h1>🤝 Third-Party Integrations</h1>
+        
+        <h2>Metanet Desktop</h2>
+        <p>Bitcoin OS integrates with Metanet Desktop, a desktop wallet application for BSV blockchain:</p>
+        
+        <ul>
+            <li><strong>Repository:</strong> https://github.com/bsv-blockchain/metanet-desktop</li>
+            <li><strong>License:</strong> Open BSV License</li>
+            <li><strong>Organization:</strong> BSV Blockchain Association</li>
+            <li><strong>Integration:</strong> JSON-API over TCP/3321 for wallet functionality</li>
+        </ul>
+
+        <p><em>We extend our gratitude to the BSV Blockchain Association and the Metanet Desktop contributors for providing the wallet infrastructure that enables Bitcoin OS's blockchain features.</em></p>
+
+        <h1>🏢 Company Information</h1>
+        
+        <p>Built with ❤️ by <strong>The Bitcoin Corporation LTD</strong><br>
+        UK Company No. 16735102</p>
+
+        <h1>🤝 Contributing</h1>
+        
+        <p>We welcome contributions! Please see our Contributing Guidelines for details.</p>
+
+        <h1>📞 Support</h1>
+        
+        <ul>
+            <li><strong>Issues:</strong> GitHub Issues at bitcoin-apps-suite/bitcoin-OS</li>
+            <li><strong>Email:</strong> info@thebitcoincorporation.com</li>
+            <li><strong>Website:</strong> thebitcoincorporation.com</li>
+        </ul>
+
+        <div class="quote">
+            <em>"Bitcoin OS - The Future of Computing is Decentralized"</em>
+        </div>
     </div>
 </body>
 </html>
