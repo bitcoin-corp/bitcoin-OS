@@ -60,35 +60,44 @@
             padding-left: 12px;
         }
         
-        .doc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
+            font-size: 11pt;
         }
         
-        .doc-card {
-            border: 2px solid #000;
-            padding: 20px;
-            background: #f8f8f8;
-            transition: all 0.3s ease;
+        .doc-table th,
+        .doc-table td {
+            border: 1px solid #333;
+            padding: 6px 12px;
+            text-align: left;
+            vertical-align: middle;
         }
         
-        .doc-card:hover {
+        .doc-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        
+        .doc-table tr:hover {
             background: #e8f4ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
-        .doc-card h3 {
-            margin-top: 0;
-            font-size: 14pt;
+        .doc-table .doc-title {
+            font-weight: bold;
             color: #000;
         }
         
-        .doc-card p {
-            margin: 10px 0;
+        .doc-table .doc-description {
             color: #333;
+            line-height: 1.2;
+            font-size: 10pt;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
         }
         
         .doc-link {
@@ -172,11 +181,11 @@
         <h3>📊 Documentation Overview</h3>
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-number">19</div>
+                <div class="stat-number">20</div>
                 <div class="stat-label">Total Documents</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">4</div>
+                <div class="stat-number">6</div>
                 <div class="stat-label">Strategic Docs</div>
             </div>
             <div class="stat-item">
@@ -184,7 +193,7 @@
                 <div class="stat-label">Technical Specs</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">21+</div>
+                <div class="stat-number">35</div>
                 <div class="stat-label">bApps Covered</div>
             </div>
         </div>
@@ -192,150 +201,270 @@
 
     <h1>🎯 Strategic Documentation</h1>
     
-    <div class="doc-grid">
-        <div class="doc-card priority-high">
-            <h3>📋 Executive Summary</h3>
-            <p>Comprehensive strategic overview of the Bitcoin OS ecosystem, tokenized developer economics, and revolutionary business model.</p>
-            <a href="bitcoin-os-executive-summary-print.html" class="doc-link">View HTML</a>
-            <a href="bitcoin-os-executive-summary.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-high">
-            <h3>🏗️ Ecosystem Architecture</h3>
-            <p>Technical framework and standardization protocols for the complete Bitcoin OS platform strategy.</p>
-            <a href="bitcoin-os-ecosystem-architecture-print.html" class="doc-link">View HTML</a>
-            <a href="bitcoin-os-ecosystem-architecture.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-high">
-            <h3>🗓️ Implementation Roadmap</h3>
-            <p>Complete 24-28 week implementation timeline with phases, resources, and success metrics for ecosystem transformation.</p>
-            <a href="bitcoin-os-implementation-roadmap-print.html" class="doc-link">View HTML</a>
-            <a href="bitcoin-os-implementation-roadmap.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-medium">
-            <h3>🎨 Color Scheme & Design System</h3>
-            <p>Comprehensive visual identity framework with duo-tone color assignments for all 21+ Bitcoin OS applications.</p>
-            <a href="bitcoin-os-color-scheme-print.html" class="doc-link">View HTML</a>
-            <a href="bitcoin-os-color-scheme.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">📋 Executive Summary</td>
+                <td class="doc-description">Strategic overview of Bitcoin OS ecosystem and tokenized developer economics</td>
+                <td>High</td>
+                <td>
+                    <a href="bitcoin-os-executive-summary-print.html" class="doc-link">View HTML</a>
+                    <a href="bitcoin-os-executive-summary.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🏗️ Ecosystem Architecture</td>
+                <td class="doc-description">Technical framework and standardization protocols for Bitcoin OS platform</td>
+                <td>High</td>
+                <td>
+                    <a href="bitcoin-os-ecosystem-architecture-print.html" class="doc-link">View HTML</a>
+                    <a href="bitcoin-os-ecosystem-architecture.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🗓️ Implementation Roadmap</td>
+                <td class="doc-description">24-28 week implementation timeline with phases and success metrics</td>
+                <td>High</td>
+                <td>
+                    <a href="bitcoin-os-implementation-roadmap-print.html" class="doc-link">View HTML</a>
+                    <a href="bitcoin-os-implementation-roadmap.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🎨 Color Scheme & Design System</td>
+                <td class="doc-description">Visual identity framework with duo-tone colors for 35 applications</td>
+                <td>Medium</td>
+                <td>
+                    <a href="bitcoin-os-color-scheme-print.html" class="doc-link">View HTML</a>
+                    <a href="bitcoin-os-color-scheme.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🤝 CTO Co-Founder Proposal</td>
+                <td class="doc-description">Strategic partnership opportunity for CTO role with significant equity and technical autonomy</td>
+                <td>High</td>
+                <td>
+                    <a href="cto-cofounder-proposal-print.html" class="doc-link">View HTML</a>
+                    <a href="cto-cofounder-proposal.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">⚖️ CEO Work-Life Balance Framework</td>
+                <td class="doc-description">Artisan's approach to building with calm intention and simplicity</td>
+                <td>Medium</td>
+                <td>
+                    <a href="ceo-work-life-balance-print.html" class="doc-link">View HTML</a>
+                    <a href="ceo-work-life-balance.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h1>⚙️ Technical Documentation</h1>
     
     <h2>🏛️ Architecture & Structure</h2>
-    <div class="doc-grid">
-        <div class="doc-card priority-standard">
-            <h3>🏢 Organization Structure</h3>
-            <p>Hierarchical structure and operational framework for The Bitcoin Corporation ecosystem.</p>
-            <a href="ORGANIZATION_STRUCTURE-print.html" class="doc-link">View HTML</a>
-            <a href="ORGANIZATION_STRUCTURE.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>📊 Smart Contract Hierarchy</h3>
-            <p>Blockchain smart contract architecture and interaction patterns across the ecosystem.</p>
-            <a href="SMART_CONTRACT_HIERARCHY-print.html" class="doc-link">View HTML</a>
-            <a href="SMART_CONTRACT_HIERARCHY.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>🔗 Integration Framework</h3>
-            <p>Cross-application integration standards and inter-bApp communication protocols.</p>
-            <a href="INTEGRATION-print.html" class="doc-link">View HTML</a>
-            <a href="INTEGRATION.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">🏢 Organization Structure</td>
+                <td class="doc-description">Hierarchical structure and operational framework for The Bitcoin Corporation ecosystem</td>
+                <td>Standard</td>
+                <td>
+                    <a href="ORGANIZATION_STRUCTURE-print.html" class="doc-link">View HTML</a>
+                    <a href="ORGANIZATION_STRUCTURE.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">📊 Smart Contract Hierarchy</td>
+                <td class="doc-description">Blockchain smart contract architecture and interaction patterns across the ecosystem</td>
+                <td>Standard</td>
+                <td>
+                    <a href="SMART_CONTRACT_HIERARCHY-print.html" class="doc-link">View HTML</a>
+                    <a href="SMART_CONTRACT_HIERARCHY.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🔗 Integration Framework</td>
+                <td class="doc-description">Cross-application integration standards and inter-bApp communication protocols</td>
+                <td>Standard</td>
+                <td>
+                    <a href="INTEGRATION-print.html" class="doc-link">View HTML</a>
+                    <a href="INTEGRATION.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h2>💰 Token Economics & Blockchain</h2>
-    <div class="doc-grid">
-        <div class="doc-card priority-standard">
-            <h3>🪙 Multi-Token Ecosystem</h3>
-            <p>Individual bApp token economies and cross-exchange trading mechanisms.</p>
-            <a href="MULTI_TOKEN_ECOSYSTEM-print.html" class="doc-link">View HTML</a>
-            <a href="MULTI_TOKEN_ECOSYSTEM.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>📈 Tokenization Model</h3>
-            <p>Comprehensive tokenization strategy and developer compensation framework.</p>
-            <a href="TOKENIZATION_MODEL-print.html" class="doc-link">View HTML</a>
-            <a href="TOKENIZATION_MODEL.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>🌐 BSV Ecosystem Tracking</h3>
-            <p>Bitcoin SV blockchain integration strategy and ecosystem positioning analysis.</p>
-            <a href="BSV_ECOSYSTEM_TRACKING-print.html" class="doc-link">View HTML</a>
-            <a href="BSV_ECOSYSTEM_TRACKING.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>🎨 NFT/FT Implementation Plan</h3>
-            <p>Non-fungible and fungible token implementation strategy across Bitcoin OS applications.</p>
-            <a href="NFT_FT_IMPLEMENTATION_PLAN-print.html" class="doc-link">View HTML</a>
-            <a href="NFT_FT_IMPLEMENTATION_PLAN.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">🪙 Multi-Token Ecosystem</td>
+                <td class="doc-description">Individual bApp token economies and cross-exchange trading mechanisms</td>
+                <td>Standard</td>
+                <td>
+                    <a href="MULTI_TOKEN_ECOSYSTEM-print.html" class="doc-link">View HTML</a>
+                    <a href="MULTI_TOKEN_ECOSYSTEM.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">📈 Tokenization Model</td>
+                <td class="doc-description">Comprehensive tokenization strategy and developer compensation framework</td>
+                <td>Standard</td>
+                <td>
+                    <a href="TOKENIZATION_MODEL-print.html" class="doc-link">View HTML</a>
+                    <a href="TOKENIZATION_MODEL.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🌐 BSV Ecosystem Tracking</td>
+                <td class="doc-description">Bitcoin SV blockchain integration strategy and ecosystem positioning analysis</td>
+                <td>Standard</td>
+                <td>
+                    <a href="BSV_ECOSYSTEM_TRACKING-print.html" class="doc-link">View HTML</a>
+                    <a href="BSV_ECOSYSTEM_TRACKING.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🎨 NFT/FT Implementation Plan</td>
+                <td class="doc-description">Non-fungible and fungible token implementation strategy across Bitcoin OS applications</td>
+                <td>Standard</td>
+                <td>
+                    <a href="NFT_FT_IMPLEMENTATION_PLAN-print.html" class="doc-link">View HTML</a>
+                    <a href="NFT_FT_IMPLEMENTATION_PLAN.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h2>⚡ Development & Implementation</h2>
-    <div class="doc-grid">
-        <div class="doc-card priority-standard">
-            <h3>📄 Contracts Implementation</h3>
-            <p>Smart contract development guidelines and implementation specifications.</p>
-            <a href="CONTRACTS_IMPLEMENTATION-print.html" class="doc-link">View HTML</a>
-            <a href="CONTRACTS_IMPLEMENTATION.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>📖 Implementation Guide</h3>
-            <p>Step-by-step implementation procedures and development workflow documentation.</p>
-            <a href="IMPLEMENTATION_GUIDE-print.html" class="doc-link">View HTML</a>
-            <a href="IMPLEMENTATION_GUIDE.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>🤖 LLM bApp Development Instructions</h3>
-            <p>AI-assisted development guidelines for building Bitcoin OS applications.</p>
-            <a href="LLM_BAPP_DEVELOPMENT_INSTRUCTIONS-print.html" class="doc-link">View HTML</a>
-            <a href="LLM_BAPP_DEVELOPMENT_INSTRUCTIONS.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>📚 Publishing Guide</h3>
-            <p>Content publishing standards and distribution protocols across the ecosystem.</p>
-            <a href="PUBLISHING_GUIDE-print.html" class="doc-link">View HTML</a>
-            <a href="PUBLISHING_GUIDE.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">📄 Contracts Implementation</td>
+                <td class="doc-description">Smart contract development guidelines and implementation specifications</td>
+                <td>Standard</td>
+                <td>
+                    <a href="CONTRACTS_IMPLEMENTATION-print.html" class="doc-link">View HTML</a>
+                    <a href="CONTRACTS_IMPLEMENTATION.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">📖 Implementation Guide</td>
+                <td class="doc-description">Step-by-step implementation procedures and development workflow documentation</td>
+                <td>Standard</td>
+                <td>
+                    <a href="IMPLEMENTATION_GUIDE-print.html" class="doc-link">View HTML</a>
+                    <a href="IMPLEMENTATION_GUIDE.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🤖 LLM bApp Development Instructions</td>
+                <td class="doc-description">AI-assisted development guidelines for building Bitcoin OS applications</td>
+                <td>Standard</td>
+                <td>
+                    <a href="LLM_BAPP_DEVELOPMENT_INSTRUCTIONS-print.html" class="doc-link">View HTML</a>
+                    <a href="LLM_BAPP_DEVELOPMENT_INSTRUCTIONS.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">📚 Publishing Guide</td>
+                <td class="doc-description">Content publishing standards and distribution protocols across the ecosystem</td>
+                <td>Standard</td>
+                <td>
+                    <a href="PUBLISHING_GUIDE-print.html" class="doc-link">View HTML</a>
+                    <a href="PUBLISHING_GUIDE.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h2>🎨 Design & Standards</h2>
-    <div class="doc-grid">
-        <div class="doc-card priority-standard">
-            <h3>🎯 Design System Summary</h3>
-            <p>Visual design standards, component libraries, and UI/UX consistency guidelines.</p>
-            <a href="DESIGN_SYSTEM_SUMMARY-print.html" class="doc-link">View HTML</a>
-            <a href="DESIGN_SYSTEM_SUMMARY.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">🎯 Design System Summary</td>
+                <td class="doc-description">Visual design standards, component libraries, and UI/UX consistency guidelines</td>
+                <td>Standard</td>
+                <td>
+                    <a href="DESIGN_SYSTEM_SUMMARY-print.html" class="doc-link">View HTML</a>
+                    <a href="DESIGN_SYSTEM_SUMMARY.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h2>📱 Platform & Integration</h2>
-    <div class="doc-grid">
-        <div class="doc-card priority-standard">
-            <h3>📖 README</h3>
-            <p>Main project README with installation instructions and platform overview.</p>
-            <a href="README-print.html" class="doc-link">View HTML</a>
-            <a href="README.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-        
-        <div class="doc-card priority-standard">
-            <h3>🔧 README Integration</h3>
-            <p>Integration-specific README documentation and configuration guidelines.</p>
-            <a href="README_INTEGRATION-print.html" class="doc-link">View HTML</a>
-            <a href="README_INTEGRATION.pdf" class="doc-link pdf-link">Download PDF</a>
-        </div>
-    </div>
+    <table class="doc-table">
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="doc-title">📖 README</td>
+                <td class="doc-description">Main project README with installation instructions and platform overview</td>
+                <td>Standard</td>
+                <td>
+                    <a href="README-print.html" class="doc-link">View HTML</a>
+                    <a href="README.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="doc-title">🔧 README Integration</td>
+                <td class="doc-description">Integration-specific README documentation and configuration guidelines</td>
+                <td>Standard</td>
+                <td>
+                    <a href="README_INTEGRATION-print.html" class="doc-link">View HTML</a>
+                    <a href="README_INTEGRATION.pdf" class="doc-link pdf-link">Download PDF</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <div style="text-align: center; margin: 40px 0; padding: 20px; border: 2px solid #000; background: #f0f0f0;">
         <h3>🚀 Ready for PDF Conversion</h3>
