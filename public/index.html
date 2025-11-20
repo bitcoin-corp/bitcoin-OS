@@ -167,13 +167,8 @@
         }
     </style>
     <script>
-        function downloadCTOProposal() {
-            var password = prompt("Enter password to download CTO proposal:");
-            if (password === "craig") {
-                window.location.href = "cto-cofounder-proposal.pdf";
-            } else {
-                alert("Incorrect password. Access denied.");
-            }
+        function viewCTOProposal() {
+            alert("Please use the 'View HTML' link to see the password-protected proposal.");
             return false;
         }
     </script>
@@ -263,8 +258,7 @@
                 <td class="doc-description">Strategic partnership opportunity for CTO role with significant equity and technical autonomy</td>
                 <td>High</td>
                 <td>
-                    <a href="cto-cofounder-proposal-print.html" class="doc-link">View HTML</a>
-                    <a href="#" onclick="return downloadCTOProposal()" class="doc-link pdf-link">Download PDF</a>
+                    <a href="cto-cofounder-proposal-print.html" class="doc-link">View Document (Password Protected)</a>
                 </td>
             </tr>
             <tr>
