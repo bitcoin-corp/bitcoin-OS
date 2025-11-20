@@ -44,6 +44,7 @@
     "lucide-react": "^0.544.0",
     "next": "15.5.3",
     "phosphor-react": "^1.4.1",
+    "puppeteer": "^24.31.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-feather": "^2.0.10",

@@ -166,6 +166,17 @@
             text-transform: uppercase;
         }
     </style>
+    <script>
+        function downloadCTOProposal() {
+            var password = prompt("Enter password to download CTO proposal:");
+            if (password === "craig") {
+                window.location.href = "cto-cofounder-proposal.pdf";
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
+            return false;
+        }
+    </script>
 </head>
 <body>
     <div class="header">
@@ -253,7 +264,7 @@
                 <td>High</td>
                 <td>
                     <a href="cto-cofounder-proposal-print.html" class="doc-link">View HTML</a>
-                    <a href="cto-cofounder-proposal.pdf" class="doc-link pdf-link">Download PDF</a>
+                    <a href="#" onclick="return downloadCTOProposal()" class="doc-link pdf-link">Download PDF</a>
                 </td>
             </tr>
             <tr>
