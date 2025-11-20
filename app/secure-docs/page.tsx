@@ -53,6 +53,37 @@ export default function SecureDocs() {
     }
   };
 
+  const switchDocument = async (newDocument: string) => {
+    if (newDocument === document) return;
+    
+    setLoading(true);
+    setError('');
+    setDocument(newDocument);
+
+    try {
+      const response = await fetch('/api/secure-docs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password, document: newDocument }),
+      });
+
+      const data = await response.text();
+
+      if (response.ok) {
+        setContent(data);
+      } else {
+        setError('Failed to load document');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (authenticated) {
     return (
       <div style={{
@@ -88,31 +119,101 @@ export default function SecureDocs() {
           background: '#000', 
           color: '#fff', 
           padding: '10px 20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
           position: 'sticky',
           top: 0,
           zIndex: 100
         }}>
-          <span style={{ color: '#fff' }}>Secure Document Viewer - The Bitcoin Corporation</span>
-          <button
-            onClick={() => {
-              setAuthenticated(false);
-              setContent('');
-              setPassword('');
-            }}
-            style={{
-              background: '#fff',
-              color: '#000',
-              border: 'none',
-              padding: '5px 15px',
-              cursor: 'pointer',
-              fontWeight: 'bold'
-            }}
-          >
-            Lock Document
-          </button>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '10px'
+          }}>
+            <span style={{ color: '#fff', fontWeight: 'bold' }}>Secure Document Viewer - The Bitcoin Corporation</span>
+            <button
+              onClick={() => {
+                setAuthenticated(false);
+                setContent('');
+                setPassword('');
+              }}
+              style={{
+                background: '#fff',
+                color: '#000',
+                border: 'none',
+                padding: '5px 15px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                borderRadius: '3px'
+              }}
+            >
+              Lock Documents
+            </button>
+          </div>
+          <div style={{
+            display: 'flex',
+            gap: '10px',
+            borderTop: '1px solid #333',
+            paddingTop: '10px'
+          }}>
+            <button
+              onClick={() => switchDocument('proposal')}
+              disabled={loading}
+              style={{
+                background: document === 'proposal' ? '#fff' : 'transparent',
+                color: document === 'proposal' ? '#000' : '#fff',
+                border: '1px solid #fff',
+                padding: '5px 15px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                borderRadius: '3px',
+                opacity: loading ? 0.5 : 1
+              }}
+            >
+              CTO Contract
+            </button>
+            <button
+              onClick={() => switchDocument('scope')}
+              disabled={loading}
+              style={{
+                background: document === 'scope' ? '#fff' : 'transparent',
+                color: document === 'scope' ? '#000' : '#fff',
+                border: '1px solid #fff',
+                padding: '5px 15px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                borderRadius: '3px',
+                opacity: loading ? 0.5 : 1
+              }}
+            >
+              Technical Scope
+            </button>
+            <button
+              onClick={() => switchDocument('memo')}
+              disabled={loading}
+              style={{
+                background: document === 'memo' ? '#fff' : 'transparent',
+                color: document === 'memo' ? '#000' : '#fff',
+                border: '1px solid #fff',
+                padding: '5px 15px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                borderRadius: '3px',
+                opacity: loading ? 0.5 : 1
+              }}
+            >
+              Memorandum
+            </button>
+            {loading && (
+              <span style={{ 
+                color: '#fff', 
+                marginLeft: '20px',
+                alignSelf: 'center',
+                fontSize: '14px'
+              }}>
+                Loading document...
+              </span>
+            )}
+          </div>
         </div>
         <div className="secure-doc-content" style={{ 
           padding: '40px',
