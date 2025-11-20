@@ -55,7 +55,31 @@ export default function SecureDocs() {
 
   if (authenticated) {
     return (
-      <div style={{ width: '100%', minHeight: '100vh', margin: 0, padding: 0 }}>
+      <>
+        <style dangerouslySetInnerHTML={{ __html: `
+          * {
+            color: #000 !important;
+          }
+          body {
+            background: white !important;
+            overflow-y: auto !important;
+            height: auto !important;
+          }
+          .parties-section {
+            background: #f9f9f9 !important;
+            border: 2px solid #000 !important;
+          }
+          .header, .company-name, .document-title, .legal-text {
+            color: #000 !important;
+          }
+          h1, h2, h3, h4, h5, h6, p, div, span, strong, em, td, th, li {
+            color: #000 !important;
+          }
+          .vision-box {
+            background: #f8f8f8 !important;
+            border: 2px solid #000 !important;
+          }
+        `}} />
         <div style={{ 
           background: '#000', 
           color: '#fff', 
@@ -63,13 +87,11 @@ export default function SecureDocs() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
-          left: 0,
-          right: 0,
           zIndex: 1000
         }}>
-          <span>Secure Document Viewer - The Bitcoin Corporation</span>
+          <span style={{ color: '#fff' }}>Secure Document Viewer - The Bitcoin Corporation</span>
           <button
             onClick={() => {
               setAuthenticated(false);
@@ -89,25 +111,14 @@ export default function SecureDocs() {
           </button>
         </div>
         <div style={{ 
-          marginTop: '50px', 
           padding: '20px',
-          background: 'white'
+          background: 'white',
+          minHeight: 'calc(100vh - 50px)',
+          color: '#000'
         }}>
-          <style dangerouslySetInnerHTML={{ __html: `
-            .parties-section {
-              background: #f9f9f9 !important;
-              color: #000 !important;
-            }
-            .parties-section * {
-              color: #000 !important;
-            }
-            body {
-              background: white !important;
-            }
-          `}} />
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div dangerouslySetInnerHTML={{ __html: content }} style={{ color: '#000' }} />
         </div>
-      </div>
+      </>
     );
   }
 
