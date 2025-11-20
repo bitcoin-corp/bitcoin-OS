@@ -719,7 +719,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         >
           <Store className="w-8 h-8 text-orange-500 drop-shadow-lg" strokeWidth={1.5} />
           <div className="text-xs text-white text-center font-medium drop-shadow-md">
-            <div>Bitcoin App</div>
+            <div>Bitcoin Apps</div>
             <div>Store</div>
           </div>
         </button>
