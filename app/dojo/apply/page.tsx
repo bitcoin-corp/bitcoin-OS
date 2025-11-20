@@ -82,9 +82,9 @@ export default function DojoApply() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950 overflow-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950">
       <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-500/10 via-transparent to-bitcoin-600/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-500/10 via-transparent to-bitcoin-600/10 pointer-events-none" />
         
         <motion.div 
           initial={{ opacity: 0 }}
