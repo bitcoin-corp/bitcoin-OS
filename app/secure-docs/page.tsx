@@ -55,29 +55,33 @@ export default function SecureDocs() {
 
   if (authenticated) {
     return (
-      <>
+      <div style={{
+        width: '100%',
+        height: '100vh',
+        overflow: 'auto',
+        background: 'white',
+        position: 'relative'
+      }}>
         <style dangerouslySetInnerHTML={{ __html: `
-          * {
+          .secure-doc-content * {
             color: #000 !important;
           }
-          body {
-            background: white !important;
-            overflow-y: auto !important;
-            height: auto !important;
-          }
-          .parties-section {
+          .secure-doc-content .parties-section {
             background: #f9f9f9 !important;
             border: 2px solid #000 !important;
           }
-          .header, .company-name, .document-title, .legal-text {
+          .secure-doc-content h1, 
+          .secure-doc-content h2, 
+          .secure-doc-content h3, 
+          .secure-doc-content p, 
+          .secure-doc-content div, 
+          .secure-doc-content span, 
+          .secure-doc-content strong, 
+          .secure-doc-content em, 
+          .secure-doc-content td, 
+          .secure-doc-content th, 
+          .secure-doc-content li {
             color: #000 !important;
-          }
-          h1, h2, h3, h4, h5, h6, p, div, span, strong, em, td, th, li {
-            color: #000 !important;
-          }
-          .vision-box {
-            background: #f8f8f8 !important;
-            border: 2px solid #000 !important;
           }
         `}} />
         <div style={{ 
@@ -89,7 +93,7 @@ export default function SecureDocs() {
           alignItems: 'center',
           position: 'sticky',
           top: 0,
-          zIndex: 1000
+          zIndex: 100
         }}>
           <span style={{ color: '#fff' }}>Secure Document Viewer - The Bitcoin Corporation</span>
           <button
@@ -110,15 +114,14 @@ export default function SecureDocs() {
             Lock Document
           </button>
         </div>
-        <div style={{ 
-          padding: '20px',
-          background: 'white',
-          minHeight: 'calc(100vh - 50px)',
-          color: '#000'
+        <div className="secure-doc-content" style={{ 
+          padding: '40px',
+          maxWidth: '1200px',
+          margin: '0 auto'
         }}>
-          <div dangerouslySetInnerHTML={{ __html: content }} style={{ color: '#000' }} />
+          <div dangerouslySetInnerHTML={{ __html: content }} />
         </div>
-      </>
+      </div>
     );
   }
 
