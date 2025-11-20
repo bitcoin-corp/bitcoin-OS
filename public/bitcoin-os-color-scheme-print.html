@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin OS Color Scheme & Design System - The Bitcoin Corporation</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #000;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            background: white;
+            font-size: 11pt;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        
+        .company-logo {
+            font-size: 24pt;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .document-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+        }
+        
+        .document-subtitle {
+            font-size: 12pt;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .document-info {
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            border-bottom: 2px solid #000;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            page-break-before: avoid;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #000;
+            padding-left: 12px;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+        
+        h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            text-align: justify;
+            margin-bottom: 12px;
+        }
+        
+        .key-insight {
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+            background: #f8f8f8;
+        }
+        
+        .framework-box {
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+            background: #fafafa;
+        }
+        
+        .color-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+        
+        .color-table th,
+        .color-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .color-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            overflow-x: auto;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 1cm;
+            left: 2cm;
+            right: 2cm;
+            text-align: center;
+            font-size: 9pt;
+            border-top: 1px solid #000;
+            padding-top: 10px;
+        }
+        
+        .download-section {
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+            background: #e8f4ff;
+            text-align: center;
+        }
+        
+        .download-link {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        .download-link:hover {
+            background: #333;
+        }
+        
+        @media print {
+            body { font-size: 10pt; }
+            .page-break { page-break-before: always; }
+            .key-insight { background: white; }
+            .framework-box { background: white; }
+            .download-section { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-logo">THE BITCOIN CORPORATION</div>
+        <div class="document-title">Bitcoin OS Color Scheme & Design System</div>
+        <div class="document-subtitle">Comprehensive Visual Identity Framework</div>
+        <div class="document-info">
+            Document Version: 1.0 | Date: November 2025 | Classification: Technical Specification<br>
+            The Bitcoin Corporation LTD | UK Company No. 16735102
+        </div>
+    </div>
+
+    <div class="download-section">
+        <h3>📄 Download PDF Version</h3>
+        <p>For offline viewing and sharing:</p>
+        <a href="/bitcoin-os-color-scheme.pdf" class="download-link" download>Download PDF</a>
+    </div>
+
+    <h1>1. Overview</h1>
+    
+    <p>This document defines the comprehensive color scheme and design system for all Bitcoin OS applications. Each app has a unique duo-tone color palette that maintains visual consistency while providing distinct app identity.</p>
+
+    <h1>2. Design Principles</h1>
+    
+    <div class="framework-box">
+        <h4>Core Design Philosophy</h4>
+        <ul>
+            <li><strong>Duo-tone approach:</strong> Each app uses exactly 2 primary colors</li>
+            <li><strong>Unique combinations:</strong> No two apps share the same color pair</li>
+            <li><strong>Accessible contrasts:</strong> All color combinations meet WCAG accessibility standards</li>
+            <li><strong>Consistent gradients:</strong> Subtle gradients between the two colors for depth</li>
+            <li><strong>Scalable system:</strong> Designed to accommodate 50+ apps</li>
+        </ul>
+    </div>
+
+    <h1>3. Primary Color Assignments</h1>
+    
+    <table class="color-table">
+        <thead>
+            <tr>
+                <th>Application</th>
+                <th>Primary Color</th>
+                <th>Secondary Color</th>
+                <th>Hex Codes</th>
+                <th>Usage Theme</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>bitcoin-writer</strong></td>
+                <td>Black</td>
+                <td>White</td>
+                <td><code>#0a0a0a / #ffffff</code></td>
+                <td>Text editing, professional</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-email</strong></td>
+                <td>Red</td>
+                <td>Dark Red</td>
+                <td><code>#ff4444 / #cc0000</code></td>
+                <td>Communication, urgent</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-music</strong></td>
+                <td>Bitcoin Orange</td>
+                <td>Yellow</td>
+                <td><code>#f7931a / #fbbf24</code></td>
+                <td>Creative, audio</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-video</strong></td>
+                <td>Dark Red</td>
+                <td>Orange</td>
+                <td><code>#b91c1c / #ff6600</code></td>
+                <td>Media, entertainment</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-photos</strong></td>
+                <td>Indigo</td>
+                <td>Light Blue</td>
+                <td><code>#4338ca / #87ceeb</code></td>
+                <td>Visual, sky-like</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-art</strong></td>
+                <td>Magenta</td>
+                <td>Gold</td>
+                <td><code>#be185d / #ffd700</code></td>
+                <td>Creative, luxury</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-3d</strong></td>
+                <td>Teal</td>
+                <td>Mint</td>
+                <td><code>#0f766e / #00ff9f</code></td>
+                <td>3D modeling, spatial</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-gaming</strong></td>
+                <td>Dark Orange</td>
+                <td>Yellow</td>
+                <td><code>#ea580c / #ffff00</code></td>
+                <td>Gaming, energy</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-calendar</strong></td>
+                <td>Navy</td>
+                <td>Sky Blue</td>
+                <td><code>#1e3a8a / #87ceeb</code></td>
+                <td>Scheduling, time</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-chat</strong></td>
+                <td>Purple</td>
+                <td>Lavender</td>
+                <td><code>#7c3aed / #dda0dd</code></td>
+                <td>Communication, social</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-social</strong></td>
+                <td>Pink</td>
+                <td>Rose</td>
+                <td><code>#ec4899 / #ff69b4</code></td>
+                <td>Social media, connection</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-drive</strong></td>
+                <td>Blue</td>
+                <td>Steel Blue</td>
+                <td><code>#2563eb / #4682b4</code></td>
+                <td>Storage, cloud</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-code</strong></td>
+                <td>Dark Gray</td>
+                <td>Neon Green</td>
+                <td><code>#1e293b / #39ff14</code></td>
+                <td>Development, terminal</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-browser</strong></td>
+                <td>Chrome Blue</td>
+                <td>Silver</td>
+                <td><code>#4285f4 / #c0c0c0</code></td>
+                <td>Web browsing</td>
+            </tr>
+            <tr>
+                <td><strong>bitcoin-search</strong></td>
+                <td>Deep Teal</td>
+                <td>Aqua</td>
+                <td><code>#0d9488 / #00ffff</code></td>
+                <td>Search, discovery</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1>4. Component Standards</h1>
+    
+    <h2>4.1 PoC Bar Specification</h2>
+    
+    <div class="code-block">
+interface PocBarProps {
+  appName: string;
+  primaryColor: string;
+  secondaryColor: string;
+  isDismissible?: boolean;
+  showBitcoinLogo?: boolean;
+}
+
+// Standard height: 40px
+// Background: Linear gradient from primary to secondary
+// Text: Black or white based on contrast
+// Position: Fixed top, full width, z-index: 9999
+    </div>
+
+    <h2>4.2 Taskbar Specification</h2>
+    
+    <div class="code-block">
+interface TaskbarProps {
+  appName: string;
+  primaryColor: string;
+  secondaryColor: string;
+  menuItems: MenuItem[];
+  isAuthenticated: boolean;
+  currentUser?: User;
+}
+
+// Standard height: 32px (below PoC bar)
+// Background: Translucent with app colors
+// Consistent menu structure across all apps
+    </div>
+
+    <h2>4.3 Dock Integration</h2>
+    
+    <div class="code-block">
+// Update dock colors to use app-specific duo-tones
+const dockApps: DockApp[] = [
+  {
+    name: 'bitcoin-writer',
+    colors: ['#0a0a0a', '#ffffff'],
+    gradient: 'linear-gradient(45deg, #0a0a0a 0%, #ffffff 100%)'
+  },
+  {
+    name: 'bitcoin-music',
+    colors: ['#f7931a', '#fbbf24'],
+    gradient: 'linear-gradient(45deg, #f7931a 0%, #fbbf24 100%)'
+  },
+  // ... other apps
+];
+    </div>
+
+    <h1>5. Design Tokens</h1>
+    
+    <h2>5.1 Color Gradients</h2>
+    
+    <p>Each app uses its duo-tone colors in these gradient patterns:</p>
+    
+    <div class="framework-box">
+        <h4>Gradient Patterns</h4>
+        <ul>
+            <li><strong>Primary Gradient:</strong> <code>linear-gradient(135deg, {primary} 0%, {secondary} 100%)</code></li>
+            <li><strong>Subtle Gradient:</strong> <code>linear-gradient(135deg, {primary} 0%, {primary}cc 50%, {secondary}99 100%)</code></li>
+            <li><strong>Accent Gradient:</strong> <code>radial-gradient(circle, {secondary} 0%, {primary} 100%)</code></li>
+        </ul>
+    </div>
+
+    <h2>5.2 Transparency Levels</h2>
+    
+    <div class="framework-box">
+        <h4>Alpha Opacity Standards</h4>
+        <ul>
+            <li><strong>Background overlays:</strong> 0.1 - 0.3 alpha</li>
+            <li><strong>Glass effects:</strong> 0.7 - 0.9 alpha with backdrop-blur</li>
+            <li><strong>Hover states:</strong> 0.8 alpha</li>
+            <li><strong>Active states:</strong> 1.0 alpha</li>
+        </ul>
+    </div>
+
+    <h2>5.3 Typography Colors</h2>
+    
+    <div class="framework-box">
+        <h4>Text Color Hierarchy</h4>
+        <ul>
+            <li><strong>Primary text:</strong> App primary color at full opacity</li>
+            <li><strong>Secondary text:</strong> App secondary color at 0.8 opacity</li>
+            <li><strong>Accent text:</strong> Gradient between both colors</li>
+            <li><strong>Muted text:</strong> Primary color at 0.6 opacity</li>
+        </ul>
+    </div>
+
+    <h1>6. Implementation Guidelines</h1>
+    
+    <h2>6.1 CSS Custom Properties</h2>
+    
+    <p>Each app should define these CSS variables:</p>
+    
+    <div class="code-block">
+:root {
+  --app-primary: #1e40af;    /* App's primary color */
+  --app-secondary: #06d6ff;  /* App's secondary color */
+  --app-gradient: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+  --app-shadow: 0 4px 12px rgba(var(--app-primary-rgb), 0.3);
+}
+    </div>
+
+    <h2>6.2 Component Classes</h2>
+    
+    <p>Standard classes for consistent styling:</p>
+    
+    <div class="code-block">
+.app-primary { color: var(--app-primary); }
+.app-secondary { color: var(--app-secondary); }
+.app-bg-gradient { background: var(--app-gradient); }
+.app-border { border-color: var(--app-primary); }
+.app-shadow { box-shadow: var(--app-shadow); }
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1>7. Accessibility</h1>
+    
+    <h2>7.1 Contrast Ratios</h2>
+    
+    <div class="key-insight">
+        <h3>WCAG Compliance Standards</h3>
+        <ul>
+            <li>All text must meet WCAG AA standards (4.5:1 minimum)</li>
+            <li>Primary colors tested against white and black backgrounds</li>
+            <li>Secondary colors provide sufficient contrast for UI elements</li>
+        </ul>
+    </div>
+
+    <h2>7.2 Color Blindness Support</h2>
+    
+    <div class="framework-box">
+        <h4>Accessibility Features</h4>
+        <ul>
+            <li>Each duo-tone pair distinguishable for all types of color blindness</li>
+            <li>Semantic meaning never conveyed by color alone</li>
+            <li>Alternative indicators (icons, text, patterns) always provided</li>
+        </ul>
+    </div>
+
+    <h1>8. File Structure</h1>
+    
+    <div class="code-block">
+/apps/{app-name}/
+├── styles/
+│   ├── colors.css          # App-specific color definitions
+│   ├── components.css      # Component styles using color tokens
+│   └── theme.css          # Theme configuration
+├── components/
+│   ├── PocBar.tsx         # Standardized PoC bar
+│   ├── Taskbar.tsx        # Standardized taskbar
+│   └── AppLayout.tsx      # Layout with color system
+└── types/
+    └── theme.ts           # TypeScript color definitions
+    </div>
+
+    <h1>9. Future Expansion</h1>
+    
+    <h2>9.1 New App Color Assignment</h2>
+    
+    <p>When adding new apps:</p>
+    
+    <div class="framework-box">
+        <h4>Color Assignment Process</h4>
+        <ol>
+            <li>Check existing combinations to avoid duplicates</li>
+            <li>Test accessibility with WebAIM contrast checker</li>
+            <li>Ensure colors match app purpose/theme</li>
+            <li>Update this document and dock configuration</li>
+            <li>Generate CSS custom properties</li>
+        </ol>
+    </div>
+
+    <h2>9.2 Color Harmony Rules</h2>
+    
+    <div class="framework-box">
+        <h4>Design Harmony Guidelines</h4>
+        <ul>
+            <li>Adjacent colors on color wheel for subtle combinations</li>
+            <li>Complementary colors for high contrast needs</li>
+            <li>Triadic relationships avoided to maintain duo-tone approach</li>
+            <li>Saturation levels consistent within app families</li>
+        </ul>
+    </div>
+
+    <div class="key-insight">
+        <h3>System Benefits</h3>
+        <p>This color scheme ensures visual consistency across the Bitcoin OS ecosystem while maintaining unique app identities and accessibility standards. The standardized approach enables rapid development while ensuring professional visual cohesion.</p>
+    </div>
+
+    <div class="footer">
+        The Bitcoin Corporation LTD | Bitcoin OS Color Scheme & Design System | Technical Specification v1.0
+    </div>
+</body>
+</html>
