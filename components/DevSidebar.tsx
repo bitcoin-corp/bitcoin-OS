@@ -45,6 +45,8 @@ export default function DevSidebar() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('devSidebarCollapsed', isCollapsed.toString())
+      // Dispatch event for other components to know about collapsed state
+      window.dispatchEvent(new CustomEvent('devSidebarCollapsed', { detail: isCollapsed }))
     }
   }, [isCollapsed])
 

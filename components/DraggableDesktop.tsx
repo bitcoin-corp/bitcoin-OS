@@ -91,16 +91,9 @@ function DraggableIcon({
           : 'hover:bg-white/10'
       }`}>
         {app.id === 'senseii' ? (
-          <svg className={`w-12 h-12 ${app.color} drop-shadow-2xl`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-            {/* Torii gate design */}
-            <path d="M3 5h18" />
-            <path d="M5 5v14" />
-            <path d="M19 5v14" />
-            <path d="M3 9h18" />
-            <path d="M9 5v4" />
-            <path d="M15 5v4" />
-            <path d="M12 5v14" />
-          </svg>
+          <div className="w-12 h-12 flex items-center justify-center">
+            <span className="text-4xl font-bold text-white drop-shadow-2xl">師</span>
+          </div>
         ) : app.id === 'cashboard' ? (
           <svg className={`w-12 h-12 ${app.color} drop-shadow-2xl`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
             {/* C in circle logo */}
@@ -605,15 +598,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                   <div className="relative">
                     <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
                       {activeApp.id === 'senseii' ? (
-                        <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                          <path d="M3 5h18" />
-                          <path d="M5 5v14" />
-                          <path d="M19 5v14" />
-                          <path d="M3 9h18" />
-                          <path d="M9 5v4" />
-                          <path d="M15 5v4" />
-                          <path d="M12 5v14" />
-                        </svg>
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <span className="text-4xl font-bold text-white drop-shadow-2xl">師</span>
+                        </div>
                       ) : activeApp.id === 'cashboard' ? (
                         <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                           <circle cx="12" cy="12" r="10" />
@@ -639,15 +626,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
                   // Show single icon when dragging one item
                   <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/10">
                     {activeApp.id === 'senseii' ? (
-                      <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                        <path d="M3 5h18" />
-                        <path d="M5 5v14" />
-                        <path d="M19 5v14" />
-                        <path d="M3 9h18" />
-                        <path d="M9 5v4" />
-                        <path d="M15 5v4" />
-                        <path d="M12 5v14" />
-                      </svg>
+                      <div className="w-12 h-12 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-white drop-shadow-2xl">師</span>
+                      </div>
                     ) : activeApp.id === 'cashboard' ? (
                       <svg className={`w-12 h-12 ${activeApp.color}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                         <circle cx="12" cy="12" r="10" />
@@ -739,13 +720,9 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           onClick={() => window.open('https://senseii-zeta.vercel.app/', '_blank')}
           title="Senseii"
         >
-          <svg className="w-8 h-8 text-red-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-            {/* Wisdom/Scroll icon */}
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 8v8" />
-            <path d="M8 12h8" />
-            <circle cx="12" cy="12" r="3" fill="currentColor" />
-          </svg>
+          <div className="w-8 h-8 flex items-center justify-center">
+            <span className="text-3xl font-bold text-white drop-shadow-lg">師</span>
+          </div>
           <span className="text-xs text-white text-center font-medium drop-shadow-md">Senseii</span>
         </button>
         <button 

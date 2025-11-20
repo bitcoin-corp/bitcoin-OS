@@ -218,7 +218,7 @@ export default function TokenPage() {
           <div className="stats-grid">
             <div className="stat">
               <h3>Total Supply</h3>
-              <p className="stat-value">100,000,000</p>
+              <p className="stat-value">1,000,000,000</p>
               <p className="stat-label">$bOS tokens</p>
             </div>
             <div className="stat">

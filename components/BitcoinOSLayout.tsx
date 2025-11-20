@@ -8,6 +8,7 @@ import Dock from '@/components/Dock'
 import MinimalDock from '@/components/MinimalDock'
 import HandCashLoginModal from '@/components/HandCashLoginModal'
 import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
+import TickerSidebar from '@/components/TickerSidebar'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { getCurrentThemeConfig, applyTheme } from '@/lib/advanced-themes'
 
@@ -21,6 +22,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   const isMobile = useIsMobile()
   
   const [showDevSidebar, setShowDevSidebar] = useState(true) // Visible but collapsed by default
+  const [isDevSidebarCollapsed, setIsDevSidebarCollapsed] = useState(true) // Track collapsed state
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showSystemPreferences, setShowSystemPreferences] = useState(false)
   const [userHandle, setUserHandle] = useState<string | null>(null)
@@ -93,12 +95,18 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
       setDockStyle(event.detail)
     }
     
+    const handleDevSidebarCollapsed = (event: any) => {
+      setIsDevSidebarCollapsed(event.detail)
+    }
+    
     window.addEventListener('keydown', handleKeyPress)
     window.addEventListener('dockStyleChanged', handleDockStyleChange)
+    window.addEventListener('devSidebarCollapsed', handleDevSidebarCollapsed)
     
     return () => {
       window.removeEventListener('keydown', handleKeyPress)
       window.removeEventListener('dockStyleChanged', handleDockStyleChange)
+      window.removeEventListener('devSidebarCollapsed', handleDevSidebarCollapsed)
     }
   }, [showDevSidebar, showSystemPreferences])
 
@@ -136,7 +144,11 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         )}
         
         {/* Page content */}
-        <div className={`relative z-10 h-full ${showDevSidebar && !isMobile && shouldShowGlobalUI ? 'pl-[60px]' : ''} ${!isMobile && shouldShowGlobalUI ? 'pt-0' : ''}`}>
+        <div className={`relative z-10 h-full ${
+          showDevSidebar && !isMobile && shouldShowGlobalUI 
+            ? isDevSidebarCollapsed ? 'pl-[60px]' : 'pl-[260px]' 
+            : ''
+        } ${!isMobile && shouldShowGlobalUI ? 'pt-0' : ''} transition-all duration-300`}>
           {children}
         </div>
         
@@ -176,6 +188,10 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         </>
       )}
 
+      {/* TickerSidebar - always show on desktop when not during BIOS/boot */}
+      {!isMobile && shouldShowGlobalUI && (
+        <TickerSidebar />
+      )}
 
       {/* Modal backdrop */}
       {showLoginModal && (
