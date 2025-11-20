@@ -705,7 +705,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
           onClick={() => window.location.href = '/dojo'}
           title="Bitcoin Dojo"
         >
-          <svg className="w-10 h-10 text-orange-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+          <svg className="w-10 h-10 text-red-500 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
             {/* Torii gate icon */}
             <path d="M3 6h18M5 6v14M19 6v14M3 10h18" />
             <path d="M3 4l3 2M21 4l-3 2" />
