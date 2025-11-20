@@ -55,14 +55,19 @@ export default function SecureDocs() {
 
   if (authenticated) {
     return (
-      <div style={{ width: '100%', height: '100vh', margin: 0, padding: 0 }}>
+      <div style={{ width: '100%', minHeight: '100vh', margin: 0, padding: 0 }}>
         <div style={{ 
           background: '#000', 
           color: '#fff', 
           padding: '10px 20px',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000
         }}>
           <span>Secure Document Viewer - The Bitcoin Corporation</span>
           <button
@@ -83,7 +88,25 @@ export default function SecureDocs() {
             Lock Document
           </button>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div style={{ 
+          marginTop: '50px', 
+          padding: '20px',
+          background: 'white'
+        }}>
+          <style dangerouslySetInnerHTML={{ __html: `
+            .parties-section {
+              background: #f9f9f9 !important;
+              color: #000 !important;
+            }
+            .parties-section * {
+              color: #000 !important;
+            }
+            body {
+              background: white !important;
+            }
+          `}} />
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
       </div>
     );
   }
