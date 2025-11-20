@@ -76,7 +76,6 @@ export default function DevSidebar() {
     { path: '/token', icon: Coins, label: '$bOS', badge: 'NEW' },
     { path: '/exchange', icon: Zap, label: 'Compute Exchange' },
     { path: '/grants', icon: Flower2, label: 'GRANTS' },
-    { path: '/maip', icon: Users, label: 'MAIP', badge: 'EXPERIMENTAL' },
     
     // Developers Section
     { divider: true },
