@@ -224,6 +224,22 @@ export default function SecureDocs() {
             >
               Why CTO
             </button>
+            <button
+              onClick={() => switchDocument('personal-goals')}
+              disabled={loading}
+              style={{
+                background: document === 'personal-goals' ? '#fff' : 'transparent',
+                color: document === 'personal-goals' ? '#000' : '#fff',
+                border: '1px solid #fff',
+                padding: '5px 15px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                borderRadius: '3px',
+                opacity: loading ? 0.5 : 1
+              }}
+            >
+              Personal Goals
+            </button>
             {loading && (
               <span style={{ 
                 color: '#fff', 
@@ -309,6 +325,7 @@ export default function SecureDocs() {
               <option value="scope">Bitcoin OS Technical Scope</option>
               <option value="memo">Memorandum to Dr. Wright - My Proof of Work</option>
               <option value="why-cto">Why CSW Should Be CTO</option>
+              <option value="personal-goals">CEO Personal Goals</option>
             </select>
           </div>
 
