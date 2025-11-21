@@ -18,6 +18,15 @@ import {
 export default function ContributionsPage() {
   const topContributors = [
     {
+      name: 'Craig Wright',
+      username: 'cswright',
+      avatar: 'https://github.com/github.png',
+      commits: 2150,
+      prs: 142,
+      issues: 89,
+      role: 'Founder & CTO'
+    },
+    {
       name: 'Richard Boase',
       username: 'rboase',
       avatar: 'https://github.com/rboase.png',
@@ -112,7 +121,7 @@ export default function ContributionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950">
+    <div className="h-screen overflow-y-auto bg-gradient-to-br from-gray-900 via-black to-bitcoin-950">
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-bitcoin-600/10 pointer-events-none" />
         
