@@ -92,9 +92,9 @@ export default function SecureDocs() {
     return (
       <div style={{
         width: '100%',
-        minHeight: '100vh',
-        height: 'auto',
-        overflow: 'visible',
+        height: '100vh',
+        overflowY: 'auto',
+        overflowX: 'hidden',
         background: 'white',
         position: 'relative'
       }}>
@@ -237,7 +237,7 @@ export default function SecureDocs() {
           </div>
         </div>
         <div className="secure-doc-content" style={{ 
-          padding: '40px',
+          padding: '40px 40px 100px 40px',
           maxWidth: '1200px',
           margin: '0 auto'
         }}>
