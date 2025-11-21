@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { readFileSync } from 'fs';
 
 export default function CSWDocs() {
+  const [password, setPassword] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
   const [document, setDocument] = useState('proposal');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const documents = {
     proposal: {
@@ -28,13 +30,30 @@ export default function CSWDocs() {
   };
 
   useEffect(() => {
-    loadDocument(document);
-  }, [document]);
+    if (authenticated) {
+      loadDocument(document);
+    }
+  }, [document, authenticated]);
+
+  const handleAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    
+    if (password === 'thesartrebit') {
+      setAuthenticated(true);
+      loadDocument(document);
+    } else {
+      setError('Invalid password');
+    }
+  };
 
   const loadDocument = async (doc: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/csw-docs?doc=${doc}`);
+      const response = await fetch(`/api/csw-docs?doc=${doc}&auth=${password}`);
+      if (!response.ok) {
+        throw new Error('Failed to load document');
+      }
       const html = await response.text();
       setContent(html);
     } catch (error) {
@@ -44,6 +63,93 @@ export default function CSWDocs() {
       setLoading(false);
     }
   };
+
+  if (!authenticated) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: '20px'
+      }}>
+        <div style={{
+          background: 'white',
+          borderRadius: '10px',
+          padding: '40px',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+          maxWidth: '400px',
+          width: '100%'
+        }}>
+          <h1 style={{ 
+            textAlign: 'center', 
+            marginBottom: '30px',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            color: '#000'
+          }}>
+            CSW Documents - Secure Access
+          </h1>
+          
+          <form onSubmit={handleAuth}>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                color: '#000'
+              }}>
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '5px',
+                  fontSize: '14px'
+                }}
+                autoFocus
+              />
+            </div>
+            
+            {error && (
+              <div style={{
+                color: '#dc2626',
+                fontSize: '14px',
+                marginBottom: '20px'
+              }}>
+                {error}
+              </div>
+            )}
+            
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                padding: '12px',
+                background: '#000',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              Access Documents
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{
