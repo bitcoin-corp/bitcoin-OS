@@ -92,8 +92,9 @@ export default function SecureDocs() {
     return (
       <div style={{
         width: '100%',
-        height: '100vh',
-        overflow: 'auto',
+        minHeight: '100vh',
+        height: 'auto',
+        overflow: 'visible',
         background: 'white',
         position: 'relative'
       }}>
