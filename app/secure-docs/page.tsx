@@ -207,6 +207,22 @@ export default function SecureDocs() {
             >
               Memorandum
             </button>
+            <button
+              onClick={() => switchDocument('why-cto')}
+              disabled={loading}
+              style={{
+                background: document === 'why-cto' ? '#fff' : 'transparent',
+                color: document === 'why-cto' ? '#000' : '#fff',
+                border: '1px solid #fff',
+                padding: '5px 15px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                borderRadius: '3px',
+                opacity: loading ? 0.5 : 1
+              }}
+            >
+              Why CTO
+            </button>
             {loading && (
               <span style={{ 
                 color: '#fff', 
@@ -291,6 +307,7 @@ export default function SecureDocs() {
               <option value="proposal">CTO Co-Founder Contract</option>
               <option value="scope">Bitcoin OS Technical Scope</option>
               <option value="memo">Memorandum to Dr. Wright - My Proof of Work</option>
+              <option value="why-cto">Why CSW Should Be CTO</option>
             </select>
           </div>
 
