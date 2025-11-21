@@ -73,6 +73,12 @@
   color: #d946ef !important;
 }
 
+/* Standardize Bitcoin symbol size across ALL pages */
+.bitcoin-symbol {
+  font-size: 16px !important;
+  line-height: 1 !important;
+}
+
 body.no-animations * {
   animation-duration: 0s !important;
   transition-duration: 0s !important;
