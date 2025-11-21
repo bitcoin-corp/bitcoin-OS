@@ -622,7 +622,7 @@ npm run deploy:contracts
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-bitcoin-950 p-6">
+    <div className="h-screen overflow-y-auto bg-gradient-to-br from-gray-900 via-black to-bitcoin-950 p-6">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
