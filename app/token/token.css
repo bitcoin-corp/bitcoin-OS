@@ -12,6 +12,11 @@
   overflow-y: auto;
 }
 
+/* Fix Bitcoin symbol size on token page */
+.token-page .bitcoin-symbol {
+  font-size: 16px !important;
+}
+
 .token-container {
   max-width: 1200px;
   margin: 0 auto;
