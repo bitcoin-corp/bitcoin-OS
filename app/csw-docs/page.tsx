@@ -26,6 +26,10 @@ export default function CSWDocs() {
     'why-cto': {
       title: 'Why CSW Should Be CTO',
       file: 'why-csw-should-be-cto.html'
+    },
+    'personal-goals': {
+      title: 'CEO Personal Goals',
+      file: 'ceo-personal-goals.html'
     }
   };
 
