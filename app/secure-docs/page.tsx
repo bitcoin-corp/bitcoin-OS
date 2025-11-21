@@ -1,272 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function SecureDocs() {
-  const [password, setPassword] = useState('');
-  const [document, setDocument] = useState('proposal');
-  const [content, setContent] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [attemptsRemaining, setAttemptsRemaining] = useState<number | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch('/api/secure-docs', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password, document }),
-      });
-
-      const data = await response.text();
-
-      if (!response.ok) {
-        try {
-          const errorData = JSON.parse(data);
-          setError(errorData.error || 'Authentication failed');
-          if (errorData.attemptsRemaining !== undefined) {
-            setAttemptsRemaining(errorData.attemptsRemaining);
-          }
-          if (errorData.rateLimited) {
-            // Clear password on rate limit
-            setPassword('');
-          }
-        } catch {
-          setError('Authentication failed');
-        }
-      } else {
-        setContent(data);
-        setAuthenticated(true);
-      }
-    } catch (err) {
-      setError('Network error. Please try again.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const switchDocument = async (newDocument: string) => {
-    if (newDocument === document) return;
-    
-    console.log('Switching to document:', newDocument);
-    setLoading(true);
-    setError('');
-    setDocument(newDocument);
-
-    try {
-      const response = await fetch('/api/secure-docs', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password, document: newDocument }),
-      });
-
-      const data = await response.text();
-      console.log('Received data length:', data.length);
-
-      if (response.ok) {
-        setContent(data);
-        console.log('Content updated for:', newDocument);
-      } else {
-        setError('Failed to load document');
-        console.error('Failed to load document:', newDocument);
-      }
-    } catch (err) {
-      setError('Network error. Please try again.');
-      console.error('Error switching document:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (authenticated) {
-    return (
-      <div style={{
-        width: '100%',
-        height: '100vh',
-        overflowY: 'auto',
-        overflowX: 'hidden',
-        background: 'white',
-        position: 'relative'
-      }}>
-        <style dangerouslySetInnerHTML={{ __html: `
-          .secure-doc-content * {
-            color: #000 !important;
-          }
-          .secure-doc-content .parties-section {
-            background: #f9f9f9 !important;
-            border: 2px solid #000 !important;
-          }
-          .secure-doc-content h1, 
-          .secure-doc-content h2, 
-          .secure-doc-content h3, 
-          .secure-doc-content p, 
-          .secure-doc-content div, 
-          .secure-doc-content span, 
-          .secure-doc-content strong, 
-          .secure-doc-content em, 
-          .secure-doc-content td, 
-          .secure-doc-content th, 
-          .secure-doc-content li {
-            color: #000 !important;
-          }
-        `}} />
-        <div style={{ 
-          background: '#000', 
-          color: '#fff', 
-          padding: '10px 20px',
-          position: 'sticky',
-          top: 0,
-          zIndex: 100
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '10px'
-          }}>
-            <span style={{ color: '#fff', fontWeight: 'bold' }}>Secure Document Viewer - The Bitcoin Corporation</span>
-            <button
-              onClick={() => {
-                setAuthenticated(false);
-                setContent('');
-                setPassword('');
-              }}
-              style={{
-                background: '#fff',
-                color: '#000',
-                border: 'none',
-                padding: '5px 15px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                borderRadius: '3px'
-              }}
-            >
-              Lock Documents
-            </button>
-          </div>
-          <div style={{
-            display: 'flex',
-            gap: '10px',
-            borderTop: '1px solid #333',
-            paddingTop: '10px'
-          }}>
-            <button
-              onClick={() => switchDocument('proposal')}
-              disabled={loading}
-              style={{
-                background: document === 'proposal' ? '#fff' : 'transparent',
-                color: document === 'proposal' ? '#000' : '#fff',
-                border: '1px solid #fff',
-                padding: '5px 15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
-                borderRadius: '3px',
-                opacity: loading ? 0.5 : 1
-              }}
-            >
-              CTO Contract
-            </button>
-            <button
-              onClick={() => switchDocument('scope')}
-              disabled={loading}
-              style={{
-                background: document === 'scope' ? '#fff' : 'transparent',
-                color: document === 'scope' ? '#000' : '#fff',
-                border: '1px solid #fff',
-                padding: '5px 15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
-                borderRadius: '3px',
-                opacity: loading ? 0.5 : 1
-              }}
-            >
-              Technical Scope
-            </button>
-            <button
-              onClick={() => switchDocument('memo')}
-              disabled={loading}
-              style={{
-                background: document === 'memo' ? '#fff' : 'transparent',
-                color: document === 'memo' ? '#000' : '#fff',
-                border: '1px solid #fff',
-                padding: '5px 15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
-                borderRadius: '3px',
-                opacity: loading ? 0.5 : 1
-              }}
-            >
-              Memorandum
-            </button>
-            <button
-              onClick={() => switchDocument('why-cto')}
-              disabled={loading}
-              style={{
-                background: document === 'why-cto' ? '#fff' : 'transparent',
-                color: document === 'why-cto' ? '#000' : '#fff',
-                border: '1px solid #fff',
-                padding: '5px 15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
-                borderRadius: '3px',
-                opacity: loading ? 0.5 : 1
-              }}
-            >
-              Why CTO
-            </button>
-            <button
-              onClick={() => switchDocument('personal-goals')}
-              disabled={loading}
-              style={{
-                background: document === 'personal-goals' ? '#fff' : 'transparent',
-                color: document === 'personal-goals' ? '#000' : '#fff',
-                border: '1px solid #fff',
-                padding: '5px 15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px',
-                borderRadius: '3px',
-                opacity: loading ? 0.5 : 1
-              }}
-            >
-              Personal Goals
-            </button>
-            {loading && (
-              <span style={{ 
-                color: '#fff', 
-                marginLeft: '20px',
-                alignSelf: 'center',
-                fontSize: '14px'
-              }}>
-                Loading document...
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="secure-doc-content" style={{ 
-          padding: '40px 40px 100px 40px',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
-          <div key={document} dangerouslySetInnerHTML={{ __html: content }} />
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    // Redirect to the bitcoin-corp-website secure docs
+    window.location.href = 'https://thebitcoincorporation.website/secure-docs';
+  }, []);
 
   return (
     <div style={{
       minHeight: '100vh',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -277,134 +23,61 @@ export default function SecureDocs() {
         borderRadius: '10px',
         padding: '40px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-        maxWidth: '400px',
-        width: '100%'
+        maxWidth: '500px',
+        width: '100%',
+        textAlign: 'center'
       }}>
         <h1 style={{ 
-          textAlign: 'center', 
-          marginBottom: '10px',
+          marginBottom: '20px',
           fontSize: '24px',
           fontWeight: 'bold',
           color: '#000'
         }}>
-          Secure Document Access
+          Redirecting to Secure Documents...
         </h1>
         <p style={{ 
-          textAlign: 'center', 
           marginBottom: '30px',
           color: '#666',
-          fontSize: '14px'
+          fontSize: '16px'
         }}>
-          The Bitcoin Corporation Limited
+          You are being redirected to the secure document enclave.
         </p>
-
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ 
-              display: 'block', 
-              marginBottom: '8px',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              color: '#000'
-            }}>
-              Select Document
-            </label>
-            <select
-              value={document}
-              onChange={(e) => setDocument(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '2px solid #e0e0e0',
-                borderRadius: '5px',
-                fontSize: '14px',
-                background: 'white'
-              }}
-            >
-              <option value="proposal">CTO Co-Founder Contract</option>
-              <option value="scope">Bitcoin OS Technical Scope</option>
-              <option value="memo">Memorandum to Dr. Wright - My Proof of Work</option>
-              <option value="why-cto">Why CSW Should Be CTO</option>
-              <option value="personal-goals">CEO Personal Goals</option>
-            </select>
-          </div>
-
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ 
-              display: 'block', 
-              marginBottom: '8px',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              color: '#000'
-            }}>
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              required
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '2px solid #e0e0e0',
-                borderRadius: '5px',
-                fontSize: '14px'
-              }}
-            />
-          </div>
-
-          {error && (
-            <div style={{
-              background: '#fee',
-              color: '#c00',
-              padding: '10px',
-              borderRadius: '5px',
-              marginBottom: '20px',
-              fontSize: '14px'
-            }}>
-              {error}
-              {attemptsRemaining !== null && attemptsRemaining > 0 && (
-                <div style={{ marginTop: '5px', fontSize: '12px' }}>
-                  Attempts remaining: {attemptsRemaining}
-                </div>
-              )}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
+        <div style={{
+          marginBottom: '20px'
+        }}>
+          <div style={{
+            width: '60px',
+            height: '60px',
+            border: '6px solid #f3f3f3',
+            borderTop: '6px solid #667eea',
+            borderRadius: '50%',
+            margin: '0 auto',
+            animation: 'spin 1s linear infinite'
+          }} />
+        </div>
+        <p style={{
+          fontSize: '14px',
+          color: '#999'
+        }}>
+          If you are not redirected automatically, 
+          <a 
+            href="https://thebitcoincorporation.website/secure-docs"
             style={{
-              width: '100%',
-              padding: '14px',
-              background: loading ? '#ccc' : '#000',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: 'background 0.3s'
+              color: '#667eea',
+              marginLeft: '5px',
+              textDecoration: 'underline'
             }}
           >
-            {loading ? 'Authenticating...' : 'Access Document'}
-          </button>
-        </form>
-
-        <div style={{
-          marginTop: '30px',
-          paddingTop: '20px',
-          borderTop: '1px solid #e0e0e0',
-          fontSize: '12px',
-          color: '#999',
-          textAlign: 'center'
-        }}>
-          <p>🔒 Server-side authentication with rate limiting</p>
-          <p>Maximum 5 attempts per 15 minutes</p>
-        </div>
+            click here
+          </a>
+        </p>
       </div>
+      <style jsx>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
