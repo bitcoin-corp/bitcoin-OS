@@ -1,7 +1,5 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Shield, Lock, Code, CheckCircle } from 'lucide-react';
 
 export default function ProposalPage() {
@@ -15,7 +13,7 @@ export default function ProposalPage() {
           <p className="text-gray-400 text-lg">Bitcoin-OS Immutable Rule Engine</p>
         </div>
 
-        <Card className="bg-gray-800/50 backdrop-blur border-gray-700 p-8 mb-8">
+        <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-8 mb-8">
           <div className="mb-8">
             <h2 className="text-3xl font-semibold mb-4 flex items-center gap-3">
               <Shield className="w-8 h-8 text-orange-400" />
@@ -127,16 +125,16 @@ export default function ProposalPage() {
                 <div className="bg-gray-900 px-6 py-3 rounded-lg">
                   <code className="text-xl font-mono text-orange-400">$boase</code>
                 </div>
-                <Button 
-                  className="mt-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600"
+                <button 
+                  className="mt-4 px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 rounded-lg font-semibold transition-all"
                   onClick={() => window.open('https://app.handcash.io/#/send?to=$boase&amount=250000&currency=BSV', '_blank')}
                 >
                   Fund This Proposal
-                </Button>
+                </button>
               </div>
             </div>
           </div>
-        </Card>
+        </div>
 
         <div className="text-center text-gray-500 italic">
           "Set in stone, not as a monument to a personality, but as a bulwark against personality."
