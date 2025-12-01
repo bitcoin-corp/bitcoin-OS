@@ -667,7 +667,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
       >
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
-          onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/trust'}
+          onClick={() => window.location.href = 'https://www.thebitcoincorporation.website/trust'}
           title="Trust"
         >
           <Shield className="w-10 h-10 text-blue-500 drop-shadow-lg" strokeWidth={1.5} />
@@ -675,7 +675,7 @@ export default function DraggableDesktop({ isVideoReady, showDevSidebar = false 
         </button>
         <button 
           className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-all cursor-pointer"
-          onClick={() => window.location.href = 'https://bitcoin-corp.vercel.app/'}
+          onClick={() => window.location.href = 'https://www.thebitcoincorporation.website'}
           title="Bitcoin Corporation"
         >
           <Building2 className="w-10 h-10 text-bitcoin-orange drop-shadow-lg" strokeWidth={1.5} />
