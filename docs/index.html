@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin OS - Download</title>
+    <meta name="description" content="Bitcoin OS - A revolutionary operating system powered by Bitcoin. Download for Chrome, macOS, and more.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        .download-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .platform-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .platform-name {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .platform-desc {
+            opacity: 0.85;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.9;
+        }
+
+        .feature-icon {
+            color: #4ade80;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+        }
+
+        .instructions {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .instructions h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .instruction-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffd700;
+        }
+
+        .tab-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: left;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content ol {
+            list-style-position: inside;
+            line-height: 2;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0.8;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .download-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="logo">B</div>
+        <h1>Bitcoin OS</h1>
+        <p class="tagline">The Future of Decentralized Computing</p>
+    </div>
+
+    <div class="download-section">
+        <div class="download-grid">
+            <div class="download-card">
+                <div class="platform-icon">🌐</div>
+                <h2 class="platform-name">Chrome Extension</h2>
+                <p class="platform-desc">Quick access to Bitcoin OS from any Chrome tab. Perfect for web users.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>12+ Integrated Apps</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>One-Click Access</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>Secure Wallet Integration</span>
+                    </div>
+                </div>
+
+                <a href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/bitcoin-os-chrome-v0.1.0.zip" class="download-btn">
+                    <span>⬇️</span>
+                    <span>Download Extension</span>
+                </a>
+            </div>
+
+            <div class="download-card">
+                <div class="platform-icon">🖥️</div>
+                <h2 class="platform-name">macOS App</h2>
+                <p class="platform-desc">Native desktop experience with full Bitcoin OS functionality.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>Native Menu Bar</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>Dock Integration</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✅</span>
+                        <span>Keyboard Shortcuts</span>
+                    </div>
+                </div>
+
+                <a href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/Bitcoin-OS-0.1.0.dmg" class="download-btn">
+                    <span>⬇️</span>
+                    <span>Download for Mac</span>
+                </a>
+            </div>
+
+            <div class="download-card">
+                <div class="platform-icon">🐧</div>
+                <h2 class="platform-name">Linux (Coming Soon)</h2>
+                <p class="platform-desc">Full Bitcoin OS experience for Linux distributions.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">⏳</span>
+                        <span>AppImage Support</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⏳</span>
+                        <span>Snap Package</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⏳</span>
+                        <span>Debian Package</span>
+                    </div>
+                </div>
+
+                <button class="download-btn" style="opacity: 0.6; cursor: not-allowed;">
+                    <span>🔜</span>
+                    <span>Coming Soon</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number">18+</div>
+            <div class="stat-label">Built-in Apps</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Open Source</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">BSV</div>
+            <div class="stat-label">Powered</div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h2>Installation Instructions</h2>
+        
+        <div class="instruction-tabs">
+            <div class="tab active" onclick="showTab('chrome')">Chrome</div>
+            <div class="tab" onclick="showTab('macos')">macOS</div>
+            <div class="tab" onclick="showTab('build')">Build from Source</div>
+        </div>
+
+        <div id="chrome" class="tab-content active">
+            <h3>Chrome Extension Installation</h3>
+            <ol>
+                <li>Download the extension ZIP file</li>
+                <li>Unzip the downloaded file to a folder</li>
+                <li>Open Chrome and navigate to chrome://extensions/</li>
+                <li>Enable "Developer mode" in the top right</li>
+                <li>Click "Load unpacked" and select the unzipped folder</li>
+                <li>The Bitcoin OS icon will appear in your extension bar</li>
+            </ol>
+        </div>
+
+        <div id="macos" class="tab-content">
+            <h3>macOS App Installation</h3>
+            <ol>
+                <li>Download the DMG file</li>
+                <li>Double-click to open the DMG</li>
+                <li>Drag Bitcoin OS to your Applications folder</li>
+                <li>Launch Bitcoin OS from Applications</li>
+                <li>Right-click the dock icon and select "Keep in Dock"</li>
+            </ol>
+        </div>
+
+        <div id="build" class="tab-content">
+            <h3>Build from Source</h3>
+            <ol>
+                <li>Clone the repository: <code>git clone https://github.com/bitcoin-corp/bitcoin-OS.git</code></li>
+                <li>Install dependencies: <code>npm install</code></li>
+                <li>For Chrome: <code>cd chrome-app && node build.js</code></li>
+                <li>For macOS: <code>cd macos-app && npm run dist</code></li>
+                <li>Find built apps in the respective dist folders</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 The Bitcoin Corporation LTD</p>
+        <p style="margin-top: 10px;">
+            <a href="https://github.com/bitcoin-corp/bitcoin-OS" style="color: #ffd700; text-decoration: none;">GitHub</a> • 
+            <a href="https://bitcoin-os.vercel.app" style="color: #ffd700; text-decoration: none;">Web App</a> • 
+            <a href="https://github.com/bitcoin-corp/bitcoin-OS/releases" style="color: #ffd700; text-decoration: none;">All Releases</a>
+        </p>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
