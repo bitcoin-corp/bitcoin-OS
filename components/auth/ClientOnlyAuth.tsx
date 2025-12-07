@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import SimpleWalletWidget from './SimpleWalletWidget'
 
 interface ClientOnlyAuthProps {
   children: React.ReactNode
@@ -19,11 +18,10 @@ export default function ClientOnlyAuth({ children }: ClientOnlyAuthProps) {
     return <>{children}</>
   }
 
-  // Client-side: render with wallet widget
+  // Client-side: render children only (wallet connection handled by taskbar)
   return (
     <>
       {children}
-      <SimpleWalletWidget className="mr-4 mt-16" />
     </>
   )
 }
