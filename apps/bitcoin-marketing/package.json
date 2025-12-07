@@ -8,7 +8,7 @@
   "dependencies": {
     "@bsv/auth-express-middleware": "^1.2.3",
     "@bsv/payment-express-middleware": "^1.2.3",
-    "@bsv/sdk": "^1.8.2",
+    "@bsv/sdk": "^1.9.17",
     "@bsv/wallet-toolbox": "^1.6.26",
     "@bsv/wallet-toolbox-client": "^1.6.26",
     "@handcash/handcash-connect": "^0.8.11",
@@ -32,7 +32,7 @@
     "lucide-react": "^0.544.0",
     "mammoth": "^1.10.0",
     "micro-ordinals": "^0.3.0",
-    "next": "^15.5.5",
+    "next": "^15.5.7",
     "next-auth": "^4.24.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

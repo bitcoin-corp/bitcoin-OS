@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Corporation - Investor Pitch Deck</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+    
+    <style>
+        :root {
+            --bitcoin-orange: #f7931a;
+            --bitcoin-orange-dark: #e67e00;
+            --bitcoin-orange-light: #ff9500;
+            --dark-bg: #0f0f23;
+            --dark-bg-light: #1a1a2e;
+        }
+        
+        .reveal {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+        }
+        
+        .reveal .slides {
+            text-align: center;
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-weight: 700;
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        .reveal h1 {
+            font-size: 1.4em;
+            background: linear-gradient(135deg, #f7931a 0%, #ff9500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.2em;
+        }
+        
+        .reveal h2 {
+            color: var(--bitcoin-orange);
+            font-size: 1.2em;
+            margin-bottom: 0.3em;
+        }
+        
+        .reveal h3 {
+            color: var(--bitcoin-orange-light);
+            font-size: 0.85em;
+            margin-bottom: 0.2em;
+        }
+        
+        .reveal .slides section {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px 20px;
+            font-size: 0.75em;
+            overflow: hidden;
+        }
+        
+        .reveal .progress {
+            color: var(--bitcoin-orange);
+        }
+        
+        .reveal .controls button {
+            color: var(--bitcoin-orange);
+        }
+        
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f7931a 0%, #ff9500 100%);
+            border-radius: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(247, 147, 26, 0.4);
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 0.5em;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(247, 147, 26, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(247, 147, 26, 0.3);
+            border-color: var(--bitcoin-orange);
+        }
+        
+        .card h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .card p {
+            font-size: 0.75em;
+            line-height: 1.3;
+            color: #ddd;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--bitcoin-orange);
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 0.7em;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            text-align: left;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            font-size: 0.65em;
+            line-height: 1.2;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--bitcoin-orange);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.75em;
+        }
+        
+        th {
+            background: rgba(247, 147, 26, 0.2);
+            padding: 8px;
+            text-align: left;
+            border-bottom: 2px solid var(--bitcoin-orange);
+            color: var(--bitcoin-orange);
+        }
+        
+        td {
+            padding: 8px;
+            border-bottom: 1px solid rgba(247, 147, 26, 0.2);
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        
+        .app-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.3), rgba(255, 149, 0, 0.3));
+            border: 1px solid var(--bitcoin-orange);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .app-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(247, 147, 26, 0.4);
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.5), rgba(255, 149, 0, 0.5));
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f7931a, #ff9500);
+            z-index: -1;
+        }
+        
+        .timeline-item {
+            background: var(--dark-bg);
+            padding: 15px;
+            border: 2px solid var(--bitcoin-orange);
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .timeline-item h4 {
+            color: var(--bitcoin-orange);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-item p {
+            font-size: 0.85em;
+            color: #aaa;
+            margin: 5px 0;
+        }
+        
+        .timeline-item small {
+            font-size: 0.75em;
+            color: #666;
+        }
+        
+        .investment-box {
+            background: rgba(247, 147, 26, 0.1);
+            border: 2px solid var(--bitcoin-orange);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px auto;
+            max-width: 500px;
+        }
+        
+        .investment-box table {
+            margin: 0;
+            font-size: 1.1em;
+        }
+        
+        .investment-box td {
+            padding: 10px 20px;
+            border: none;
+        }
+        
+        .investment-box td:first-child {
+            text-align: left;
+            color: #aaa;
+        }
+        
+        .investment-box td:last-child {
+            text-align: right;
+            color: var(--bitcoin-orange);
+            font-weight: bold;
+        }
+        
+        .highlight {
+            color: var(--bitcoin-orange);
+            font-weight: bold;
+        }
+        
+        .emphasis {
+            background: linear-gradient(135deg, #f7931a 0%, #ff9500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 15px auto;
+        }
+        
+        .reveal .slide-number {
+            color: var(--bitcoin-orange);
+            background: rgba(15, 15, 35, 0.8);
+        }
+        
+        /* Print styles for PDF export */
+        @media print {
+            .reveal .slides section {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            
+            .reveal {
+                background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-info a {
+            color: var(--bitcoin-orange);
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .r-fit-text {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <div class="logo-container">₿</div>
+                <h1>The Bitcoin Corporation</h1>
+                <p class="subtitle">Building the Operating System for Bitcoin</p>
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #666; font-size: 0.9em;">Investor Presentation</h3>
+                    <p style="color: #666; font-size: 0.8em;">December 2025 | Series A</p>
+                </div>
+            </section>
+
+            <!-- Slide 2: The Problem -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>The Problem</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Fragmented Ecosystem</h3>
+                        <p>Bitcoin SV lacks unified infrastructure for developers and users</p>
+                    </div>
+                    <div class="card">
+                        <h3>No App Marketplace</h3>
+                        <p>Developers have no centralized distribution platform</p>
+                    </div>
+                    <div class="card">
+                        <h3>Limited User Tools</h3>
+                        <p>End users need technical expertise to use BSV</p>
+                    </div>
+                    <div class="card">
+                        <h3>Monetization Gap</h3>
+                        <p>No clear path from development to revenue generation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Our Solution - Recognizable Apps -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Recognizable Apps for Real People</h2>
+                <h3 class="subtitle">Familiar Tools That Add Real Value to Lives</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Just Like You Know</h3>
+                        <p>Gmail → Bitcoin Email<br>
+                        Google Docs → Bitcoin Writer<br>
+                        Excel → Bitcoin Spreadsheets<br>
+                        Dropbox → Bitcoin Drive</p>
+                    </div>
+                    <div class="card">
+                        <h3>Real Business Value</h3>
+                        <p>Build companies on-chain<br>
+                        Tokenize equity shares<br>
+                        Trade in real-time<br>
+                        Instant micropayments</p>
+                    </div>
+                    <div class="card">
+                        <h3>Complete Architecture</h3>
+                        <p>Full business operating system<br>
+                        Integrated payment rails<br>
+                        Built-in exchanges<br>
+                        Corporate governance tools</p>
+                    </div>
+                </div>
+                <p class="emphasis" style="margin-top: 30px;">Every app your business needs, but better - owned by you, on Bitcoin</p>
+            </section>
+
+            <!-- Slide 4: Real Value for Real People -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>How bApps Transform Real Lives</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>For Entrepreneurs</h3>
+                        <ul class="feature-list">
+                            <li>Build your company entirely on-chain</li>
+                            <li>Issue tokenized equity shares instantly</li>
+                            <li>Trade shares 24/7 with no intermediaries</li>
+                            <li>Accept micropayments from global customers</li>
+                            <li>Automated corporate governance</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>For Everyday Users</h3>
+                        <ul class="feature-list">
+                            <li>Use familiar apps like Gmail and Google Docs</li>
+                            <li>Own your data permanently</li>
+                            <li>Earn equity in apps you use daily</li>
+                            <li>Send money instantly for fractions of a cent</li>
+                            <li>Build real wealth through contribution</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #ff9500;">Complete Business Architecture On-Chain</h3>
+                    <p style="font-size: 0.9em; color: #aaa;">
+                        Not just apps - a complete ecosystem for building, funding, and operating businesses on Bitcoin<br>
+                        Creating thousands of tradeable products (company shares) that drive real micropayment economy
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 5: Product Portfolio -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Our bApps Portfolio</h2>
+                <h3 class="subtitle">30+ Production Applications</h3>
+                <div class="app-grid">
+                    <div class="app-icon">📝</div>
+                    <div class="app-icon">📊</div>
+                    <div class="app-icon">✉️</div>
+                    <div class="app-icon">💾</div>
+                    <div class="app-icon">💱</div>
+                    <div class="app-icon">👥</div>
+                    <div class="app-icon">🎮</div>
+                    <div class="app-icon">🤖</div>
+                    <div class="app-icon">🎨</div>
+                    <div class="app-icon">📚</div>
+                    <div class="app-icon">🌐</div>
+                    <div class="app-icon">📅</div>
+                    <div class="app-icon">💬</div>
+                    <div class="app-icon">📱</div>
+                    <div class="app-icon">📄</div>
+                    <div class="app-icon">🔗</div>
+                    <div class="app-icon">👤</div>
+                    <div class="app-icon">🗺️</div>
+                    <div class="app-icon">📢</div>
+                    <div class="app-icon">🎵</div>
+                    <div class="app-icon">🖌️</div>
+                    <div class="app-icon">📷</div>
+                    <div class="app-icon">📻</div>
+                    <div class="app-icon">🔍</div>
+                    <div class="app-icon">📈</div>
+                    <div class="app-icon">🐦</div>
+                    <div class="app-icon">📹</div>
+                    <div class="app-icon">🏢</div>
+                    <div class="app-icon">🎯</div>
+                    <div class="app-icon">📋</div>
+                </div>
+                <p style="color: #aaa; margin-top: 20px; font-size: 0.85em;">
+                    Writer • Spreadsheets • Email • Drive • Exchange • Social • Gaming • AI • Art • Books<br>
+                    Browser • Calendar • Chat • CMS • Contracts • CRM • Identity • Maps • Marketing • Music<br>
+                    Paint • Photos • Radio • Search • Shares • Twitter • Video • Jobs • DNS • Todo
+                </p>
+            </section>
+
+            <!-- Slide 6: Token Ecosystem -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Revolutionary Token Ecosystem</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>BRC-100 Token Standard</h3>
+                        <ul class="feature-list">
+                            <li>Each bApp issues utility tokens</li>
+                            <li>Tokens represent equity participation</li>
+                            <li>Built-in exchange infrastructure</li>
+                            <li>Cross-app token utility</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Proof-of-Work Rewards</h3>
+                        <ul class="feature-list">
+                            <li>Users contribute computational resources</li>
+                            <li>Earn tokens for contributions</li>
+                            <li>Aligned user-developer incentives</li>
+                            <li>Decentralized governance</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Revenue Model -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Credit Card Subscription Model</h2>
+                <h3 class="subtitle">Simple, Familiar, Powerful</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Revenue Stream</th>
+                            <th>Model</th>
+                            <th>Year 3 Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Subscriptions</td>
+                            <td>$9.99 Basic / $29.99 Pro / $99 Enterprise</td>
+                            <td class="highlight">$35M</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Fees</td>
+                            <td>1% on all bApp transactions</td>
+                            <td class="highlight">$25M</td>
+                        </tr>
+                        <tr>
+                            <td>Equity Token Trading</td>
+                            <td>1% on tokenized company shares</td>
+                            <td class="highlight">$40M</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise Licensing</td>
+                            <td>$10K-$100K/month</td>
+                            <td class="highlight">$10M</td>
+                        </tr>
+                        <tr>
+                            <td>Micropayment Infrastructure</td>
+                            <td>Infrastructure fees on real-time payments</td>
+                            <td class="highlight">$7.5M</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #ff9500;">Go-to-Market: Familiar Credit Card Billing</h3>
+                    <p style="font-size: 0.9em; color: #aaa;">No crypto complexity - just monthly subscriptions like Netflix or Spotify</p>
+                    <div class="metric-value" style="margin-top: 20px;">$117.5M</div>
+                    <div class="metric-label">Total Year 3 Revenue</div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Growth Projections -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Growth Projections</h2>
+                <canvas id="revenueChart" class="chart-container"></canvas>
+                <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 30px;">
+                    <div class="metric">
+                        <div class="metric-value">10M</div>
+                        <div class="metric-label">Users by Year 5</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$500M</div>
+                        <div class="metric-label">Revenue by Year 5</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$25B</div>
+                        <div class="metric-label">GMV by Year 5</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Market Opportunity -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>$1.7 Trillion Market Opportunity</h2>
+                <canvas id="marketChart" class="chart-container"></canvas>
+                <div style="margin-top: 30px;">
+                    <h3>Why Now?</h3>
+                    <ul class="feature-list" style="display: inline-block; text-align: left;">
+                        <li>BSV has proven unlimited scaling capability</li>
+                        <li>Enterprise adoption accelerating globally</li>
+                        <li>Regulatory clarity improving worldwide</li>
+                        <li>Web3 infrastructure maturing rapidly</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 10: Competitive Advantages -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Our Competitive Advantages</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>First Mover</h3>
+                        <p>First complete OS and app ecosystem for BSV</p>
+                    </div>
+                    <div class="card">
+                        <h3>Network Effects</h3>
+                        <p>Each new app and user increases value for all</p>
+                    </div>
+                    <div class="card">
+                        <h3>Complete Stack</h3>
+                        <p>OS + Apps + Store + Tokens + Exchange</p>
+                    </div>
+                    <div class="card">
+                        <h3>Enterprise Ready</h3>
+                        <p>Built for scale from day one</p>
+                    </div>
+                    <div class="card">
+                        <h3>Token Economy</h3>
+                        <p>Aligned incentives across ecosystem</p>
+                    </div>
+                    <div class="card">
+                        <h3>Developer Tools</h3>
+                        <p>Comprehensive SDKs and APIs</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Current Traction -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Current Traction</h2>
+                <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="metric">
+                        <div class="metric-value">30+</div>
+                        <div class="metric-label">Live bApps</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1,000+</div>
+                        <div class="metric-label">Early Users</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$250K</div>
+                        <div class="metric-label">Monthly GMV</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">15</div>
+                        <div class="metric-label">Enterprise Pilots</div>
+                    </div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <h3>Key Milestones Achieved</h3>
+                    <ul class="feature-list" style="display: inline-block; text-align: left;">
+                        <li>Bitcoin OS v1.0 launched</li>
+                        <li>30+ production applications deployed</li>
+                        <li>BRC-100 token standard implemented</li>
+                        <li>MetaNet SSO integration complete</li>
+                        <li>Cross-app data sharing operational</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 12: Go-to-Market Strategy -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Go-to-Market Strategy</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1</h4>
+                        <p>Developer Adoption</p>
+                        <small>Q1-Q2 2025</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 2</h4>
+                        <p>Consumer Launch</p>
+                        <small>Q3-Q4 2025</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 3</h4>
+                        <p>Enterprise Scale</p>
+                        <small>2026</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Phase 4</h4>
+                        <p>Global Expansion</p>
+                        <small>2027+</small>
+                    </div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <h3>Target Markets</h3>
+                    <p style="font-size: 1.1em; color: #aaa; margin-top: 20px;">
+                        Gaming • Finance • Social Media • Enterprise • Education • Healthcare
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 13: Use of Funds -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>$10M Series A - Use of Funds</h2>
+                <canvas id="fundsChart" class="chart-container"></canvas>
+                <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 30px;">
+                    <div class="card">
+                        <h3>Engineering</h3>
+                        <p>Scale team from 15 to 50 engineers</p>
+                    </div>
+                    <div class="card">
+                        <h3>Marketing</h3>
+                        <p>Global user acquisition campaign</p>
+                    </div>
+                    <div class="card">
+                        <h3>Infrastructure</h3>
+                        <p>Scale to support 10M users</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Investment Terms -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Investment Terms</h2>
+                <div class="investment-box">
+                    <h3>Series A Round</h3>
+                    <table>
+                        <tr>
+                            <td>Pre-Money Valuation:</td>
+                            <td>$40M</td>
+                        </tr>
+                        <tr>
+                            <td>Investment Amount:</td>
+                            <td>$10M</td>
+                        </tr>
+                        <tr>
+                            <td>Post-Money Valuation:</td>
+                            <td>$50M</td>
+                        </tr>
+                        <tr>
+                            <td>Equity Stake:</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Board Representation:</td>
+                            <td>1 Seat</td>
+                        </tr>
+                        <tr>
+                            <td>Token Allocation:</td>
+                            <td>10%</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Slide 15: Why Ayre Ventures -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <h2>Why Partner with Ayre Ventures?</h2>
+                <ul class="feature-list" style="font-size: 1.1em; line-height: 2; display: inline-block; text-align: left;">
+                    <li>Shared vision for Bitcoin SV's future</li>
+                    <li>Deep understanding of Bitcoin technology</li>
+                    <li>Global network and market access</li>
+                    <li>Strategic guidance and expertise</li>
+                    <li>Long-term commitment to ecosystem</li>
+                </ul>
+                <div style="margin-top: 40px;">
+                    <h3>Together We Will Build</h3>
+                    <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 30px;">
+                        <div class="metric">
+                            <div class="metric-value">100+</div>
+                            <div class="metric-label">bApps by 2026</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">50+</div>
+                            <div class="metric-label">Countries</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">1B</div>
+                            <div class="metric-label">Transactions/Day</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 16: Contact -->
+            <section data-background-gradient="linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)">
+                <div class="logo-container">₿</div>
+                <h1>Let's Build the Future Together</h1>
+                <div class="contact-info">
+                    <p><strong>The Bitcoin Corporation</strong></p>
+                    <p>Email: <a href="mailto:invest@bitcoincorporation.com">invest@bitcoincorporation.com</a></p>
+                    <p>Website: <a href="https://www.bitcoin-os.website">www.bitcoin-os.website</a></p>
+                    <p>GitHub: <a href="https://github.com/bitcoin-corp">github.com/bitcoin-corp</a></p>
+                    <div style="margin-top: 30px;">
+                        <h3 style="color: #ff9500;">Next Steps</h3>
+                        <p>Schedule a demo and technical deep dive</p>
+                        <p>Meet the team and review detailed financials</p>
+                        <p>Discuss strategic partnership opportunities</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            
+            // PDF export settings
+            pdfMaxPagesPerSlide: 1,
+            pdfSeparateFragments: false,
+            
+            // Keyboard shortcuts
+            keyboard: {
+                // P key for print/PDF
+                80: () => {
+                    window.print();
+                }
+            }
+        });
+        
+        // Wait for Reveal to be ready before creating charts
+        Reveal.on('ready', event => {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart');
+            if (revenueCtx) {
+                new Chart(revenueCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                        datasets: [{
+                            label: 'Revenue ($M)',
+                            data: [2.5, 15, 117.5, 250, 500],
+                            borderColor: '#f7931a',
+                            backgroundColor: 'rgba(247, 147, 26, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3
+                        }, {
+                            label: 'Users (Millions)',
+                            data: [0.01, 0.1, 1, 5, 10],
+                            borderColor: '#ff9500',
+                            backgroundColor: 'rgba(255, 149, 0, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            yAxisID: 'y1'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { 
+                                    color: '#fff',
+                                    font: { size: 14 }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: { color: '#aaa' },
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                title: {
+                                    display: true,
+                                    text: 'Revenue ($M)',
+                                    color: '#aaa'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                ticks: { color: '#aaa' },
+                                grid: { drawOnChartArea: false },
+                                title: {
+                                    display: true,
+                                    text: 'Users (Millions)',
+                                    color: '#aaa'
+                                }
+                            },
+                            x: {
+                                ticks: { color: '#aaa' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Market Chart
+            const marketCtx = document.getElementById('marketChart');
+            if (marketCtx) {
+                new Chart(marketCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Enterprise Software', 'Consumer Apps', 'Gaming', 'Finance', 'Other'],
+                        datasets: [{
+                            data: [680, 340, 255, 170, 255],
+                            backgroundColor: [
+                                '#f7931a',
+                                '#ff9500',
+                                '#ffb347',
+                                '#ffc87c',
+                                '#ffd4a3'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#0f0f23'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { 
+                                    color: '#fff',
+                                    font: { size: 14 }
+                                },
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Funds Chart
+            const fundsCtx = document.getElementById('fundsChart');
+            if (fundsCtx) {
+                new Chart(fundsCtx.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Engineering (40%)', 'Marketing (25%)', 'Business Dev (15%)', 'Infrastructure (10%)', 'Legal (10%)'],
+                        datasets: [{
+                            data: [4, 2.5, 1.5, 1, 1],
+                            backgroundColor: [
+                                '#f7931a',
+                                '#ff9500',
+                                '#ffb347',
+                                '#ffc87c',
+                                '#ffd4a3'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#0f0f23'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { 
+                                    color: '#fff',
+                                    font: { size: 14 }
+                                },
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Add print instructions
+        console.log('%c📄 To export as PDF: Press "P" or use Cmd+P', 'color: #f7931a; font-size: 14px; font-weight: bold;');
+        console.log('%c💡 For best results, select "Save as PDF" and ensure "Background graphics" is enabled', 'color: #ff9500; font-size: 12px;');
+    </script>
+</body>
+</html>

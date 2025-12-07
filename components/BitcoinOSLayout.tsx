@@ -6,7 +6,6 @@ import TopMenuBar from '@/components/TopMenuBar'
 import DevSidebar from '@/components/DevSidebar'
 import Dock from '@/components/Dock'
 import MinimalDock from '@/components/MinimalDock'
-import HandCashLoginModal from '@/components/HandCashLoginModal'
 import SystemPreferencesAdvanced from '@/components/SystemPreferencesAdvanced'
 import TickerSidebar from '@/components/TickerSidebar'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -23,11 +22,10 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
   
   const [showDevSidebar, setShowDevSidebar] = useState(true) // Visible but collapsed by default
   const [isDevSidebarCollapsed, setIsDevSidebarCollapsed] = useState(true) // Track collapsed state
-  const [showLoginModal, setShowLoginModal] = useState(false)
   const [showSystemPreferences, setShowSystemPreferences] = useState(false)
-  const [userHandle, setUserHandle] = useState<string | null>(null)
   const [isBootingOrBios, setIsBootingOrBios] = useState(pathname === '/')
   const [dockStyle, setDockStyle] = useState<string>('minimal')
+  const [isConnected, setIsConnected] = useState(false)
 
   // Initialize theme and dock style on mount
   useEffect(() => {
@@ -127,8 +125,8 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         <>
           <TopMenuBar 
             onOpenApp={openApp} 
-            onOpenWalletModal={() => setShowLoginModal(true)}
-            isConnected={!!userHandle}
+            onOpenWalletModal={() => {/* MetaNet widget handles this */}}
+            isConnected={isConnected}
           />
         </>
       )}
@@ -160,16 +158,7 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         )}
       </div>
       
-      {/* Login Modal */}
-      <HandCashLoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        onLogin={(handle, method) => {
-          setUserHandle(handle)
-          setShowLoginModal(false)
-          console.log(`Connected with ${method}: ${handle}`)
-        }}
-      />
+      {/* MetaNet Wallet Widget - now handled by ClientOnlyAuth wrapper */}
       
       {/* System Preferences Modal */}
       <SystemPreferencesAdvanced
@@ -193,11 +182,11 @@ export default function BitcoinOSLayout({ children, showBackground = false }: Bi
         <TickerSidebar />
       )}
 
-      {/* Modal backdrop */}
-      {showLoginModal && (
+      {/* Modal backdrop for system preferences only */}
+      {showSystemPreferences && (
         <div 
           className="fixed inset-0 z-40"
-          onClick={() => setShowLoginModal(false)}
+          onClick={() => setShowSystemPreferences(false)}
         />
       )}
     </div>
