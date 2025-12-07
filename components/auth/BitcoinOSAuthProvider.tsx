@@ -57,13 +57,15 @@ export const BitcoinOSAuthProvider: React.FC<BitcoinOSAuthProviderProps> = ({ ch
     }
 
     // Global event listeners
-    const handleUserAuthenticated = (event: CustomEvent) => {
-      setCurrentUser(event.detail.user)
+    const handleUserAuthenticated = (event: Event) => {
+      const customEvent = event as CustomEvent
+      setCurrentUser(customEvent.detail.user)
       setSystemError(null)
     }
 
-    const handleWalletConnected = (event: CustomEvent<WalletData>) => {
-      setWalletData(event.detail)
+    const handleWalletConnected = (event: Event) => {
+      const customEvent = event as CustomEvent<WalletData>
+      setWalletData(customEvent.detail)
       setSystemError(null)
     }
 
@@ -77,24 +79,25 @@ export const BitcoinOSAuthProvider: React.FC<BitcoinOSAuthProviderProps> = ({ ch
       setSystemError(null)
     }
 
-    const handleSystemError = (event: CustomEvent) => {
-      setSystemError(event.detail.error)
+    const handleSystemError = (event: Event) => {
+      const customEvent = event as CustomEvent
+      setSystemError(customEvent.detail.error)
     }
 
     // Add listeners
-    window.addEventListener('userAuthenticated', handleUserAuthenticated)
-    window.addEventListener('walletConnected', handleWalletConnected)
+    window.addEventListener('userAuthenticated', handleUserAuthenticated as EventListener)
+    window.addEventListener('walletConnected', handleWalletConnected as EventListener)
     window.addEventListener('walletDisconnected', handleWalletDisconnected)
     window.addEventListener('globalSignOut', handleGlobalSignOut)
-    window.addEventListener('systemError', handleSystemError)
+    window.addEventListener('systemError', handleSystemError as EventListener)
 
     // Cleanup
     return () => {
-      window.removeEventListener('userAuthenticated', handleUserAuthenticated)
-      window.removeEventListener('walletConnected', handleWalletConnected)
+      window.removeEventListener('userAuthenticated', handleUserAuthenticated as EventListener)
+      window.removeEventListener('walletConnected', handleWalletConnected as EventListener)
       window.removeEventListener('walletDisconnected', handleWalletDisconnected)
       window.removeEventListener('globalSignOut', handleGlobalSignOut)
-      window.removeEventListener('systemError', handleSystemError)
+      window.removeEventListener('systemError', handleSystemError as EventListener)
     }
   }, [])
 
