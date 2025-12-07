@@ -33,6 +33,7 @@
     "kill:all": "for port in {3000..3010}; do lsof -ti:$port | xargs kill -9 2>/dev/null || true; done"
   },
   "dependencies": {
+    "@bsv/sdk": "^1.9.17",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -42,11 +43,11 @@
     "@types/three": "^0.180.0",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",
-    "next": "15.5.3",
+    "next": "15.5.7",
     "phosphor-react": "^1.4.1",
     "puppeteer": "^24.31.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-feather": "^2.0.10",
     "react-icons": "^5.5.0",
     "react-rnd": "^10.5.2",

@@ -1,0 +1,136 @@
+name: Release Bitcoin OS Apps
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-chrome-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Build Chrome Extension
+        run: |
+          cd chrome-app
+          npm install
+          node build.js
+          cd dist
+          zip -r ../../bitcoin-os-chrome-${{ github.ref_name }}.zip *
+      
+      - name: Upload Chrome Extension Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: chrome-extension
+          path: bitcoin-os-chrome-*.zip
+
+  build-macos-app:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Build macOS App
+        run: |
+          cd macos-app
+          npm install
+          npm run dist
+      
+      - name: Upload macOS App Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-app
+          path: macos-app/dist/*.dmg
+
+  create-release:
+    needs: [build-chrome-extension, build-macos-app]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download Chrome Extension
+        uses: actions/download-artifact@v3
+        with:
+          name: chrome-extension
+      
+      - name: Download macOS App
+        uses: actions/download-artifact@v3
+        with:
+          name: macos-app
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Bitcoin OS ${{ github.ref_name }}
+          body: |
+            ## 🚀 Bitcoin OS ${{ github.ref_name }}
+            
+            ### Chrome Extension
+            - ✨ Quick access to all 12 Bitcoin OS apps
+            - 🔒 Secure wallet integration
+            - ⚡ One-click app launcher
+            - 🎨 Beautiful gradient UI
+            
+            ### macOS App
+            - 🖥️ Native desktop experience
+            - 🎯 Dock integration
+            - ⌨️ Keyboard shortcuts
+            - 📱 Full Bitcoin OS functionality
+            
+            ### Installation
+            
+            **Chrome Extension:**
+            1. Download `bitcoin-os-chrome-${{ github.ref_name }}.zip`
+            2. Unzip the file
+            3. Open chrome://extensions/
+            4. Enable Developer mode
+            5. Click "Load unpacked" and select the folder
+            
+            **macOS App:**
+            1. Download `Bitcoin-OS-*.dmg`
+            2. Open the DMG file
+            3. Drag Bitcoin OS to Applications
+            4. Launch and add to dock
+            
+            ### What's New
+            - 🎯 All Bitcoin OS apps integrated
+            - 🚀 Performance improvements
+            - 🐛 Bug fixes
+            
+          draft: false
+          prerelease: false
+      
+      - name: Upload Chrome Extension to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bitcoin-os-chrome-${{ github.ref_name }}.zip
+          asset_name: bitcoin-os-chrome-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
+      
+      - name: Upload macOS DMG to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Bitcoin-OS-*.dmg
+          asset_name: Bitcoin-OS-${{ github.ref_name }}.dmg
+          asset_content_type: application/x-apple-diskimage

@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Bitcoin OS",
+  "version": "0.1.0",
+  "description": "Bitcoin-powered operating system with built-in wallet and decentralized apps",
+  "author": "The Bitcoin Corporation LTD",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png",
+    "256": "icon-256.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["*.html", "*.js", "*.css", "*.png", "*.jpg", "*.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "homepage_url": "https://bitcoin-os.vercel.app"
+}

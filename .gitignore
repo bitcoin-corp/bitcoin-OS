@@ -61,3 +61,17 @@ screen*shot*
 *.env
 .env copy.local
 .env.deployment
+
+# Sensitive/private directories
+app/csw-docs/
+app/secure-docs/
+investor-relations/
+
+# Sensitive documents
+docs/ceo-*.md
+docs/cto-*.md
+**/salary*.md
+**/compensation*.md
+**/financial*.md
+**/confidential*.md
+**/private*.md

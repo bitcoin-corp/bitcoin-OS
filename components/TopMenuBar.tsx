@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Github, BookOpen, FileText, ExternalLink, X, Wifi, WifiOff } from 'lucide-react'
+import { Github, BookOpen, FileText, ExternalLink, X } from 'lucide-react'
 import './TopMenuBar.css'
 
 interface MenuItem {
@@ -483,23 +483,6 @@ export default function TopMenuBar({ onOpenApp, onOpenWalletModal, isConnected }
 
       {/* Right side - Status */}
       <div className="taskbar-status">
-        <button
-          onClick={onOpenWalletModal}
-          className="taskbar-link"
-          title={isConnected ? "Connected" : "Connect Wallet"}
-        >
-          {isConnected ? (
-            <>
-              <Wifi className="taskbar-link-icon" />
-              <span style={{ fontSize: '11px', marginLeft: '4px' }}>Connected</span>
-            </>
-          ) : (
-            <>
-              <WifiOff className="taskbar-link-icon" />
-              <span style={{ fontSize: '11px', marginLeft: '4px' }}>Connect</span>
-            </>
-          )}
-        </button>
         <a 
           href="https://github.com/bitcoin-apps-suite/bitcoin-OS" 
           target="_blank" 

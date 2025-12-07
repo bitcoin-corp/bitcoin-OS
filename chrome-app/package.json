@@ -1,0 +1,12 @@
+{
+  "name": "bitcoin-os-chrome-app",
+  "version": "0.1.0",
+  "description": "Bitcoin OS Chrome Extension",
+  "scripts": {
+    "build": "node build.js",
+    "pack": "npm run build && cd dist && zip -r ../bitcoin-os-chrome.zip *",
+    "icons": "node generate-icons.js"
+  },
+  "author": "The Bitcoin Corporation LTD",
+  "license": "Open-BSV-4.0"
+}
