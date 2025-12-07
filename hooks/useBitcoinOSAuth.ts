@@ -72,21 +72,24 @@ export function useBitcoinOSAuth(appId: string): UseBitcoinOSAuthReturn {
     loadAppTokens()
 
     // Set up event listeners
-    const handleUserAuthenticated = (event: CustomEvent) => {
-      setUser(event.detail.user)
+    const handleUserAuthenticated = (event: Event) => {
+      const customEvent = event as CustomEvent
+      setUser(customEvent.detail.user)
       setError(null)
     }
 
-    const handleAppSignIn = (event: CustomEvent) => {
-      if (event.detail.appId === appId) {
-        setCurrentSession(event.detail.session)
-        setUser(event.detail.user)
+    const handleAppSignIn = (event: Event) => {
+      const customEvent = event as CustomEvent
+      if (customEvent.detail.appId === appId) {
+        setCurrentSession(customEvent.detail.session)
+        setUser(customEvent.detail.user)
         loadAppTokens()
       }
     }
 
-    const handleAppSignOut = (event: CustomEvent) => {
-      if (event.detail.appId === appId) {
+    const handleAppSignOut = (event: Event) => {
+      const customEvent = event as CustomEvent
+      if (customEvent.detail.appId === appId) {
         setCurrentSession(null)
       }
     }
@@ -101,9 +104,10 @@ export function useBitcoinOSAuth(appId: string): UseBitcoinOSAuthReturn {
       setTotalTokens(0)
     }
 
-    const handleWalletConnected = (event: CustomEvent<WalletData>) => {
-      setWalletData(event.detail)
-      setBalance(event.detail.balance)
+    const handleWalletConnected = (event: Event) => {
+      const customEvent = event as CustomEvent<WalletData>
+      setWalletData(customEvent.detail)
+      setBalance(customEvent.detail.balance)
       setError(null)
     }
 
@@ -112,9 +116,10 @@ export function useBitcoinOSAuth(appId: string): UseBitcoinOSAuthReturn {
       setBalance(0)
     }
 
-    const handleTokenCreated = (event: CustomEvent) => {
-      if (event.detail.appId === appId) {
-        setAppTokens(prev => [...prev, event.detail.token])
+    const handleTokenCreated = (event: Event) => {
+      const customEvent = event as CustomEvent
+      if (customEvent.detail.appId === appId) {
+        setAppTokens(prev => [...prev, customEvent.detail.token])
         setTotalTokens(prev => prev + 1)
       }
     }

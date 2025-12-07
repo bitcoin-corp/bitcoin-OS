@@ -48,8 +48,9 @@ class BitcoinOSAuth {
     if (typeof window === 'undefined') return
     
     // Listen for wallet connection events
-    window.addEventListener('walletConnected', (event: CustomEvent<WalletData>) => {
-      this.handleWalletConnection(event.detail)
+    window.addEventListener('walletConnected', (event: Event) => {
+      const customEvent = event as CustomEvent<WalletData>
+      this.handleWalletConnection(customEvent.detail)
     })
 
     window.addEventListener('walletDisconnected', () => {
