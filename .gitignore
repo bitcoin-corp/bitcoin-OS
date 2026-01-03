@@ -66,8 +66,14 @@ screen*shot*
 app/csw-docs/
 app/secure-docs/
 investor-relations/
+docs/sec/
 
 # Sensitive documents
+final_security_audit.json
+covering-letter.html
+pitch-deck.html
+pitch-deck-reveal.html
+open-investor-docs.sh
 docs/ceo-*.md
 docs/cto-*.md
 **/salary*.md
@@ -75,3 +81,9 @@ docs/cto-*.md
 **/financial*.md
 **/confidential*.md
 **/private*.md
+
+# Block all PDFs and their print-HTML counterparts
+*.pdf
+*-print.html
+public/*.pdf
+public/*-print.html
