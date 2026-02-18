@@ -513,7 +513,7 @@ export default function DownloadPage() {
               <div className="flex items-center"><CheckCircle className="w-4 h-4 mr-2 text-green-400 shrink-0" />Quick wallet access from any tab</div>
             </div>
             <a
-              href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/bitcoin-os-chrome.zip"
+              href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/bitcoin-os-chrome-v0.1.1.zip"
               className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2.5 px-5 rounded-lg flex items-center justify-center transition-all text-sm"
             >
               <Download className="w-4 h-4 mr-2" />
@@ -536,13 +536,13 @@ export default function DownloadPage() {
               <div className="flex items-center"><CheckCircle className="w-4 h-4 mr-2 text-green-400 shrink-0" />Full Bitcoin OS experience</div>
             </div>
             <a
-              href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/Bitcoin-OS-0.1.0.dmg"
+              href="https://github.com/bitcoin-corp/bitcoin-OS/releases/latest/download/Bitcoin.OS-0.1.0-arm64.dmg"
               className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2.5 px-5 rounded-lg flex items-center justify-center transition-all text-sm"
             >
               <Download className="w-4 h-4 mr-2" />
               Download for macOS
             </a>
-            <div className="text-xs opacity-50 text-center mt-2">v0.1.0 &middot; Apple Silicon & Intel</div>
+            <div className="text-xs opacity-50 text-center mt-2">v0.1.0 &middot; 88 MB &middot; Apple Silicon</div>
           </div>
         </div>
 
