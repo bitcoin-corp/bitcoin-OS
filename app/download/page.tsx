@@ -369,10 +369,11 @@ const allApps: AppDownload[] = [
     category: 'infrastructure',
   },
   {
-    name: 'bgit',
+    name: 'BitGit (npm: bitgit)',
     repo: 'bgit',
     org: 'bitcoin-apps-suite',
-    description: 'Bitcoin-powered Git repository management',
+    description: 'git push for Bitcoin — inscribe content, register domains, manage tokens on BSV. Install via npm: npm i -g bitgit',
+    liveUrl: 'https://www.npmjs.com/package/bitgit',
     color: '#f05032',
     category: 'infrastructure',
   },
@@ -542,6 +543,117 @@ export default function DownloadPage() {
               Download for macOS
             </a>
             <div className="text-xs opacity-50 text-center mt-2">v0.1.0 &middot; Apple Silicon & Intel</div>
+          </div>
+        </div>
+
+        {/* Path Protocol Stack - Core of Bitcoin OS */}
+        <div className="max-w-5xl mx-auto mb-8">
+          <div className="text-center mb-4">
+            <h2 className="text-xl font-bold">The Protocol Stack</h2>
+            <p className="text-xs opacity-50 mt-1">Path 401, 402 and 403 are at the heart of Bitcoin OS</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Path 402 Client */}
+            <div className="bg-green-500/5 rounded-xl p-4 border border-green-500/20 hover:border-green-500/40 transition-all">
+              <div className="text-green-400 font-bold text-lg mb-1">$402</div>
+              <div className="text-xs font-semibold mb-1">Path402 Client</div>
+              <p className="text-[10px] opacity-50 mb-3 leading-relaxed">Payment Required protocol — content and commodity tokens via BSV-21 PoW20</p>
+              <div className="flex flex-col gap-1.5">
+                <a href="https://github.com/b0ase/path402/archive/refs/heads/main.zip" className="bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 text-green-400 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <Download className="w-3 h-3 mr-1" />Download Client
+                </a>
+                <a href="https://github.com/b0ase/path402" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
+                  <Github className="w-3 h-3 mr-1" />Source
+                </a>
+              </div>
+            </div>
+            {/* Path 402 Web */}
+            <div className="bg-green-500/5 rounded-xl p-4 border border-green-500/20 hover:border-green-500/40 transition-all">
+              <div className="text-green-400 font-bold text-lg mb-1">$402</div>
+              <div className="text-xs font-semibold mb-1">Path402 Web Client</div>
+              <p className="text-[10px] opacity-50 mb-3 leading-relaxed">Web interface for the $402 protocol — browse and interact via your browser</p>
+              <div className="flex flex-col gap-1.5">
+                <a href="https://path402-com.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-green-500/10 hover:bg-green-500/20 border border-green-500/20 text-green-400 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <ExternalLink className="w-3 h-3 mr-1" />Live App
+                </a>
+                <a href="https://github.com/b0ase/path402-com" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
+                  <Github className="w-3 h-3 mr-1" />Source
+                </a>
+              </div>
+            </div>
+            {/* Path 401 */}
+            <div className="bg-blue-500/5 rounded-xl p-4 border border-blue-500/20 hover:border-blue-500/40 transition-all">
+              <div className="text-blue-400 font-bold text-lg mb-1">$401</div>
+              <div className="text-xs font-semibold mb-1">Path401 Identity</div>
+              <p className="text-[10px] opacity-50 mb-3 leading-relaxed">Unauthorized protocol — self-sovereign identity on the blockchain with on-chain inscriptions</p>
+              <div className="flex flex-col gap-1.5">
+                <a href="https://path401-com.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 text-blue-400 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <ExternalLink className="w-3 h-3 mr-1" />Live App
+                </a>
+                <a href="https://github.com/b0ase/path401-com" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
+                  <Github className="w-3 h-3 mr-1" />Source
+                </a>
+              </div>
+            </div>
+            {/* Path 403 */}
+            <div className="bg-red-500/5 rounded-xl p-4 border border-red-500/20 hover:border-red-500/40 transition-all">
+              <div className="text-red-400 font-bold text-lg mb-1">$403</div>
+              <div className="text-xs font-semibold mb-1">Path403 Securities</div>
+              <p className="text-[10px] opacity-50 mb-3 leading-relaxed">Forbidden protocol — securities and access tokens requiring $401 KYC verification</p>
+              <div className="flex flex-col gap-1.5">
+                <a href="https://path403.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <ExternalLink className="w-3 h-3 mr-1" />Live App
+                </a>
+                <a href="https://github.com/b0ase/path403" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
+                  <Github className="w-3 h-3 mr-1" />Source
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* BitGit Recommendation Banner */}
+        <div className="max-w-5xl mx-auto mb-8">
+          <div className="bg-gradient-to-r from-orange-500/10 via-red-500/10 to-orange-500/10 rounded-xl p-5 border border-orange-500/20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center shrink-0">
+                <GitBranch className="w-6 h-6 text-orange-400" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-sm mb-1">
+                  Recommended: Install BitGit before working on these packages
+                </h3>
+                <p className="text-xs opacity-60 leading-relaxed">
+                  BitGit is <code className="bg-white/10 px-1.5 py-0.5 rounded">git push</code> for Bitcoin.
+                  Inscribe content, register domains, and manage tokens on BSV directly from your terminal.
+                  Every app in this suite is designed to work with BitGit for on-chain publishing.
+                </p>
+                <div className="flex flex-wrap items-center gap-3 mt-3">
+                  <button
+                    onClick={() => copyCommand('npm i -g bitgit', 'bitgit-install')}
+                    className="bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 text-orange-300 text-xs py-1.5 px-3 rounded-lg font-mono transition-all"
+                  >
+                    npm i -g bitgit {copied === 'bitgit-install' ? '  Copied!' : ''}
+                  </button>
+                  <a
+                    href="https://b0ase.com/blog/bitgit-git-push-for-bitcoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-orange-400 hover:text-orange-300 transition-all flex items-center gap-1"
+                  >
+                    Read the guide <ArrowRight className="w-3 h-3" />
+                  </a>
+                  <a
+                    href="https://www.npmjs.com/package/bitgit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs opacity-50 hover:opacity-80 transition-all flex items-center gap-1"
+                  >
+                    <Package className="w-3 h-3" /> npmjs.com/package/bitgit
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
