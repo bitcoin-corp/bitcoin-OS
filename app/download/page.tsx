@@ -481,7 +481,7 @@ export default function DownloadPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white overflow-y-auto">
+    <div className="h-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white overflow-y-auto">
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-8">
