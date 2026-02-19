@@ -552,7 +552,7 @@ export default function DownloadPage() {
             <h2 className="text-xl font-bold">The Protocol Stack</h2>
             <p className="text-xs opacity-50 mt-1">Path 401, 402 and 403 are at the heart of Bitcoin OS</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Path 402 Client */}
             <div className="bg-green-500/5 rounded-xl p-4 border border-green-500/20 hover:border-green-500/40 transition-all">
               <div className="text-green-400 font-bold text-lg mb-1">$402</div>
@@ -605,6 +605,23 @@ export default function DownloadPage() {
                   <ExternalLink className="w-3 h-3 mr-1" />Live App
                 </a>
                 <a href="https://github.com/b0ase/path403" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
+                  <Github className="w-3 h-3 mr-1" />Source
+                </a>
+              </div>
+            </div>
+            {/* ORDFS */}
+            <div className="bg-yellow-500/5 rounded-xl p-4 border border-yellow-500/20 hover:border-yellow-500/40 transition-all">
+              <div className="text-yellow-400 font-bold text-lg mb-1">ORDFS</div>
+              <div className="text-xs font-semibold mb-1">On-chain File System</div>
+              <p className="text-[10px] opacity-50 mb-3 leading-relaxed">Serves Bitcoin inscription content via URL — programmable HTML inscriptions stored on-chain</p>
+              <div className="flex flex-col gap-1.5">
+                <a href="https://ordfs.network" target="_blank" rel="noopener noreferrer" className="bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/20 text-yellow-400 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <ExternalLink className="w-3 h-3 mr-1" />ordfs.network
+                </a>
+                <a href="https://app.reactonchain.com/content/0fbc6c40adb34111cf8d90ef5e92a0260f6a0dd6b0fa803ba8066783a3ba58aa_0/" target="_blank" rel="noopener noreferrer" className="bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/20 text-yellow-300 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all">
+                  <ExternalLink className="w-3 h-3 mr-1" />React On Chain
+                </a>
+                <a href="https://github.com/shruggr/ordfs-server" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center transition-all opacity-60 hover:opacity-100">
                   <Github className="w-3 h-3 mr-1" />Source
                 </a>
               </div>
