@@ -1,12 +1,12 @@
+@import "./performance.css";
+@import "./themes.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import performance optimizations */
-@import './performance.css';
 
-/* Import advanced theme system */
-@import './themes.css';
+
 
 @layer base {
   body {
