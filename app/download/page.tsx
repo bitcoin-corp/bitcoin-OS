@@ -217,7 +217,7 @@ const allApps: AppDownload[] = [
     name: 'Bitcoin Shares',
     repo: 'bitcoin-shares',
     org: 'bitcoin-apps-suite',
-    description: 'Equity platform for tokenized shares, cap table management, and dividend distribution',
+    description: 'Coming later. Not available; nothing is offered.',
     color: '#6366f1',
     category: 'finance',
   },

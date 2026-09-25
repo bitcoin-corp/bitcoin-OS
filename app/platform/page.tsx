@@ -158,10 +158,6 @@ export default function PlatformPage() {
                 </div>
                 <div className="flow-item">
                   <span>Tokens transferred to providers</span>
-                  <span className="arrow">→</span>
-                </div>
-                <div className="flow-item">
-                  <span>Exchange fees to $bOS holders</span>
                 </div>
               </div>
               <p style={{textAlign: 'center', marginTop: '20px', fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)'}}>

@@ -10,7 +10,7 @@ export default function ProposalPage() {
       <div className="proposal-container">
         {/* Hero Section */}
         <section className="proposal-hero">
-          <div className="hero-badge">BUSINESS PROPOSAL</div>
+          <div className="hero-badge">CONCEPT PROPOSAL</div>
           <h1><span style={{color: '#ffffff'}}>Bitcoin OS</span> <span style={{color: '#f7931a'}}>Compute Marketplace</span></h1>
           <p className="proposal-tagline">
             A Decentralized GPU & Computing Resource Exchange
@@ -28,6 +28,16 @@ export default function ProposalPage() {
               <span className="stat-value">100K+</span>
               <span className="stat-label">Idle GPUs Globally</span>
             </div>
+          </div>
+        </section>
+
+        <section className="summary-section">
+          <div className="summary-content">
+            <p className="lead">
+              <strong>Concept document only.</strong> This page describes an early product idea. It is not an
+              offer of shares, tokens or any other investment, and no returns, dividends or staking rewards
+              are offered or promised. $bOS token plans are paused pending legal review.
+            </p>
           </div>
         </section>
 
@@ -56,7 +66,6 @@ export default function ProposalPage() {
                   <li>Tokenized compute resources tradeable on-chain</li>
                   <li>Instant BSV micropayments per second of usage</li>
                   <li>Smart contracts for automated resource allocation</li>
-                  <li>$bOS token dividends from marketplace fees</li>
                 </ul>
               </div>
             </div>
@@ -146,60 +155,6 @@ export default function ProposalPage() {
                 </div>
               </div>
             </div>
-
-            <div className="revenue-projection">
-              <h3>Revenue Projections</h3>
-              <div className="projection-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Year</th>
-                      <th>Active GPUs</th>
-                      <th>Monthly Volume</th>
-                      <th>Revenue (2% avg)</th>
-                      <th>$bOS Dividends (70%)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Year 1</td>
-                      <td>1,000</td>
-                      <td>$500K</td>
-                      <td>$10K</td>
-                      <td>$7K</td>
-                    </tr>
-                    <tr>
-                      <td>Year 2</td>
-                      <td>10,000</td>
-                      <td>$5M</td>
-                      <td>$100K</td>
-                      <td>$70K</td>
-                    </tr>
-                    <tr className="highlight">
-                      <td>Year 3</td>
-                      <td>50,000</td>
-                      <td>$25M</td>
-                      <td>$500K</td>
-                      <td>$350K</td>
-                    </tr>
-                    <tr>
-                      <td>Year 4</td>
-                      <td>200,000</td>
-                      <td>$100M</td>
-                      <td>$2M</td>
-                      <td>$1.4M</td>
-                    </tr>
-                    <tr>
-                      <td>Year 5</td>
-                      <td>500,000</td>
-                      <td>$250M</td>
-                      <td>$5M</td>
-                      <td>$3.5M</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -214,9 +169,8 @@ export default function ProposalPage() {
                   <div className="token-icon">💎</div>
                   <h4>$bOS Governance Token</h4>
                   <ul>
-                    <li>Receives 70% of platform fees as dividends</li>
+                    <li>Token plans paused pending legal review</li>
                     <li>Voting rights on protocol parameters</li>
-                    <li>Staking rewards 12-20% APY</li>
                     <li>Total supply: 100M tokens</li>
                   </ul>
                 </div>
@@ -273,8 +227,8 @@ export default function ProposalPage() {
                 <div className="flow-step">
                   <span className="step-num">4</span>
                   <div className="step-content">
-                    <h5>Fee Distribution</h5>
-                    <p>Platform fees paid to $bOS holders</p>
+                    <h5>Provider Payment</h5>
+                    <p>Providers are paid for compute delivered</p>
                   </div>
                 </div>
               </div>
@@ -313,13 +267,6 @@ export default function ProposalPage() {
                     <td>⚠️ Slow</td>
                   </tr>
                   <tr>
-                    <td>Revenue Sharing</td>
-                    <td className="highlight">✅ 70% to holders</td>
-                    <td>❌ No</td>
-                    <td>❌ No</td>
-                    <td>⚠️ Limited</td>
-                  </tr>
-                  <tr>
                     <td>Consumer GPU Support</td>
                     <td className="highlight">✅ Yes</td>
                     <td>✅ Yes</td>
@@ -350,10 +297,6 @@ export default function ProposalPage() {
                 <div className="advantage">
                   <h4>🚀 Instant Settlement</h4>
                   <p>BSV enables per-second micropayments with zero confirmation time</p>
-                </div>
-                <div className="advantage">
-                  <h4>💰 Token Dividends</h4>
-                  <p>$bOS holders earn 70% of all platform fees automatically</p>
                 </div>
                 <div className="advantage">
                   <h4>🔄 Liquid Markets</h4>
@@ -392,11 +335,10 @@ export default function ProposalPage() {
                   <span className="phase-number">Phase 2</span>
                   <span className="phase-time">Q2 2025</span>
                 </div>
-                <h3>Token Launch</h3>
+                <h3>Resource Tokens</h3>
                 <ul>
-                  <li>$bOS token generation event</li>
+                  <li>Token plans paused pending legal review</li>
                   <li>GPU resource token minting</li>
-                  <li>Staking mechanisms</li>
                   <li>1,000 active GPUs</li>
                 </ul>
               </div>
@@ -427,81 +369,6 @@ export default function ProposalPage() {
                   <li>DAO governance</li>
                   <li>50,000 active GPUs</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Investment Ask */}
-        <section className="investment-section">
-          <h2>Investment Opportunity</h2>
-          <div className="investment-content">
-            <div className="investment-ask">
-              <h3>Seed Round</h3>
-              <div className="ask-details">
-                <div className="ask-item">
-                  <span className="ask-label">Raising</span>
-                  <span className="ask-value">$2.5M</span>
-                </div>
-                <div className="ask-item">
-                  <span className="ask-label">Valuation</span>
-                  <span className="ask-value">$10M</span>
-                </div>
-                <div className="ask-item">
-                  <span className="ask-label">Token Allocation</span>
-                  <span className="ask-value">25M $bOS (25%)</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="use-of-funds">
-              <h3>Use of Funds</h3>
-              <div className="funds-breakdown">
-                <div className="fund-item">
-                  <div className="fund-bar" style={{width: '40%'}}>
-                    <span>Development (40%)</span>
-                  </div>
-                  <span className="fund-amount">$1M</span>
-                </div>
-                <div className="fund-item">
-                  <div className="fund-bar" style={{width: '25%'}}>
-                    <span>Marketing (25%)</span>
-                  </div>
-                  <span className="fund-amount">$625K</span>
-                </div>
-                <div className="fund-item">
-                  <div className="fund-bar" style={{width: '20%'}}>
-                    <span>Operations (20%)</span>
-                  </div>
-                  <span className="fund-amount">$500K</span>
-                </div>
-                <div className="fund-item">
-                  <div className="fund-bar" style={{width: '15%'}}>
-                    <span>Legal & Compliance (15%)</span>
-                  </div>
-                  <span className="fund-amount">$375K</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="roi-projection">
-              <h3>Projected Returns</h3>
-              <div className="roi-metrics">
-                <div className="roi-item">
-                  <h4>Year 3 Revenue</h4>
-                  <p className="roi-value">$6M ARR</p>
-                  <p className="roi-detail">$350K monthly dividends</p>
-                </div>
-                <div className="roi-item">
-                  <h4>Year 5 Valuation</h4>
-                  <p className="roi-value">$250M</p>
-                  <p className="roi-detail">25x return potential</p>
-                </div>
-                <div className="roi-item">
-                  <h4>Token Price Target</h4>
-                  <p className="roi-value">$2.50</p>
-                  <p className="roi-detail">From $0.10 launch</p>
-                </div>
               </div>
             </div>
           </div>
@@ -540,10 +407,7 @@ export default function ProposalPage() {
           </p>
           <div className="cta-buttons">
             <a href="/token" className="cta-btn primary">
-              Learn About $bOS Token
-            </a>
-            <a href="mailto:invest@bitcoinos.com" className="cta-btn secondary">
-              Contact for Investment
+              $bOS Token Status
             </a>
             <a href="https://github.com/bitcoin-corp/bitcoin-OS" target="_blank" rel="noopener noreferrer" className="cta-btn tertiary">
               View Technical Docs

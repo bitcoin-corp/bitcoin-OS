@@ -1,23 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
-  // Mock market data for Bitcoin exchange
-  const markets = [
+// Exchange is a design preview only; no market data is served.
+export async function GET() {
+  return NextResponse.json(
     {
-      id: 'bsv-usd',
-      name: 'BSV/USD',
-      price: '50.25',
-      change: '+2.5%',
-      volume: '1,250,000'
+      success: false,
+      error: 'The Bitcoin OS exchange is a preview only and is not live. No market data is available.',
     },
-    {
-      id: 'btc-usd', 
-      name: 'BTC/USD',
-      price: '43,500.00',
-      change: '-1.2%',
-      volume: '850,000'
-    }
-  ]
-  
-  return NextResponse.json(markets)
+    { status: 503 }
+  )
 }

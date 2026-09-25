@@ -12,12 +12,10 @@ const getAppInfo = (appName: string) => {
   const apps: Record<string, { repoName: string; description: string; ideas: string[] }> = {
     'Bitcoin Shares': {
       repoName: 'bitcoin-shares',
-      description: 'A decentralized equity management system powered by Bitcoin',
+      description: 'Coming later. This app is not available and nothing is being offered.',
       ideas: [
-        'Issue and trade company shares on the blockchain',
-        'Smart contracts for dividend distribution',
-        'Transparent cap table management',
-        'Automated compliance and reporting'
+        'Not yet designed',
+        'No shares, tokens or investments are offered through Bitcoin OS'
       ]
     },
     'Bitcoin Jobs': {
