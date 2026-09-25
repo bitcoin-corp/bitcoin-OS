@@ -42,7 +42,6 @@
     "clean:all": "pnpm -r clean"
   },
   "dependencies": {
-    "@bitcoin-os/kernel": "workspace:*",
     "@bsv/sdk": "^1.9.17",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
